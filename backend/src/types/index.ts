@@ -59,6 +59,18 @@ export interface Crop {
   imageUrl?: string;
   nextTask?: string;
   timeline: CropTimelineStage[];
+  localName?: string;
+  hindiName?: string;
+  category?: string;
+  description?: string;
+  growingSeason?: string;
+  soilType?: string;
+  waterRequirement?: string;
+  temperatureRange?: string;
+  acreage?: number;
+  diseases?: string[];
+  fertilizers?: string[];
+  recommendations?: string[];
 }
 
 export interface FarmTask {
@@ -328,3 +340,174 @@ export interface AIChatMessage {
   language: Language;
   suggestions?: string[];
 }
+
+// ==================================================
+// ADMIN & CMS TYPES
+// ==================================================
+
+export type AdminRole = 'Super Admin' | 'Admin' | 'Editor';
+
+export interface AdminUser {
+  id: string;
+  name: string;
+  email: string;
+  passwordHash: string;
+  role: AdminRole;
+  status: 'Active' | 'Inactive';
+  createdAt: string;
+  lastLogin?: string;
+}
+
+export interface CMSComponent {
+  id: string;
+  type: string; // 'text' | 'heading' | 'paragraph' | 'image' | 'icon' | 'button' | 'card' | 'statistic' | 'banner' | 'grid' | 'list' | 'badge' | 'alert' | 'chart' | 'weather' | 'crop' | 'product' | 'scheme' | 'custom'
+  title?: string;
+  content?: any;
+  image?: string;
+  icon?: string;
+  link?: string;
+  settings?: Record<string, any>;
+  visible: boolean;
+  order: number;
+}
+
+export interface CMSSection {
+  id: string;
+  title: string;
+  type: string;
+  visible: boolean;
+  order: number;
+  components: CMSComponent[];
+  settings?: Record<string, any>;
+}
+
+export interface CMSPage {
+  id: string;
+  slug: string;
+  name: string;
+  route: string;
+  status: 'Published' | 'Draft';
+  lastUpdated: string;
+  updatedBy: string;
+  sections: CMSSection[];
+}
+
+export interface DashboardHeroConfig {
+  greeting: string;
+  mainHeading: string;
+  subtitle: string;
+  locationText: string;
+  farmHealthScore: number;
+  heroBg: string;
+  heroImage?: string;
+  buttonText: string;
+  buttonLink: string;
+  visible: boolean;
+}
+
+export interface DashboardStatusCard {
+  id: string;
+  title: string;
+  value?: string;
+  description?: string;
+  icon?: string;
+  image?: string;
+  color?: string;
+  route?: string;
+  visible: boolean;
+  order: number;
+}
+
+export interface DashboardQuickAction {
+  id: string;
+  label: string;
+  icon: string;
+  route: string;
+  bg?: string;
+  description?: string;
+  visible: boolean;
+  order: number;
+}
+
+export interface DashboardConfig {
+  hero: DashboardHeroConfig;
+  statusCards: DashboardStatusCard[];
+  quickActions: DashboardQuickAction[];
+}
+
+export interface MediaItem {
+  id: string;
+  name: string;
+  url: string;
+  type: 'image' | 'icon' | 'document';
+  size: number;
+  uploadedAt: string;
+  tags?: string[];
+}
+
+export interface ActivityLog {
+  id: string;
+  adminName: string;
+  adminEmail: string;
+  action: string;
+  page: string;
+  record?: string;
+  timestamp: string;
+}
+
+export interface SiteSettings {
+  siteName: string;
+  logo: string;
+  favicon?: string;
+  tagline: string;
+  contactEmail: string;
+  contactPhone: string;
+  socialLinks: {
+    facebook?: string;
+    twitter?: string;
+    youtube?: string;
+    instagram?: string;
+  };
+  defaultLanguage: Language;
+  theme: {
+    primaryColor: string;
+    accentColor: string;
+  };
+  footerText: string;
+  supportInfo: string;
+}
+
+export interface WeatherAdvisoryItem {
+  id: string;
+  title: string;
+  message: string;
+  type: 'Alert' | 'Advisory' | 'Seasonal' | 'Warning';
+  priority: 'High' | 'Medium' | 'Low';
+  validUntil: string;
+  visible: boolean;
+}
+
+export interface AIAdvisorArticleItem {
+  id: string;
+  title: string;
+  category: string;
+  crop: string;
+  content: string;
+  image?: string;
+  language: Language;
+  status: 'Published' | 'Draft';
+  tags: string[];
+  createdAt: string;
+}
+
+export interface DroneServiceItem {
+  id: string;
+  name: string;
+  description: string;
+  pricePerAcre: number;
+  status: 'Active' | 'Inactive';
+  coverageType: string;
+  image: string;
+  availableLocations: string[];
+}
+

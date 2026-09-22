@@ -16,6 +16,8 @@ import droneRoutes from './drone.routes.js';
 import storeRoutes from './store.routes.js';
 import premiumRoutes from './premium.routes.js';
 import assistantRoutes from './assistant.routes.js';
+import adminRoutes from './admin.routes.js';
+import cmsRoutes from './cms.routes.js';
 
 const router = Router();
 
@@ -37,4 +39,9 @@ router.use('/store', storeRoutes);
 router.use('/premium', premiumRoutes);
 router.use('/assistant', assistantRoutes);
 
+// Admin & CMS Endpoints
+router.use('/admin', adminRoutes);
+router.use('/cms', cmsRoutes);
+
 export default router;
+

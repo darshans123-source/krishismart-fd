@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LanguageProvider } from './context/LanguageContext';
 import { ToastProvider } from './context/ToastContext';
 import { FarmDataProvider, useFarmData } from './context/FarmDataContext';
@@ -6,7 +6,7 @@ import { Navbar } from './components/layout/Navbar';
 import { Sidebar } from './components/layout/Sidebar';
 import { FloatingAIChat } from './components/ai/FloatingAIChat';
 
-// Pages
+// Farmer Pages
 import { LandingPage } from './pages/LandingPage';
 import { Dashboard } from './pages/Dashboard';
 import { MyFarmsPage } from './pages/MyFarmsPage';
@@ -28,7 +28,18 @@ import { AlertCenterModal } from './pages/AlertCenterModal';
 import { LocationModal } from './components/layout/LocationModal';
 import { MobileBottomNav } from './components/layout/MobileBottomNav';
 
-const MainAppContent: React.FC = () => {
+// Admin CMS System
+import { AdminAuthProvider } from './admin/auth/AdminAuthContext';
+import { AdminLoginPage } from './admin/auth/AdminLoginPage';
+import { AdminProtectedRoute } from './admin/auth/AdminProtectedRoute';
+import { AdminLayout } from './admin/layouts/AdminLayout';
+import { AdminTab } from './admin/components/AdminSidebar';
+
+interface MainAppContentProps {
+  onNavigateAdmin: () => void;
+}
+
+const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
   const [currentTab, setCurrentTab] = useState<string>('dashboard');
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -98,6 +109,7 @@ const MainAppContent: React.FC = () => {
         onOpenAuth={() => handleOpenAuth('login')}
         onOpenCart={() => setCurrentTab('store')}
         onToggleMobileSidebar={() => setIsMobileSidebarOpen(true)}
+        onNavigateAdmin={onNavigateAdmin}
       />
 
       {/* Main Body with Desktop Sidebar + Content Area */}
@@ -168,11 +180,57 @@ const MainAppContent: React.FC = () => {
 };
 
 export default function App() {
+  const [currentPath, setCurrentPath] = useState(() => window.location.pathname);
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+    window.addEventListener('popstate', handleLocationChange);
+    return () => window.removeEventListener('popstate', handleLocationChange);
+  }, []);
+
+  const navigateTo = (url: string) => {
+    window.history.pushState(null, '', url);
+    setCurrentPath(url);
+    window.scrollTo(0, 0);
+  };
+
+  // 1. Admin Login Screen (/admin/login)
+  if (currentPath === '/admin/login') {
+    return (
+      <AdminAuthProvider>
+        <AdminLoginPage
+          onLoginSuccess={() => navigateTo('/admin')}
+          onNavigateFarmer={() => navigateTo('/')}
+        />
+      </AdminAuthProvider>
+    );
+  }
+
+  // 2. Protected Admin Portal (/admin and /admin/*)
+  if (currentPath.startsWith('/admin')) {
+    const tabSegment = currentPath.replace('/admin', '').replace(/^\//, '').split('/')[0] as AdminTab;
+    const initialTab: AdminTab = tabSegment || 'dashboard';
+
+    return (
+      <AdminAuthProvider>
+        <AdminProtectedRoute onRedirectLogin={() => navigateTo('/admin/login')}>
+          <AdminLayout
+            initialTab={initialTab}
+            onNavigateFarmer={() => navigateTo('/')}
+          />
+        </AdminProtectedRoute>
+      </AdminAuthProvider>
+    );
+  }
+
+  // 3. Farmer Web Application (100% untouched and functional)
   return (
     <LanguageProvider>
       <ToastProvider>
         <FarmDataProvider>
-          <MainAppContent />
+          <MainAppContent onNavigateAdmin={() => navigateTo('/admin')} />
         </FarmDataProvider>
       </ToastProvider>
     </LanguageProvider>

@@ -9,7 +9,8 @@ import {
   User,
   Sparkles,
   Menu,
-  ChevronDown
+  ChevronDown,
+  ShieldCheck
 } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useFarmData } from '../../context/FarmDataContext';
@@ -22,6 +23,7 @@ interface NavbarProps {
   onOpenAuth: () => void;
   onOpenCart: () => void;
   onToggleMobileSidebar: () => void;
+  onNavigateAdmin?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -30,7 +32,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenNotifications,
   onOpenAuth,
   onOpenCart,
-  onToggleMobileSidebar
+  onToggleMobileSidebar,
+  onNavigateAdmin
 }) => {
   const { language, setLanguage, t } = useLanguage();
   const {
@@ -202,6 +205,18 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
             )}
           </div>
+
+          {/* Admin Portal Gateway */}
+          {onNavigateAdmin && (
+            <button
+              onClick={onNavigateAdmin}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-extrabold transition-all shadow-2xs cursor-pointer"
+              title="Enter Admin Portal / CMS"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
+              <span className="hidden sm:inline">Admin CMS</span>
+            </button>
+          )}
 
           {/* Cart Icon */}
           <button

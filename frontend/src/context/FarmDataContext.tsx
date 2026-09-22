@@ -160,6 +160,10 @@ interface FarmDataContextType {
 
   isProUnlocked: boolean;
   unlockProTier: () => void;
+
+  // Dynamic CMS Configuration
+  cmsDashboard: any | null;
+  refreshCMSDashboard: () => Promise<void>;
 }
 
 const FarmDataContext = createContext<FarmDataContextType | undefined>(undefined);
@@ -951,6 +955,38 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     showToast('🌟 Welcome to KrishiSmart Pro! All AI & IoT features unlocked.', 'success');
   };
 
+  const [cmsDashboard, setCmsDashboard] = useState<any | null>(null);
+
+  const refreshCMSDashboard = useCallback(async () => {
+    try {
+      const res = await fetch('/api/cms/dashboard');
+      if (res.ok) {
+        const json = await res.json();
+        if (json?.data) {
+          setCmsDashboard(json.data);
+        }
+      }
+    } catch (e) {
+      console.warn('Could not load CMS dashboard config:', e);
+    }
+  }, []);
+
+  useEffect(() => {
+    refreshCMSDashboard();
+  }, [refreshCMSDashboard]);
+
+  // Sync crops from CMS
+  useEffect(() => {
+    fetch('/api/cms/crops')
+      .then(res => res.json())
+      .then(json => {
+        if (json?.data && Array.isArray(json.data) && json.data.length > 0) {
+          setCrops(json.data);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <FarmDataContext.Provider
       value={{
@@ -1016,7 +1052,9 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         achievements,
         addXP,
         isProUnlocked,
-        unlockProTier
+        unlockProTier,
+        cmsDashboard,
+        refreshCMSDashboard
       }}
     >
       {children}

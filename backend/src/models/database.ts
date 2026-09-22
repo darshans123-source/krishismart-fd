@@ -1,3 +1,7 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { hashPassword } from '../utils/security.js';
 import {
   UserProfile,
   Farm,
@@ -16,19 +20,38 @@ import {
   NotificationItem,
   AchievementBadge,
   KrishiBhavishyaForecast,
-  DiseaseDetectionResult
+  DiseaseDetectionResult,
+  AdminUser,
+  CMSPage,
+  CMSSection,
+  CMSComponent,
+  DashboardConfig,
+  DashboardHeroConfig,
+  DashboardStatusCard,
+  DashboardQuickAction,
+  MediaItem,
+  ActivityLog,
+  SiteSettings,
+  WeatherAdvisoryItem,
+  AIAdvisorArticleItem,
+  DroneServiceItem
 } from '../types/index.js';
 
-// In-Memory Model Store with persistence readiness
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const DATA_DIR = path.resolve(__dirname, '../../data');
+const DB_FILE = path.join(DATA_DIR, 'db.json');
+
+// Model Store with File-Backed Atomic Persistence
 class DatabaseStore {
   public users: Map<string, UserProfile> = new Map();
   public farms: Map<string, Farm> = new Map();
   public crops: Map<string, Crop> = new Map();
   public tasks: Map<string, FarmTask> = new Map();
-  public weather: WeatherData;
+  public weather!: WeatherData;
   public mandis: Map<string, MandiItem> = new Map();
   public schemes: Map<string, GovernmentScheme> = new Map();
-  public financialSummary: FinancialSummary;
+  public financialSummary!: FinancialSummary;
   public transactions: Map<string, FinancialTransaction> = new Map();
   public iotDevices: Map<string, IoTDevice> = new Map();
   public smartPumps: Map<string, SmartPump> = new Map();
@@ -40,7 +63,23 @@ class DatabaseStore {
   public bhavishyaForecasts: Map<string, KrishiBhavishyaForecast> = new Map();
   public sampleDiagnostics: Map<string, any> = new Map();
 
+  // Admin & CMS Collections
+  public admins: Map<string, AdminUser> = new Map();
+  public pages: Map<string, CMSPage> = new Map();
+  public dashboardConfig!: DashboardConfig;
+  public media: Map<string, MediaItem> = new Map();
+  public activityLogs: ActivityLog[] = [];
+  public siteSettings!: SiteSettings;
+  public weatherAdvisories: Map<string, WeatherAdvisoryItem> = new Map();
+  public aiArticles: Map<string, AIAdvisorArticleItem> = new Map();
+  public droneServices: Map<string, DroneServiceItem> = new Map();
+
   constructor() {
+    this.initDefaultMetrics();
+    this.initStore();
+  }
+
+  private initDefaultMetrics() {
     this.weather = {
       temp: 29.4,
       condition: 'Partly Cloudy with Scattered Showers',
@@ -82,8 +121,6 @@ class DatabaseStore {
       kisanCreditScore: 785,
       loanEligibilityAmount: 750000
     };
-
-    this.seedInitialData();
   }
 
   private seedInitialData() {
@@ -512,6 +549,850 @@ class DatabaseStore {
     ];
     sampleDiagnostics.forEach((s) => this.sampleDiagnostics.set(s.id, s));
   }
+
+  // ==================================================
+  // PERSISTENCE ENGINE (Atomic File-Backed Storage)
+  // ==================================================
+
+  public initStore() {
+    try {
+      if (!fs.existsSync(DATA_DIR)) {
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+      }
+
+      if (fs.existsSync(DB_FILE)) {
+        const success = this.loadFromFile();
+        if (!success || this.admins.size === 0) {
+          console.log('⚡ Seeding initial KrishiSmart & Admin data...');
+          this.seedInitialData();
+          this.seedAdminAndCMSData();
+          this.saveToFile();
+        } else {
+          console.log('💾 KrishiSmart DB successfully hydrated from persistent store.');
+        }
+      } else {
+        console.log('🌱 First-time initialization of KrishiSmart database...');
+        this.seedInitialData();
+        this.seedAdminAndCMSData();
+        this.saveToFile();
+      }
+    } catch (err: any) {
+      console.warn('⚠️ Error initializing DB persistence, falling back to in-memory seeds:', err.message);
+      this.seedInitialData();
+      this.seedAdminAndCMSData();
+    }
+  }
+
+  public saveToFile(): boolean {
+    try {
+      if (!fs.existsSync(DATA_DIR)) {
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+      }
+
+      const state = {
+        users: Array.from(this.users.entries()),
+        farms: Array.from(this.farms.entries()),
+        crops: Array.from(this.crops.entries()),
+        tasks: Array.from(this.tasks.entries()),
+        weather: this.weather,
+        mandis: Array.from(this.mandis.entries()),
+        schemes: Array.from(this.schemes.entries()),
+        financialSummary: this.financialSummary,
+        transactions: Array.from(this.transactions.entries()),
+        iotDevices: Array.from(this.iotDevices.entries()),
+        smartPumps: Array.from(this.smartPumps.entries()),
+        dronePlans: Array.from(this.dronePlans.entries()),
+        products: Array.from(this.products.entries()),
+        orders: Array.from(this.orders.entries()),
+        notifications: Array.from(this.notifications.entries()),
+        achievements: Array.from(this.achievements.entries()),
+        bhavishyaForecasts: Array.from(this.bhavishyaForecasts.entries()),
+        sampleDiagnostics: Array.from(this.sampleDiagnostics.entries()),
+
+        // Admin & CMS
+        admins: Array.from(this.admins.entries()),
+        pages: Array.from(this.pages.entries()),
+        dashboardConfig: this.dashboardConfig,
+        media: Array.from(this.media.entries()),
+        activityLogs: this.activityLogs,
+        siteSettings: this.siteSettings,
+        weatherAdvisories: Array.from(this.weatherAdvisories.entries()),
+        aiArticles: Array.from(this.aiArticles.entries()),
+        droneServices: Array.from(this.droneServices.entries())
+      };
+
+      const tmpFile = `${DB_FILE}.tmp`;
+      fs.writeFileSync(tmpFile, JSON.stringify(state, null, 2), 'utf-8');
+      fs.renameSync(tmpFile, DB_FILE);
+      return true;
+    } catch (err: any) {
+      console.error('❌ Failed to save database to file:', err.message);
+      return false;
+    }
+  }
+
+  public loadFromFile(): boolean {
+    try {
+      if (!fs.existsSync(DB_FILE)) return false;
+      const raw = fs.readFileSync(DB_FILE, 'utf-8');
+      if (!raw.trim()) return false;
+
+      const data = JSON.parse(raw);
+
+      if (data.users) this.users = new Map(data.users);
+      if (data.farms) this.farms = new Map(data.farms);
+      if (data.crops) this.crops = new Map(data.crops);
+      if (data.tasks) this.tasks = new Map(data.tasks);
+      if (data.weather) this.weather = data.weather;
+      if (data.mandis) this.mandis = new Map(data.mandis);
+      if (data.schemes) this.schemes = new Map(data.schemes);
+      if (data.financialSummary) this.financialSummary = data.financialSummary;
+      if (data.transactions) this.transactions = new Map(data.transactions);
+      if (data.iotDevices) this.iotDevices = new Map(data.iotDevices);
+      if (data.smartPumps) this.smartPumps = new Map(data.smartPumps);
+      if (data.dronePlans) this.dronePlans = new Map(data.dronePlans);
+      if (data.products) this.products = new Map(data.products);
+      if (data.orders) this.orders = new Map(data.orders);
+      if (data.notifications) this.notifications = new Map(data.notifications);
+      if (data.achievements) this.achievements = new Map(data.achievements);
+      if (data.bhavishyaForecasts) this.bhavishyaForecasts = new Map(data.bhavishyaForecasts);
+      if (data.sampleDiagnostics) this.sampleDiagnostics = new Map(data.sampleDiagnostics);
+
+      // Admin & CMS
+      if (data.admins) this.admins = new Map(data.admins);
+      if (data.pages) this.pages = new Map(data.pages);
+      if (data.dashboardConfig) this.dashboardConfig = data.dashboardConfig;
+      if (data.media) this.media = new Map(data.media);
+      if (data.activityLogs) this.activityLogs = data.activityLogs;
+      if (data.siteSettings) this.siteSettings = data.siteSettings;
+      if (data.weatherAdvisories) this.weatherAdvisories = new Map(data.weatherAdvisories);
+      if (data.aiArticles) this.aiArticles = new Map(data.aiArticles);
+      if (data.droneServices) this.droneServices = new Map(data.droneServices);
+
+      // Ensure essential configs exist even if loaded from partial file
+      if (!this.dashboardConfig || this.admins.size === 0 || this.pages.size === 0) {
+        this.seedAdminAndCMSData();
+      }
+
+      return true;
+    } catch (err: any) {
+      console.error('❌ Failed to parse existing db.json file:', err.message);
+      return false;
+    }
+  }
+
+  public logActivity(adminName: string, adminEmail: string, action: string, page: string, record?: string) {
+    const log: ActivityLog = {
+      id: `act-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+      adminName,
+      adminEmail,
+      action,
+      page,
+      record,
+      timestamp: new Date().toISOString()
+    };
+    this.activityLogs.unshift(log);
+    if (this.activityLogs.length > 500) {
+      this.activityLogs.pop();
+    }
+    this.saveToFile();
+    return log;
+  }
+
+  public seedAdminAndCMSData() {
+    // 1. Admin Users
+    const admins: AdminUser[] = [
+      {
+        id: 'adm-1',
+        name: 'Darshan Patil (Super Admin)',
+        email: 'admin@krishismart.ai',
+        passwordHash: hashPassword('admin123'),
+        role: 'Super Admin',
+        status: 'Active',
+        createdAt: '2026-01-10T10:00:00Z',
+        lastLogin: new Date().toISOString()
+      },
+      {
+        id: 'adm-2',
+        name: 'Content Operations Manager',
+        email: 'editor@krishismart.ai',
+        passwordHash: hashPassword('editor123'),
+        role: 'Admin',
+        status: 'Active',
+        createdAt: '2026-02-15T11:00:00Z',
+        lastLogin: '2026-09-20T08:30:00Z'
+      },
+      {
+        id: 'adm-3',
+        name: 'Agronomy Field Editor',
+        email: 'content@krishismart.ai',
+        passwordHash: hashPassword('content123'),
+        role: 'Editor',
+        status: 'Active',
+        createdAt: '2026-03-01T09:00:00Z',
+        lastLogin: '2026-09-21T14:15:00Z'
+      }
+    ];
+    admins.forEach((a) => this.admins.set(a.id, a));
+
+    // 2. Dashboard Config
+    this.dashboardConfig = {
+      hero: {
+        greeting: 'GOOD AFTERNOON, FARMER',
+        mainHeading: 'GOOD AFTERNOON, FARMER 🌱',
+        subtitle: 'Real-time farm status for Mandya, Karnataka. Precision AI monitoring active.',
+        locationText: 'Pandavapura, Mandya, Karnataka',
+        farmHealthScore: 94,
+        heroBg: 'from-emerald-800 to-emerald-900',
+        heroImage: '',
+        buttonText: 'Farm Health: 94/100',
+        buttonLink: 'myFarms',
+        visible: true
+      },
+      statusCards: [
+        {
+          id: 'card-location',
+          title: 'Current Location',
+          value: '📍 Pandavapura, Mandya, Karnataka',
+          description: 'Click to change location',
+          icon: 'MapPin',
+          color: 'emerald',
+          route: 'locationModal',
+          visible: true,
+          order: 1
+        },
+        {
+          id: 'card-weather',
+          title: 'Weather',
+          value: '🌡️ 29.4°C • Partly Cloudy',
+          description: 'Wind: 11.2 km/h • 65% Rain Caution',
+          icon: 'Sun',
+          color: 'amber',
+          route: 'weather',
+          visible: true,
+          order: 2
+        },
+        {
+          id: 'card-crop-health',
+          title: 'Crop Health',
+          value: '🌾 94% Optimal Health',
+          description: '4 active crop parcels monitored',
+          icon: 'Wheat',
+          color: 'emerald',
+          route: 'myFarms',
+          visible: true,
+          order: 3
+        },
+        {
+          id: 'card-soil-moisture',
+          title: 'Soil Moisture',
+          value: '💧 58% (Optimal)',
+          description: 'Smart Pump: Auto Mode (OFF)',
+          icon: 'Droplets',
+          color: 'cyan',
+          route: 'pump',
+          visible: true,
+          order: 4
+        }
+      ],
+      quickActions: [
+        {
+          id: 'aiHub',
+          label: 'Crop Scan',
+          icon: '🌱',
+          route: 'aiHub',
+          bg: 'bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border-emerald-200',
+          description: 'Instant AI crop disease diagnosis',
+          visible: true,
+          order: 1
+        },
+        {
+          id: 'weather',
+          label: 'Weather',
+          icon: '🌦️',
+          route: 'weather',
+          bg: 'bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-200',
+          description: 'Rain alerts & spray advisory',
+          visible: true,
+          order: 2
+        },
+        {
+          id: 'market',
+          label: 'Market',
+          icon: '📈',
+          route: 'market',
+          bg: 'bg-blue-50 hover:bg-blue-100 text-blue-900 border-blue-200',
+          description: 'Live APMC mandi rates & trends',
+          visible: true,
+          order: 3
+        },
+        {
+          id: 'finance',
+          label: 'Finance',
+          icon: '💰',
+          route: 'finance',
+          bg: 'bg-teal-50 hover:bg-teal-100 text-teal-900 border-teal-200',
+          description: 'KrishiNidhi farm profit & ledger',
+          visible: true,
+          order: 4
+        },
+        {
+          id: 'drone',
+          label: 'Drone',
+          icon: '🚁',
+          route: 'drone',
+          bg: 'bg-purple-50 hover:bg-purple-100 text-purple-900 border-purple-200',
+          description: 'Precision drone spraying booking',
+          visible: true,
+          order: 5
+        },
+        {
+          id: 'pump',
+          label: 'Pump',
+          icon: '💧',
+          route: 'pump',
+          bg: 'bg-cyan-50 hover:bg-cyan-100 text-cyan-900 border-cyan-200',
+          description: 'Automated irrigation controls',
+          visible: true,
+          order: 6
+        },
+        {
+          id: 'iot',
+          label: 'IoT',
+          icon: '📡',
+          route: 'iot',
+          bg: 'bg-stone-100 hover:bg-stone-200 text-stone-900 border-stone-300',
+          description: 'Multi-depth soil sensor telemetry',
+          visible: true,
+          order: 7
+        }
+      ]
+    };
+
+    // 3. Universal CMS Pages (13 Farmer Pages)
+    const initialPages: CMSPage[] = [
+      {
+        id: 'page-dashboard',
+        slug: 'dashboard',
+        name: 'Farmer Dashboard',
+        route: '/',
+        status: 'Published',
+        lastUpdated: new Date().toISOString().split('T')[0],
+        updatedBy: 'Darshan Patil',
+        sections: [
+          {
+            id: 'sec-dash-hero',
+            title: 'Hero Overview & Greeting',
+            type: 'hero',
+            visible: true,
+            order: 1,
+            components: [
+              { id: 'c-dash-1', type: 'badge', title: 'Smart Farming Platform', visible: true, order: 1 },
+              { id: 'c-dash-2', type: 'heading', title: 'GOOD AFTERNOON, FARMER 🌱', visible: true, order: 2 },
+              { id: 'c-dash-3', type: 'paragraph', title: 'Location & Telemetry Briefing', visible: true, order: 3 }
+            ]
+          },
+          {
+            id: 'sec-dash-status',
+            title: 'Current Farm Status Cards',
+            type: 'grid',
+            visible: true,
+            order: 2,
+            components: [
+              { id: 'c-st-1', type: 'card', title: 'Current Location', content: 'Pandavapura, Mandya', visible: true, order: 1 },
+              { id: 'c-st-2', type: 'weather', title: 'Live Weather', content: '29.4°C • Partly Cloudy', visible: true, order: 2 },
+              { id: 'c-st-3', type: 'crop', title: 'Crop Health', content: '94% Healthy', visible: true, order: 3 },
+              { id: 'c-st-4', type: 'card', title: 'Soil Moisture', content: '58% Optimal', visible: true, order: 4 }
+            ]
+          },
+          {
+            id: 'sec-dash-quickactions',
+            title: 'Quick Actions Bar',
+            type: 'grid',
+            visible: true,
+            order: 3,
+            components: [
+              { id: 'c-qa-1', type: 'button', title: 'Crop Scan', icon: '🌱', link: '/crop-scan', visible: true, order: 1 },
+              { id: 'c-qa-2', type: 'button', title: 'Weather', icon: '🌦️', link: '/weather', visible: true, order: 2 },
+              { id: 'c-qa-3', type: 'button', title: 'Market', icon: '📈', link: '/market', visible: true, order: 3 },
+              { id: 'c-qa-4', type: 'button', title: 'Finance', icon: '💰', link: '/finance', visible: true, order: 4 },
+              { id: 'c-qa-5', type: 'button', title: 'Drone', icon: '🚁', link: '/drone', visible: true, order: 5 },
+              { id: 'c-qa-6', type: 'button', title: 'Pump', icon: '💧', link: '/pump', visible: true, order: 6 },
+              { id: 'c-qa-7', type: 'button', title: 'IoT', icon: '📡', link: '/iot', visible: true, order: 7 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'page-my-farm',
+        slug: 'my-farm',
+        name: 'My Farm Parcels',
+        route: '/my-farm',
+        status: 'Published',
+        lastUpdated: new Date().toISOString().split('T')[0],
+        updatedBy: 'Darshan Patil',
+        sections: [
+          {
+            id: 'sec-farm-hero',
+            title: 'Farm Management Header',
+            type: 'banner',
+            visible: true,
+            order: 1,
+            components: [
+              { id: 'c-mf-1', type: 'heading', title: 'Cauvery River Oasis & Siddaganga Parcels', visible: true, order: 1 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'page-crops',
+        slug: 'crops',
+        name: 'Crops & Fields',
+        route: '/crops',
+        status: 'Published',
+        lastUpdated: new Date().toISOString().split('T')[0],
+        updatedBy: 'Darshan Patil',
+        sections: [
+          {
+            id: 'sec-crops-active',
+            title: 'Active Crop Portfolios',
+            type: 'grid',
+            visible: true,
+            order: 1,
+            components: [
+              { id: 'c-cr-1', type: 'crop', title: 'Paddy BPT-5204', content: '2.5 Acres', visible: true, order: 1 },
+              { id: 'c-cr-2', type: 'crop', title: 'Tomato Arka Rakshak', content: '2.0 Acres', visible: true, order: 2 },
+              { id: 'c-cr-3', type: 'crop', title: 'Sugarcane Co-86032', content: '2.0 Acres', visible: true, order: 3 },
+              { id: 'c-cr-4', type: 'crop', title: 'Bt Cotton RCH-659', content: '1.5 Acres', visible: true, order: 4 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'page-ai-advisor',
+        slug: 'ai-advisor',
+        name: 'AI Hub & Disease Diagnostics',
+        route: '/ai-advisor',
+        status: 'Published',
+        lastUpdated: new Date().toISOString().split('T')[0],
+        updatedBy: 'Darshan Patil',
+        sections: [
+          {
+            id: 'sec-ai-hub',
+            title: 'AI Crop Doctor Scanner',
+            type: 'card',
+            visible: true,
+            order: 1,
+            components: [
+              { id: 'c-ai-1', type: 'heading', title: '24/7 AI Precision Agronomist', visible: true, order: 1 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'page-weather',
+        slug: 'weather',
+        name: 'Weather & Climate Center',
+        route: '/weather',
+        status: 'Published',
+        lastUpdated: new Date().toISOString().split('T')[0],
+        updatedBy: 'Darshan Patil',
+        sections: [
+          {
+            id: 'sec-weather-alert',
+            title: 'Monsoon Alert Banner',
+            type: 'alert',
+            visible: true,
+            order: 1,
+            components: [
+              { id: 'c-wth-1', type: 'alert', title: '65% Rain Warning', content: 'Hold off pesticide spraying for 24 hours.', visible: true, order: 1 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'page-market',
+        slug: 'market',
+        name: 'Market & Mandi Rates',
+        route: '/market',
+        status: 'Published',
+        lastUpdated: new Date().toISOString().split('T')[0],
+        updatedBy: 'Darshan Patil',
+        sections: [
+          {
+            id: 'sec-market-rates',
+            title: 'Regional Mandi Price Matrix',
+            type: 'grid',
+            visible: true,
+            order: 1,
+            components: [
+              { id: 'c-mkt-1', type: 'statistic', title: 'Tomato Kolar APMC', content: 'Rs 2,450 / Qtl', visible: true, order: 1 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'page-finance',
+        slug: 'finance',
+        name: 'KrishiNidhi Finance',
+        route: '/finance',
+        status: 'Published',
+        lastUpdated: new Date().toISOString().split('T')[0],
+        updatedBy: 'Darshan Patil',
+        sections: [
+          {
+            id: 'sec-fin-summary',
+            title: 'Farm Profitability Summary',
+            type: 'card',
+            visible: true,
+            order: 1,
+            components: [
+              { id: 'c-fin-1', type: 'statistic', title: 'Net Farm Income', content: 'Rs 2,92,600', visible: true, order: 1 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'page-schemes',
+        slug: 'schemes',
+        name: 'Government Schemes',
+        route: '/schemes',
+        status: 'Published',
+        lastUpdated: new Date().toISOString().split('T')[0],
+        updatedBy: 'Darshan Patil',
+        sections: [
+          {
+            id: 'sec-sch-list',
+            title: 'Central & State Subsidy Portal',
+            type: 'list',
+            visible: true,
+            order: 1,
+            components: [
+              { id: 'c-sch-1', type: 'scheme', title: 'PM-KISAN DBT', content: 'Rs 6,000 / year', visible: true, order: 1 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'page-krishibhavishya',
+        slug: 'krishibhavishya',
+        name: 'KrishiBhavishya Forecasts',
+        route: '/krishibhavishya',
+        status: 'Published',
+        lastUpdated: new Date().toISOString().split('T')[0],
+        updatedBy: 'Darshan Patil',
+        sections: [
+          {
+            id: 'sec-kb-forecast',
+            title: 'AI Future Harvest Price Predictions',
+            type: 'chart',
+            visible: true,
+            order: 1,
+            components: [
+              { id: 'c-kb-1', type: 'chart', title: 'Tomato 60-Day Price Trajectory', content: 'Peak: Rs 42/kg', visible: true, order: 1 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'page-drone',
+        slug: 'drone',
+        name: 'DroneSpray AI Missions',
+        route: '/drone',
+        status: 'Published',
+        lastUpdated: new Date().toISOString().split('T')[0],
+        updatedBy: 'Darshan Patil',
+        sections: [
+          {
+            id: 'sec-dr-fleet',
+            title: 'Autonomous Drone Fleet Services',
+            type: 'card',
+            visible: true,
+            order: 1,
+            components: [
+              { id: 'c-dr-1', type: 'card', title: 'Precision Bio-Fungicide Spray', content: 'Rs 450 / Acre', visible: true, order: 1 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'page-iot',
+        slug: 'iot',
+        name: 'SmartFarm IoT Network',
+        route: '/iot',
+        status: 'Published',
+        lastUpdated: new Date().toISOString().split('T')[0],
+        updatedBy: 'Darshan Patil',
+        sections: [
+          {
+            id: 'sec-iot-telemetry',
+            title: 'Field Sensor Node Telemetry',
+            type: 'grid',
+            visible: true,
+            order: 1,
+            components: [
+              { id: 'c-iot-1', type: 'statistic', title: 'Soil Probe #1', content: 'Moisture 58% • Temp 24.5°C', visible: true, order: 1 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'page-smart-pump',
+        slug: 'smart-pump',
+        name: 'Smart Irrigation Pump',
+        route: '/smart-pump',
+        status: 'Published',
+        lastUpdated: new Date().toISOString().split('T')[0],
+        updatedBy: 'Darshan Patil',
+        sections: [
+          {
+            id: 'sec-pump-vfd',
+            title: 'Solar-Grid Hybrid 7.5 HP Pump Starter',
+            type: 'card',
+            visible: true,
+            order: 1,
+            components: [
+              { id: 'c-pmp-1', type: 'card', title: 'Cauvery River VFD Controller', content: 'AUTO Mode', visible: true, order: 1 }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'page-store',
+        slug: 'store',
+        name: 'Krishi Agri Store',
+        route: '/store',
+        status: 'Published',
+        lastUpdated: new Date().toISOString().split('T')[0],
+        updatedBy: 'Darshan Patil',
+        sections: [
+          {
+            id: 'sec-store-prod',
+            title: 'Certified Inputs & IoT Hardware',
+            type: 'grid',
+            visible: true,
+            order: 1,
+            components: [
+              { id: 'c-str-1', type: 'product', title: 'IFFCO Nano Urea', content: 'Rs 225', visible: true, order: 1 }
+            ]
+          }
+        ]
+      }
+    ];
+    initialPages.forEach((p) => this.pages.set(p.id, p));
+
+    // 4. Site Settings
+    this.siteSettings = {
+      siteName: 'KrishiSmart AI',
+      logo: '🌱 KrishiSmart AI',
+      favicon: '🌾',
+      tagline: 'Smart Farming. Better Decisions. Better Future.',
+      contactEmail: 'support@krishismart.ai',
+      contactPhone: '+91 8000 123 456',
+      socialLinks: {
+        facebook: 'https://facebook.com/krishismart',
+        twitter: 'https://twitter.com/krishismart',
+        youtube: 'https://youtube.com/krishismart',
+        instagram: 'https://instagram.com/krishismart'
+      },
+      defaultLanguage: 'en',
+      theme: {
+        primaryColor: '#16a34a',
+        accentColor: '#d97706'
+      },
+      footerText: '© 2026 KrishiSmart AI Platform. Empowering precision agriculture for Indian farmers.',
+      supportInfo: '24/7 Farmer Helpline available via Toll-Free Voice Call & WhatsApp in Kannada, Hindi, and English.'
+    };
+
+    // 5. Media Library
+    const mediaSeeds: MediaItem[] = [
+      {
+        id: 'med-1',
+        name: 'Lush Paddy Field Canopy',
+        url: 'https://images.unsplash.com/photo-1536657464919-892534f60d6e?w=800&auto=format&fit=crop&q=80',
+        type: 'image',
+        size: 245000,
+        uploadedAt: '2026-08-10',
+        tags: ['crop', 'paddy', 'field']
+      },
+      {
+        id: 'med-2',
+        name: 'Ripening Red Hybrid Tomatoes',
+        url: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=800&auto=format&fit=crop&q=80',
+        type: 'image',
+        size: 312000,
+        uploadedAt: '2026-08-12',
+        tags: ['crop', 'tomato', 'vegetables']
+      },
+      {
+        id: 'med-3',
+        name: 'Sugarcane Green Stalks',
+        url: 'https://images.unsplash.com/photo-1598112972019-91e30f406976?w=800&auto=format&fit=crop&q=80',
+        type: 'image',
+        size: 289000,
+        uploadedAt: '2026-08-14',
+        tags: ['crop', 'sugarcane']
+      },
+      {
+        id: 'med-4',
+        name: 'White Cotton Bolls in Sunlight',
+        url: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=800&auto=format&fit=crop&q=80',
+        type: 'image',
+        size: 340000,
+        uploadedAt: '2026-08-16',
+        tags: ['crop', 'cotton']
+      },
+      {
+        id: 'med-5',
+        name: 'Precision Agricultural Spraying Drone',
+        url: 'https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=800&auto=format&fit=crop&q=80',
+        type: 'image',
+        size: 420000,
+        uploadedAt: '2026-08-18',
+        tags: ['drone', 'technology']
+      },
+      {
+        id: 'med-6',
+        name: 'IoT Soil Sensor in Soil',
+        url: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&auto=format&fit=crop&q=80',
+        type: 'image',
+        size: 390000,
+        uploadedAt: '2026-08-20',
+        tags: ['iot', 'sensor', 'probe']
+      }
+    ];
+    mediaSeeds.forEach((m) => this.media.set(m.id, m));
+
+    // 6. Weather Advisories
+    const weatherAdv: WeatherAdvisoryItem[] = [
+      {
+        id: 'wadv-1',
+        title: 'Monsoon Heavy Shower Advisory',
+        message: '65% to 80% heavy rainfall forecast for Mandya district over next 36 hours. Avoid foliar spraying.',
+        type: 'Warning',
+        priority: 'High',
+        validUntil: '2026-09-25',
+        visible: true
+      },
+      {
+        id: 'wadv-2',
+        title: 'Optimal Spray Window Tomorrow Morning',
+        message: 'Dry spell window between 06:00 AM and 09:30 AM before convective clouds build up.',
+        type: 'Advisory',
+        priority: 'Medium',
+        validUntil: '2026-09-24',
+        visible: true
+      },
+      {
+        id: 'wadv-3',
+        title: 'Kharif Post-Sowing Micro-Nutrient Recommendation',
+        message: 'Foliar application of Zinc & Boron recommended for tillering Paddy and flowering Tomato.',
+        type: 'Seasonal',
+        priority: 'Low',
+        validUntil: '2026-10-05',
+        visible: true
+      }
+    ];
+    weatherAdv.forEach((w) => this.weatherAdvisories.set(w.id, w));
+
+    // 7. AI Advisor Articles
+    const articles: AIAdvisorArticleItem[] = [
+      {
+        id: 'art-1',
+        title: 'Integrated Pest Management for Tomato Early Blight',
+        category: 'Disease Management',
+        crop: 'Tomato',
+        content: 'Early Blight caused by Alternaria solani manifests as concentric target rings. Prevent spore dissemination by combining drip irrigation with protective Trichoderma bio-fungicide sprays at 5g/L.',
+        image: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=600&auto=format&fit=crop&q=80',
+        language: 'en',
+        status: 'Published',
+        tags: ['Tomato', 'Early Blight', 'Organic Spray'],
+        createdAt: '2026-08-20'
+      },
+      {
+        id: 'art-2',
+        title: 'Nano Urea Application Timings in Sugarcane & Paddy',
+        category: 'Nutrient Guide',
+        crop: 'Sugarcane',
+        content: 'IFFCO Nano Urea delivers 80%+ nitrogen assimilation directly into leaf stomata. Apply 4ml/L during active tillering in early morning or late afternoon for maximum leaf stomatal uptake.',
+        image: 'https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?w=600&auto=format&fit=crop&q=80',
+        language: 'en',
+        status: 'Published',
+        tags: ['Nano Urea', 'Sugarcane', 'Fertigation'],
+        createdAt: '2026-08-22'
+      },
+      {
+        id: 'art-3',
+        title: 'Whitefly Control and Cotton Leaf Curl Prevention',
+        category: 'Pest Control',
+        crop: 'Cotton',
+        content: 'Whitefly (Bemisia tabaci) transmits Gemini viruses. Install 15 yellow sticky traps per acre and apply neem extract spray before flower bud formation.',
+        image: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=600&auto=format&fit=crop&q=80',
+        language: 'en',
+        status: 'Published',
+        tags: ['Cotton', 'Whitefly', 'Sticky Traps'],
+        createdAt: '2026-08-25'
+      }
+    ];
+    articles.forEach((a) => this.aiArticles.set(a.id, a));
+
+    // 8. Drone Services
+    const droneServices: DroneServiceItem[] = [
+      {
+        id: 'srv-1',
+        name: 'Hexacopter 16L Precision Spraying Service',
+        description: 'Autonomous RTK-guided aerial spray delivering uniform 15-20 micron droplet dispersion with zero crop stomping.',
+        pricePerAcre: 450,
+        status: 'Active',
+        coverageType: 'Liquid Spray',
+        image: 'https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=500&auto=format&fit=crop&q=80',
+        availableLocations: ['Mandya', 'Mysuru', 'Kolar', 'Ramanagara', 'Tumakuru']
+      },
+      {
+        id: 'srv-2',
+        name: 'Multispectral NDVI Crop Health Scanning Mission',
+        description: 'Near-infrared aerial crop health mapping detecting moisture stress and nitrogen deficits 7 days before visible symptoms appear.',
+        pricePerAcre: 350,
+        status: 'Active',
+        coverageType: 'NDVI Multispectral Scan',
+        image: 'https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=500&auto=format&fit=crop&q=80',
+        availableLocations: ['Mandya', 'Mysuru', 'Hassan', 'Bengaluru Rural']
+      }
+    ];
+    droneServices.forEach((d) => this.droneServices.set(d.id, d));
+
+    // 9. Initial Activity Logs
+    this.activityLogs = [
+      {
+        id: 'act-1',
+        adminName: 'Darshan Patil',
+        adminEmail: 'admin@krishismart.ai',
+        action: 'System Initialized',
+        page: 'System',
+        record: 'KrishiSmart Admin Portal & CMS loaded',
+        timestamp: '2026-09-22T06:00:00Z'
+      },
+      {
+        id: 'act-2',
+        adminName: 'Darshan Patil',
+        adminEmail: 'admin@krishismart.ai',
+        action: 'Published Page',
+        page: 'Dashboard',
+        record: 'Farmer Dashboard configured with 4 status cards',
+        timestamp: '2026-09-22T06:10:00Z'
+      },
+      {
+        id: 'act-3',
+        adminName: 'Content Operations Manager',
+        adminEmail: 'editor@krishismart.ai',
+        action: 'Updated Mandi Rate',
+        page: 'Market',
+        record: 'Tomato rate updated to Rs 2,450/Qtl in Kolar APMC',
+        timestamp: '2026-09-22T06:20:00Z'
+      }
+    ];
+  }
 }
 
 export const db = new DatabaseStore();
+

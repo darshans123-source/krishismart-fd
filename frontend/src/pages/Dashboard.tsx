@@ -49,7 +49,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
     aiFarmHealth,
     aiBriefing,
     nearbyMandis,
-    openAIChatWithPrompt
+    openAIChatWithPrompt,
+    cmsDashboard
   } = useFarmData();
 
   const { t } = useLanguage();
@@ -115,110 +116,128 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
     setCommandInput('');
   };
 
-  // Quick action buttons matching specification
-  const quickActions = [
-    { id: 'aiHub', label: 'Crop Scan', icon: '🌱', bg: 'bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border-emerald-200' },
-    { id: 'weather', label: 'Weather', icon: '🌦️', bg: 'bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-200' },
-    { id: 'market', label: 'Market', icon: '📈', bg: 'bg-blue-50 hover:bg-blue-100 text-blue-900 border-blue-200' },
-    { id: 'finance', label: 'Finance', icon: '💰', bg: 'bg-teal-50 hover:bg-teal-100 text-teal-900 border-teal-200' },
-    { id: 'drone', label: 'Drone', icon: '🚁', bg: 'bg-purple-50 hover:bg-purple-100 text-purple-900 border-purple-200' },
-    { id: 'pump', label: 'Pump', icon: '💧', bg: 'bg-cyan-50 hover:bg-cyan-100 text-cyan-900 border-cyan-200' },
-    { id: 'iot', label: 'IoT', icon: '📡', bg: 'bg-stone-100 hover:bg-stone-200 text-stone-900 border-stone-300' }
+  // Quick action buttons matching specification with dynamic CMS fallback
+  const defaultQuickActions = [
+    { id: 'aiHub', label: 'Crop Scan', icon: '🌱', route: 'aiHub', bg: 'bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border-emerald-200' },
+    { id: 'weather', label: 'Weather', icon: '🌦️', route: 'weather', bg: 'bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-200' },
+    { id: 'market', label: 'Market', icon: '📈', route: 'market', bg: 'bg-blue-50 hover:bg-blue-100 text-blue-900 border-blue-200' },
+    { id: 'finance', label: 'Finance', icon: '💰', route: 'finance', bg: 'bg-teal-50 hover:bg-teal-100 text-teal-900 border-teal-200' },
+    { id: 'drone', label: 'Drone', icon: '🚁', route: 'drone', bg: 'bg-purple-50 hover:bg-purple-100 text-purple-900 border-purple-200' },
+    { id: 'pump', label: 'Pump', icon: '💧', route: 'pump', bg: 'bg-cyan-50 hover:bg-cyan-100 text-cyan-900 border-cyan-200' },
+    { id: 'iot', label: 'IoT', icon: '📡', route: 'iot', bg: 'bg-stone-100 hover:bg-stone-200 text-stone-900 border-stone-300' }
   ];
+
+  const heroConfig = cmsDashboard?.hero;
+  const showHero = heroConfig ? heroConfig.visible !== false : true;
+
+  const heroHeading = heroConfig?.mainHeading
+    ? heroConfig.mainHeading.replace(/\{name\}/gi, user?.name ? user.name.toUpperCase() : 'FARMER')
+    : heroConfig?.greeting
+    ? `${heroConfig.greeting.toUpperCase()}, ${user?.name ? user.name.toUpperCase() : 'FARMER'} 🌱`
+    : `GOOD AFTERNOON, ${user?.name ? user.name.toUpperCase() : 'FARMER'} 🌱`;
+
+  const heroSubtitle = heroConfig?.subtitle || `Real-time farm status for ${locationState.address.district || 'Raichur'}, ${locationState.address.state || 'Karnataka'}.`;
+  const heroBtnText = heroConfig?.buttonText || `Farm Health: ${aiFarmHealth.overall}/100`;
+
+  const activeQuickActions = (cmsDashboard?.quickActions && Array.isArray(cmsDashboard.quickActions) && cmsDashboard.quickActions.length > 0)
+    ? cmsDashboard.quickActions.filter((qa: any) => qa.visible !== false).sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
+    : defaultQuickActions;
 
   return (
     <div className="space-y-6 sm:space-y-8 pb-16 animate-in fade-in duration-200">
       {/* ================================================== */}
       {/* 1. TOP 5-SECOND OVERVIEW & GREETING BANNER */}
       {/* ================================================== */}
-      <div className="rounded-3xl bg-gradient-to-r from-emerald-800 to-emerald-900 text-white p-6 sm:p-8 shadow-sm border border-emerald-700/80 space-y-5">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="space-y-1.5">
-            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-700/60 border border-emerald-500/30 text-emerald-200 text-xs font-semibold">
-              <Sprout className="w-3.5 h-3.5 text-emerald-300" />
-              <span>Smart Farming Platform</span>
+      {showHero && (
+        <div className="rounded-3xl bg-gradient-to-r from-emerald-800 to-emerald-900 text-white p-6 sm:p-8 shadow-sm border border-emerald-700/80 space-y-5">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="space-y-1.5">
+              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-700/60 border border-emerald-500/30 text-emerald-200 text-xs font-semibold">
+                <Sprout className="w-3.5 h-3.5 text-emerald-300" />
+                <span>Smart Farming Platform</span>
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-extrabold font-heading text-white tracking-tight">
+                {heroHeading}
+              </h1>
+              <p className="text-xs sm:text-sm text-emerald-100 max-w-xl leading-relaxed">
+                {heroSubtitle}
+              </p>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold font-heading text-white tracking-tight">
-              GOOD AFTERNOON, {user?.name ? user.name.toUpperCase() : 'FARMER'} 🌱
-            </h1>
-            <p className="text-xs sm:text-sm text-emerald-100 max-w-xl leading-relaxed">
-              Real-time farm status for <strong>{locationState.address.district || 'Raichur'}, {locationState.address.state || 'Karnataka'}</strong>.
-            </p>
+
+            <button
+              onClick={() => setShowHealthModal(true)}
+              className="px-4 py-2.5 rounded-2xl bg-white/15 hover:bg-white/25 border border-white/20 text-white text-xs font-bold flex items-center gap-2 self-start md:self-auto transition-all shadow-xs cursor-pointer"
+            >
+              <HelpCircle className="w-4 h-4 text-emerald-200" />
+              <span>{heroBtnText}</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </button>
           </div>
 
-          <button
-            onClick={() => setShowHealthModal(true)}
-            className="px-4 py-2.5 rounded-2xl bg-white/15 hover:bg-white/25 border border-white/20 text-white text-xs font-bold flex items-center gap-2 self-start md:self-auto transition-all shadow-xs"
-          >
-            <HelpCircle className="w-4 h-4 text-emerald-200" />
-            <span>Farm Health: {aiFarmHealth.overall}/100</span>
-            <ChevronRight className="w-3.5 h-3.5" />
-          </button>
+          {/* 4 Clean Quick Metrics */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 pt-3 border-t border-emerald-700/70">
+            {/* 1. Location */}
+            <button
+              onClick={() => setIsLocationModalOpen(true)}
+              className="p-3.5 rounded-2xl bg-emerald-950/40 hover:bg-emerald-950/60 border border-emerald-600/30 text-left transition-colors group cursor-pointer"
+            >
+              <div className="text-[11px] text-emerald-200 flex items-center gap-1.5 font-medium">
+                <MapPin className="w-3.5 h-3.5 text-emerald-300 shrink-0" />
+                <span>Current Location</span>
+              </div>
+              <div className="text-sm font-bold text-white mt-1 truncate group-hover:text-emerald-200">
+                📍 {locationState.address.district || 'Raichur'}, {locationState.address.state || 'Karnataka'}
+              </div>
+              <div className="text-[10px] text-emerald-300 mt-0.5">Click to change</div>
+            </button>
+
+            {/* 2. Weather */}
+            <button
+              onClick={() => onNavigate('weather')}
+              className="p-3.5 rounded-2xl bg-emerald-950/40 hover:bg-emerald-950/60 border border-emerald-600/30 text-left transition-colors group cursor-pointer"
+            >
+              <div className="text-[11px] text-emerald-200 flex items-center gap-1.5 font-medium">
+                <Sun className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+                <span>Weather</span>
+              </div>
+              <div className="text-sm font-bold text-white mt-1 group-hover:text-emerald-200">
+                🌡️ {weather.temp}°C • {weather.condition}
+              </div>
+              <div className="text-[10px] text-emerald-300 mt-0.5">Wind: {weather.windSpeed} km/h</div>
+            </button>
+
+            {/* 3. Crop Health */}
+            <button
+              onClick={() => onNavigate('myFarms')}
+              className="p-3.5 rounded-2xl bg-emerald-950/40 hover:bg-emerald-950/60 border border-emerald-600/30 text-left transition-colors group cursor-pointer"
+            >
+              <div className="text-[11px] text-emerald-200 flex items-center gap-1.5 font-medium">
+                <Wheat className="w-3.5 h-3.5 text-emerald-300 shrink-0" />
+                <span>Crop Health</span>
+              </div>
+              <div className="text-sm font-bold text-white mt-1 group-hover:text-emerald-200">
+                🌾 {aiFarmHealth.cropHealth}% Healthy
+              </div>
+              <div className="text-[10px] text-emerald-300 mt-0.5">{crops.length} crops active</div>
+            </button>
+
+            {/* 4. Soil Moisture */}
+            <button
+              onClick={() => onNavigate('pump')}
+              className="p-3.5 rounded-2xl bg-emerald-950/40 hover:bg-emerald-950/60 border border-emerald-600/30 text-left transition-colors group cursor-pointer"
+            >
+              <div className="text-[11px] text-emerald-200 flex items-center gap-1.5 font-medium">
+                <Droplets className="w-3.5 h-3.5 text-cyan-300 shrink-0" />
+                <span>Soil Moisture</span>
+              </div>
+              <div className="text-sm font-bold text-white mt-1 group-hover:text-emerald-200">
+                💧 {weather.soilMoisture}% (Optimal)
+              </div>
+              <div className="text-[10px] text-emerald-300 mt-0.5">Pump: {smartPump.status}</div>
+            </button>
+          </div>
         </div>
-
-        {/* 4 Clean Quick Metrics */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 pt-3 border-t border-emerald-700/70">
-          {/* 1. Location */}
-          <button
-            onClick={() => setIsLocationModalOpen(true)}
-            className="p-3.5 rounded-2xl bg-emerald-950/40 hover:bg-emerald-950/60 border border-emerald-600/30 text-left transition-colors group"
-          >
-            <div className="text-[11px] text-emerald-200 flex items-center gap-1.5 font-medium">
-              <MapPin className="w-3.5 h-3.5 text-emerald-300 shrink-0" />
-              <span>Current Location</span>
-            </div>
-            <div className="text-sm font-bold text-white mt-1 truncate group-hover:text-emerald-200">
-              📍 {locationState.address.district || 'Raichur'}, {locationState.address.state || 'Karnataka'}
-            </div>
-            <div className="text-[10px] text-emerald-300 mt-0.5">Click to change</div>
-          </button>
-
-          {/* 2. Weather */}
-          <button
-            onClick={() => onNavigate('weather')}
-            className="p-3.5 rounded-2xl bg-emerald-950/40 hover:bg-emerald-950/60 border border-emerald-600/30 text-left transition-colors group"
-          >
-            <div className="text-[11px] text-emerald-200 flex items-center gap-1.5 font-medium">
-              <Sun className="w-3.5 h-3.5 text-amber-300 shrink-0" />
-              <span>Weather</span>
-            </div>
-            <div className="text-sm font-bold text-white mt-1 group-hover:text-emerald-200">
-              🌡️ {weather.temp}°C • {weather.condition}
-            </div>
-            <div className="text-[10px] text-emerald-300 mt-0.5">Wind: {weather.windSpeed} km/h</div>
-          </button>
-
-          {/* 3. Crop Health */}
-          <button
-            onClick={() => onNavigate('myFarms')}
-            className="p-3.5 rounded-2xl bg-emerald-950/40 hover:bg-emerald-950/60 border border-emerald-600/30 text-left transition-colors group"
-          >
-            <div className="text-[11px] text-emerald-200 flex items-center gap-1.5 font-medium">
-              <Wheat className="w-3.5 h-3.5 text-emerald-300 shrink-0" />
-              <span>Crop Health</span>
-            </div>
-            <div className="text-sm font-bold text-white mt-1 group-hover:text-emerald-200">
-              🌾 {aiFarmHealth.cropHealth}% Healthy
-            </div>
-            <div className="text-[10px] text-emerald-300 mt-0.5">{crops.length} crops active</div>
-          </button>
-
-          {/* 4. Soil Moisture */}
-          <button
-            onClick={() => onNavigate('pump')}
-            className="p-3.5 rounded-2xl bg-emerald-950/40 hover:bg-emerald-950/60 border border-emerald-600/30 text-left transition-colors group"
-          >
-            <div className="text-[11px] text-emerald-200 flex items-center gap-1.5 font-medium">
-              <Droplets className="w-3.5 h-3.5 text-cyan-300 shrink-0" />
-              <span>Soil Moisture</span>
-            </div>
-            <div className="text-sm font-bold text-white mt-1 group-hover:text-emerald-200">
-              💧 {weather.soilMoisture}% (Optimal)
-            </div>
-            <div className="text-[10px] text-emerald-300 mt-0.5">Pump: {smartPump.status}</div>
-          </button>
-        </div>
-      </div>
+      )}
 
       {/* ================================================== */}
       {/* 2. QUICK ACTIONS (Large, clean, simple buttons) */}
@@ -232,14 +251,16 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
-          {quickActions.map((act) => (
+          {activeQuickActions.map((act: any) => (
             <button
               key={act.id}
-              onClick={() => onNavigate(act.id)}
-              className={`p-3.5 rounded-2xl border transition-all duration-150 flex flex-col items-center justify-center text-center shadow-2xs hover:shadow-sm active:scale-98 cursor-pointer ${act.bg}`}
+              onClick={() => onNavigate(act.route || act.id)}
+              className={`p-3.5 rounded-2xl border transition-all duration-150 flex flex-col items-center justify-center text-center shadow-2xs hover:shadow-sm active:scale-98 cursor-pointer ${
+                act.bg || 'bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border-emerald-200'
+              }`}
             >
               <span className="text-2xl mb-1">{act.icon}</span>
-              <span className="text-xs font-bold">{act.label}</span>
+              <span className="text-xs font-bold">{act.label || act.title}</span>
             </button>
           ))}
         </div>
