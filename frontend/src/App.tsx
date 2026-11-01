@@ -27,6 +27,7 @@ import { AuthModal } from './pages/AuthModal';
 import { AlertCenterModal } from './pages/AlertCenterModal';
 import { LocationModal } from './components/layout/LocationModal';
 import { MobileBottomNav } from './components/layout/MobileBottomNav';
+import { SplashScreen } from './components/layout/SplashScreen';
 
 // Admin CMS System
 import { AdminAuthProvider } from './admin/auth/AdminAuthContext';
@@ -52,6 +53,15 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
     });
   };
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  // Splash screen: initial mount only. Navigation changes currentTab,
+  // never remounts this component, so the splash never reappears.
+  const [showSplash, setShowSplash] = useState(true);
+  const [splashFading, setSplashFading] = useState(false);
+  useEffect(() => {
+    const fade = window.setTimeout(() => setSplashFading(true), 650);
+    const remove = window.setTimeout(() => setShowSplash(false), 1150);
+    return () => { window.clearTimeout(fade); window.clearTimeout(remove); };
+  }, []);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [authInitialMode, setAuthInitialMode] = useState<'login' | 'register' | 'onboarding'>('login');
 
@@ -109,7 +119,9 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
   };
 
   return (
-    <div className="app-shell min-h-screen w-full max-w-none min-w-0 bg-[#F7FAF7] text-[#172B24] flex flex-col selection:bg-[#059669] selection:text-white overflow-x-clip">
+    <div className="app-shell min-h-screen w-full max-w-none min-w-0 text-[#14251D] flex flex-col selection:bg-[#059669] selection:text-white overflow-x-clip">
+      {showSplash && <SplashScreen fading={splashFading} />}
+
       {/* Top Universal Navbar */}
       <Navbar
         currentTab={currentTab}
@@ -138,7 +150,7 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
 
         {/* Dynamic Page Content */}
         <main
-          className={`flex-1 min-w-0 w-full overflow-x-hidden ${
+          className={`page-fade-in flex-1 min-w-0 w-full overflow-x-hidden ${
             currentTab === 'landing' ? 'p-0' : 'p-4 sm:p-6 lg:p-8 pb-24 lg:pb-8 max-w-full'
           }`}
         >

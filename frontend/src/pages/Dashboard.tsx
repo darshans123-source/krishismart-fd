@@ -187,13 +187,11 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       .join(' ');
   const hourNow = new Date().getHours();
   const timeGreeting = hourNow < 12 ? 'Good morning' : hourNow < 17 ? 'Good afternoon' : 'Good evening';
+  const capsName = (user?.name || 'Farmer').split(' ')[0].toUpperCase();
   const heroHeading = heroConfig?.mainHeading
     ? heroConfig.mainHeading.replace(/\{name\}/gi, formatDisplayName(user?.name)).replace(/🌱/g, '').trim()
-    : heroConfig?.greeting
-    ? `${heroConfig.greeting.replace(/🌱/g, '').trim()}, ${formatDisplayName(user?.name)}`
-    : `${timeGreeting}, ${formatDisplayName(user?.name)}`;
-
-  const heroSubtitle = heroConfig?.subtitle || `Real-time farm status for ${locationState.address.district || 'Raichur'}, ${locationState.address.state || 'Karnataka'}.`;
+    : `${timeGreeting.toUpperCase()}, ${capsName}!`;
+  const heroSubtitle = heroConfig?.subtitle || 'Your farm intelligence at a glance. Monitor your crops, understand your soil and make smarter farming decisions.';
   const heroBtnText = heroConfig?.buttonText || `Farm Health: ${aiFarmHealth.overall}/100`;
 
   const activeQuickActions = (cmsDashboard?.quickActions && Array.isArray(cmsDashboard.quickActions) && cmsDashboard.quickActions.length > 0)
@@ -221,6 +219,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-heading text-white tracking-tight leading-tight break-words">
                 {heroHeading}
               </h1>
+              <div className="h-1 w-16 rounded-full bg-[#D6AD55]" />
               <p className="text-sm sm:text-base text-[#D1FAE5]/90 max-w-xl leading-relaxed">
                 {heroSubtitle}
               </p>
@@ -237,7 +236,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           </div>
 
           {/* 4 Clean Quick Metrics */}
-          <div className="relative grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 pt-5 border-t border-white/10">
+          <div className="relative grid grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-3 pt-5 border-t border-white/10">
             {/* 1. Location */}
             <button
               onClick={() => setIsLocationModalOpen(true)}
@@ -296,6 +295,21 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                 {weather.soilMoisture}% (Optimal)
               </div>
               <div className="text-[10px] text-[#6EE7B7] mt-0.5">Pump: {smartPump.status}</div>
+            </button>
+
+            {/* 5. Farm Health Score */}
+            <button
+              onClick={() => setShowHealthModal(true)}
+              className="p-3 sm:p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer min-w-0"
+            >
+              <div className="text-[11px] text-[#A7F3D0] flex items-center gap-1.5 font-medium">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#D6AD55] shrink-0" />
+                <span className="uppercase tracking-wider">Farm Health Score</span>
+              </div>
+              <div className="text-sm font-bold text-white mt-1 group-hover:text-[#A7F3D0]">
+                {aiFarmHealth.overall}/100
+              </div>
+              <div className="text-[10px] text-[#6EE7B7] mt-0.5">Tap to see why</div>
             </button>
           </div>
         </div>
@@ -422,6 +436,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                 </div>
 
                 <div className="pt-2 border-t border-[#EFF4EF] flex items-center justify-between text-[11px] text-[#718078]">
+                  <span>Health: <strong className="text-[#064E3B]">{crop.healthScore}%</strong></span>
+                  <span>Soil moisture: <strong className="text-[#064E3B]">{weather.soilMoisture}%</strong> <span className="font-normal">(farm)</span></span>
+                </div>
+                <div className="pt-2 border-t border-[#EFF4EF] flex items-center justify-between text-[11px] text-[#718078]">
                   <span>Harvest Date:</span>
                   <span className="font-bold text-[#243A32]">{crop.expectedHarvestDate}</span>
                 </div>
@@ -440,7 +458,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           <h2 className="text-base font-bold text-[#172B24] font-heading">Farm analytics</h2>
           <span className="text-xs text-[#718078]">From your recorded farm data</span>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-6 gap-3">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {[
             { icon: Wheat, label: 'Total land', value: `${crops.reduce((sum, c) => sum + (c.area || 0), 0).toFixed(1)} acres`, sub: `${crops.length} fields`, onClick: () => onNavigate('myFarms') },
             { icon: Sprout, label: 'Active crops', value: `${crops.length}`, sub: 'Currently monitored', onClick: () => onNavigate('myFarms') },
@@ -448,6 +466,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             { icon: Droplets, label: 'Soil moisture', value: `${weather.soilMoisture}%`, sub: `Pump: ${smartPump.status}`, onClick: () => onNavigate('iot') },
             { icon: Coins, label: 'Total income', value: `₹${financialSummary.totalIncome.toLocaleString('en-IN')}`, sub: 'Recorded income', onClick: () => onNavigate('finance') },
             { icon: TrendingUp, label: 'Net profit', value: `₹${financialSummary.netProfit.toLocaleString('en-IN')}`, sub: `${financialSummary.profitMargin}% margin`, onClick: () => onNavigate('finance') },
+            { icon: Wheat, label: 'Estimated yield', value: `${(crops.reduce((sum, c) => sum + (c.projectedYieldKg || 0), 0) / 1000).toFixed(1)} tonnes`, sub: 'Sum of crop projections', onClick: () => onNavigate('myFarms') },
+            { icon: Coins, label: 'Expected revenue', value: `₹${crops.reduce((sum, c) => sum + (c.expectedRevenue || 0), 0).toLocaleString('en-IN')}`, sub: 'Sum of crop projections', onClick: () => onNavigate('finance') },
           ].map((stat) => {
             const Icon = stat.icon;
             return (
