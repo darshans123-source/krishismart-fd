@@ -113,7 +113,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             aria-label="KrishiSmart AI home"
           >
             <img
-              src="/logo-icon.webp"
+              src="/logo-icon.svg"
               alt="KrishiSmart AI logo"
               className="w-8 h-8 rounded-2xl shadow-xs"
             />
@@ -124,7 +124,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="hidden md:flex items-center gap-2 cursor-pointer group min-w-0"
           >
             <img
-              src="/logo-icon.webp"
+              src="/logo-icon.svg"
               alt="KrishiSmart AI logo"
               className="w-8 h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 rounded-2xl shadow-xs group-hover:scale-105 transition-transform shrink-0"
             />

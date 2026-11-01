@@ -208,7 +208,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           <div className="absolute inset-0 bg-gradient-to-b from-[#022C22]/70 via-[#022C22]/40 to-[#022C22]/90" />
           <div className="relative z-10 flex h-full flex-col justify-end md:justify-between p-5 sm:p-6 text-white">
             <div className="hidden md:flex items-center gap-2">
-              <img src="/logo-icon.webp" alt="KrishiSmart AI" className="w-10 h-10 rounded-xl ring-1 ring-white/30" />
+              <img src="/logo-icon.svg" alt="KrishiSmart AI" className="w-10 h-10 rounded-xl ring-1 ring-white/30" />
               <span className="font-extrabold font-heading tracking-tight">KRISHISMART AI</span>
             </div>
             <div>
