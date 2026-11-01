@@ -43,12 +43,12 @@ interface MainAppContentProps {
 const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
   const [currentTab, setCurrentTab] = useState<string>('dashboard');
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(() => {
-    try { return localStorage.getItem('krishi_sidebar_collapsed') === '1'; } catch { return false; }
-  });
+  // Usability fix (issue 3): sidebar ALWAYS starts expanded with labels.
+  // Farmers should not have to guess icons. Collapsing is still allowed
+  // for the session, but it is never persisted as the default.
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(false);
   const toggleSidebarCollapsed = () => {
     setIsSidebarCollapsed((prev) => {
-      try { localStorage.setItem('krishi_sidebar_collapsed', prev ? '0' : '1'); } catch { /* ignore */ }
       return !prev;
     });
   };
