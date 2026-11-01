@@ -35,7 +35,7 @@ export const FarmerProfilePage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 pb-12 animate-in fade-in">
+    <div className="w-full min-w-0 space-y-8 pb-12 animate-in fade-in">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -77,7 +77,7 @@ export const FarmerProfilePage: React.FC = () => {
             )}
           </div>
 
-          <div className="space-y-1 flex-1">
+          <div className="w-full min-w-0 space-y-1 flex-1">
             <div className="flex flex-wrap items-center gap-2">
               <h2 className="text-2xl font-black text-[#172B24] font-heading">
                 {user?.name || 'Farmer'}
@@ -145,7 +145,7 @@ export const FarmerProfilePage: React.FC = () => {
           <h3 className="font-extrabold text-base text-[#172B24] font-heading">
             Registered Farm Parcels ({farms.length})
           </h3>
-          <div className="space-y-3">
+          <div className="w-full min-w-0 space-y-3">
             {farms.map((f) => (
               <div key={f.id} className="p-3.5 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7]/80 flex items-center justify-between text-xs">
                 <div>
@@ -165,7 +165,7 @@ export const FarmerProfilePage: React.FC = () => {
           <h3 className="font-extrabold text-base text-[#172B24] font-heading">
             Active Crop Portfolio ({crops.length})
           </h3>
-          <div className="space-y-3">
+          <div className="w-full min-w-0 space-y-3">
             {crops.map((c) => (
               <div key={c.id} className="p-3.5 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7]/80 flex items-center justify-between text-xs">
                 <div>
@@ -194,7 +194,7 @@ export const FarmerProfilePage: React.FC = () => {
               </button>
             </div>
 
-            <form onSubmit={handleSaveProfile} className="space-y-3.5 text-xs">
+            <form onSubmit={handleSaveProfile} className="w-full min-w-0 space-y-3.5 text-xs">
               <div>
                 <label className="block font-bold text-[#3E5248] mb-1">Farmer Full Name</label>
                 <input

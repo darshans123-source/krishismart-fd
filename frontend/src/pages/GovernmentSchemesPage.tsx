@@ -36,7 +36,7 @@ export const GovernmentSchemesPage: React.FC = () => {
   });
 
   return (
-    <div className="space-y-8 pb-12 animate-in fade-in">
+    <div className="w-full min-w-0 space-y-8 pb-12 animate-in fade-in">
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -205,11 +205,11 @@ export const GovernmentSchemesPage: React.FC = () => {
               <p className="text-blue-800 font-semibold">{selectedSchemeForModal.financialBenefit}</p>
             </div>
 
-            <div className="space-y-2 text-xs">
+            <div className="w-full min-w-0 space-y-2 text-xs">
               <div className="font-bold text-[#243A32] uppercase text-[10px] tracking-wider">
                 Eligibility Criteria
               </div>
-              <ul className="space-y-1.5 text-[#5A6E64]">
+              <ul className="w-full min-w-0 space-y-1.5 text-[#5A6E64]">
                 {selectedSchemeForModal.eligibility.map((el, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#059669] shrink-0 mt-0.5" />
@@ -219,11 +219,11 @@ export const GovernmentSchemesPage: React.FC = () => {
               </ul>
             </div>
 
-            <div className="space-y-2 text-xs">
+            <div className="w-full min-w-0 space-y-2 text-xs">
               <div className="font-bold text-[#243A32] uppercase text-[10px] tracking-wider">
                 Required Documents Checklist
               </div>
-              <ul className="space-y-1.5 text-[#5A6E64]">
+              <ul className="w-full min-w-0 space-y-1.5 text-[#5A6E64]">
                 {selectedSchemeForModal.documentsRequired.map((doc, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <FileText className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />

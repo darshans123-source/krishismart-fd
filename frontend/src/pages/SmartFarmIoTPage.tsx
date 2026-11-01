@@ -45,7 +45,7 @@ export const SmartFarmIoTPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 pb-16 animate-in fade-in">
+    <div className="w-full min-w-0 space-y-8 pb-16 animate-in fade-in">
       {/* ================================================== */}
       {/* 1. HERO WITH REAL FARM IoT SENSOR IMAGE */}
       {/* ================================================== */}
@@ -341,7 +341,7 @@ export const SmartFarmIoTPage: React.FC = () => {
               </button>
             </div>
 
-            <form onSubmit={handleAddSubmit} className="space-y-3.5 text-xs">
+            <form onSubmit={handleAddSubmit} className="w-full min-w-0 space-y-3.5 text-xs">
               <div>
                 <label className="block font-bold text-[#3E5248] mb-1">Sensor Nickname</label>
                 <input

@@ -53,7 +53,7 @@ export const KrishiBhavishyaPage: React.FC = () => {
   const peakKg = (forecast.peakPrice / 100).toFixed(0);
 
   return (
-    <div className="space-y-8 pb-16 animate-in fade-in">
+    <div className="w-full min-w-0 space-y-8 pb-16 animate-in fade-in">
       {/* ================================================== */}
       {/* 1. HEADER: "When should I sell my crop?" */}
       {/* ================================================== */}

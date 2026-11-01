@@ -39,7 +39,7 @@ export const SmartPumpPage: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-8 pb-16 animate-in fade-in">
+    <div className="w-full min-w-0 space-y-8 pb-16 animate-in fade-in">
       {/* ================================================== */}
       {/* 1. HEADER WITH REALISTIC IRRIGATION/FARM IMAGE */}
       {/* ================================================== */}
@@ -123,7 +123,7 @@ export const SmartPumpPage: React.FC = () => {
         {/* Controls: [ ON ] [ OFF ] and Mode: [ AUTO ] [ MANUAL ] */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
           {/* Pump Power Controls */}
-          <div className="space-y-3">
+          <div className="w-full min-w-0 space-y-3">
             <label className="block text-xs font-black uppercase tracking-wider text-[#5A6E64]">
               Controls
             </label>
@@ -162,7 +162,7 @@ export const SmartPumpPage: React.FC = () => {
           </div>
 
           {/* Mode Switcher */}
-          <div className="space-y-3">
+          <div className="w-full min-w-0 space-y-3">
             <label className="block text-xs font-black uppercase tracking-wider text-[#5A6E64]">
               Mode
             </label>
@@ -296,7 +296,7 @@ export const SmartPumpPage: React.FC = () => {
             <span className="text-xs text-[#064E3B] font-bold">2 Active Timers</span>
           </div>
 
-          <div className="space-y-2 text-xs">
+          <div className="w-full min-w-0 space-y-2 text-xs">
             {smartPump.schedules.map((sch) => (
               <div
                 key={sch.id}

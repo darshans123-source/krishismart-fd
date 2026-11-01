@@ -80,7 +80,7 @@ export const AIHubPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 pb-12 animate-in fade-in">
+    <div className="w-full min-w-0 space-y-8 pb-12 animate-in fade-in">
       {/* Top Title Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -127,7 +127,7 @@ export const AIHubPage: React.FC = () => {
 
       {/* 1. AI CROP DOCTOR & DISEASE SCAN TAB */}
       {activeTab === 'doctor' && (
-        <div className="space-y-8 animate-in fade-in">
+        <div className="w-full min-w-0 space-y-8 animate-in fade-in">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Left Upload / Sample Selector */}
             <div className="lg:col-span-5 space-y-5">
@@ -261,7 +261,7 @@ export const AIHubPage: React.FC = () => {
                         <Leaf className="w-4 h-4 text-[#064E3B]" />
                         <span>Farm Advice: Organic Remedy</span>
                       </div>
-                      <ul className="space-y-1 text-xs text-[#064E3B]">
+                      <ul className="w-full min-w-0 space-y-1 text-xs text-[#064E3B]">
                         {diagnosticResult.organicTreatment.map((t, idx) => (
                           <li key={idx} className="flex items-start gap-1.5">
                             <CheckCircle2 className="w-3.5 h-3.5 text-[#059669] shrink-0 mt-0.5" />
@@ -277,7 +277,7 @@ export const AIHubPage: React.FC = () => {
                         <FlaskConical className="w-4 h-4 text-blue-700" />
                         <span>Today's Recommendation: Treatment</span>
                       </div>
-                      <ul className="space-y-1 text-xs text-blue-800">
+                      <ul className="w-full min-w-0 space-y-1 text-xs text-blue-800">
                         {diagnosticResult.chemicalTreatment.map((t, idx) => (
                           <li key={idx} className="flex items-start gap-1.5">
                             <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-1.5" />
@@ -293,7 +293,7 @@ export const AIHubPage: React.FC = () => {
                     <div className="font-bold text-amber-900 text-xs">
                       Possible Risk Prevention
                     </div>
-                    <ul className="space-y-1 text-xs text-amber-800">
+                    <ul className="w-full min-w-0 space-y-1 text-xs text-amber-800">
                       {diagnosticResult.preventiveMeasures.map((p, idx) => (
                         <li key={idx} className="flex items-start gap-1.5">
                           <CheckCircle2 className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
@@ -576,7 +576,7 @@ export const AIHubPage: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-            <div className="space-y-4">
+            <div className="w-full min-w-0 space-y-4">
               <div>
                 <label className="block text-xs font-bold text-[#3E5248] mb-1">Target Crop</label>
                 <select

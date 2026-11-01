@@ -47,7 +47,7 @@ export const DroneSprayPage: React.FC = () => {
   const isWindSafe = weather.windSpeed < 14;
 
   return (
-    <div className="space-y-8 pb-16 animate-in fade-in">
+    <div className="w-full min-w-0 space-y-8 pb-16 animate-in fade-in">
       {/* ================================================== */}
       {/* 1. HERO SECTION WITH REALISTIC AGRI-DRONE IMAGE */}
       {/* ================================================== */}
@@ -316,7 +316,7 @@ export const DroneSprayPage: React.FC = () => {
 
         {/* Action Controls & Launch */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
-          <div className="space-y-1">
+          <div className="w-full min-w-0 space-y-1">
             <div className="text-xs text-[#718078]">
               Formulation: <strong>{sprayType} (Bio-protection)</strong>
             </div>
