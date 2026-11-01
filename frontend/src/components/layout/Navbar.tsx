@@ -295,7 +295,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           ) : (
             <button
               onClick={onOpenAuth}
-              className="px-4 py-2 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white text-xs font-bold shadow-md shadow-[#059669]/20 transition-all flex items-center gap-1.5"
+              className="px-4 py-2 rounded-xl btn-clay-primary text-white text-xs font-bold shadow-md shadow-[#059669]/20 transition-all flex items-center gap-1.5"
             >
               <User className="w-3.5 h-3.5" />
               <span>{t('login')}</span>

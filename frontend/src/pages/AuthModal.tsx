@@ -264,7 +264,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               Farm setup is saved to your real Supabase account. Sign up or sign in, then come back to complete your farm setup.
             </p>
             <div className="flex gap-2">
-              <button type="button" onClick={() => setMode('pin')} className="flex-1 py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md">
+              <button type="button" onClick={() => setMode('pin')} className="flex-1 py-3 rounded-xl btn-clay-primary text-white font-bold text-sm shadow-md">
                 Fast PIN Login
               </button>
               <button type="button" onClick={() => setMode('login')} className="flex-1 py-3 rounded-xl border border-[#CBD8D0] hover:bg-[#F7FAF7] text-[#3E5248] font-bold text-sm">
@@ -339,7 +339,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setOnboardStep(2)}
-                  className="w-full py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
+                  className="w-full py-3 rounded-xl btn-clay-primary text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
                 >
                   <span>Next: Farm Location</span>
                   <ArrowRight className="w-4 h-4" />
@@ -406,7 +406,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   <button
                     type="button"
                     onClick={() => setOnboardStep(3)}
-                    className="flex-1 py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md flex items-center justify-center gap-2"
+                    className="flex-1 py-3 rounded-xl btn-clay-primary text-white font-bold text-sm shadow-md flex items-center justify-center gap-2"
                   >
                     <span>Next: Crops & Land</span>
                     <ArrowRight className="w-4 h-4" />
@@ -479,7 +479,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md flex items-center justify-center gap-2"
+                    className="flex-1 py-3 rounded-xl btn-clay-primary text-white font-bold text-sm shadow-md flex items-center justify-center gap-2"
                   >
                     <CheckCircle2 className="w-4 h-4" />
                     <span>Complete Setup</span>
@@ -530,7 +530,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <button
                 type="submit"
                 disabled={authLoading}
-                className="w-full py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md shadow-[#059669]/20 transition-all disabled:opacity-60"
+                className="w-full py-3 rounded-xl btn-clay-primary text-white font-bold text-sm shadow-md shadow-[#059669]/20 transition-all disabled:opacity-60"
               >
                 {authLoading ? 'Please wait…' : pinAction === 'register' ? 'Create PIN Account' : 'Login with PIN'}
               </button>
@@ -686,7 +686,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <button
                 type="submit"
                 disabled={authLoading}
-                className="w-full py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md shadow-[#059669]/20 transition-all disabled:opacity-60"
+                className="w-full py-3 rounded-xl btn-clay-primary text-white font-bold text-sm shadow-md shadow-[#059669]/20 transition-all disabled:opacity-60"
               >
                 {authLoading ? 'Please wait…' : mode === 'register' ? 'Create Account' : mode === 'forgot' ? 'Send Reset Link' : 'Sign In'}
               </button>

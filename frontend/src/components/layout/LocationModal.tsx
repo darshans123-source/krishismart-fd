@@ -123,7 +123,7 @@ export const LocationModal: React.FC<LocationModalProps> = ({ isOpen, onClose })
             <button
               onClick={handleUseGPS}
               disabled={isSubmitting || locationState.status === 'loading'}
-              className="w-full py-3.5 px-4 rounded-2xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-3.5 px-4 rounded-2xl btn-clay-primary text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50"
             >
               <Navigation className={`w-4 h-4 ${locationState.status === 'loading' ? 'animate-spin' : ''}`} />
               <span>

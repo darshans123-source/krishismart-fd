@@ -148,7 +148,7 @@ export const AdminNotificationsManager: React.FC = () => {
           </button>
           <button
             onClick={handleOpenCreate}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white text-xs font-bold shadow-sm transition cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl btn-clay-primary text-white text-xs font-bold shadow-sm transition cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             Dispatch New Alert
@@ -365,7 +365,7 @@ export const AdminNotificationsManager: React.FC = () => {
             <button
               type="submit"
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white text-xs font-bold shadow-sm transition disabled:opacity-50"
+              className="px-5 py-2 rounded-xl btn-clay-primary text-white text-xs font-bold shadow-sm transition disabled:opacity-50"
             >
               {saving ? 'Broadcasting...' : 'Send Alert Now'}
             </button>

@@ -149,7 +149,7 @@ export const FloatingAIChat: React.FC = () => {
       <div className="fixed bottom-24 lg:bottom-6 left-4 sm:left-6 z-40">
         <button
           onClick={() => setIsAIChatOpen(!isAIChatOpen)}
-          className="relative group flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-[#064E3B] via-[#059669] to-green-600 text-white shadow-xl shadow-[#064E3B]/30 hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-[#34D399]/40"
+          className="btn-clay btn-clay-pill relative group flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-[#064E3B] via-[#059669] to-green-600 text-white shadow-xl shadow-[#064E3B]/30 hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-[#34D399]/40"
         >
           <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6EE7B7] opacity-75"></span>
@@ -276,7 +276,7 @@ export const FloatingAIChat: React.FC = () => {
             <button
               onClick={() => handleSend()}
               disabled={!input.trim()}
-              className="p-2.5 rounded-xl bg-[#059669] hover:bg-[#064E3B] disabled:opacity-40 text-white shadow-md shadow-[#059669]/20 transition-all shrink-0"
+              className="p-2.5 rounded-xl btn-clay-primary disabled:opacity-40 text-white shadow-md shadow-[#059669]/20 transition-all shrink-0"
             >
               <Send className="w-4 h-4" />
             </button>

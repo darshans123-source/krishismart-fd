@@ -56,7 +56,7 @@ export const AdminConfirmModal: React.FC<AdminConfirmModalProps> = ({
             className={`px-4 py-2 rounded-xl text-white text-xs font-bold transition-all shadow-xs cursor-pointer ${
               isDestructive
                 ? 'bg-rose-600 hover:bg-rose-700 shadow-rose-600/20'
-                : 'bg-[#059669] hover:bg-[#064E3B] shadow-[#059669]/20'
+                : 'btn-clay-primary shadow-[#059669]/20'
             }`}
           >
             {confirmLabel}

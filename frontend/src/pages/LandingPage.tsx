@@ -168,7 +168,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                 <button
                   onClick={onGetStarted}
-                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-[#059669] to-[#10B981] hover:from-[#047857] hover:to-[#059669] active:scale-95 text-white font-bold text-base shadow-[0_20px_40px_-10px_rgba(5,150,105,0.7)] transition-all flex items-center justify-center gap-2.5 group cursor-pointer"
+                  className="btn-clay btn-clay-primary w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-[#059669] to-[#10B981] hover:from-[#047857] hover:to-[#059669] active:scale-95 text-white font-bold text-base transition-all flex items-center justify-center gap-2.5 group cursor-pointer"
                 >
                   <span>{t('getStarted')}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -482,7 +482,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <button
               onClick={onGetStarted}
-              className="px-8 py-4 rounded-2xl bg-white/75 backdrop-blur-xl hover:bg-[#ECFDF5] text-[#064E3B] font-extrabold text-base shadow-xl transition-all"
+              className="btn-clay btn-clay-secondary px-8 py-4 rounded-2xl bg-white/75 backdrop-blur-xl hover:bg-[#ECFDF5] text-[#064E3B] font-extrabold text-base transition-all"
             >
               Get Started for Free
             </button>

@@ -228,6 +228,60 @@
   background: linear-gradient(135deg, #022c22 0%, #064e3b 60%, #059669 100%);
 }
 
+
+/* Claymorphism buttons — soft, puffy, tactile clay, not flat.
+   Big rounded corners, a light top highlight, a darker bottom inner
+   shadow (like pressed clay), and a soft outer shadow. On press the
+   button sinks in: shadow shrinks and it moves down 2px. Colours stay
+   on the KrishiSmart palette, so clay buttons still read as brand. */
+.btn-clay {
+  border-radius: 1.25rem;
+  border: 2px solid rgba(255, 255, 255, 0.65);
+  box-shadow:
+    0 12px 24px -8px rgba(2, 44, 34, 0.25),
+    inset 0 2px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -5px 10px rgba(2, 44, 34, 0.12);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+.btn-clay:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  box-shadow:
+    0 16px 28px -8px rgba(2, 44, 34, 0.28),
+    inset 0 2px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -5px 10px rgba(2, 44, 34, 0.12);
+}
+.btn-clay:active {
+  transform: translateY(2px) scale(0.98);
+  box-shadow:
+    0 4px 10px -4px rgba(2, 44, 34, 0.22),
+    inset 0 2px 6px rgba(2, 44, 34, 0.18),
+    inset 0 -2px 4px rgba(255, 255, 255, 0.4);
+}
+.btn-clay-primary {
+  background: linear-gradient(180deg, #10b981 0%, #059669 55%, #047857 100%);
+  color: #ffffff;
+  border-color: rgba(167, 243, 208, 0.7);
+}
+.btn-clay-secondary {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(239, 244, 239, 0.9) 100%);
+  color: #243a32;
+  border-color: rgba(255, 255, 255, 0.8);
+}
+.btn-clay-gold {
+  background: linear-gradient(180deg, #e8c87a 0%, #d6ad55 55%, #c49a3f 100%);
+  color: #172b24;
+  border-color: rgba(255, 236, 180, 0.8);
+}
+.btn-clay-pill {
+  border-radius: 9999px;
+}
+.btn-clay:disabled {
+  opacity: 0.6;
+  transform: none;
+  box-shadow: 0 6px 14px -6px rgba(2, 44, 34, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.4);
+}
+
 /* Premium hero: deep emerald with soft radial highlights, no flat block. */
 .premium-hero {
   position: relative;

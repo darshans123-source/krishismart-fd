@@ -56,7 +56,7 @@ export const WeatherCenterPage: React.FC = () => {
           </button>
           <button
             onClick={refreshWeather}
-            className="px-3.5 py-2 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-xs shadow-md shadow-[#059669]/20 flex items-center gap-1.5 transition-colors"
+            className="px-3.5 py-2 rounded-xl btn-clay-primary text-white font-bold text-xs shadow-md shadow-[#059669]/20 flex items-center gap-1.5 transition-colors"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             <span>Refresh</span>
