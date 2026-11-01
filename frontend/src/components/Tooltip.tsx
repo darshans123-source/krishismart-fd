@@ -29,7 +29,7 @@ export function Tooltip({ children, content, position = "top", className, wrappe
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.15 }}
             className={cn(
-              "absolute z-50 whitespace-nowrap px-2.5 py-1.5 text-xs font-medium text-white bg-gray-900 rounded shadow-md pointer-events-none",
+              "absolute z-50 whitespace-nowrap px-2.5 py-1.5 text-xs font-medium text-white bg-[#172B24] rounded shadow-md pointer-events-none",
               positions[position],
               className
             )}
@@ -37,7 +37,7 @@ export function Tooltip({ children, content, position = "top", className, wrappe
           >
             {content}
             <div className={cn(
-              "absolute w-2 h-2 bg-gray-900 transform rotate-45",
+              "absolute w-2 h-2 bg-[#172B24] transform rotate-45",
               position === "top" ? "bottom-[-4px] left-1/2 -translate-x-1/2" :
               position === "bottom" ? "top-[-4px] left-1/2 -translate-x-1/2" :
               position === "left" ? "right-[-4px] top-1/2 -translate-y-1/2" :

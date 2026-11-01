@@ -42,6 +42,15 @@ interface MainAppContentProps {
 const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
   const [currentTab, setCurrentTab] = useState<string>('dashboard');
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(() => {
+    try { return localStorage.getItem('krishi_sidebar_collapsed') === '1'; } catch { return false; }
+  });
+  const toggleSidebarCollapsed = () => {
+    setIsSidebarCollapsed((prev) => {
+      try { localStorage.setItem('krishi_sidebar_collapsed', prev ? '0' : '1'); } catch { /* ignore */ }
+      return !prev;
+    });
+  };
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [authInitialMode, setAuthInitialMode] = useState<'login' | 'register' | 'onboarding'>('login');
@@ -100,7 +109,7 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f6f5f1] text-stone-900 flex flex-col selection:bg-emerald-600 selection:text-white">
+    <div className="min-h-screen bg-[#F7FAF7] text-[#172B24] flex flex-col selection:bg-[#059669] selection:text-white">
       {/* Top Universal Navbar */}
       <Navbar
         currentTab={currentTab}
@@ -117,7 +126,13 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
         {/* Desktop Sidebar (hidden on public landing page) */}
         {currentTab !== 'landing' && (
           <div className="hidden lg:block">
-            <Sidebar currentTab={currentTab} setCurrentTab={setCurrentTab} />
+            <Sidebar
+              currentTab={currentTab}
+              setCurrentTab={setCurrentTab}
+              collapsed={isSidebarCollapsed}
+              onToggleCollapse={toggleSidebarCollapsed}
+              onNavigateAdmin={onNavigateAdmin}
+            />
           </div>
         )}
 
@@ -133,13 +148,14 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
 
       {/* Mobile Drawer Navigation Sidebar */}
       {isMobileSidebarOpen && (
-        <div className="fixed inset-0 z-50 flex lg:hidden bg-slate-950/60 backdrop-blur-xs animate-in fade-in">
+        <div className="fixed inset-0 z-50 flex lg:hidden bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in">
           <div className="w-4/5 max-w-xs bg-white h-full shadow-2xl p-4 animate-in slide-in-from-left duration-200 overflow-y-auto">
             <Sidebar
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
               isMobile={true}
               onCloseMobile={() => setIsMobileSidebarOpen(false)}
+              onNavigateAdmin={onNavigateAdmin}
             />
           </div>
           <div className="flex-1" onClick={() => setIsMobileSidebarOpen(false)} />

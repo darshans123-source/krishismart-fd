@@ -163,30 +163,30 @@ export const AdminStoreManager: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-stone-200/80 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
         <div>
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold mb-2">
-            <ShoppingBag className="w-3.5 h-3.5 text-emerald-600" />
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#064E3B] text-xs font-semibold mb-2">
+            <ShoppingBag className="w-3.5 h-3.5 text-[#059669]" />
             Agri-Input Direct Marketplace
           </div>
-          <h1 className="text-2xl font-black text-stone-900 tracking-tight font-heading">
+          <h1 className="text-2xl font-black text-[#172B24] tracking-tight font-heading">
             Krishi Store Product Manager
           </h1>
-          <p className="text-xs text-stone-500 mt-1">
+          <p className="text-xs text-[#718078] mt-1">
             Manage certified seeds, bio-fertilizers, solar drip kits, and agricultural machinery sold to farmers.
           </p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={fetchProducts}
-            className="p-2.5 rounded-xl border border-stone-200 text-stone-600 hover:bg-stone-50 transition"
+            className="p-2.5 rounded-xl border border-[#E5EDE7] text-[#5A6E64] hover:bg-[#F7FAF7] transition"
             title="Refresh"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
           </button>
           <button
             onClick={handleOpenCreate}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white text-xs font-bold shadow-sm transition cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             Add Store Product
@@ -196,35 +196,35 @@ export const AdminStoreManager: React.FC = () => {
 
       {/* Summary KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white p-5 rounded-2xl border border-stone-200/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
-            <div className="text-xs font-medium text-stone-500">Catalog SKUs</div>
-            <div className="text-2xl font-black text-stone-900 mt-1">{products.length} Items</div>
-            <div className="text-[11px] text-emerald-600 font-semibold mt-0.5">Direct manufacturer sourcing</div>
+            <div className="text-xs font-medium text-[#718078]">Catalog SKUs</div>
+            <div className="text-2xl font-black text-[#172B24] mt-1">{products.length} Items</div>
+            <div className="text-[11px] text-[#059669] font-semibold mt-0.5">Direct manufacturer sourcing</div>
           </div>
-          <div className="p-3 bg-emerald-50 text-emerald-700 rounded-2xl">
+          <div className="p-3 bg-[#ECFDF5] text-[#064E3B] rounded-2xl">
             <Package className="w-6 h-6" />
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-stone-200/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
-            <div className="text-xs font-medium text-stone-500">In Stock Ratio</div>
-            <div className="text-2xl font-black text-emerald-800 mt-1">
+            <div className="text-xs font-medium text-[#718078]">In Stock Ratio</div>
+            <div className="text-2xl font-black text-[#064E3B] mt-1">
               {products.length > 0 
                 ? Math.round((products.filter(p => p.inStock).length / products.length) * 100) 
                 : 100}%
             </div>
-            <div className="text-[11px] text-emerald-600 font-semibold mt-0.5">Ready for doorstep delivery</div>
+            <div className="text-[11px] text-[#059669] font-semibold mt-0.5">Ready for doorstep delivery</div>
           </div>
           <div className="p-3 bg-teal-50 text-teal-700 rounded-2xl">
             <CheckCircle2 className="w-6 h-6" />
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-stone-200/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
-            <div className="text-xs font-medium text-stone-500">Avg Farmer Rating</div>
+            <div className="text-xs font-medium text-[#718078]">Avg Farmer Rating</div>
             <div className="text-2xl font-black text-amber-900 mt-1">4.8 / 5.0</div>
             <div className="text-[11px] text-amber-700 font-semibold mt-0.5">Over 1,200 verified reviews</div>
           </div>
@@ -233,11 +233,11 @@ export const AdminStoreManager: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-stone-200/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
-            <div className="text-xs font-medium text-stone-500">Avg Farmer Savings</div>
-            <div className="text-2xl font-black text-emerald-800 mt-1">22%</div>
-            <div className="text-[11px] text-emerald-600 font-semibold mt-0.5">Vs local retail prices</div>
+            <div className="text-xs font-medium text-[#718078]">Avg Farmer Savings</div>
+            <div className="text-2xl font-black text-[#064E3B] mt-1">22%</div>
+            <div className="text-[11px] text-[#059669] font-semibold mt-0.5">Vs local retail prices</div>
           </div>
           <div className="p-3 bg-blue-50 text-blue-700 rounded-2xl">
             <Tag className="w-6 h-6" />
@@ -246,15 +246,15 @@ export const AdminStoreManager: React.FC = () => {
       </div>
 
       {/* Filter Toolbar */}
-      <div className="bg-white p-4 rounded-2xl border border-stone-200/80 shadow-xs flex flex-col md:flex-row items-center gap-3">
+      <div className="bg-white p-4 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex flex-col md:flex-row items-center gap-3">
         <div className="relative flex-1 w-full">
-          <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#8A9A90] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search store by product title, brand, SKU or active molecule..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+            className="w-full pl-9 pr-4 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
           />
         </div>
 
@@ -262,7 +262,7 @@ export const AdminStoreManager: React.FC = () => {
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 bg-stone-50 focus:ring-2 focus:ring-emerald-600/30"
+            className="px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs font-medium text-[#3E5248] bg-[#F7FAF7] focus:ring-2 focus:ring-[#059669]/30"
           >
             {CATEGORIES.map(c => (
               <option key={c} value={c}>{c}</option>
@@ -272,7 +272,7 @@ export const AdminStoreManager: React.FC = () => {
           <select
             value={stockFilter}
             onChange={(e) => setStockFilter(e.target.value as any)}
-            className="px-3 py-2 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 bg-stone-50 focus:ring-2 focus:ring-emerald-600/30"
+            className="px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs font-medium text-[#3E5248] bg-[#F7FAF7] focus:ring-2 focus:ring-[#059669]/30"
           >
             <option value="all">All Inventory</option>
             <option value="in_stock">In Stock Only</option>
@@ -284,14 +284,14 @@ export const AdminStoreManager: React.FC = () => {
       {/* Products Grid */}
       {loading ? (
         <div className="py-20 text-center">
-          <RefreshCw className="w-8 h-8 text-emerald-600 animate-spin mx-auto mb-3" />
-          <p className="text-xs text-stone-500">Loading catalog items...</p>
+          <RefreshCw className="w-8 h-8 text-[#059669] animate-spin mx-auto mb-3" />
+          <p className="text-xs text-[#718078]">Loading catalog items...</p>
         </div>
       ) : filteredProducts.length === 0 ? (
-        <div className="bg-white rounded-3xl border border-dashed border-stone-300 p-12 text-center">
-          <Package className="w-10 h-10 text-stone-300 mx-auto mb-3" />
-          <h3 className="text-sm font-bold text-stone-800">No products found</h3>
-          <p className="text-xs text-stone-500 mt-1">Try relaxing your search terms or add a new product.</p>
+        <div className="bg-white rounded-2xl border border-dashed border-[#CBD8D0] p-12 text-center">
+          <Package className="w-10 h-10 text-[#CBD8D0] mx-auto mb-3" />
+          <h3 className="text-sm font-bold text-[#243A32]">No products found</h3>
+          <p className="text-xs text-[#718078] mt-1">Try relaxing your search terms or add a new product.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -303,13 +303,13 @@ export const AdminStoreManager: React.FC = () => {
             return (
               <div
                 key={prod.id}
-                className="bg-white rounded-3xl border border-stone-200/90 shadow-xs hover:shadow-md transition overflow-hidden flex flex-col justify-between"
+                className="bg-white rounded-2xl border border-[#E5EDE7]/90 shadow-xs hover:shadow-md transition overflow-hidden flex flex-col justify-between"
               >
                 <div>
-                  <div className="h-44 w-full overflow-hidden bg-stone-100 relative">
+                  <div className="h-44 w-full overflow-hidden bg-[#EFF4EF] relative">
                     <img src={prod.image} alt={prod.name} className="w-full h-full object-cover" />
                     {prod.badge && (
-                      <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md bg-emerald-600 text-white text-[10px] font-extrabold uppercase tracking-wide">
+                      <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md bg-[#059669] text-white text-[10px] font-extrabold uppercase tracking-wide">
                         {prod.badge}
                       </span>
                     )}
@@ -321,28 +321,28 @@ export const AdminStoreManager: React.FC = () => {
                   </div>
 
                   <div className="p-4 space-y-2">
-                    <div className="flex items-center justify-between text-[11px] text-stone-500">
-                      <span className="font-semibold text-emerald-800">{prod.brand}</span>
+                    <div className="flex items-center justify-between text-[11px] text-[#718078]">
+                      <span className="font-semibold text-[#064E3B]">{prod.brand}</span>
                       <span className="flex items-center gap-1 text-amber-600 font-bold">
                         <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
                         {prod.rating || 4.8}
                       </span>
                     </div>
 
-                    <h3 className="text-sm font-bold text-stone-900 line-clamp-2 leading-snug">
+                    <h3 className="text-sm font-bold text-[#172B24] line-clamp-2 leading-snug">
                       {prod.name}
                     </h3>
 
-                    <div className="text-[11px] text-stone-500 font-medium line-clamp-1">
+                    <div className="text-[11px] text-[#718078] font-medium line-clamp-1">
                       {prod.category}
                     </div>
 
                     <div className="flex items-baseline gap-2 pt-1">
-                      <span className="text-lg font-black text-stone-900 font-heading">
+                      <span className="text-lg font-black text-[#172B24] font-heading">
                         ₹{prod.price}
                       </span>
                       {prod.originalPrice && prod.originalPrice > prod.price && (
-                        <span className="text-xs text-stone-400 line-through">
+                        <span className="text-xs text-[#8A9A90] line-through">
                           ₹{prod.originalPrice}
                         </span>
                       )}
@@ -350,13 +350,13 @@ export const AdminStoreManager: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="px-4 py-3 bg-stone-50/70 border-t border-stone-100 flex items-center justify-between">
+                <div className="px-4 py-3 bg-[#F7FAF7]/70 border-t border-[#EFF4EF] flex items-center justify-between">
                   <button
                     onClick={() => handleToggleStock(prod)}
                     className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-extrabold cursor-pointer transition ${
                       prod.inStock
-                        ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200'
-                        : 'bg-stone-200 text-stone-700 hover:bg-stone-300'
+                        ? 'bg-[#D1FAE5] text-[#064E3B] hover:bg-[#A7F3D0]'
+                        : 'bg-[#E5EDE7] text-[#3E5248] hover:bg-[#CBD8D0]'
                     }`}
                   >
                     {prod.inStock ? <CheckCircle2 className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}
@@ -366,14 +366,14 @@ export const AdminStoreManager: React.FC = () => {
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={() => handleOpenEdit(prod)}
-                      className="p-1.5 rounded-lg text-stone-600 hover:text-emerald-700 hover:bg-white transition"
+                      className="p-1.5 rounded-lg text-[#5A6E64] hover:text-[#064E3B] hover:bg-white transition"
                       title="Edit Product"
                     >
                       <Edit2 className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={() => setDeleteTarget(prod)}
-                      className="p-1.5 rounded-lg text-stone-400 hover:text-rose-600 hover:bg-white transition"
+                      className="p-1.5 rounded-lg text-[#8A9A90] hover:text-rose-600 hover:bg-white transition"
                       title="Delete Product"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -394,24 +394,24 @@ export const AdminStoreManager: React.FC = () => {
       >
         <form onSubmit={handleSave} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-stone-700 mb-1">Product Title *</label>
+            <label className="block text-xs font-semibold text-[#3E5248] mb-1">Product Title *</label>
             <input
               type="text"
               required
               value={formData.name || ''}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="e.g. Bio-NPK Liquid Consortium 1 Liter"
-              className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">Category</label>
+              <label className="block text-xs font-semibold text-[#3E5248] mb-1">Category</label>
               <select
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30"
+                className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30"
               >
                 {CATEGORIES.filter(c => c !== 'All').map(c => (
                   <option key={c} value={c}>{c}</option>
@@ -420,72 +420,72 @@ export const AdminStoreManager: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">Brand / Manufacturer</label>
+              <label className="block text-xs font-semibold text-[#3E5248] mb-1">Brand / Manufacturer</label>
               <input
                 type="text"
                 value={formData.brand || ''}
                 onChange={(e) => setFormData({ ...formData, brand: e.target.value })}
                 placeholder="KrishiSmart Agrotech"
-                className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">Selling Price (₹) *</label>
+              <label className="block text-xs font-semibold text-[#3E5248] mb-1">Selling Price (₹) *</label>
               <input
                 type="number"
                 required
                 min="1"
                 value={formData.price || 0}
                 onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
-                className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">Original MRP (₹)</label>
+              <label className="block text-xs font-semibold text-[#3E5248] mb-1">Original MRP (₹)</label>
               <input
                 type="number"
                 min="1"
                 value={formData.originalPrice || 0}
                 onChange={(e) => setFormData({ ...formData, originalPrice: Number(e.target.value) })}
-                className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">Badge Tag</label>
+              <label className="block text-xs font-semibold text-[#3E5248] mb-1">Badge Tag</label>
               <input
                 type="text"
                 value={formData.badge || ''}
                 onChange={(e) => setFormData({ ...formData, badge: e.target.value })}
                 placeholder="Govt Certified / Bestseller"
-                className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-stone-700 mb-1">Product Image URL</label>
+            <label className="block text-xs font-semibold text-[#3E5248] mb-1">Product Image URL</label>
             <input
               type="url"
               value={formData.image || ''}
               onChange={(e) => setFormData({ ...formData, image: e.target.value })}
               placeholder="https://images.unsplash.com/..."
-              className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-stone-700 mb-1">Description & Application Advice</label>
+            <label className="block text-xs font-semibold text-[#3E5248] mb-1">Description & Application Advice</label>
             <textarea
               rows={3}
               value={formData.description || ''}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               placeholder="Active ingredients, bacterial count, dosage per acre..."
-              className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
             />
           </div>
 
@@ -495,24 +495,24 @@ export const AdminStoreManager: React.FC = () => {
                 type="checkbox"
                 checked={formData.inStock}
                 onChange={(e) => setFormData({ ...formData, inStock: e.target.checked })}
-                className="rounded text-emerald-600 focus:ring-emerald-500"
+                className="rounded text-[#059669] focus:ring-[#10B981]"
               />
-              <span className="text-xs font-semibold text-stone-700">In Stock & Available for Delivery</span>
+              <span className="text-xs font-semibold text-[#3E5248]">In Stock & Available for Delivery</span>
             </label>
           </div>
 
-          <div className="flex items-center justify-end gap-3 pt-3 border-t border-stone-100">
+          <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#EFF4EF]">
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}
-              className="px-4 py-2 rounded-xl border border-stone-200 text-xs font-semibold text-stone-600 hover:bg-stone-50"
+              className="px-4 py-2 rounded-xl border border-[#E5EDE7] text-xs font-semibold text-[#5A6E64] hover:bg-[#F7FAF7]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white text-xs font-bold shadow-sm transition disabled:opacity-50"
             >
               {saving ? 'Saving...' : editingProduct ? 'Save Changes' : 'Create Product'}
             </button>

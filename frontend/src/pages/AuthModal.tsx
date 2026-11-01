@@ -79,13 +79,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const districtsForState = INDIAN_STATES_CITIES[selectedState] || [];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/70 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-[#E5EDE7] overflow-hidden">
         {/* Top Header */}
-        <div className="p-6 bg-gradient-to-r from-emerald-800 to-emerald-700 text-white flex items-center justify-between">
+        <div className="p-6 bg-gradient-to-r from-[#064E3B] to-[#064E3B] text-white flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center border border-white/20">
-              <Sprout className="w-6 h-6 text-emerald-300" />
+              <Sprout className="w-6 h-6 text-[#6EE7B7]" />
             </div>
             <div>
               <h3 className="font-extrabold text-lg font-heading leading-tight">
@@ -97,7 +97,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   ? 'Reset Password'
                   : 'Sign In to KrishiSmart AI'}
               </h3>
-              <p className="text-xs text-emerald-100">
+              <p className="text-xs text-[#D1FAE5]">
                 {mode === 'onboarding'
                   ? `Step ${onboardStep} of 3 • Personalize your smart farm`
                   : 'Smart Farming. Better Decisions. Better Future.'}
@@ -117,12 +117,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         {mode === 'onboarding' ? (
           <form onSubmit={handleOnboardingSubmit} className="p-6 space-y-5">
             {/* Step Indicators */}
-            <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
+            <div className="flex items-center justify-between gap-2 border-b border-[#EFF4EF] pb-3">
               {[1, 2, 3].map((st) => (
                 <div
                   key={st}
                   className={`flex-1 h-1.5 rounded-full transition-all ${
-                    st <= onboardStep ? 'bg-emerald-600' : 'bg-slate-200'
+                    st <= onboardStep ? 'bg-[#059669]' : 'bg-[#E5EDE7]'
                   }`}
                 />
               ))}
@@ -130,33 +130,33 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
             {onboardStep === 1 && (
               <div className="space-y-4 animate-in fade-in">
-                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                <div className="text-xs font-bold text-[#718078] uppercase tracking-wider">
                   Step 1: Farmer Details
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Full Name</label>
+                  <label className="block text-xs font-bold text-[#3E5248] mb-1">Full Name</label>
                   <input
                     type="text"
                     value={farmerName}
                     onChange={(e) => setFarmerName(e.target.value)}
                     required
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 outline-hidden"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden"
                     placeholder="e.g. Ramesh Patil"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Mobile Phone (for SMS/WhatsApp alerts)</label>
+                  <label className="block text-xs font-bold text-[#3E5248] mb-1">Mobile Phone (for SMS/WhatsApp alerts)</label>
                   <input
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     required
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 outline-hidden"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden"
                     placeholder="+91 98452 00000"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Preferred Language</label>
+                  <label className="block text-xs font-bold text-[#3E5248] mb-1">Preferred Language</label>
                   <div className="grid grid-cols-3 gap-2">
                     {[
                       { code: 'en', label: 'English' },
@@ -169,8 +169,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                         onClick={() => setLanguage(l.code as Language)}
                         className={`py-2 px-3 rounded-xl border text-xs font-bold transition-all ${
                           language === l.code
-                            ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs'
-                            : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
+                            ? 'bg-[#059669] text-white border-[#059669] shadow-xs'
+                            : 'bg-[#F7FAF7] border-[#E5EDE7] text-[#3E5248] hover:bg-[#EFF4EF]'
                         }`}
                       >
                         {l.label}
@@ -181,7 +181,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setOnboardStep(2)}
-                  className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
+                  className="w-full py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
                 >
                   <span>Next: Farm Location</span>
                   <ArrowRight className="w-4 h-4" />
@@ -191,11 +191,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
             {onboardStep === 2 && (
               <div className="space-y-4 animate-in fade-in">
-                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                <div className="text-xs font-bold text-[#718078] uppercase tracking-wider">
                   Step 2: Farm Location & Region
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">State</label>
+                  <label className="block text-xs font-bold text-[#3E5248] mb-1">State</label>
                   <select
                     value={selectedState}
                     onChange={(e) => {
@@ -203,7 +203,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       const cities = INDIAN_STATES_CITIES[e.target.value] || [];
                       if (cities.length > 0) setSelectedDistrict(cities[0]);
                     }}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 outline-hidden bg-white"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden bg-white"
                   >
                     {INDIAN_STATES.map((st) => (
                       <option key={st} value={st}>
@@ -213,11 +213,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">District</label>
+                  <label className="block text-xs font-bold text-[#3E5248] mb-1">District</label>
                   <select
                     value={selectedDistrict}
                     onChange={(e) => setSelectedDistrict(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 outline-hidden bg-white"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden bg-white"
                   >
                     {districtsForState.map((dst) => (
                       <option key={dst} value={dst}>
@@ -227,13 +227,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Village / Taluk</label>
+                  <label className="block text-xs font-bold text-[#3E5248] mb-1">Village / Taluk</label>
                   <input
                     type="text"
                     value={village}
                     onChange={(e) => setVillage(e.target.value)}
                     required
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 outline-hidden"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden"
                     placeholder="e.g. Pandavapura"
                   />
                 </div>
@@ -241,14 +241,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   <button
                     type="button"
                     onClick={() => setOnboardStep(1)}
-                    className="flex-1 py-3 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-sm"
+                    className="flex-1 py-3 rounded-xl border border-[#CBD8D0] hover:bg-[#F7FAF7] text-[#3E5248] font-bold text-sm"
                   >
                     Back
                   </button>
                   <button
                     type="button"
                     onClick={() => setOnboardStep(3)}
-                    className="flex-1 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md flex items-center justify-center gap-2"
+                    className="flex-1 py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md flex items-center justify-center gap-2"
                   >
                     <span>Next: Crops & Land</span>
                     <ArrowRight className="w-4 h-4" />
@@ -259,12 +259,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
             {onboardStep === 3 && (
               <div className="space-y-4 animate-in fade-in">
-                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                <div className="text-xs font-bold text-[#718078] uppercase tracking-wider">
                   Step 3: Land Size & Crops
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Total Cultivable Land (Acres): <span className="text-emerald-700 font-bold">{landSize} Acres</span>
+                  <label className="block text-xs font-bold text-[#3E5248] mb-1">
+                    Total Cultivable Land (Acres): <span className="text-[#064E3B] font-bold">{landSize} Acres</span>
                   </label>
                   <input
                     type="range"
@@ -273,9 +273,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     step="0.5"
                     value={landSize}
                     onChange={(e) => setLandSize(parseFloat(e.target.value))}
-                    className="w-full accent-emerald-600"
+                    className="w-full accent-[#059669]"
                   />
-                  <div className="flex justify-between text-[10px] text-slate-400 font-semibold">
+                  <div className="flex justify-between text-[10px] text-[#8A9A90] font-semibold">
                     <span>0.5 Acre</span>
                     <span>10 Acres</span>
                     <span>25 Acres</span>
@@ -283,7 +283,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Farming Type</label>
+                  <label className="block text-xs font-bold text-[#3E5248] mb-1">Farming Type</label>
                   <div className="grid grid-cols-3 gap-2">
                     {(['Precision Tech', 'Organic', 'Conventional'] as const).map((type) => (
                       <button
@@ -292,8 +292,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                         onClick={() => setFarmingType(type)}
                         className={`py-2 px-2 rounded-xl border text-[11px] font-bold transition-all ${
                           farmingType === type
-                            ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs'
-                            : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
+                            ? 'bg-[#059669] text-white border-[#059669] shadow-xs'
+                            : 'bg-[#F7FAF7] border-[#E5EDE7] text-[#3E5248] hover:bg-[#EFF4EF]'
                         }`}
                       >
                         {type}
@@ -302,12 +302,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Current Crops</label>
+                  <label className="block text-xs font-bold text-[#3E5248] mb-1">Current Crops</label>
                   <input
                     type="text"
                     value={primaryCrop}
                     onChange={(e) => setPrimaryCrop(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 outline-hidden"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden"
                     placeholder="e.g. Paddy, Tomato, Sugarcane"
                   />
                 </div>
@@ -315,13 +315,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   <button
                     type="button"
                     onClick={() => setOnboardStep(2)}
-                    className="flex-1 py-3 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-sm"
+                    className="flex-1 py-3 rounded-xl border border-[#CBD8D0] hover:bg-[#F7FAF7] text-[#3E5248] font-bold text-sm"
                   >
                     Back
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md flex items-center justify-center gap-2"
+                    className="flex-1 py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md flex items-center justify-center gap-2"
                   >
                     <CheckCircle2 className="w-4 h-4" />
                     <span>Complete Setup</span>
@@ -336,7 +336,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             {/* Social Google Login Button */}
             <button
               onClick={handleGoogleAuth}
-              className="w-full py-3 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-800 font-bold text-xs flex items-center justify-center gap-3 transition-colors shadow-xs"
+              className="w-full py-3 rounded-xl border border-[#CBD8D0] hover:bg-[#F7FAF7] text-[#243A32] font-bold text-xs flex items-center justify-center gap-3 transition-colors shadow-xs"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24">
                 <path
@@ -360,34 +360,34 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             </button>
 
             <div className="flex items-center my-3">
-              <div className="flex-1 border-t border-slate-200"></div>
-              <span className="px-3 text-[11px] font-bold text-slate-400 uppercase">Or with email</span>
-              <div className="flex-1 border-t border-slate-200"></div>
+              <div className="flex-1 border-t border-[#E5EDE7]"></div>
+              <span className="px-3 text-[11px] font-bold text-[#8A9A90] uppercase">Or with email</span>
+              <div className="flex-1 border-t border-[#E5EDE7]"></div>
             </div>
 
             <form onSubmit={handleLoginSubmit} className="space-y-3.5">
               {mode === 'register' && (
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">Farmer Name</label>
+                  <label className="block text-xs font-bold text-[#3E5248] mb-1">Farmer Name</label>
                   <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 outline-hidden"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden"
                     placeholder="Darshan Patil"
                   />
                 </div>
               )}
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">Email or Phone</label>
+                <label className="block text-xs font-bold text-[#3E5248] mb-1">Email or Phone</label>
                 <input
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 outline-hidden"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden"
                   placeholder="farmer@krishismart.ai"
                 />
               </div>
@@ -395,12 +395,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               {mode !== 'forgot' && (
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="text-xs font-bold text-slate-700">Password</label>
+                    <label className="text-xs font-bold text-[#3E5248]">Password</label>
                     {mode === 'login' && (
                       <button
                         type="button"
                         onClick={() => setMode('forgot')}
-                        className="text-[11px] text-emerald-600 hover:text-emerald-700 font-semibold"
+                        className="text-[11px] text-[#059669] hover:text-[#064E3B] font-semibold"
                       >
                         Forgot?
                       </button>
@@ -411,7 +411,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 outline-hidden"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden"
                     placeholder="••••••••"
                   />
                 </div>
@@ -419,7 +419,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
               <button
                 type="submit"
-                className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md shadow-emerald-600/20 transition-all"
+                className="w-full py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md shadow-[#059669]/20 transition-all"
               >
                 {mode === 'register' ? 'Create Account' : mode === 'forgot' ? 'Send Reset Link' : 'Sign In'}
               </button>
@@ -427,21 +427,21 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
             <div className="pt-2 text-center">
               {mode === 'login' ? (
-                <div className="text-xs text-slate-500">
+                <div className="text-xs text-[#718078]">
                   New to KrishiSmart?{' '}
                   <button
                     onClick={() => setMode('onboarding')}
-                    className="text-emerald-700 font-bold hover:underline"
+                    className="text-[#064E3B] font-bold hover:underline"
                   >
                     Start Farmer Onboarding →
                   </button>
                 </div>
               ) : (
-                <div className="text-xs text-slate-500">
+                <div className="text-xs text-[#718078]">
                   Already have an account?{' '}
                   <button
                     onClick={() => setMode('login')}
-                    className="text-emerald-700 font-bold hover:underline"
+                    className="text-[#064E3B] font-bold hover:underline"
                   >
                     Sign In
                   </button>

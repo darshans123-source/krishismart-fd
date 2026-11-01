@@ -76,17 +76,17 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
   return (
     <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-200">
       {/* Top Welcome Banner */}
-      <div className="rounded-3xl bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-950 text-white p-6 sm:p-8 shadow-sm border border-emerald-700/60 relative overflow-hidden">
+      <div className="rounded-2xl bg-gradient-to-r from-[#064E3B] via-[#064E3B] to-[#022C22] text-white p-6 sm:p-8 shadow-sm border border-[#064E3B]/60 relative overflow-hidden">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-700/60 border border-emerald-500/40 text-emerald-200 text-xs font-bold">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-300" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#064E3B]/60 border border-[#10B981]/40 text-[#A7F3D0] text-xs font-bold">
+              <Sparkles className="w-3.5 h-3.5 text-[#6EE7B7]" />
               <span>Precision Agriculture Operations Console</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold font-heading text-white tracking-tight">
               Platform Overview & Control
             </h1>
-            <p className="text-xs sm:text-sm text-emerald-100/90 max-w-xl">
+            <p className="text-xs sm:text-sm text-[#D1FAE5]/90 max-w-xl">
               Real-time synchronization across telemetry, multi-lingual agricultural advisories, and APMC market intelligence.
             </p>
           </div>
@@ -95,16 +95,16 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
           <div className="flex flex-wrap items-center gap-2.5 self-start md:self-auto">
             <button
               onClick={() => onNavigateTab('dashboard-editor')}
-              className="px-4 py-2.5 rounded-2xl bg-white text-stone-900 hover:bg-emerald-50 text-xs font-extrabold flex items-center gap-2 transition-all shadow-xs cursor-pointer"
+              className="px-4 py-2.5 rounded-2xl bg-white text-[#172B24] hover:bg-[#ECFDF5] text-xs font-extrabold flex items-center gap-2 transition-all shadow-xs cursor-pointer"
             >
-              <Sliders className="w-4 h-4 text-emerald-700" />
+              <Sliders className="w-4 h-4 text-[#064E3B]" />
               <span>Edit Dashboard</span>
             </button>
             <button
               onClick={() => onNavigateTab('crops')}
-              className="px-4 py-2.5 rounded-2xl bg-emerald-700/60 hover:bg-emerald-700 border border-emerald-500/40 text-white text-xs font-bold flex items-center gap-2 transition-all cursor-pointer"
+              className="px-4 py-2.5 rounded-2xl bg-[#064E3B]/60 hover:bg-[#064E3B] border border-[#10B981]/40 text-white text-xs font-bold flex items-center gap-2 transition-all cursor-pointer"
             >
-              <Wheat className="w-4 h-4 text-emerald-300" />
+              <Wheat className="w-4 h-4 text-[#6EE7B7]" />
               <span>Manage Crops</span>
             </button>
           </div>
@@ -114,73 +114,73 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-4">
         {/* Total Users */}
-        <div className="p-5 rounded-3xl bg-white border border-stone-200 shadow-2xs hover:border-emerald-300 transition-all">
+        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs hover:border-[#6EE7B7] transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-stone-500 uppercase tracking-wider font-heading">Users</span>
-            <div className="p-2 rounded-xl bg-emerald-50 text-emerald-700">
+            <span className="text-xs font-bold text-[#718078] uppercase tracking-wider font-heading">Users</span>
+            <div className="p-2 rounded-xl bg-[#ECFDF5] text-[#064E3B]">
               <Users className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-stone-900 mt-2 font-heading">
+          <div className="text-2xl sm:text-3xl font-black text-[#172B24] mt-2 font-heading">
             {stats ? Number(stats.totalUsers).toLocaleString() : '2,450'}
           </div>
-          <div className="text-[11px] text-emerald-700 font-semibold mt-1 flex items-center gap-1">
+          <div className="text-[11px] text-[#064E3B] font-semibold mt-1 flex items-center gap-1">
             <ArrowUpRight className="w-3.5 h-3.5" />
             <span>+12.4% this month</span>
           </div>
         </div>
 
         {/* Active Farmers */}
-        <div className="p-5 rounded-3xl bg-white border border-stone-200 shadow-2xs hover:border-emerald-300 transition-all">
+        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs hover:border-[#6EE7B7] transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-stone-500 uppercase tracking-wider font-heading">Farmers</span>
+            <span className="text-xs font-bold text-[#718078] uppercase tracking-wider font-heading">Farmers</span>
             <div className="p-2 rounded-xl bg-blue-50 text-blue-700">
               <CheckCircle2 className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-stone-900 mt-2 font-heading">
+          <div className="text-2xl sm:text-3xl font-black text-[#172B24] mt-2 font-heading">
             {stats ? Number(stats.activeFarmers).toLocaleString() : '1,982'}
           </div>
-          <div className="text-[11px] text-stone-500 font-semibold mt-1">Verified landholding RTCs</div>
+          <div className="text-[11px] text-[#718078] font-semibold mt-1">Verified landholding RTCs</div>
         </div>
 
         {/* Total Crops */}
-        <div className="p-5 rounded-3xl bg-white border border-stone-200 shadow-2xs hover:border-emerald-300 transition-all">
+        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs hover:border-[#6EE7B7] transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-stone-500 uppercase tracking-wider font-heading">Crops</span>
+            <span className="text-xs font-bold text-[#718078] uppercase tracking-wider font-heading">Crops</span>
             <div className="p-2 rounded-xl bg-amber-50 text-amber-700">
               <Wheat className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-stone-900 mt-2 font-heading">
+          <div className="text-2xl sm:text-3xl font-black text-[#172B24] mt-2 font-heading">
             {stats ? Number(stats.totalCrops).toLocaleString() : '4,821'}
           </div>
           <div className="text-[11px] text-amber-700 font-semibold mt-1">Monitored acres</div>
         </div>
 
         {/* Total Products */}
-        <div className="p-5 rounded-3xl bg-white border border-stone-200 shadow-2xs hover:border-emerald-300 transition-all">
+        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs hover:border-[#6EE7B7] transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-stone-500 uppercase tracking-wider font-heading">Products</span>
+            <span className="text-xs font-bold text-[#718078] uppercase tracking-wider font-heading">Products</span>
             <div className="p-2 rounded-xl bg-teal-50 text-teal-700">
               <Store className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-stone-900 mt-2 font-heading">
+          <div className="text-2xl sm:text-3xl font-black text-[#172B24] mt-2 font-heading">
             {stats ? stats.totalProducts : 356}
           </div>
           <div className="text-[11px] text-teal-700 font-semibold mt-1">Agri store catalog</div>
         </div>
 
         {/* Government Schemes */}
-        <div className="p-5 rounded-3xl bg-white border border-stone-200 shadow-2xs hover:border-emerald-300 transition-all col-span-2 sm:col-span-1">
+        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs hover:border-[#6EE7B7] transition-all col-span-2 sm:col-span-1">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-stone-500 uppercase tracking-wider font-heading">Schemes</span>
+            <span className="text-xs font-bold text-[#718078] uppercase tracking-wider font-heading">Schemes</span>
             <div className="p-2 rounded-xl bg-purple-50 text-purple-700">
               <ShieldCheck className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-stone-900 mt-2 font-heading">
+          <div className="text-2xl sm:text-3xl font-black text-[#172B24] mt-2 font-heading">
             {stats ? stats.totalSchemes : 82}
           </div>
           <div className="text-[11px] text-purple-700 font-semibold mt-1">Active state subsidies</div>
@@ -188,22 +188,22 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
       </div>
 
       {/* Quick Actions Shortcuts Bar */}
-      <div className="bg-white rounded-3xl border border-stone-200 p-5 shadow-2xs space-y-3">
+      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-5 shadow-2xs space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-xs font-bold text-stone-500 uppercase tracking-wider font-heading">
+          <h2 className="text-xs font-bold text-[#718078] uppercase tracking-wider font-heading">
             Admin Management Actions
           </h2>
-          <span className="text-[11px] text-stone-500">Quick shortcuts to content managers</span>
+          <span className="text-[11px] text-[#718078]">Quick shortcuts to content managers</span>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
           <button
             onClick={() => onNavigateTab('dashboard-editor')}
-            className="p-3.5 rounded-2xl bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 text-left transition-all cursor-pointer group"
+            className="p-3.5 rounded-2xl bg-[#ECFDF5] hover:bg-[#D1FAE5] text-[#064E3B] border border-[#A7F3D0] text-left transition-all cursor-pointer group"
           >
-            <Sliders className="w-5 h-5 text-emerald-700 mb-1 group-hover:scale-110 transition-transform" />
+            <Sliders className="w-5 h-5 text-[#064E3B] mb-1 group-hover:scale-110 transition-transform" />
             <div className="text-xs font-bold">Edit Dashboard</div>
-            <div className="text-[10px] text-emerald-800/80">Hero, greeting & cards</div>
+            <div className="text-[10px] text-[#064E3B]/80">Hero, greeting & cards</div>
           </button>
 
           <button
@@ -247,15 +247,15 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
       {/* Analytics Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Growth Area Chart */}
-        <div className="lg:col-span-2 bg-white rounded-3xl border border-stone-200 p-6 shadow-2xs space-y-4">
+        <div className="lg:col-span-2 bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-extrabold text-stone-900 font-heading">
+              <h3 className="text-base font-extrabold text-[#172B24] font-heading">
                 Farmer Onboarding & Acreage Growth
               </h3>
-              <p className="text-xs text-stone-500 mt-0.5">Platform adoption across Karnataka agricultural zones</p>
+              <p className="text-xs text-[#718078] mt-0.5">Platform adoption across Karnataka agricultural zones</p>
             </div>
-            <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+            <span className="text-xs font-bold text-[#064E3B] bg-[#ECFDF5] px-2.5 py-1 rounded-full border border-[#A7F3D0]">
               Active Sync
             </span>
           </div>
@@ -288,13 +288,13 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
         </div>
 
         {/* Crop Distribution Bar Chart */}
-        <div className="bg-white rounded-3xl border border-stone-200 p-6 shadow-2xs space-y-4">
+        <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-extrabold text-stone-900 font-heading">
+              <h3 className="text-base font-extrabold text-[#172B24] font-heading">
                 Top Cultivated Crops
               </h3>
-              <p className="text-xs text-stone-500 mt-0.5">Acreage breakdown</p>
+              <p className="text-xs text-[#718078] mt-0.5">Acreage breakdown</p>
             </div>
           </div>
 
@@ -323,17 +323,17 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
       {/* Bottom: Recent Activity & System Status */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Activity Table */}
-        <div className="lg:col-span-2 bg-white rounded-3xl border border-stone-200 p-6 shadow-2xs space-y-4">
+        <div className="lg:col-span-2 bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-extrabold text-stone-900 font-heading">
+              <h3 className="text-base font-extrabold text-[#172B24] font-heading">
                 Recent Admin Operations
               </h3>
-              <p className="text-xs text-stone-500 mt-0.5">Live audit log of all content modifications</p>
+              <p className="text-xs text-[#718078] mt-0.5">Live audit log of all content modifications</p>
             </div>
             <button
               onClick={() => onNavigateTab('activity')}
-              className="text-xs font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 cursor-pointer"
+              className="text-xs font-bold text-[#064E3B] hover:text-[#064E3B] flex items-center gap-1 cursor-pointer"
             >
               <span>View Full Log</span>
               <ChevronRight className="w-3.5 h-3.5" />
@@ -342,7 +342,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-stone-50/70 border-b border-stone-200 text-stone-500 font-semibold">
+              <thead className="bg-[#F7FAF7]/70 border-b border-[#E5EDE7] text-[#718078] font-semibold">
                 <tr>
                   <th className="py-2.5 px-3">Admin</th>
                   <th className="py-2.5 px-3">Action</th>
@@ -351,26 +351,26 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
                   <th className="py-2.5 px-3 text-right">Time</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-stone-100">
+              <tbody className="divide-y divide-[#EFF4EF]">
                 {stats && stats.recentActivities && stats.recentActivities.length > 0 ? (
                   stats.recentActivities.map((act: any) => (
-                    <tr key={act.id} className="hover:bg-stone-50/60 transition-colors">
-                      <td className="py-2.5 px-3 font-bold text-stone-900">{act.adminName}</td>
+                    <tr key={act.id} className="hover:bg-[#F7FAF7]/60 transition-colors">
+                      <td className="py-2.5 px-3 font-bold text-[#172B24]">{act.adminName}</td>
                       <td className="py-2.5 px-3">
-                        <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold text-[10px]">
+                        <span className="px-2 py-0.5 rounded-full bg-[#ECFDF5] text-[#064E3B] border border-[#A7F3D0] font-semibold text-[10px]">
                           {act.action}
                         </span>
                       </td>
-                      <td className="py-2.5 px-3 text-stone-600">{act.page}</td>
-                      <td className="py-2.5 px-3 text-stone-500 max-w-xs truncate">{act.record || '—'}</td>
-                      <td className="py-2.5 px-3 text-right text-stone-400">
+                      <td className="py-2.5 px-3 text-[#5A6E64]">{act.page}</td>
+                      <td className="py-2.5 px-3 text-[#718078] max-w-xs truncate">{act.record || '—'}</td>
+                      <td className="py-2.5 px-3 text-right text-[#8A9A90]">
                         {new Date(act.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={5} className="py-4 text-center text-stone-400">
+                    <td colSpan={5} className="py-4 text-center text-[#8A9A90]">
                       No recent activities recorded.
                     </td>
                   </tr>
@@ -381,40 +381,40 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
         </div>
 
         {/* System Health Card */}
-        <div className="bg-white rounded-3xl border border-stone-200 p-6 shadow-2xs space-y-4">
+        <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-base font-extrabold text-stone-900 font-heading">
+            <h3 className="text-base font-extrabold text-[#172B24] font-heading">
               Platform Status
             </h3>
             <span className="flex h-2.5 w-2.5 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#34D399] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#10B981]" />
             </span>
           </div>
 
           <div className="space-y-3 pt-1">
-            <div className="p-3.5 rounded-2xl bg-emerald-50/60 border border-emerald-200/80">
-              <div className="text-xs font-bold text-emerald-950 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <div className="p-3.5 rounded-2xl bg-[#ECFDF5]/60 border border-[#A7F3D0]/80">
+              <div className="text-xs font-bold text-[#022C22] flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-[#059669]" />
                 <span>Backend REST API</span>
               </div>
-              <div className="text-[11px] text-emerald-800 mt-1">Operational (5000/api)</div>
+              <div className="text-[11px] text-[#064E3B] mt-1">Operational (5000/api)</div>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-emerald-50/60 border border-emerald-200/80">
-              <div className="text-xs font-bold text-emerald-950 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <div className="p-3.5 rounded-2xl bg-[#ECFDF5]/60 border border-[#A7F3D0]/80">
+              <div className="text-xs font-bold text-[#022C22] flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-[#059669]" />
                 <span>Persistence Storage</span>
               </div>
-              <div className="text-[11px] text-emerald-800 mt-1">Atomic JSON File DB Synchronized</div>
+              <div className="text-[11px] text-[#064E3B] mt-1">Atomic JSON File DB Synchronized</div>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-emerald-50/60 border border-emerald-200/80">
-              <div className="text-xs font-bold text-emerald-950 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <div className="p-3.5 rounded-2xl bg-[#ECFDF5]/60 border border-[#A7F3D0]/80">
+              <div className="text-xs font-bold text-[#022C22] flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-[#059669]" />
                 <span>IoT & Telemetry Bridge</span>
               </div>
-              <div className="text-[11px] text-emerald-800 mt-1">{stats ? stats.activeSensors : 5} Active Sensor Probes Online</div>
+              <div className="text-[11px] text-[#064E3B] mt-1">{stats ? stats.activeSensors : 5} Active Sensor Probes Online</div>
             </div>
           </div>
         </div>

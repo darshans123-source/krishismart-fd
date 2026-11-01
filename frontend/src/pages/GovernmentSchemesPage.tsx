@@ -44,17 +44,17 @@ export const GovernmentSchemesPage: React.FC = () => {
             <Landmark className="w-3.5 h-3.5" />
             <span>Direct Benefit Transfer (DBT) & Subsidies</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-heading">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#172B24] font-heading">
             {t('govtSchemes')}
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500">
+          <p className="text-xs sm:text-sm text-[#718078]">
             Central & State agricultural welfare schemes, eligibility checklists, and direct DBT assistance.
           </p>
         </div>
       </div>
 
       {/* Eligible Match Banner */}
-      <div className="p-5 rounded-3xl bg-gradient-to-r from-blue-900 to-indigo-950 text-white flex flex-col md:flex-row items-center justify-between gap-4 shadow-md">
+      <div className="p-5 rounded-2xl bg-gradient-to-r from-blue-900 to-indigo-950 text-white flex flex-col md:flex-row items-center justify-between gap-4 shadow-md">
         <div className="flex items-center gap-3.5">
           <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center border border-white/20 shrink-0">
             <Sparkles className="w-6 h-6 text-blue-300" />
@@ -87,7 +87,7 @@ export const GovernmentSchemesPage: React.FC = () => {
               className={`px-3.5 py-2 rounded-2xl text-xs font-bold transition-all shrink-0 ${
                 selectedCategory === cat
                   ? 'bg-blue-600 text-white shadow-xs'
-                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                  : 'bg-white text-[#5A6E64] hover:bg-[#EFF4EF] border border-[#E5EDE7]'
               }`}
             >
               {cat}
@@ -96,13 +96,13 @@ export const GovernmentSchemesPage: React.FC = () => {
         </div>
 
         <div className="relative w-full md:w-72">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8A9A90]" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search PM-KISAN, KCC, Solar..."
-            className="w-full pl-9 pr-4 py-2 rounded-2xl border border-slate-200 text-xs bg-white focus:outline-hidden focus:ring-2 focus:ring-blue-500"
+            className="w-full pl-9 pr-4 py-2 rounded-2xl border border-[#E5EDE7] text-xs bg-white focus:outline-hidden focus:ring-2 focus:ring-blue-500"
           />
         </div>
       </div>
@@ -112,7 +112,7 @@ export const GovernmentSchemesPage: React.FC = () => {
         {filteredSchemes.map((scheme) => (
           <div
             key={scheme.id}
-            className="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-blue-400 hover:shadow-md transition-all group"
+            className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-blue-400 hover:shadow-md transition-all group"
           >
             <div>
               <div className="flex items-center justify-between mb-2">
@@ -122,40 +122,40 @@ export const GovernmentSchemesPage: React.FC = () => {
                 <span
                   className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-full ${
                     scheme.appliedStatus === 'Approved'
-                      ? 'bg-emerald-100 text-emerald-800'
+                      ? 'bg-[#D1FAE5] text-[#064E3B]'
                       : scheme.appliedStatus === 'In Progress'
                       ? 'bg-amber-100 text-amber-800'
-                      : 'bg-slate-100 text-slate-600'
+                      : 'bg-[#EFF4EF] text-[#5A6E64]'
                   }`}
                 >
                   {scheme.appliedStatus || 'Not Applied'}
                 </span>
               </div>
 
-              <h3 className="font-extrabold text-base text-slate-900 font-heading group-hover:text-blue-700 transition-colors">
+              <h3 className="font-extrabold text-base text-[#172B24] font-heading group-hover:text-blue-700 transition-colors">
                 {scheme.shortName}
               </h3>
-              <p className="text-[11px] text-slate-400 font-medium line-clamp-1">{scheme.name}</p>
+              <p className="text-[11px] text-[#8A9A90] font-medium line-clamp-1">{scheme.name}</p>
 
               {/* Financial Benefit Callout */}
-              <div className="p-3 rounded-2xl bg-slate-50 border border-slate-100 text-xs text-slate-800 font-bold mt-3">
+              <div className="p-3 rounded-2xl bg-[#F7FAF7] border border-[#EFF4EF] text-xs text-[#243A32] font-bold mt-3">
                 💰 {scheme.financialBenefit}
               </div>
 
               {/* Eligibility Preview */}
-              <div className="mt-3 space-y-1 text-xs text-slate-600">
-                <div className="font-bold text-slate-700 text-[11px]">Key Eligibility:</div>
-                <p className="text-[11px] text-slate-500 line-clamp-2 leading-relaxed">
+              <div className="mt-3 space-y-1 text-xs text-[#5A6E64]">
+                <div className="font-bold text-[#3E5248] text-[11px]">Key Eligibility:</div>
+                <p className="text-[11px] text-[#718078] line-clamp-2 leading-relaxed">
                   {scheme.eligibility[0]}
                 </p>
               </div>
             </div>
 
             {/* Action Footer */}
-            <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+            <div className="pt-3 border-t border-[#EFF4EF] flex items-center justify-between gap-2">
               <button
                 onClick={() => setSelectedSchemeForModal(scheme)}
-                className="text-xs font-bold text-slate-600 hover:text-blue-700 flex items-center gap-1"
+                className="text-xs font-bold text-[#5A6E64] hover:text-blue-700 flex items-center gap-1"
               >
                 <span>Full Checklist</span>
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -169,8 +169,8 @@ export const GovernmentSchemesPage: React.FC = () => {
                   {t('applyNow')}
                 </button>
               ) : (
-                <span className="text-[11px] font-bold text-emerald-700 flex items-center gap-1">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                <span className="text-[11px] font-bold text-[#064E3B] flex items-center gap-1">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#059669]" />
                   <span>Enrolled</span>
                 </span>
               )}
@@ -181,20 +181,20 @@ export const GovernmentSchemesPage: React.FC = () => {
 
       {/* DETAILED SCHEME CHECKLIST MODAL */}
       {selectedSchemeForModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white rounded-3xl p-6 max-w-lg w-full shadow-2xl border border-slate-200 space-y-5 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in">
+          <div className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-2xl border border-[#E5EDE7] space-y-5 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
               <div>
                 <span className="text-[10px] font-extrabold text-blue-700 uppercase">
                   {selectedSchemeForModal.category}
                 </span>
-                <h3 className="font-extrabold text-lg text-slate-900 font-heading">
+                <h3 className="font-extrabold text-lg text-[#172B24] font-heading">
                   {selectedSchemeForModal.name}
                 </h3>
               </div>
               <button
                 onClick={() => setSelectedSchemeForModal(null)}
-                className="text-slate-400 hover:text-slate-700 text-base"
+                className="text-[#8A9A90] hover:text-[#3E5248] text-base"
               >
                 ✕
               </button>
@@ -206,13 +206,13 @@ export const GovernmentSchemesPage: React.FC = () => {
             </div>
 
             <div className="space-y-2 text-xs">
-              <div className="font-bold text-slate-800 uppercase text-[10px] tracking-wider">
+              <div className="font-bold text-[#243A32] uppercase text-[10px] tracking-wider">
                 Eligibility Criteria
               </div>
-              <ul className="space-y-1.5 text-slate-600">
+              <ul className="space-y-1.5 text-[#5A6E64]">
                 {selectedSchemeForModal.eligibility.map((el, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#059669] shrink-0 mt-0.5" />
                     <span>{el}</span>
                   </li>
                 ))}
@@ -220,10 +220,10 @@ export const GovernmentSchemesPage: React.FC = () => {
             </div>
 
             <div className="space-y-2 text-xs">
-              <div className="font-bold text-slate-800 uppercase text-[10px] tracking-wider">
+              <div className="font-bold text-[#243A32] uppercase text-[10px] tracking-wider">
                 Required Documents Checklist
               </div>
-              <ul className="space-y-1.5 text-slate-600">
+              <ul className="space-y-1.5 text-[#5A6E64]">
                 {selectedSchemeForModal.documentsRequired.map((doc, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <FileText className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
@@ -233,7 +233,7 @@ export const GovernmentSchemesPage: React.FC = () => {
               </ul>
             </div>
 
-            <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div className="pt-3 border-t border-[#EFF4EF] flex items-center justify-between gap-3">
               <a
                 href={selectedSchemeForModal.officialUrl}
                 target="_blank"

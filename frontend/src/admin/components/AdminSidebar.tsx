@@ -125,23 +125,23 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
         isMobile
           ? 'w-full bg-[#082015] text-white'
           : isCollapsed
-          ? 'w-20 bg-[#082015] text-white border-r border-emerald-900/50 shadow-xl'
-          : 'w-72 bg-[#082015] text-white border-r border-emerald-900/50 shadow-xl'
+          ? 'w-20 bg-[#082015] text-white border-r border-[#064E3B]/50 shadow-xl'
+          : 'w-72 bg-[#082015] text-white border-r border-[#064E3B]/50 shadow-xl'
       }`}
     >
       {/* Top Brand Banner */}
       <div>
-        <div className="p-4 border-b border-emerald-900/60 flex items-center justify-between">
+        <div className="p-4 border-b border-[#064E3B]/60 flex items-center justify-between">
           <div className="flex items-center gap-2.5 overflow-hidden">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center shrink-0 shadow-md shadow-emerald-900/50">
-              <Sprout className="w-5 h-5 text-stone-950 font-bold" />
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#059669] to-[#34D399] flex items-center justify-center shrink-0 shadow-md shadow-[#064E3B]/50">
+              <Sprout className="w-5 h-5 text-[#022C22] font-bold" />
             </div>
             {(!isCollapsed || isMobile) && (
               <div className="truncate">
                 <div className="text-sm font-extrabold font-heading text-white tracking-tight">
                   KrishiSmart AI
                 </div>
-                <div className="text-[10px] text-emerald-400 font-semibold tracking-wider uppercase">
+                <div className="text-[10px] text-[#34D399] font-semibold tracking-wider uppercase">
                   CMS Admin Portal
                 </div>
               </div>
@@ -151,7 +151,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
           {!isMobile && (
             <button
               onClick={() => setIsCollapsed(!isCollapsed)}
-              className="p-1.5 rounded-xl bg-emerald-900/40 hover:bg-emerald-800 text-emerald-300 hover:text-white transition-colors cursor-pointer"
+              className="p-1.5 rounded-xl bg-[#064E3B]/40 hover:bg-[#064E3B] text-[#6EE7B7] hover:text-white transition-colors cursor-pointer"
               title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             >
               {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
@@ -164,7 +164,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
           {navGroups.map((grp) => (
             <div key={grp.group} className="space-y-1">
               {(!isCollapsed || isMobile) && (
-                <div className="px-3 py-1 text-[10px] font-bold text-emerald-400/60 uppercase tracking-wider font-heading">
+                <div className="px-3 py-1 text-[10px] font-bold text-[#34D399]/60 uppercase tracking-wider font-heading">
                   {grp.group}
                 </div>
               )}
@@ -182,12 +182,12 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
                     onClick={() => handleSelect(item.id)}
                     className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-2xl text-xs font-semibold transition-all duration-150 cursor-pointer ${
                       isActive
-                        ? 'bg-gradient-to-r from-emerald-600 to-emerald-500 text-stone-950 shadow-md shadow-emerald-700/30 font-bold'
-                        : 'text-emerald-100/80 hover:bg-emerald-900/50 hover:text-white'
+                        ? 'bg-gradient-to-r from-[#059669] to-[#10B981] text-[#022C22] shadow-md shadow-[#064E3B]/30 font-bold'
+                        : 'text-[#D1FAE5]/80 hover:bg-[#064E3B]/50 hover:text-white'
                     } ${isCollapsed && !isMobile ? 'justify-center px-0' : ''}`}
                     title={isCollapsed ? item.label : undefined}
                   >
-                    <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-stone-950' : 'text-emerald-400'}`} />
+                    <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-[#022C22]' : 'text-[#34D399]'}`} />
                     {(!isCollapsed || isMobile) && (
                       <span className="flex-1 text-left truncate">{item.label}</span>
                     )}
@@ -195,8 +195,8 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
                       <span
                         className={`text-[9px] font-bold px-1.5 py-0.5 rounded-md ${
                           isActive
-                            ? 'bg-stone-950 text-emerald-300'
-                            : 'bg-emerald-800/60 text-emerald-200'
+                            ? 'bg-[#022C22] text-[#6EE7B7]'
+                            : 'bg-[#064E3B]/60 text-[#A7F3D0]'
                         }`}
                       >
                         {item.badge}
@@ -211,25 +211,25 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       </div>
 
       {/* Bottom Profile & Switch Area */}
-      <div className="p-3 border-t border-emerald-900/60 bg-[#06180f] space-y-2">
+      <div className="p-3 border-t border-[#064E3B]/60 bg-[#06180f] space-y-2">
         {/* Quick Link to Farmer Frontend */}
         <button
           onClick={onNavigateFarmer}
-          className={`w-full flex items-center gap-2 p-2.5 rounded-2xl bg-emerald-950/60 hover:bg-emerald-900/60 border border-emerald-800/60 text-emerald-200 text-xs font-bold transition-colors cursor-pointer ${
+          className={`w-full flex items-center gap-2 p-2.5 rounded-2xl bg-[#022C22]/60 hover:bg-[#064E3B]/60 border border-[#064E3B]/60 text-[#A7F3D0] text-xs font-bold transition-colors cursor-pointer ${
             isCollapsed && !isMobile ? 'justify-center p-2' : ''
           }`}
           title="Open Farmer Application"
         >
-          <ExternalLink className="w-4 h-4 text-emerald-400 shrink-0" />
+          <ExternalLink className="w-4 h-4 text-[#34D399] shrink-0" />
           {(!isCollapsed || isMobile) && <span>View Farmer App</span>}
         </button>
 
         {/* Logged in Admin Badge */}
         {(!isCollapsed || isMobile) && admin && (
-          <div className="px-3 py-2 rounded-2xl bg-emerald-900/30 border border-emerald-800/40 flex items-center justify-between">
+          <div className="px-3 py-2 rounded-2xl bg-[#064E3B]/30 border border-[#064E3B]/40 flex items-center justify-between">
             <div className="truncate mr-2">
               <div className="text-xs font-bold text-white truncate">{admin.name}</div>
-              <div className="text-[10px] text-emerald-400 font-semibold">{admin.role}</div>
+              <div className="text-[10px] text-[#34D399] font-semibold">{admin.role}</div>
             </div>
             <button
               onClick={logout}

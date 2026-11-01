@@ -83,10 +83,10 @@ export const PremiumPage: React.FC = () => {
           <Crown className="w-3.5 h-3.5 text-amber-600" />
           <span>KrishiSmart Pro Memberships</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-[#172B24] font-heading">
           Unlock the Full Power of Intelligent Farming
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500">
+        <p className="text-xs sm:text-sm text-[#718078]">
           Equip your agricultural operations with predictive market intelligence, automated drip controls, and AI agronomy.
         </p>
       </div>
@@ -96,39 +96,39 @@ export const PremiumPage: React.FC = () => {
         {plans.map((plan, i) => (
           <div
             key={i}
-            className={`rounded-3xl p-6 sm:p-7 flex flex-col justify-between space-y-6 transition-all duration-300 relative ${
+            className={`rounded-2xl p-6 sm:p-7 flex flex-col justify-between space-y-6 transition-all duration-300 relative ${
               plan.isPopular
-                ? 'bg-gradient-to-b from-slate-900 via-slate-900 to-emerald-950 text-white shadow-2xl border-2 border-amber-400/80 -translate-y-2'
-                : 'bg-white text-slate-900 border border-slate-200 shadow-sm'
+                ? 'bg-gradient-to-b from-[#172B24] via-[#172B24] to-[#022C22] text-white shadow-2xl border-2 border-amber-400/80 -translate-y-2'
+                : 'bg-white text-[#172B24] border border-[#E5EDE7] shadow-sm'
             }`}
           >
             {plan.isPopular && (
-              <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 text-[10px] font-black uppercase tracking-wider shadow-md">
+              <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-[#022C22] text-[10px] font-black uppercase tracking-wider shadow-md">
                 ⭐ Most Recommended
               </span>
             )}
 
             <div>
               <div className="flex items-center justify-between mb-2">
-                <h3 className={`font-extrabold text-lg font-heading ${plan.isPopular ? 'text-white' : 'text-slate-900'}`}>
+                <h3 className={`font-extrabold text-lg font-heading ${plan.isPopular ? 'text-white' : 'text-[#172B24]'}`}>
                   {plan.name}
                 </h3>
                 {plan.isCurrent && (
-                  <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                  <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-[#10B981]/20 text-[#6EE7B7] border border-[#10B981]/30">
                     Active
                   </span>
                 )}
               </div>
 
-              <p className={`text-xs ${plan.isPopular ? 'text-slate-300' : 'text-slate-500'} leading-relaxed mb-4`}>
+              <p className={`text-xs ${plan.isPopular ? 'text-[#CBD8D0]' : 'text-[#718078]'} leading-relaxed mb-4`}>
                 {plan.description}
               </p>
 
-              <div className="flex items-baseline gap-1.5 pb-4 border-b border-slate-100/20">
-                <span className={`text-3xl sm:text-4xl font-black font-heading ${plan.isPopular ? 'text-amber-400' : 'text-slate-900'}`}>
+              <div className="flex items-baseline gap-1.5 pb-4 border-b border-[#EFF4EF]/20">
+                <span className={`text-3xl sm:text-4xl font-black font-heading ${plan.isPopular ? 'text-amber-400' : 'text-[#172B24]'}`}>
                   {plan.price}
                 </span>
-                <span className={`text-xs ${plan.isPopular ? 'text-slate-400' : 'text-slate-500'}`}>
+                <span className={`text-xs ${plan.isPopular ? 'text-[#8A9A90]' : 'text-[#718078]'}`}>
                   / {plan.period}
                 </span>
               </div>
@@ -139,10 +139,10 @@ export const PremiumPage: React.FC = () => {
                   <div key={idx} className="flex items-start gap-2">
                     <CheckCircle2
                       className={`w-4 h-4 shrink-0 mt-0.5 ${
-                        plan.isPopular ? 'text-emerald-400' : 'text-emerald-600'
+                        plan.isPopular ? 'text-[#34D399]' : 'text-[#059669]'
                       }`}
                     />
-                    <span className={plan.isPopular ? 'text-slate-200' : 'text-slate-700'}>
+                    <span className={plan.isPopular ? 'text-[#E5EDE7]' : 'text-[#3E5248]'}>
                       {feat}
                     </span>
                   </div>
@@ -155,10 +155,10 @@ export const PremiumPage: React.FC = () => {
               disabled={plan.isCurrent}
               className={`w-full py-3.5 rounded-2xl font-bold text-xs shadow-md transition-all ${
                 plan.isPopular
-                  ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-amber-500/20'
+                  ? 'bg-amber-500 hover:bg-amber-400 text-[#022C22] shadow-amber-500/20'
                   : plan.isCurrent
-                  ? 'bg-slate-100 text-slate-400 cursor-default'
-                  : 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                  ? 'bg-[#EFF4EF] text-[#8A9A90] cursor-default'
+                  : 'bg-[#059669] hover:bg-[#064E3B] text-white'
               }`}
             >
               {plan.buttonText}
