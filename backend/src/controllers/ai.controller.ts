@@ -4,7 +4,6 @@ import { SoilAnalysisService } from '../services/ai/soilAnalysis.service.js';
 import { YieldPredictionService } from '../services/ai/yieldPrediction.service.js';
 import { CropRecommendationService } from '../services/ai/cropRecommendation.service.js';
 import { AssistantService } from '../services/ai/assistant.service.js';
-import { generateOpenAiText, validateOpenAiRequest, OpenAiError } from '../services/ai/openai.service.js';
 import { sendSuccess, sendError } from '../utils/response.js';
 
 export class AIController {
@@ -57,22 +56,6 @@ export class AIController {
       landSizeAcres
     });
     return sendSuccess(res, recs, 'Crop recommendations generated');
-  }
-
-  /**
-   * Centralized OpenAI endpoint: POST /api/ai/generate
-   * Text only. Returns a real OpenAI answer, or a clear error
-   * (e.g. key not configured) — never a fabricated answer.
-   */
-  public static async generate(req: Request, res: Response): Promise<Response> {
-    try {
-      const validated = validateOpenAiRequest(req.body);
-      const result = await generateOpenAiText(validated);
-      return sendSuccess(res, result, 'AI response generated');
-    } catch (err: any) {
-      if (err instanceof OpenAiError) return sendError(res, err.message, err.status, err.code);
-      return sendError(res, 'AI request failed. Please try again.', 502);
-    }
   }
 
   public static async chat(req: Request, res: Response): Promise<Response> {

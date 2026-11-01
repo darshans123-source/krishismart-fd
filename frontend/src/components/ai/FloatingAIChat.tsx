@@ -12,7 +12,7 @@ import {
 import { useLanguage } from '../../context/LanguageContext';
 import { useFarmData } from '../../context/FarmDataContext';
 import { AIChatMessage } from '../../types';
-import { askOpenAi } from '../../services/openai';
+import { askGeminiChat } from '../../services/gemini';
 
 export const FloatingAIChat: React.FC = () => {
   const { language, t } = useLanguage();
@@ -102,8 +102,7 @@ export const FloatingAIChat: React.FC = () => {
     setInput('');
     setIsTyping(true);
     try {
-      const result = await askOpenAi({
-        feature: 'ask-krishi',
+      const result = await askGeminiChat({
         prompt: query,
         language,
         context: {

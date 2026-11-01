@@ -9,6 +9,4 @@ export const ENV = {
   GEMINI_API_KEY: process.env.GEMINI_API_KEY || '',
   DATABASE_URL: process.env.DATABASE_URL || '',
   FIREBASE_CONFIG: process.env.FIREBASE_CONFIG || '',
-  OPENAI_API_KEY: process.env.OPENAI_API_KEY || '',
-  OPENAI_MODEL: process.env.OPENAI_MODEL || 'gpt-4o-mini',
 };
