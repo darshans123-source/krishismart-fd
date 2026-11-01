@@ -113,7 +113,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {isMobile && (
         <div className="flex items-center gap-3 pb-4 mb-4 border-b border-[#E5EDE7]">
           <img
-            src="/logo-icon.svg"
+            src="/logo-icon.webp"
             alt="KrishiSmart AI logo"
             className="w-10 h-10 rounded-2xl shadow-sm"
           />

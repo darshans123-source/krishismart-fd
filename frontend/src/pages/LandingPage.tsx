@@ -145,7 +145,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             {/* Left: headline, CTAs, trust stats */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/25 backdrop-blur-md text-xs font-bold shadow-lg">
-                <img src="/logo-icon.svg" alt="KrishiSmart AI" className="w-5 h-5 rounded-md" />
+                <img src="/logo-icon.webp" alt="KrishiSmart AI" className="w-5 h-5 rounded-md" />
                 <span>KRISHISMART AI</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#34D399]" />
                 <span className="text-[#A7F3D0]">Live for Indian Farmers</span>

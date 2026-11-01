@@ -47,7 +47,7 @@ export const SplashScreen: React.FC<{ fading: boolean }> = ({ fading }) => {
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
         <img
-          src="/logo-icon.svg"
+          src="/logo-icon.webp"
           alt="KrishiSmart AI logo"
           className="splash-logo w-24 h-24 sm:w-28 sm:h-28 rounded-[1.75rem] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.6)] ring-1 ring-white/30"
         />
