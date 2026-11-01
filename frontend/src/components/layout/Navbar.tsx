@@ -4,7 +4,6 @@ import {
   Bell,
   ShoppingCart,
   Globe,
-  Sprout,
   Sun,
   User,
   Sparkles,
@@ -106,9 +105,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => setCurrentTab('dashboard')}
             className="flex items-center gap-2.5 cursor-pointer group"
           >
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-emerald-700 flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform">
-              <Sprout className="w-5 h-5 sm:w-6 sm:h-6" />
-            </div>
+            <img
+              src="/logo-icon.svg"
+              alt="KrishiSmart AI logo"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl shadow-xs group-hover:scale-105 transition-transform"
+            />
             <div>
               <div className="flex items-center gap-1.5">
                 <span className="font-extrabold text-base sm:text-xl tracking-tight text-stone-900 font-heading">
