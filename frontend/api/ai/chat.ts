@@ -65,7 +65,9 @@ export default async function handler(req: any, res: any) {
         message: 'Gemini is not configured on the server. Add GEMINI_API_KEY to the Vercel environment variables and redeploy.',
       });
     }
-    const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+    // gemini-2.0-flash was retired by Google (chatbot returned 'model no longer available').
+    // Default is now gemini-3.8-flash. If GEMINI_MODEL is set in Vercel to the old name, it will override this — update or remove it there.
+    const model = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
     const context = sanitizeContext(body.context);
     const userText = [
       `Language: ${LANGUAGE_NAMES[language]}`,
