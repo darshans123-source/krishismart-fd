@@ -257,7 +257,7 @@ export const AdminSettingsPage: React.FC = () => {
           <button
             type="submit"
             disabled={saving}
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-2xl bg-[#059669] hover:bg-[#064E3B] text-white text-xs font-bold shadow-lg shadow-[#064E3B]/20 transition disabled:opacity-50 cursor-pointer"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-2xl btn-clay-primary text-white text-xs font-bold shadow-lg shadow-[#064E3B]/20 transition disabled:opacity-50 cursor-pointer"
           >
             <Save className="w-4 h-4" />
             {saving ? 'Saving...' : 'Save Site Settings'}

@@ -313,7 +313,7 @@ export const AdminSmartPumpManager: React.FC = () => {
             <button
               type="submit"
               disabled={saving}
-              className="px-6 py-2.5 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white text-xs font-bold shadow-sm transition disabled:opacity-50 cursor-pointer"
+              className="px-6 py-2.5 rounded-xl btn-clay-primary text-white text-xs font-bold shadow-sm transition disabled:opacity-50 cursor-pointer"
             >
               {saving ? 'Saving...' : 'Save Pump Configuration'}
             </button>

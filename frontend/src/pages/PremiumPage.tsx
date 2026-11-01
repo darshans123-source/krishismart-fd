@@ -158,7 +158,7 @@ export const PremiumPage: React.FC = () => {
                   ? 'bg-amber-500 hover:bg-amber-400 text-[#022C22] shadow-amber-500/20'
                   : plan.isCurrent
                   ? 'bg-[#EFF4EF] text-[#8A9A90] cursor-default'
-                  : 'bg-[#059669] hover:bg-[#064E3B] text-white'
+                  : 'btn-clay-primary text-white'
               }`}
             >
               {plan.buttonText}

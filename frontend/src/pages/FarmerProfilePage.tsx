@@ -241,7 +241,7 @@ export const FarmerProfilePage: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md transition-all mt-2"
+                className="w-full py-3 rounded-xl btn-clay-primary text-white font-bold text-sm shadow-md transition-all mt-2"
               >
                 Save Changes
               </button>

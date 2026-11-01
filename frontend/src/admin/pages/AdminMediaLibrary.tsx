@@ -133,7 +133,7 @@ export const AdminMediaLibrary: React.FC = () => {
           </button>
           <button
             onClick={() => setIsUploadOpen(true)}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white text-xs font-bold shadow-sm transition cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl btn-clay-primary text-white text-xs font-bold shadow-sm transition cursor-pointer"
           >
             <Upload className="w-4 h-4" />
             Add Media Asset
@@ -322,7 +322,7 @@ export const AdminMediaLibrary: React.FC = () => {
             <button
               type="submit"
               disabled={uploading}
-              className="px-5 py-2 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white text-xs font-bold shadow-sm transition disabled:opacity-50"
+              className="px-5 py-2 rounded-xl btn-clay-primary text-white text-xs font-bold shadow-sm transition disabled:opacity-50"
             >
               {uploading ? 'Adding...' : 'Save Asset'}
             </button>

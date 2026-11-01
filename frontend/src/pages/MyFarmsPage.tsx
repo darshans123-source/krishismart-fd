@@ -113,7 +113,7 @@ export const MyFarmsPage: React.FC = () => {
 
           <button
             onClick={() => setShowAddCropModal(true)}
-            className="px-4 py-2.5 rounded-2xl bg-[#059669] hover:bg-[#064E3B] text-white text-xs font-bold shadow-md shadow-[#059669]/20 transition-all flex items-center gap-1.5"
+            className="px-4 py-2.5 rounded-2xl btn-clay-primary text-white text-xs font-bold shadow-md shadow-[#059669]/20 transition-all flex items-center gap-1.5"
           >
             <Plus className="w-4 h-4" />
             <span>{t('addCrop')}</span>
@@ -434,7 +434,7 @@ export const MyFarmsPage: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md transition-all mt-2"
+                className="w-full py-3 rounded-xl btn-clay-primary text-white font-bold text-sm shadow-md transition-all mt-2"
               >
                 Save Crop (+200 XP)
               </button>
@@ -520,7 +520,7 @@ export const MyFarmsPage: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md transition-all mt-2"
+                className="w-full py-3 rounded-xl btn-clay-primary text-white font-bold text-sm shadow-md transition-all mt-2"
               >
                 Register Farm Parcel (+150 XP)
               </button>

@@ -401,7 +401,7 @@ export const AdminUsersManager: React.FC = () => {
             <button
               type="submit"
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white text-xs font-bold shadow-sm transition disabled:opacity-50"
+              className="px-5 py-2 rounded-xl btn-clay-primary text-white text-xs font-bold shadow-sm transition disabled:opacity-50"
             >
               {saving ? 'Saving...' : 'Update Profile'}
             </button>

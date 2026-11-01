@@ -207,7 +207,7 @@ export const KrishiStorePage: React.FC = () => {
             <div className="p-4 pt-0">
               <button
                 onClick={() => addToCart(prod, 1)}
-                className="w-full py-2.5 rounded-xl bg-[#059669] hover:bg-[#064E3B] active:scale-95 text-white font-bold text-xs shadow-sm transition-all flex items-center justify-center gap-1.5"
+                className="w-full py-2.5 rounded-xl btn-clay-primary active:scale-95 text-white font-bold text-xs shadow-sm transition-all flex items-center justify-center gap-1.5"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add to Cart</span>
@@ -317,7 +317,7 @@ export const KrishiStorePage: React.FC = () => {
 
                 <button
                   onClick={() => setShowCheckoutModal(true)}
-                  className="w-full py-3.5 rounded-2xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md shadow-[#059669]/20 transition-all flex items-center justify-center gap-2"
+                  className="w-full py-3.5 rounded-2xl btn-clay-primary text-white font-bold text-sm shadow-md shadow-[#059669]/20 transition-all flex items-center justify-center gap-2"
                 >
                   <span>Proceed to Checkout</span>
                   <ChevronRight className="w-4 h-4" />
@@ -381,7 +381,7 @@ export const KrishiStorePage: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md transition-all"
+                className="w-full py-3.5 rounded-xl btn-clay-primary text-white font-bold text-sm shadow-md transition-all"
               >
                 Confirm & Place Order (+100 XP)
               </button>
