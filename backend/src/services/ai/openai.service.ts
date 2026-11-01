@@ -168,8 +168,8 @@ export async function generateOpenAiText(req: OpenAiRequest): Promise<OpenAiResu
   const data = (await res.json().catch(() => ({}))) as Record<string, unknown>;
   if (!res.ok) {
     if (res.status === 401) throw new OpenAiError('OpenAI rejected the server API key. Check OPENAI_API_KEY on the server.', 502, 'OPENAI_AUTH');
-    if (res.status === 429) throw new OpenAiError('OpenAI is rate-limited right now. Please try again in a minute.', 429, 'OPENAI_RATE_LIMIT');
     const msg = typeof data.error === 'object' && data.error !== null ? (data.error as Record<string, unknown>).message : undefined;
+    if (res.status === 429) throw new OpenAiError(typeof msg === 'string' ? msg : 'OpenAI is rate-limited right now. Please try again in a minute.', 429, 'OPENAI_RATE_LIMIT');
     throw new OpenAiError(typeof msg === 'string' ? msg : `OpenAI returned status ${res.status}.`, 502, 'OPENAI_UPSTREAM');
   }
 

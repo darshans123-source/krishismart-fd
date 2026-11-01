@@ -134,9 +134,14 @@ export default async function handler(req: any, res: any) {
     const data: any = await response.json().catch(() => ({}));
     if (!response.ok) {
       if (response.status === 401) return res.status(502).json({ success: false, message: 'OpenAI rejected the server API key. Check OPENAI_API_KEY on the server.' });
-      if (response.status === 429) return res.status(429).json({ success: false, message: 'OpenAI is rate-limited right now. Please try again in a minute.' });
-      const msg = data?.error?.message;
-      return res.status(502).json({ success: false, message: typeof msg === 'string' ? msg : `OpenAI returned status ${response.status}.` });
+      const upstreamMsg = typeof data?.error?.message === 'string' ? data.error.message : '';
+      if (response.status === 429) {
+        // Do NOT hide the real reason: a quota-exceeded account will keep
+        // returning 429 until credits are added, and 'try again in a minute'
+        // would mislead the farmer. Upstream messages contain no API key.
+        return res.status(429).json({ success: false, message: upstreamMsg || 'OpenAI is rate-limited right now. Please try again in a minute.' });
+      }
+      return res.status(502).json({ success: false, message: upstreamMsg || `OpenAI returned status ${response.status}.` });
     }
     let text = '';
     if (typeof data.output_text === 'string' && data.output_text.trim()) text = data.output_text.trim();
