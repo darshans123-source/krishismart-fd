@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import {
   UserProfile,
   Farm,
@@ -292,22 +292,48 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       showToast(`📍 GPS Fix acquired: ${address.formatted}`, 'success');
     } catch (err: any) {
       const errorMsg = err?.message || 'Failed to detect GPS location';
-      const isDenied = errorMsg.includes('denied');
+      const status = errorMsg.includes('denied')
+        ? 'denied'
+        : errorMsg.includes('timed out')
+          ? 'timeout'
+          : errorMsg.includes('unavailable') || errorMsg.includes('not supported')
+            ? 'unavailable'
+            : 'error';
 
       setLocationState((prev) => ({
         ...prev,
-        status: isDenied ? 'denied' : 'error',
+        status,
         errorMessage: errorMsg
       }));
 
       showToast(
-        isDenied
+        status === 'denied'
           ? 'Location permission denied. You can select your district manually.'
           : errorMsg,
         'error'
       );
     }
   };
+
+  // Auto-detect live location on first load, but only when there is no
+  // saved location yet. Without this the app silently shows the default
+  // Raichur coordinates and never asks the browser for a GPS fix, which
+  // looks like "live location is not working". The guard and the status
+  // change above prevent this from prompting repeatedly.
+  const hasAutoRequestedLocation = useRef(false);
+  useEffect(() => {
+    if (
+      !hasAutoRequestedLocation.current &&
+      locationState.source === 'default' &&
+      locationState.status === 'idle'
+    ) {
+      hasAutoRequestedLocation.current = true;
+      void requestGPSLocation();
+    }
+    // Only run this first-load check; requestGPSLocation is stable enough
+    // in practice and re-running it would re-prompt the user.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Set manual location
   const setManualLocation = async (district: string, state: string, village?: string) => {
