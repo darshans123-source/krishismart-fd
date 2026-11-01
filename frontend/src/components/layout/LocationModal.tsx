@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   MapPin,
   Compass,
@@ -32,6 +32,16 @@ export const LocationModal: React.FC<LocationModalProps> = ({ isOpen, onClose })
   const [selectedDistrict, setSelectedDistrict] = useState(locationState.address.district || 'Raichur');
   const [districtSearch, setDistrictSearch] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Keep the manual picker in sync when the modal is reopened after a
+  // GPS fix, instead of showing the district from the first mount.
+  useEffect(() => {
+    if (isOpen) {
+      setSelectedState(locationState.address.state || 'Karnataka');
+      setSelectedDistrict(locationState.address.district || 'Raichur');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -129,7 +139,22 @@ export const LocationModal: React.FC<LocationModalProps> = ({ isOpen, onClose })
                 <div>
                   <div className="font-bold">Location Permission Denied</div>
                   <p className="text-[11px] text-amber-800 mt-0.5">
-                    Your browser has location permissions blocked. You can pick your agricultural district manually below.
+                    Your browser has location permissions blocked. Allow location for this site in your browser settings, then try again — or pick your agricultural district manually below.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {(locationState.status === 'timeout' ||
+              locationState.status === 'unavailable' ||
+              locationState.status === 'error') && (
+              <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-start gap-2">
+                <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                <div>
+                  <div className="font-bold">Could not detect your live location</div>
+                  <p className="text-[11px] text-amber-800 mt-0.5">
+                    {locationState.errorMessage ||
+                      'GPS detection failed. Try again outdoors with device location turned on, or pick your district manually below.'}
                   </p>
                 </div>
               </div>

@@ -125,6 +125,19 @@ export function findNearestDistrict(lat: number, lng: number): { district: strin
   };
 }
 
+function cleanDistrictName(value: unknown): string {
+  if (typeof value !== 'string') return '';
+  return value.replace(/ district/i, '').trim();
+}
+
+function isValidDistrict(district: string, state: string, country: string): boolean {
+  if (!district || district.length <= 2) return false;
+  if (district === state || district === country) return false;
+  // A 2-letter state code (e.g. "KA") must never be treated as a district.
+  if (/^[A-Z]{2}$/.test(district)) return false;
+  return true;
+}
+
 /**
  * Reverse geocodes coordinates to village/area, district, state, country
  */
@@ -132,7 +145,7 @@ export async function reverseGeocode(lat: number, lng: number): Promise<Location
   // First try BigDataCloud's free client reverse geocoding API (Fast, reliable, CORS enabled)
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000);
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
 
     const res = await fetch(
       `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`,
@@ -142,12 +155,25 @@ export async function reverseGeocode(lat: number, lng: number): Promise<Location
 
     if (res.ok) {
       const data = await res.json();
-      const village = data.locality || data.localityInfo?.administrative?.[3]?.name || data.city || '';
-      const district = (data.localityInfo?.administrative?.[2]?.name || data.principalSubdivisionCode || data.city || '').replace(/ district/i, '');
       const state = data.principalSubdivision || 'Karnataka';
       const country = data.countryName || 'India';
+      const village = data.locality || data.city || '';
+      const adminNames: string[] = (data.localityInfo?.administrative || [])
+        .map((a: { name?: string }) => a.name)
+        .filter((n: unknown): n is string => typeof n === 'string' && n.length > 0);
+      // Administrative levels are not at a fixed index for every place in
+      // India, so prefer an explicit "district" entry, then the first
+      // administrative name that is neither the state nor the country.
+      // Never fall back to principalSubdivisionCode ("KA") as a district.
+      const district =
+        cleanDistrictName(adminNames.find((n) => /district/i.test(n))) ||
+        cleanDistrictName(
+          adminNames.find((n) => n !== state && n !== country && n !== village)
+        ) ||
+        cleanDistrictName(data.city) ||
+        cleanDistrictName(data.locality);
 
-      if (district) {
+      if (isValidDistrict(district, state, country)) {
         return {
           village: village || district,
           district,
@@ -164,7 +190,7 @@ export async function reverseGeocode(lat: number, lng: number): Promise<Location
   // Fallback 1: OpenStreetMap Nominatim with timeout
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000);
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
 
     const res = await fetch(
       `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=12&addressdetails=1`,
@@ -178,12 +204,14 @@ export async function reverseGeocode(lat: number, lng: number): Promise<Location
     if (res.ok) {
       const data = await res.json();
       const addr = data.address || {};
-      const village = addr.village || addr.suburb || addr.town || addr.county || '';
-      const district = (addr.state_district || addr.county || addr.city || '').replace(/ district/i, '');
+      const village = addr.village || addr.suburb || addr.town || addr.hamlet || '';
       const state = addr.state || 'Karnataka';
       const country = addr.country || 'India';
+      const district = cleanDistrictName(
+        addr.state_district || addr.county || addr.city_district || addr.city || addr.town
+      );
 
-      if (district) {
+      if (isValidDistrict(district, state, country)) {
         return {
           village: village || district,
           district,
@@ -234,16 +262,8 @@ export function setStoredLocation(loc: LocationState): void {
   }
 }
 
-/**
- * Requests browser GPS position with high accuracy and timeouts
- */
-export function getCurrentGPSCoordinates(): Promise<Coordinates> {
+function requestPosition(options: PositionOptions): Promise<Coordinates> {
   return new Promise((resolve, reject) => {
-    if (!navigator.geolocation) {
-      reject(new Error('Geolocation is not supported by your browser'));
-      return;
-    }
-
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         resolve({
@@ -262,11 +282,40 @@ export function getCurrentGPSCoordinates(): Promise<Coordinates> {
         }
         reject(new Error(msg));
       },
-      {
-        enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 1000 * 60 * 10 // Cache position for up to 10 mins in browser
-      }
+      options
     );
   });
+}
+
+/**
+ * Requests browser GPS position with high accuracy and timeouts.
+ * High-accuracy GPS often takes longer than 10 seconds indoors or on a
+ * slow mobile connection, so a timeout / unavailable result is retried
+ * once with lower accuracy instead of failing outright. A permission
+ * denial is never retried. maximumAge is 0 so a "live" request does not
+ * return a stale cached position.
+ */
+export async function getCurrentGPSCoordinates(): Promise<Coordinates> {
+  if (!navigator.geolocation) {
+    throw new Error('Geolocation is not supported by your browser');
+  }
+
+  try {
+    return await requestPosition({
+      enableHighAccuracy: true,
+      timeout: 15000,
+      maximumAge: 0
+    });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : '';
+    if (message.includes('denied')) {
+      throw err;
+    }
+    // Timeout or position unavailable: retry once, low accuracy, longer wait.
+    return await requestPosition({
+      enableHighAccuracy: false,
+      timeout: 20000,
+      maximumAge: 0
+    });
+  }
 }
