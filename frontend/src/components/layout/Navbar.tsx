@@ -89,10 +89,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-[#E5EDE7]/80 shadow-soft transition-all">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-3">
+    <header className="sticky top-0 z-40 w-full min-w-0 bg-white/85 backdrop-blur-md border-b border-[#E5EDE7]/80 shadow-soft transition-all overflow-x-clip">
+      <div className="w-full min-w-0 px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-1.5 sm:gap-3">
         {/* Left: Mobile Menu Toggle & Brand Logo */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3 min-w-0">
           <button
             onClick={onToggleMobileSidebar}
             className="lg:hidden p-2 rounded-xl text-[#5A6E64] hover:bg-[#EFF4EF] transition-colors"
@@ -112,7 +112,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             />
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-base sm:text-xl tracking-tight text-[#172B24] font-heading">
+                <span className="font-extrabold text-sm sm:text-xl tracking-tight text-[#172B24] font-heading truncate">
                   KRISHISMART <span className="text-[#064E3B]">AI</span>
                 </span>
                 <span className="hidden sm:inline-flex px-2 py-0.5 text-[10px] font-bold bg-[#ECFDF5] text-[#064E3B] rounded-md border border-[#A7F3D0]">
@@ -141,11 +141,11 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Right: Actions (Location Selector, Weather, Language, Notifications, Cart, Profile) */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5">
+        <div className="flex items-center gap-1 sm:gap-2.5 min-w-0 shrink-0">
           {/* Real-time Location Control Pill */}
           <button
             onClick={() => setIsLocationModalOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-[#ECFDF5] border border-[#E5EDE7] hover:border-[#6EE7B7] transition-all text-[#243A32] group shadow-2xs"
+            className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-full bg-white hover:bg-[#ECFDF5] border border-[#E5EDE7] hover:border-[#6EE7B7] transition-all text-[#243A32] group shadow-2xs min-w-0"
             title="Click to detect GPS or change farm location"
           >
             <span className="relative flex h-2 w-2">
@@ -160,7 +160,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }`}
               ></span>
             </span>
-            <span className="text-[11px] sm:text-xs font-bold text-[#243A32] group-hover:text-[#064E3B] truncate max-w-[130px] sm:max-w-[170px]">
+            <span className="text-[11px] sm:text-xs font-bold text-[#243A32] group-hover:text-[#064E3B] truncate max-w-[92px] sm:max-w-[170px]">
               📍 {locationState.address.district || 'Raichur'}, {locationState.address.state || 'Karnataka'}
             </span>
           </button>
@@ -179,10 +179,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="relative">
             <button
               onClick={() => setShowLangMenu(!showLangMenu)}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-[#E5EDE7] text-[#3E5248] hover:bg-[#F7FAF7] text-xs font-semibold transition-colors"
+              className="flex items-center gap-1.5 px-2 sm:px-2.5 py-1.5 rounded-xl border border-[#E5EDE7] text-[#3E5248] hover:bg-[#F7FAF7] text-xs font-semibold transition-colors"
             >
               <Globe className="w-3.5 h-3.5 text-[#059669]" />
-              <span>{languageLabels[language].label}</span>
+              <span className="hidden sm:inline">{languageLabels[language].label}</span>
               <ChevronDown className="w-3 h-3 text-[#8A9A90]" />
             </button>
 
@@ -211,7 +211,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {onNavigateAdmin && (
             <button
               onClick={onNavigateAdmin}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#6EE7B7] bg-[#ECFDF5] hover:bg-[#D1FAE5] text-[#064E3B] text-xs font-extrabold transition-all shadow-2xs cursor-pointer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#6EE7B7] bg-[#ECFDF5] hover:bg-[#D1FAE5] text-[#064E3B] text-xs font-extrabold transition-all shadow-2xs cursor-pointer"
               title="Enter Admin Portal / CMS"
             >
               <ShieldCheck className="w-3.5 h-3.5 text-[#064E3B]" />

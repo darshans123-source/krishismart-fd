@@ -118,7 +118,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
     <div className="min-h-screen bg-[#F7FAF7] text-[#172B24] overflow-hidden">
       {/* 1. HERO SECTION */}
       <section className="relative pt-12 pb-20 lg:pt-16 lg:pb-24 overflow-hidden bg-[#F7FAF7] border-b border-[#E5EDE7]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="w-full px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Hero Copy */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
@@ -157,15 +157,15 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               {/* Trust Indicators */}
               <div className="grid grid-cols-3 gap-4 pt-6 border-t border-[#E5EDE7] text-left">
                 <div>
-                  <div className="text-2xl font-black text-[#064E3B] font-heading">50,000+</div>
+                  <div className="text-xl sm:text-2xl font-black text-[#064E3B] font-heading">50,000+</div>
                   <div className="text-xs text-[#718078] font-medium">Active Farmers</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-black text-[#064E3B] font-heading">94.8%</div>
+                  <div className="text-xl sm:text-2xl font-black text-[#064E3B] font-heading">94.8%</div>
                   <div className="text-xs text-[#718078] font-medium">Crop Health Accuracy</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-black text-[#064E3B] font-heading">₹2.4 Cr+</div>
+                  <div className="text-xl sm:text-2xl font-black text-[#064E3B] font-heading">₹2.4 Cr+</div>
                   <div className="text-xs text-[#718078] font-medium">Extra Value Realized</div>
                 </div>
               </div>
@@ -222,7 +222,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
       {/* 2. CORE FEATURES GRID */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ECFDF5] text-[#064E3B] text-xs font-bold mb-3 border border-[#A7F3D0]">
               <Sparkles className="w-3.5 h-3.5" />
@@ -278,7 +278,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
       {/* 3. KRISHIBHAVISHYA SPOTLIGHT */}
       <section className="py-20 bg-gradient-to-br from-[#022C22] via-[#172B24] to-[#022C22] text-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="w-full px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6 space-y-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold">
@@ -293,7 +293,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 Never sell at distress prices again. Our AI models predict wholesale APMC price trajectories for Tomato, Paddy, Onion, Cotton, and Wheat up to 60 days into the future.
               </p>
 
-              <div className="space-y-3">
+              <div className="w-full min-w-0 space-y-3">
                 {[
                   'Historical APMC arrivals & seasonal supply forecasting',
                   'Festival demand spike indexing across major metro consumption hubs',
@@ -369,7 +369,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
       {/* 4. TESTIMONIALS */}
       <section className="py-20 bg-[#F7FAF7]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <h2 className="text-3xl font-extrabold text-[#172B24] font-heading">
               Loved by Farmers Across India

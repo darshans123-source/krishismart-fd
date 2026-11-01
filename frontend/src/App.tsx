@@ -109,7 +109,7 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7FAF7] text-[#172B24] flex flex-col selection:bg-[#059669] selection:text-white">
+    <div className="min-h-screen w-full min-w-0 bg-[#F7FAF7] text-[#172B24] flex flex-col selection:bg-[#059669] selection:text-white overflow-x-clip">
       {/* Top Universal Navbar */}
       <Navbar
         currentTab={currentTab}
@@ -122,7 +122,7 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
       />
 
       {/* Main Body with Desktop Sidebar + Content Area */}
-      <div className="flex-1 max-w-7xl w-full mx-auto flex">
+      <div className="flex-1 w-full min-w-0 flex">
         {/* Desktop Sidebar (hidden on public landing page) */}
         {currentTab !== 'landing' && (
           <div className="hidden lg:block">
@@ -138,8 +138,8 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
 
         {/* Dynamic Page Content */}
         <main
-          className={`flex-1 overflow-x-hidden ${
-            currentTab === 'landing' ? 'p-0' : 'p-4 sm:p-6 lg:p-8 max-w-full'
+          className={`flex-1 min-w-0 w-full overflow-x-hidden ${
+            currentTab === 'landing' ? 'p-0' : 'p-4 sm:p-6 lg:p-8 pb-24 lg:pb-8 max-w-full'
           }`}
         >
           {renderActivePage()}

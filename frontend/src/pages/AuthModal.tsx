@@ -129,7 +129,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             </div>
 
             {onboardStep === 1 && (
-              <div className="space-y-4 animate-in fade-in">
+              <div className="w-full min-w-0 space-y-4 animate-in fade-in">
                 <div className="text-xs font-bold text-[#718078] uppercase tracking-wider">
                   Step 1: Farmer Details
                 </div>
@@ -190,7 +190,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             )}
 
             {onboardStep === 2 && (
-              <div className="space-y-4 animate-in fade-in">
+              <div className="w-full min-w-0 space-y-4 animate-in fade-in">
                 <div className="text-xs font-bold text-[#718078] uppercase tracking-wider">
                   Step 2: Farm Location & Region
                 </div>
@@ -258,7 +258,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             )}
 
             {onboardStep === 3 && (
-              <div className="space-y-4 animate-in fade-in">
+              <div className="w-full min-w-0 space-y-4 animate-in fade-in">
                 <div className="text-xs font-bold text-[#718078] uppercase tracking-wider">
                   Step 3: Land Size & Crops
                 </div>
@@ -365,7 +365,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <div className="flex-1 border-t border-[#E5EDE7]"></div>
             </div>
 
-            <form onSubmit={handleLoginSubmit} className="space-y-3.5">
+            <form onSubmit={handleLoginSubmit} className="w-full min-w-0 space-y-3.5">
               {mode === 'register' && (
                 <div>
                   <label className="block text-xs font-bold text-[#3E5248] mb-1">Farmer Name</label>

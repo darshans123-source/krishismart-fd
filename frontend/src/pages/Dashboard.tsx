@@ -168,16 +168,16 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
     : defaultQuickActions;
 
   return (
-    <div className="space-y-6 sm:space-y-8 pb-16 animate-in fade-in duration-200">
+    <div className="w-full min-w-0 space-y-6 sm:space-y-8 pb-2 animate-in fade-in duration-200">
       {/* ================================================== */}
       {/* 1. TOP 5-SECOND OVERVIEW & GREETING BANNER */}
       {/* ================================================== */}
       {showHero && (
-        <div className="premium-hero rounded-[1.75rem] text-white p-6 sm:p-8 border border-[#064E3B]/20 space-y-5">
+        <div className="premium-hero rounded-[1.75rem] w-full min-w-0 overflow-hidden text-white p-4 sm:p-6 lg:p-8 border border-[#064E3B]/20 space-y-5">
           <div className="pointer-events-none absolute -right-10 -top-16 w-64 h-64 rounded-full bg-[#34D399]/20 blur-3xl" />
           <div className="pointer-events-none absolute -left-8 bottom-0 w-48 h-48 rounded-full bg-amber-400/10 blur-3xl" />
           <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="space-y-2">
+            <div className="w-full min-w-0 space-y-2">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[#D1FAE5] text-[11px] font-semibold tracking-wide">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#34D399] opacity-75"></span>
@@ -185,7 +185,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                 </span>
                 <span>Live · Smart Farming Platform</span>
               </div>
-              <h1 className="text-3xl sm:text-4xl font-bold font-heading text-white tracking-tight leading-tight">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-heading text-white tracking-tight leading-tight break-words">
                 {heroHeading}
               </h1>
               <p className="text-sm sm:text-base text-[#D1FAE5]/90 max-w-xl leading-relaxed">
@@ -204,11 +204,11 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           </div>
 
           {/* 4 Clean Quick Metrics */}
-          <div className="relative grid grid-cols-2 lg:grid-cols-4 gap-3 pt-5 border-t border-white/10">
+          <div className="relative grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 pt-5 border-t border-white/10">
             {/* 1. Location */}
             <button
               onClick={() => setIsLocationModalOpen(true)}
-              className="p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer"
+              className="p-3 sm:p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer min-w-0"
             >
               <div className="text-[11px] text-[#A7F3D0] flex items-center gap-1.5 font-medium">
                 <MapPin className="w-3.5 h-3.5 text-[#6EE7B7] shrink-0" />
@@ -223,7 +223,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             {/* 2. Weather */}
             <button
               onClick={() => onNavigate('weather')}
-              className="p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer"
+              className="p-3 sm:p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer min-w-0"
             >
               <div className="text-[11px] text-[#A7F3D0] flex items-center gap-1.5 font-medium">
                 <Sun className="w-3.5 h-3.5 text-amber-300 shrink-0" />
@@ -238,7 +238,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             {/* 3. Crop Health */}
             <button
               onClick={() => onNavigate('myFarms')}
-              className="p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer"
+              className="p-3 sm:p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer min-w-0"
             >
               <div className="text-[11px] text-[#A7F3D0] flex items-center gap-1.5 font-medium">
                 <Wheat className="w-3.5 h-3.5 text-[#6EE7B7] shrink-0" />
@@ -253,7 +253,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             {/* 4. Soil Moisture */}
             <button
               onClick={() => onNavigate('pump')}
-              className="p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer"
+              className="p-3 sm:p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer min-w-0"
             >
               <div className="text-[11px] text-[#A7F3D0] flex items-center gap-1.5 font-medium">
                 <Droplets className="w-3.5 h-3.5 text-cyan-300 shrink-0" />
@@ -271,7 +271,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       {/* ================================================== */}
       {/* 2. QUICK ACTIONS (Large, clean, simple buttons) */}
       {/* ================================================== */}
-      <div className="space-y-2.5">
+      <div className="w-full min-w-0 space-y-2.5">
         <div className="flex items-center justify-between">
           <h2 className="text-sm font-bold text-[#172B24] font-heading">
             Quick actions
@@ -287,7 +287,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               <button
                 key={act.id}
                 onClick={() => onNavigate(act.route || act.id)}
-                className="premium-card premium-card-hover p-4 flex flex-col items-center justify-center text-center cursor-pointer group"
+                className="premium-card premium-card-hover p-3 sm:p-4 flex flex-col items-center justify-center text-center cursor-pointer group h-full min-w-0"
               >
                 {VisualIcon ? (
                   <span className={`w-11 h-11 rounded-2xl ring-1 flex items-center justify-center mb-2 ${visual.tint}`}>
@@ -307,7 +307,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       {/* ================================================== */}
       {/* 3. MY CROPS (3-4 Large Cards with Realistic Photos) */}
       {/* ================================================== */}
-      <div className="space-y-3">
+      <div className="w-full min-w-0 space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <h2 className="text-base font-bold text-[#172B24] font-heading">
@@ -332,11 +332,11 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             <div
               key={crop.id}
               onClick={() => onNavigate('myFarms')}
-              className="premium-card premium-card-hover overflow-hidden cursor-pointer flex flex-col justify-between group"
+              className="premium-card premium-card-hover overflow-hidden cursor-pointer flex flex-col justify-between group w-full min-w-0"
             >
               {/* Realistic Crop Image — gradient behind it so a failed
                   image never shows a broken-image icon in the card. */}
-              <div className="relative w-full h-40 bg-gradient-to-br from-[#D1FAE5] via-[#ECFDF5] to-amber-50 overflow-hidden">
+              <div className="relative w-full aspect-[16/10] bg-gradient-to-br from-[#D1FAE5] via-[#ECFDF5] to-amber-50 overflow-hidden">
                 <img
                   onError={(e) => {
                     e.currentTarget.style.opacity = '0';
@@ -402,7 +402,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           from your crops, health and moisture from live context, income and
           profit from your recorded finance summary. No forecast or trend
           percentages are invented here. */}
-      <div className="space-y-3">
+      <div className="w-full min-w-0 space-y-3">
         <div className="flex items-center justify-between">
           <h2 className="text-base font-bold text-[#172B24] font-heading">Farm analytics</h2>
           <span className="text-xs text-[#718078]">From your recorded farm data</span>
@@ -418,7 +418,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           ].map((stat) => {
             const Icon = stat.icon;
             return (
-              <button key={stat.label} onClick={stat.onClick} className="ds-card ds-card-hover p-4 text-left">
+              <button key={stat.label} onClick={stat.onClick} className="ds-card ds-card-hover p-3 sm:p-4 text-left min-w-0">
                 <span className="w-9 h-9 rounded-xl bg-[#ECFDF5] text-[#064E3B] flex items-center justify-center mb-3">
                   <Icon className="w-4 h-4" />
                 </span>
@@ -528,7 +528,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               </button>
             </div>
 
-            <div className="space-y-2.5">
+            <div className="w-full min-w-0 space-y-2.5">
               {tasks.map((task) => (
                 <div
                   key={task.id}
@@ -644,7 +644,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               </button>
             </div>
 
-            <div className="space-y-2.5">
+            <div className="w-full min-w-0 space-y-2.5">
               {nearbyMandis.slice(0, 3).map((mandi) => (
                 <div
                   key={mandi.id}
@@ -731,7 +731,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               </button>
             </div>
 
-            <form onSubmit={handleCreateTask} className="space-y-3.5">
+            <form onSubmit={handleCreateTask} className="w-full min-w-0 space-y-3.5">
               <div>
                 <label className="block text-xs font-bold text-[#3E5248] mb-1">Task Title</label>
                 <input

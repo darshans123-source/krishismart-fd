@@ -76,7 +76,7 @@ export const PremiumPage: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-8 pb-12 animate-in fade-in">
+    <div className="w-full min-w-0 space-y-8 pb-12 animate-in fade-in">
       {/* Top Banner */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-extrabold border border-amber-300">
@@ -134,7 +134,7 @@ export const PremiumPage: React.FC = () => {
               </div>
 
               {/* Features list */}
-              <div className="space-y-2.5 pt-4 text-xs">
+              <div className="w-full min-w-0 space-y-2.5 pt-4 text-xs">
                 {plan.features.map((feat, idx) => (
                   <div key={idx} className="flex items-start gap-2">
                     <CheckCircle2

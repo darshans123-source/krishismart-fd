@@ -91,7 +91,7 @@ export const MyFarmsPage: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-8 pb-12 animate-in fade-in">
+    <div className="w-full min-w-0 space-y-8 pb-12 animate-in fade-in">
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -122,7 +122,7 @@ export const MyFarmsPage: React.FC = () => {
       </div>
 
       {/* Farm Parcel Selector Tabs */}
-      <div className="flex gap-3 overflow-x-auto pb-1">
+      <div className="flex gap-3 overflow-x-auto pb-1 w-full min-w-0">
         {farms.map((farm) => {
           const isSelected = farm.id === selectedFarmId;
           const farmCropCount = crops.filter((c) => c.farmId === farm.id).length;
@@ -178,7 +178,7 @@ export const MyFarmsPage: React.FC = () => {
       )}
 
       {/* Crops List with 5-Stage Timelines */}
-      <div className="space-y-6">
+      <div className="w-full min-w-0 space-y-6">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-extrabold text-[#172B24] font-heading">
             Active Crops in {selectedFarm?.name || 'Farm'}
@@ -253,7 +253,7 @@ export const MyFarmsPage: React.FC = () => {
               </div>
 
               {/* 5-STAGE VISUAL TIMELINE */}
-              <div className="space-y-3">
+              <div className="w-full min-w-0 space-y-3">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-bold text-[#3E5248] font-heading uppercase tracking-wider text-[10px]">
                     Visual Crop Timeline
@@ -329,7 +329,7 @@ export const MyFarmsPage: React.FC = () => {
               </button>
             </div>
 
-            <form onSubmit={handleAddCropSubmit} className="space-y-3.5 text-xs">
+            <form onSubmit={handleAddCropSubmit} className="w-full min-w-0 space-y-3.5 text-xs">
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block font-bold text-[#3E5248] mb-1">Crop Name</label>
@@ -355,7 +355,7 @@ export const MyFarmsPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
                   <label className="block font-bold text-[#3E5248] mb-1">Area (Acres)</label>
                   <input
@@ -456,7 +456,7 @@ export const MyFarmsPage: React.FC = () => {
               </button>
             </div>
 
-            <form onSubmit={handleAddFarmSubmit} className="space-y-3.5 text-xs">
+            <form onSubmit={handleAddFarmSubmit} className="w-full min-w-0 space-y-3.5 text-xs">
               <div>
                 <label className="block font-bold text-[#3E5248] mb-1">Farm Parcel Name</label>
                 <input

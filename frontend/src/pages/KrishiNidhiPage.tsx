@@ -75,7 +75,7 @@ export const KrishiNidhiPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 pb-12 animate-in fade-in">
+    <div className="w-full min-w-0 space-y-8 pb-12 animate-in fade-in">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -233,9 +233,9 @@ export const KrishiNidhiPage: React.FC = () => {
             <p className="text-xs text-[#718078]">Major operational cost drivers</p>
           </div>
 
-          <div className="space-y-3 text-xs">
+          <div className="w-full min-w-0 space-y-3 text-xs">
             {categoryBreakdownData.map((cat, i) => (
-              <div key={i} className="space-y-1">
+              <div key={i} className="w-full min-w-0 space-y-1">
                 <div className="flex justify-between font-bold text-[#3E5248]">
                   <span>{cat.category}</span>
                   <span>₹{cat.amount.toLocaleString('en-IN')}</span>
@@ -318,7 +318,7 @@ export const KrishiNidhiPage: React.FC = () => {
               </button>
             </div>
 
-            <form onSubmit={handleAddTxSubmit} className="space-y-3.5 text-xs">
+            <form onSubmit={handleAddTxSubmit} className="w-full min-w-0 space-y-3.5 text-xs">
               {/* Type Switcher */}
               <div className="grid grid-cols-2 gap-2">
                 <button

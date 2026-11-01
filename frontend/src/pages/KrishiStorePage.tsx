@@ -67,7 +67,7 @@ export const KrishiStorePage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 pb-16 animate-in fade-in">
+    <div className="w-full min-w-0 space-y-8 pb-16 animate-in fade-in">
       {/* Agricultural Store Hero Banner */}
       <div className="relative rounded-2xl overflow-hidden shadow-sm border border-[#E5EDE7]">
         <div className="relative h-48 sm:h-64 w-full overflow-hidden bg-[#172B24]">
@@ -341,7 +341,7 @@ export const KrishiStorePage: React.FC = () => {
               </button>
             </div>
 
-            <form onSubmit={handleCheckoutSubmit} className="space-y-4 text-xs">
+            <form onSubmit={handleCheckoutSubmit} className="w-full min-w-0 space-y-4 text-xs">
               <div>
                 <label className="block font-bold text-[#3E5248] mb-1">Delivery Address & Farm Gate</label>
                 <textarea
@@ -403,7 +403,7 @@ export const KrishiStorePage: React.FC = () => {
               </button>
             </div>
 
-            <div className="space-y-4">
+            <div className="w-full min-w-0 space-y-4">
               {orders.map((ord) => (
                 <div key={ord.id} className="p-4 rounded-2xl border border-[#E5EDE7] space-y-3 bg-[#F7FAF7]/50">
                   <div className="flex items-center justify-between">
@@ -423,7 +423,7 @@ export const KrishiStorePage: React.FC = () => {
                   {/* Step Tracking Progress Bar */}
                   <div className="pt-2 border-t border-[#E5EDE7]/80 space-y-2">
                     <div className="text-[10px] font-bold text-[#8A9A90] uppercase">Live Delivery Milestones</div>
-                    <div className="space-y-2 text-xs">
+                    <div className="w-full min-w-0 space-y-2 text-xs">
                       {ord.trackingSteps.map((st, i) => (
                         <div key={i} className="flex items-center gap-2">
                           <CheckCircle2

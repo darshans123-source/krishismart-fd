@@ -49,7 +49,7 @@ export const MarketIntelligencePage: React.FC = () => {
   }).sort((a, b) => b.netRevenue - a.netRevenue);
 
   return (
-    <div className="space-y-8 pb-12 animate-in fade-in">
+    <div className="w-full min-w-0 space-y-8 pb-12 animate-in fade-in">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -148,7 +148,7 @@ export const MarketIntelligencePage: React.FC = () => {
                 </div>
                 <div className="text-xs text-[#8A9A90] mb-3">{res.mandi.district}, {res.mandi.state}</div>
 
-                <div className="space-y-1.5 text-xs pt-3 border-t border-[#3E5248]/80">
+                <div className="w-full min-w-0 space-y-1.5 text-xs pt-3 border-t border-[#3E5248]/80">
                   <div className="flex justify-between text-[#CBD8D0]">
                     <span>Mandi Price:</span>
                     <strong className="text-white">₹{res.mandi.currentPrice}/qtl</strong>

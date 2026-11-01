@@ -28,7 +28,7 @@ export const KrishiJourneyPage: React.FC = () => {
   const unlockedCount = achievements.filter((a) => a.unlocked).length;
 
   return (
-    <div className="space-y-8 pb-12 animate-in fade-in">
+    <div className="w-full min-w-0 space-y-8 pb-12 animate-in fade-in">
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -82,7 +82,7 @@ export const KrishiJourneyPage: React.FC = () => {
         </div>
 
         {/* Level XP Progress Bar */}
-        <div className="space-y-2 pt-2 border-t border-[#243A32]">
+        <div className="w-full min-w-0 space-y-2 pt-2 border-t border-[#243A32]">
           <div className="flex justify-between text-xs text-[#CBD8D0] font-semibold">
             <span>Level {currentLevel} Progress ({xpInCurrentLevel} / 1000 XP)</span>
             <span className="text-amber-300">{1000 - xpInCurrentLevel} XP until Level {currentLevel + 1}</span>
