@@ -5,9 +5,8 @@ import React from 'react';
  *
  * Shown only on initial application mount (App renders it once, then
  * removes it after the fade-out animation). Tab navigation never
- * remounts App, so it never reappears on navigation. There is no
- * artificial loading delay: the splash is only as long as its own
- * fade-in / fade-out animation (~1.1s total), and reduced-motion
+ * remounts App, so it never reappears on navigation. Total splash
+ * time is 5 seconds (fade out starts at 4.5s), and reduced-motion
  * users get the animation-free version via CSS.
  */
 export const SplashScreen: React.FC<{ fading: boolean }> = ({ fading }) => {
