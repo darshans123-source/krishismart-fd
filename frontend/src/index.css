@@ -286,3 +286,13 @@
     margin-right: 0 !important;
   }
 }
+
+@keyframes splash-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.splash-float { animation: splash-float 6s ease-in-out infinite; }
+.splash-float-slow { animation: splash-float 8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .splash-float, .splash-float-slow { animation: none; }
+}

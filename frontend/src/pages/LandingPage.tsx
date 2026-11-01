@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Sprout,
   BrainCircuit,
@@ -35,6 +35,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   onSelectModule
 }) => {
   const { t } = useLanguage();
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
   const corePillars = [
     {
@@ -116,106 +117,164 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
   return (
     <div className="min-h-screen bg-[#F7FAF7] text-[#172B24] overflow-hidden">
-      {/* 1. HERO SECTION */}
-      <section className="relative pt-12 pb-20 lg:pt-16 lg:pb-24 overflow-hidden bg-[#F7FAF7] border-b border-[#E5EDE7]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Hero Copy */}
+      {/* 1. SPLASH HERO — full-screen real farm photo, 3D glass scene */}
+      <section
+        className="relative min-h-[calc(100svh-7rem)] md:min-h-[calc(100svh-4rem)] overflow-hidden text-white"
+        style={{ perspective: '1200px' }}
+        onMouseMove={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          setTilt({ x: Math.max(-6, Math.min(6, x * 12)), y: Math.max(-6, Math.min(6, -y * 12)) });
+        }}
+        onMouseLeave={() => setTilt({ x: 0, y: 0 })}
+      >
+        {/* Real full-screen background photo — golden field, verified to load */}
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=2400&auto=format&fit=crop&q=80"
+            alt="Golden wheat field at sunset in India"
+            className="h-full w-full object-cover scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#022C22]/80 via-[#022C22]/40 to-[#022C22]/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#022C22]/85 via-[#022C22]/30 to-transparent" />
+        </div>
+
+        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 min-h-[calc(100svh-7rem)] md:min-h-[calc(100svh-4rem)] flex flex-col justify-center py-14 lg:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            {/* Left: headline, CTAs, trust stats */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#D1FAE5] text-[#064E3B] text-xs font-bold shadow-2xs">
-                <Sprout className="w-3.5 h-3.5 text-[#064E3B]" />
-                <span>Agricultural Technology Platform for Farmers</span>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/25 backdrop-blur-md text-xs font-bold shadow-lg">
+                <img src="/logo-icon.svg" alt="KrishiSmart AI" className="w-5 h-5 rounded-md" />
+                <span>KRISHISMART AI</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#34D399]" />
+                <span className="text-[#A7F3D0]">Live for Indian Farmers</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#172B24] leading-[1.15] font-heading">
-                Smart Farming. Better Decisions. Better Future.
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] font-heading drop-shadow-[0_4px_24px_rgba(0,0,0,0.45)]">
+                Smart Farming.
+                <br />
+                Better Decisions.
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6EE7B7] via-[#34D399] to-amber-300">
+                  Better Future.
+                </span>
               </h1>
 
-              <p className="text-base sm:text-lg text-[#5A6E64] leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              <p className="text-base sm:text-lg text-white/90 leading-relaxed max-w-2xl mx-auto lg:mx-0 drop-shadow">
                 A simple, human-friendly agriculture platform designed for real farmers. Monitor crop health, automated water pumps, drone spraying, and real-time mandi prices in one place.
               </p>
 
-              {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                 <button
                   onClick={onGetStarted}
-                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#064E3B] hover:bg-[#064E3B] active:scale-95 text-white font-bold text-base shadow-lg transition-all flex items-center justify-center gap-2.5 group cursor-pointer"
+                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-[#059669] to-[#10B981] hover:from-[#047857] hover:to-[#059669] active:scale-95 text-white font-bold text-base shadow-[0_20px_40px_-10px_rgba(5,150,105,0.7)] transition-all flex items-center justify-center gap-2.5 group cursor-pointer"
                 >
                   <span>{t('getStarted')}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
-
                 <button
                   onClick={onExploreApp}
-                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white hover:bg-[#F7FAF7] active:scale-95 text-[#243A32] font-bold text-base border border-[#CBD8D0] shadow-2xs transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/20 active:scale-95 text-white font-bold text-base border border-white/30 backdrop-blur-md shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>{t('exploreApp')}</span>
-                  <ChevronRight className="w-4 h-4 text-[#718078]" />
+                  <ChevronRight className="w-4 h-4 text-white/80" />
                 </button>
               </div>
 
-              {/* Trust Indicators */}
-              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-[#E5EDE7] text-left">
-                <div>
-                  <div className="text-xl sm:text-2xl font-black text-[#064E3B] font-heading">50,000+</div>
-                  <div className="text-xs text-[#718078] font-medium">Active Farmers</div>
-                </div>
-                <div>
-                  <div className="text-xl sm:text-2xl font-black text-[#064E3B] font-heading">94.8%</div>
-                  <div className="text-xs text-[#718078] font-medium">Crop Health Accuracy</div>
-                </div>
-                <div>
-                  <div className="text-xl sm:text-2xl font-black text-[#064E3B] font-heading">₹2.4 Cr+</div>
-                  <div className="text-xs text-[#718078] font-medium">Extra Value Realized</div>
-                </div>
+              {/* Trust stats in glass */}
+              <div className="grid grid-cols-3 gap-3 sm:gap-4 pt-6">
+                {[
+                  { value: '50,000+', label: 'Active Farmers' },
+                  { value: '94.8%', label: 'Crop Health Accuracy' },
+                  { value: '₹2.4 Cr+', label: 'Extra Value Realized' },
+                ].map((s) => (
+                  <div key={s.label} className="rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md p-3 sm:p-4 text-center lg:text-left shadow-lg">
+                    <div className="text-xl sm:text-2xl font-black font-heading text-white">{s.value}</div>
+                    <div className="text-[11px] sm:text-xs text-white/75 font-medium">{s.label}</div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Right Hero Visual with Authentic Agriculture Imagery */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative mx-auto max-w-md lg:max-w-none">
-                {/* Hero Agricultural Card */}
-                <div className="bg-white rounded-2xl border border-[#E5EDE7] shadow-md overflow-hidden space-y-4">
-                  <div className="relative h-56 w-full bg-[#EFF4EF] overflow-hidden">
+            {/* Right: real 3D scene — mouse tilt + layered depth, no flat card */}
+            <div className="lg:col-span-5 relative" style={{ transformStyle: 'preserve-3d' }}>
+              <div
+                className="relative mx-auto max-w-md lg:max-w-none transition-transform duration-300 ease-out will-change-transform"
+                style={{
+                  transform: `rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
+                  transformStyle: 'preserve-3d',
+                }}
+              >
+                {/* Main glass photo card, deep shadow */}
+                <div
+                  className="rounded-[1.75rem] border border-white/30 bg-white/10 backdrop-blur-xl overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.65)]"
+                  style={{ transform: 'translateZ(30px)' }}
+                >
+                  <div className="relative h-56 sm:h-64 w-full overflow-hidden">
                     <img
-                      src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=800&auto=format&fit=crop&q=80"
-                      alt="Farmer in healthy agricultural field"
+                      src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=1200&auto=format&fit=crop&q=80"
+                      alt="Farmer in a healthy agricultural field"
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#022C22]/80 via-transparent to-transparent flex items-end p-4">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#022C22]/85 via-transparent to-transparent flex items-end p-4">
                       <div className="text-white">
                         <div className="text-xs font-bold text-[#6EE7B7]">Live Farm Monitoring</div>
                         <div className="text-base font-extrabold">Cauvery Valley Field 2 (Tomato)</div>
                       </div>
                     </div>
                   </div>
-
-                  {/* Clean Metrics Grid */}
-                  <div className="p-4 grid grid-cols-2 gap-2.5">
-                    <div className="p-3 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7]">
-                      <div className="text-[10px] text-[#8A9A90] font-bold uppercase">Soil Moisture</div>
-                      <div className="text-base font-bold text-[#172B24] mt-0.5">58% Optimal</div>
+                  <div className="p-4 grid grid-cols-2 gap-2.5 bg-[#022C22]/40">
+                    <div className="p-3 rounded-2xl bg-white/90 border border-white/50 text-[#172B24]">
+                      <div className="text-[10px] font-bold uppercase text-[#718078]">Soil Moisture</div>
+                      <div className="text-base font-bold mt-0.5">58% Optimal</div>
                       <div className="text-[10px] text-[#064E3B] font-semibold">Pump Ready</div>
                     </div>
-                    <div className="p-3 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7]">
-                      <div className="text-[10px] text-[#8A9A90] font-bold uppercase">Mandi Rate</div>
-                      <div className="text-base font-bold text-[#172B24] mt-0.5">₹31/kg</div>
-                      <div className="text-[10px] text-[#064E3B] font-semibold">+38% 25-day trend</div>
-                    </div>
-                    <div className="p-3 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7]">
-                      <div className="text-[10px] text-[#8A9A90] font-bold uppercase">Farm Weather</div>
-                      <div className="text-base font-bold text-[#172B24] mt-0.5">29.4°C Calm</div>
+                    <div className="p-3 rounded-2xl bg-white/90 border border-white/50 text-[#172B24]">
+                      <div className="text-[10px] font-bold uppercase text-[#718078]">Farm Weather</div>
+                      <div className="text-base font-bold mt-0.5">29.4°C Calm</div>
                       <div className="text-[10px] text-[#718078]">Good for spraying</div>
                     </div>
-                    <div className="p-3 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7]">
-                      <div className="text-[10px] text-[#8A9A90] font-bold uppercase">Drone Status</div>
+                    <div className="p-3 rounded-2xl bg-white/90 border border-white/50 text-[#172B24]">
+                      <div className="text-[10px] font-bold uppercase text-[#718078]">Mandi Rate</div>
+                      <div className="text-base font-bold mt-0.5">₹31/kg</div>
+                      <div className="text-[10px] text-[#064E3B] font-semibold">+38% 25-day trend</div>
+                    </div>
+                    <div className="p-3 rounded-2xl bg-white/90 border border-white/50 text-[#172B24]">
+                      <div className="text-[10px] font-bold uppercase text-[#718078]">Drone Status</div>
                       <div className="text-base font-bold text-[#064E3B] mt-0.5">Ready to Fly</div>
                       <div className="text-[10px] text-[#718078]">14 min spray flight</div>
                     </div>
                   </div>
                 </div>
+
+                {/* Floating 3D chips, in front of the main card */}
+                <div
+                  className="splash-float absolute -top-4 -left-2 sm:-left-6 rounded-2xl bg-white text-[#172B24] px-3.5 py-2.5 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.55)] border border-white/60 flex items-center gap-2"
+                  style={{ transform: 'translateZ(60px)' }}
+                >
+                  <BrainCircuit className="w-5 h-5 text-[#059669]" />
+                  <div>
+                    <div className="text-xs font-extrabold leading-none">AI Crop Doctor</div>
+                    <div className="text-[10px] text-[#059669] font-bold mt-0.5">95%+ Accuracy</div>
+                  </div>
+                </div>
+                <div
+                  className="splash-float-slow absolute -bottom-5 -right-2 sm:-right-4 rounded-2xl bg-[#064E3B] text-white px-3.5 py-2.5 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.55)] border border-[#34D399]/40 flex items-center gap-2"
+                  style={{ transform: 'translateZ(50px)' }}
+                >
+                  <TrendingUp className="w-5 h-5 text-amber-300" />
+                  <div>
+                    <div className="text-xs font-extrabold leading-none">KrishiBhavishya</div>
+                    <div className="text-[10px] text-amber-300 font-bold mt-0.5">+38% Profit Lift</div>
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+
+          <div className="hidden lg:flex justify-center pt-10 text-white/70 text-xs font-semibold items-center gap-2">
+            Scroll to explore <ChevronRight className="w-4 h-4 rotate-90 animate-bounce" />
           </div>
         </div>
       </section>
