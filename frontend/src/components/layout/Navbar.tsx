@@ -137,7 +137,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   Smart Farming
                 </span>
               </div>
-              <p className="hidden lg:block text-[11px] text-[#718078] font-medium -mt-0.5">
+              <p className="hidden lg:block text-xs text-[#718078] font-medium -mt-0.5">
                 {t('tagline')}
               </p>
             </div>

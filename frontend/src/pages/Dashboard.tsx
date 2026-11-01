@@ -18,7 +18,6 @@ import {
   Volume2,
   VolumeX,
   MapPin,
-  HelpCircle,
   ArrowRight,
   Activity,
   Wheat,
@@ -120,8 +119,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
   // Quick action buttons matching specification with dynamic CMS fallback
   const defaultQuickActions = [
     { id: 'aiHub', label: 'Crop Scan', icon: '🌱', route: 'aiHub', bg: 'bg-[#ECFDF5] hover:bg-[#D1FAE5] text-[#064E3B] border-[#A7F3D0]' },
-    { id: 'weather', label: 'Weather', icon: '🌦️', route: 'weather', bg: 'bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-200' },
-    { id: 'market', label: 'Market', icon: '📈', route: 'market', bg: 'bg-blue-50 hover:bg-blue-100 text-blue-900 border-blue-200' },
+    { id: 'weather', label: 'Weather', icon: '🌦️', route: 'weather', bg: 'bg-amber-50 hover:bg-amber-100 text-[#243A32] border-amber-200' },
+    { id: 'market', label: 'Market', icon: '📈', route: 'market', bg: 'bg-blue-50 hover:bg-blue-100 text-[#243A32] border-blue-200' },
     { id: 'finance', label: 'Finance', icon: '💰', route: 'finance', bg: 'bg-teal-50 hover:bg-teal-100 text-teal-900 border-teal-200' },
     { id: 'drone', label: 'Drone', icon: '🚁', route: 'drone', bg: 'bg-purple-50 hover:bg-purple-100 text-purple-900 border-purple-200' },
     { id: 'pump', label: 'Pump', icon: '💧', route: 'pump', bg: 'bg-cyan-50 hover:bg-cyan-100 text-cyan-900 border-cyan-200' },
@@ -154,12 +153,20 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       .join(' ');
   const hourNow = new Date().getHours();
   const timeGreeting = hourNow < 12 ? 'Good morning' : hourNow < 17 ? 'Good afternoon' : 'Good evening';
-  const capsName = (user?.name || 'Farmer').split(' ')[0].toUpperCase();
+  // Usability fix (issue 8): sentence case, never ALL-CAPS. If a CMS
+  // heading was entered in all caps, normalise it to sentence case too.
+  const toSentenceCase = (s: string) => {
+    const clean = s.replace(/🌱/g, '').trim();
+    if (clean && clean === clean.toUpperCase() && clean.length > 10) {
+      const lower = clean.toLowerCase();
+      return lower.charAt(0).toUpperCase() + lower.slice(1);
+    }
+    return clean;
+  };
   const heroHeading = heroConfig?.mainHeading
-    ? heroConfig.mainHeading.replace(/\{name\}/gi, formatDisplayName(user?.name)).replace(/🌱/g, '').trim()
-    : `${timeGreeting.toUpperCase()}, ${capsName}!`;
+    ? toSentenceCase(heroConfig.mainHeading.replace(/\{name\}/gi, formatDisplayName(user?.name)))
+    : `${timeGreeting}, ${formatDisplayName(user?.name).split(' ')[0]}!`;
   const heroSubtitle = heroConfig?.subtitle || 'Your farm intelligence at a glance. Monitor your crops, understand your soil and make smarter farming decisions.';
-  const heroBtnText = heroConfig?.buttonText || `Farm Health: ${aiFarmHealth.overall}/100`;
 
   const activeQuickActions = (cmsDashboard?.quickActions && Array.isArray(cmsDashboard.quickActions) && cmsDashboard.quickActions.length > 0)
     ? cmsDashboard.quickActions.filter((qa: any) => qa.visible !== false).sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
@@ -171,12 +178,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       {/* 1. TOP 5-SECOND OVERVIEW & GREETING BANNER */}
       {/* ================================================== */}
       {showHero && (
-        <div className="premium-hero rounded-[1.75rem] w-full min-w-0 overflow-hidden text-white p-4 sm:p-6 lg:p-8 border border-[#064E3B]/20 space-y-5">
+        <div className="premium-hero rounded-2xl w-full min-w-0 overflow-hidden text-white p-4 sm:p-6 lg:p-8 border border-[#064E3B]/20 space-y-5">
           <div className="pointer-events-none absolute -right-10 -top-16 w-64 h-64 rounded-full bg-[#34D399]/20 blur-3xl" />
           <div className="pointer-events-none absolute -left-8 bottom-0 w-48 h-48 rounded-full bg-amber-400/10 blur-3xl" />
           <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="w-full min-w-0 space-y-2">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[#D1FAE5] text-[11px] font-semibold tracking-wide">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[#D1FAE5] text-xs font-semibold tracking-wide">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#34D399] opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#34D399]"></span>
@@ -192,14 +199,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               </p>
             </div>
 
-            <button
-              onClick={() => setShowHealthModal(true)}
-              className="px-4 py-2.5 rounded-full bg-white/75 backdrop-blur-xl hover:bg-[#ECFDF5] text-[#022C22] text-xs font-bold flex items-center gap-2 self-start md:self-auto transition-all shadow-md cursor-pointer"
-            >
-              <HelpCircle className="w-4 h-4 text-[#064E3B]" />
-              <span>{heroBtnText}</span>
-              <ChevronRight className="w-3.5 h-3.5" />
-            </button>
+            {/* Usability fix (issue 11): no second Farm Health button here.
+                The Farm Health Score card in the metrics row below opens the
+                same explanation modal — one focal point, not two. */}
           </div>
 
           {/* 4 Clean Quick Metrics */}
@@ -207,76 +209,76 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             {/* 1. Location */}
             <button
               onClick={() => setIsLocationModalOpen(true)}
-              className="p-3 sm:p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer min-w-0"
+              className="btn btn-card-dark flex-col items-start group min-w-0"
             >
-              <div className="text-[11px] text-[#A7F3D0] flex items-center gap-1.5 font-medium">
+              <div className="text-xs text-[#A7F3D0] flex items-center gap-1.5 font-medium">
                 <MapPin className="w-3.5 h-3.5 text-[#6EE7B7] shrink-0" />
-                <span className="uppercase tracking-wider">Current Location</span>
+                <span className="tracking-wide">Current location</span>
               </div>
               <div className="text-sm font-bold text-white mt-1 truncate group-hover:text-[#A7F3D0]">
                 {locationState.address.district || 'Raichur'}, {locationState.address.state || 'Karnataka'}
               </div>
-              <div className="text-[10px] text-[#6EE7B7] mt-0.5">Click to change</div>
+              <div className="text-xs text-[#6EE7B7] mt-0.5">Click to change</div>
             </button>
 
             {/* 2. Weather */}
             <button
               onClick={() => onNavigate('weather')}
-              className="p-3 sm:p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer min-w-0"
+              className="btn btn-card-dark flex-col items-start group min-w-0"
             >
-              <div className="text-[11px] text-[#A7F3D0] flex items-center gap-1.5 font-medium">
+              <div className="text-xs text-[#A7F3D0] flex items-center gap-1.5 font-medium">
                 <Sun className="w-3.5 h-3.5 text-amber-300 shrink-0" />
-                <span className="uppercase tracking-wider">Weather</span>
+                <span className="tracking-wide">Weather</span>
               </div>
               <div className="text-sm font-bold text-white mt-1 group-hover:text-[#A7F3D0]">
                 {weather.temp}°C • {weather.condition}
               </div>
-              <div className="text-[10px] text-[#6EE7B7] mt-0.5">Wind: {weather.windSpeed} km/h</div>
+              <div className="text-xs text-[#6EE7B7] mt-0.5">Wind: {weather.windSpeed} km/h</div>
             </button>
 
             {/* 3. Crop Health */}
             <button
               onClick={() => onNavigate('myFarms')}
-              className="p-3 sm:p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer min-w-0"
+              className="btn btn-card-dark flex-col items-start group min-w-0"
             >
-              <div className="text-[11px] text-[#A7F3D0] flex items-center gap-1.5 font-medium">
+              <div className="text-xs text-[#A7F3D0] flex items-center gap-1.5 font-medium">
                 <Wheat className="w-3.5 h-3.5 text-[#6EE7B7] shrink-0" />
-                <span className="uppercase tracking-wider">Crop Health</span>
+                <span className="tracking-wide">Crop health</span>
               </div>
               <div className="text-sm font-bold text-white mt-1 group-hover:text-[#A7F3D0]">
                 {aiFarmHealth.cropHealth}% Healthy
               </div>
-              <div className="text-[10px] text-[#6EE7B7] mt-0.5">{crops.length} crops active</div>
+              <div className="text-xs text-[#6EE7B7] mt-0.5">{crops.length} crops active</div>
             </button>
 
             {/* 4. Soil Moisture */}
             <button
               onClick={() => onNavigate('pump')}
-              className="p-3 sm:p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer min-w-0"
+              className="btn btn-card-dark flex-col items-start group min-w-0"
             >
-              <div className="text-[11px] text-[#A7F3D0] flex items-center gap-1.5 font-medium">
+              <div className="text-xs text-[#A7F3D0] flex items-center gap-1.5 font-medium">
                 <Droplets className="w-3.5 h-3.5 text-cyan-300 shrink-0" />
-                <span className="uppercase tracking-wider">Soil Moisture</span>
+                <span className="tracking-wide">Soil moisture</span>
               </div>
               <div className="text-sm font-bold text-white mt-1 group-hover:text-[#A7F3D0]">
                 {weather.soilMoisture}% (Optimal)
               </div>
-              <div className="text-[10px] text-[#6EE7B7] mt-0.5">Pump: {smartPump.status}</div>
+              <div className="text-xs text-[#6EE7B7] mt-0.5">Pump: {smartPump.status}</div>
             </button>
 
             {/* 5. Farm Health Score */}
             <button
               onClick={() => setShowHealthModal(true)}
-              className="p-3 sm:p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer min-w-0"
+              className="btn btn-card-dark flex-col items-start group min-w-0"
             >
-              <div className="text-[11px] text-[#A7F3D0] flex items-center gap-1.5 font-medium">
+              <div className="text-xs text-[#A7F3D0] flex items-center gap-1.5 font-medium">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#D6AD55] shrink-0" />
-                <span className="uppercase tracking-wider">Farm Health Score</span>
+                <span className="tracking-wide">Farm health score</span>
               </div>
               <div className="text-sm font-bold text-white mt-1 group-hover:text-[#A7F3D0]">
                 {aiFarmHealth.overall}/100
               </div>
-              <div className="text-[10px] text-[#6EE7B7] mt-0.5">Tap to see why</div>
+              <div className="text-xs text-[#6EE7B7] mt-0.5">Tap to see why</div>
             </button>
           </div>
         </div>
@@ -286,7 +288,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       {/* 2. QUICK ACTIONS (Large, clean, simple buttons) */}
       {/* ================================================== */}
       <div className="w-full min-w-0 space-y-2.5">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col items-start gap-0.5">
           <h2 className="text-sm font-bold text-[#172B24] font-heading">
             Quick actions
           </h2>
@@ -301,7 +303,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               <button
                 key={act.id}
                 onClick={() => onNavigate(act.route || act.id)}
-                className="premium-card premium-card-hover p-3 sm:p-4 flex flex-col items-center justify-center text-center cursor-pointer group h-full min-w-0"
+                className="btn btn-card flex-col items-center justify-center text-center group h-full min-w-0"
               >
                 {VisualIcon ? (
                   <span className={`w-11 h-11 rounded-2xl ring-1 flex items-center justify-center mb-2 ${visual.tint}`}>
@@ -311,7 +313,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                   <span className="text-2xl mb-1">{act.icon}</span>
                 )}
                 <span className="text-xs font-bold text-[#172B24]">{act.label || act.title}</span>
-                <span className="text-[10px] font-medium text-[#8A9A90] group-hover:text-[#064E3B] mt-0.5">Open →</span>
+                <span className="text-[10px] font-medium text-[#718078] group-hover:text-[#064E3B] mt-0.5">Open →</span>
               </button>
             );
           })}
@@ -334,7 +336,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
           <button
             onClick={() => onNavigate('myFarms')}
-            className="text-xs font-bold text-[#064E3B] hover:text-[#064E3B] flex items-center gap-1"
+            className="btn btn-ghost"
           >
             <span>View All Crops</span>
             <ChevronRight className="w-4 h-4" />
@@ -376,7 +378,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                   />
                   {crop.status}
                 </span>
-                <span className="absolute bottom-2 left-2 bg-[#172B24]/70 text-white backdrop-blur-xs text-[10px] font-bold px-2 py-0.5 rounded-md">
+                <span className="absolute bottom-2 left-2 bg-[#172B24]/70 text-white backdrop-blur-xs text-[10px] font-bold px-2 py-0.5 rounded-xl">
                   {crop.area} Acres
                 </span>
               </div>
@@ -392,10 +394,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                   </div>
                 </div>
 
-                {/* Next Task Highlight Box */}
+                {/* Next task Highlight Box */}
                 <div className="mt-2 p-2.5 rounded-xl bg-[#ECFDF5]/70 border border-[#D1FAE5] text-xs space-y-0.5">
-                  <div className="text-[10px] uppercase font-bold text-[#064E3B]">
-                    Next Task
+                  <div className="text-xs font-bold text-[#064E3B]">
+                    Next task
                   </div>
                   <div className="font-semibold text-[#064E3B] leading-snug">
                     {crop.nextTask || 'Scheduled: Weekly farm inspection'}
@@ -425,63 +427,68 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           <h2 className="text-base font-bold text-[#172B24] font-heading">Farm analytics</h2>
           <span className="text-xs text-[#718078]">From your recorded farm data</span>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          {[
-            { icon: Wheat, label: 'Total land', value: `${crops.reduce((sum, c) => sum + (c.area || 0), 0).toFixed(1)} acres`, sub: `${crops.length} fields`, onClick: () => onNavigate('myFarms') },
-            { icon: Sprout, label: 'Active crops', value: `${crops.length}`, sub: 'Currently monitored', onClick: () => onNavigate('myFarms') },
-            { icon: ShieldCheck, label: 'Farm health', value: `${aiFarmHealth.overall}/100`, sub: `${aiFarmHealth.cropHealth}% crop health`, onClick: () => setShowHealthModal(true) },
-            { icon: Droplets, label: 'Soil moisture', value: `${weather.soilMoisture}%`, sub: `Pump: ${smartPump.status}`, onClick: () => onNavigate('iot') },
-            { icon: Coins, label: 'Total income', value: `₹${financialSummary.totalIncome.toLocaleString('en-IN')}`, sub: 'Recorded income', onClick: () => onNavigate('finance') },
-            { icon: TrendingUp, label: 'Net profit', value: `₹${financialSummary.netProfit.toLocaleString('en-IN')}`, sub: `${financialSummary.profitMargin}% margin`, onClick: () => onNavigate('finance') },
-            { icon: Wheat, label: 'Estimated yield', value: `${(crops.reduce((sum, c) => sum + (c.projectedYieldKg || 0), 0) / 1000).toFixed(1)} tonnes`, sub: 'Sum of crop projections', onClick: () => onNavigate('myFarms') },
-            { icon: Coins, label: 'Expected revenue', value: `₹${crops.reduce((sum, c) => sum + (c.expectedRevenue || 0), 0).toLocaleString('en-IN')}`, sub: 'Sum of crop projections', onClick: () => onNavigate('finance') },
-          ].map((stat) => {
-            const Icon = stat.icon;
-            return (
-              <button key={stat.label} onClick={stat.onClick} className="ds-card ds-card-hover p-3 sm:p-4 text-left min-w-0">
-                <span className="w-9 h-9 rounded-xl bg-[#ECFDF5] text-[#064E3B] flex items-center justify-center mb-3">
-                  <Icon className="w-4 h-4" />
-                </span>
-                <span className="block text-[11px] font-semibold uppercase tracking-wide text-[#718078]">{stat.label}</span>
-                <span className="block text-base font-bold text-[#172B24] font-heading mt-0.5 truncate">{stat.value}</span>
-                <span className="block text-[11px] text-[#718078] mt-0.5 truncate">{stat.sub}</span>
-              </button>
-            );
-          })}
-        </div>
+        {/* Usability fix (issue 12): cards are grouped, not one flat row of 8.
+            Production = land, crops, health, moisture, yield.
+            Financials = income, profit, expected revenue. */}
+        {(['Production', 'Financials'] as const).map((groupName) => (
+          <div key={groupName} className="space-y-2">
+            <h3 className="text-xs font-bold text-[#064E3B] tracking-wide">{groupName}</h3>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+              {[
+            { icon: Wheat, group: 'Production', label: 'Total land', value: `${crops.reduce((sum, c) => sum + (c.area || 0), 0).toFixed(1)} acres`, sub: `${crops.length} fields`, onClick: () => onNavigate('myFarms') },
+            { icon: Sprout, group: 'Production', label: 'Active crops', value: `${crops.length}`, sub: 'Currently monitored', onClick: () => onNavigate('myFarms') },
+            { icon: ShieldCheck, group: 'Production', label: 'Farm health', value: `${aiFarmHealth.overall}/100`, sub: `${aiFarmHealth.cropHealth}% crop health`, onClick: () => setShowHealthModal(true) },
+            { icon: Droplets, group: 'Production', label: 'Soil moisture', value: `${weather.soilMoisture}%`, sub: `Pump: ${smartPump.status}`, onClick: () => onNavigate('iot') },
+            { icon: Coins, group: 'Financials', label: 'Total income', value: `₹${financialSummary.totalIncome.toLocaleString('en-IN')}`, sub: 'Recorded income', onClick: () => onNavigate('finance') },
+            { icon: TrendingUp, group: 'Financials', label: 'Net profit', value: `₹${financialSummary.netProfit.toLocaleString('en-IN')}`, sub: `${financialSummary.profitMargin}% margin`, onClick: () => onNavigate('finance') },
+            { icon: Wheat, group: 'Production', label: 'Estimated yield', value: `${(crops.reduce((sum, c) => sum + (c.projectedYieldKg || 0), 0) / 1000).toFixed(1)} tonnes`, sub: 'Sum of crop projections', onClick: () => onNavigate('myFarms') },
+            { icon: Coins, group: 'Financials', label: 'Expected revenue', value: `₹${crops.reduce((sum, c) => sum + (c.expectedRevenue || 0), 0).toLocaleString('en-IN')}`, sub: 'Sum of crop projections', onClick: () => onNavigate('finance') },
+              ].filter((stat) => stat.group === groupName).map((stat) => {
+                const Icon = stat.icon;
+                return (
+                  <button key={stat.label} onClick={stat.onClick} className="btn btn-card flex-col items-start min-w-0">
+                    <span className="w-9 h-9 rounded-xl bg-[#ECFDF5] text-[#064E3B] flex items-center justify-center mb-3">
+                      <Icon className="w-4 h-4" />
+                    </span>
+                    <span className="block text-xs font-semibold tracking-wide text-[#718078]">{stat.label}</span>
+                    <span className="block text-base font-bold text-[#172B24] font-heading mt-0.5 truncate">{stat.value}</span>
+                    <span className="block text-xs text-[#718078] mt-0.5 truncate">{stat.sub}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </div>
-
       {/* ================================================== */}
       {/* 4. FARM ADVICE & RECOMMENDATIONS (Natural Language) */}
       {/* ================================================== */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left Column (Farm Advice & Today's Recommendations) */}
+        {/* Left Column (Farm Advice & Today's recommendations) */}
         <div className="lg:col-span-8 space-y-6">
           {/* Farm Advice Card */}
           <div className="p-5 sm:p-6 premium-card space-y-4">
-            <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
+            <div className="border-b border-[#EFF4EF] pb-3 space-y-2">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-xl bg-[#D1FAE5] text-[#064E3B] flex items-center justify-center font-bold">
                   🌱
                 </div>
                 <div>
-                  <h2 className="text-sm font-extrabold text-[#172B24] uppercase tracking-wider font-heading">
+                  <h2 className="text-sm font-extrabold text-[#172B24] tracking-wide font-heading">
                     Farm Advice
                   </h2>
-                  <span className="text-[11px] text-[#718078]">
+                  <span className="text-xs text-[#718078]">
                     Daily summary for {locationState.address.district || 'Raichur'} • Updated just now
                   </span>
                 </div>
               </div>
-
+              {/* Usability fix (issue 13): Listen Advice sits directly under
+                  the heading/text it acts on, left-aligned, not far right. */}
               <button
                 onClick={handleToggleSpeakBriefing}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all border ${
-                  isSpeakingBriefing
-                    ? 'bg-rose-100 text-rose-800 border-rose-300 animate-pulse'
-                    : 'bg-[#F7FAF7] hover:bg-[#ECFDF5] text-[#3E5248] border-[#E5EDE7]'
-                }`}
+                className={`btn ${isSpeakingBriefing ? 'btn-primary' : 'btn-secondary'} self-start`}
                 title="Read advice aloud"
+                aria-label="Read farm advice aloud"
               >
                 {isSpeakingBriefing ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
                 <span>{isSpeakingBriefing ? 'Stop' : 'Listen Advice'}</span>
@@ -493,34 +500,34 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             </p>
             {/* 3 Actionable Natural Recommendations */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-              <div className="p-3 rounded-2xl bg-blue-50 border border-blue-100 text-blue-900 space-y-1">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-blue-700">
-                  Today's Recommendation
+              <div className="p-3 rounded-2xl bg-blue-50 border border-blue-100 text-[#243A32] space-y-1">
+                <div className="text-xs font-bold tracking-wide text-[#064E3B]">
+                  Today's recommendation
                 </div>
                 <div className="text-xs font-bold">Irrigation Advice</div>
-                <p className="text-[11px] text-blue-800 leading-snug">
+                <p className="text-xs text-[#243A32] leading-snug">
                   {weather.soilMoisture > 50
                     ? `Soil moisture is optimal (${weather.soilMoisture}%). Hold drip irrigation until evening.`
                     : 'Soil moisture is low. Recommended 45 minutes drip cycle tomorrow morning.'}
                 </p>
               </div>
 
-              <div className="p-3 rounded-2xl bg-amber-50 border border-amber-100 text-amber-900 space-y-1">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-amber-700">
-                  Possible Risk
+              <div className="p-3 rounded-2xl bg-amber-50 border border-amber-100 text-[#243A32] space-y-1">
+                <div className="text-xs font-bold tracking-wide text-[#064E3B]">
+                  Possible risk
                 </div>
                 <div className="text-xs font-bold">Crop Disease Alert</div>
-                <p className="text-[11px] text-amber-800 leading-snug">
+                <p className="text-xs text-[#243A32] leading-snug">
                   Humidity is {weather.humidity}%. Check tomato lower leaves for early blight and apply bio-spray.
                 </p>
               </div>
 
               <div className="p-3 rounded-2xl bg-[#ECFDF5] border border-[#D1FAE5] text-[#064E3B] space-y-1">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-[#064E3B]">
-                  AI Suggestion
+                <div className="text-xs font-bold tracking-wide text-[#064E3B]">
+                  AI suggestion
                 </div>
                 <div className="text-xs font-bold">Optimal Spray Window</div>
-                <p className="text-[11px] text-[#064E3B] leading-snug">
+                <p className="text-xs text-[#243A32] leading-snug">
                   Wind speed is calm ({weather.windSpeed} km/h). Safe for foliar application between 4:00 PM – 6:30 PM.
                 </p>
               </div>
@@ -540,7 +547,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               </div>
               <button
                 onClick={() => setShowAddTaskModal(true)}
-                className="px-3.5 py-1.5 rounded-xl bg-[#ECFDF5] hover:bg-[#D1FAE5] text-[#064E3B] text-xs font-bold flex items-center gap-1.5 transition-colors border border-[#A7F3D0]"
+                className="btn btn-primary"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add Task</span>
@@ -571,12 +578,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                     <div>
                       <div
                         className={`text-xs sm:text-sm font-bold ${
-                          task.completed ? 'line-through text-[#8A9A90]' : 'text-[#243A32]'
+                          task.completed ? 'line-through text-[#718078]' : 'text-[#243A32]'
                         }`}
                       >
                         {task.title}
                       </div>
-                      <div className="text-[11px] text-[#8A9A90] flex items-center gap-2 mt-0.5">
+                      <div className="text-[11px] text-[#718078] flex items-center gap-2 mt-0.5">
                         <span className="font-semibold text-[#064E3B]">{task.category}</span>
                         <span>•</span>
                         <span>Due {task.dueDate}</span>
@@ -606,7 +613,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           {/* KrishiBhavishya Spotlight (Simplified Selling Timeline) */}
           <div className="p-5 sm:p-6 rounded-2xl bg-amber-50/80 border border-amber-200/90 text-amber-950 space-y-3.5 shadow-2xs">
             <div className="flex items-center justify-between">
-              <span className="px-2.5 py-0.5 bg-amber-200/60 text-amber-900 border border-amber-300/60 text-[10px] font-black rounded-full uppercase">
+              <span className="px-2.5 py-0.5 bg-amber-200/60 text-[#243A32] border border-amber-300/60 text-[10px] font-black rounded-full uppercase">
                 KrishiBhavishya
               </span>
               <span className="text-[11px] font-bold text-amber-800">APMC Mandis</span>
@@ -624,11 +631,11 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             {/* 3 Price points */}
             <div className="grid grid-cols-3 gap-2 text-center pt-1">
               <div className="p-2 rounded-xl bg-white/75 backdrop-blur-xl border border-amber-200">
-                <div className="text-[10px] text-[#8A9A90] font-bold uppercase">Today</div>
+                <div className="text-[10px] text-[#718078] font-bold uppercase">Today</div>
                 <div className="text-sm font-black text-[#172B24] mt-0.5">₹24/kg</div>
               </div>
               <div className="p-2 rounded-xl bg-white/75 backdrop-blur-xl border border-amber-200">
-                <div className="text-[10px] text-[#8A9A90] font-bold uppercase">15 Days</div>
+                <div className="text-[10px] text-[#718078] font-bold uppercase">15 Days</div>
                 <div className="text-sm font-black text-amber-800 mt-0.5">₹29/kg</div>
               </div>
               <div className="p-2 rounded-xl bg-amber-100 border border-amber-300">
@@ -639,7 +646,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
             <button
               onClick={() => onNavigate('krishiBhavishya')}
-              className="w-full py-2.5 rounded-xl bg-[#064E3B] hover:bg-[#064E3B] text-white font-bold text-xs transition-all flex items-center justify-center gap-1.5"
+              className="btn btn-primary w-full"
             >
               <span>View Selling Advice</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -657,7 +664,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               </div>
               <button
                 onClick={() => onNavigate('market')}
-                className="text-xs font-bold text-[#064E3B] hover:text-[#064E3B]"
+                className="btn btn-ghost"
               >
                 All Mandis
               </button>
@@ -714,7 +721,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                 value={commandInput}
                 onChange={(e) => setCommandInput(e.target.value)}
                 placeholder="Type your question in simple words..."
-                className="w-full pl-3 pr-20 py-2.5 bg-[#243A32] border border-[#3E5248] rounded-xl text-xs text-white focus:outline-hidden focus:ring-2 focus:ring-[#10B981] placeholder:text-[#8A9A90]"
+                className="w-full pl-3 pr-20 py-2.5 bg-[#243A32] border border-[#3E5248] rounded-xl text-xs text-white focus:outline-hidden focus:ring-2 focus:ring-[#10B981] placeholder:text-[#718078]"
               />
               <button
                 type="submit"
@@ -744,7 +751,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               </h3>
               <button
                 onClick={() => setShowAddTaskModal(false)}
-                className="text-[#8A9A90] hover:text-[#3E5248] font-bold"
+                className="btn btn-ghost"
               >
                 ✕
               </button>
@@ -806,7 +813,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
               <button
                 type="submit"
-                className="w-full py-3 rounded-xl bg-[#064E3B] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md transition-all mt-2 cursor-pointer"
+                className="btn btn-primary w-full mt-2"
               >
                 Schedule Task (+40 XP)
               </button>

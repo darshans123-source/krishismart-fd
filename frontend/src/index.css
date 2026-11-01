@@ -282,6 +282,50 @@
   box-shadow: 0 6px 14px -6px rgba(2, 44, 34, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.4);
 }
 
+
+/* Canonical button system — usability audit fix (issues 1, 4, 5).
+   The live page had 22 distinct button styles, 22 text colours and
+   7 radii because every button was hand-styled with Tailwind
+   arbitrary values. From now on Dashboard/shell buttons use ONLY
+   these 5 variants (primary, secondary, ghost, card, card-dark).
+   Sizes are not new styles: .btn is the shared base.
+   Canonical text colours: #14251D ink, #172B24 heading, #243A32 body,
+   #3E5248 secondary body, #718078 muted, #064E3B brand, #059669 accent,
+   #D1FAE5/#A7F3D0/#6EE7B7 light-on-dark, #FFFFFF, #022C22 dark, #D6AD55 gold.
+   Canonical radii: 1rem (16px) buttons/cards, 1.5rem (24px) heroes,
+   9999px pills, 0.75rem (12px) small chips — no other radii on Dashboard. */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  min-height: 2.75rem; padding: 0.625rem 1rem; font-size: 0.875rem; font-weight: 700;
+  line-height: 1.25; border-radius: 1rem; cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+.btn:active { transform: translateY(1px) scale(0.98); }
+.btn-primary {
+  background: linear-gradient(180deg, #10b981 0%, #059669 55%, #047857 100%);
+  color: #ffffff; border: 2px solid rgba(167, 243, 208, 0.7);
+  box-shadow: 0 12px 24px -8px rgba(2, 44, 34, 0.25), inset 0 2px 0 rgba(255, 255, 255, 0.55), inset 0 -5px 10px rgba(2, 44, 34, 0.12);
+}
+.btn-secondary {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.68));
+  -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%);
+  color: #172b24; border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 24px rgba(2, 44, 34, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+.btn-ghost { background: transparent; color: #064e3b; border: 1px solid transparent; min-height: 2.5rem; padding-left: 0.5rem; padding-right: 0.5rem; }
+.btn-ghost:hover { background: rgba(236, 253, 245, 0.9); }
+.btn-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.52));
+  -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%);
+  color: #172b24; border: 1px solid rgba(255, 255, 255, 0.65); border-radius: 1rem; padding: 1rem; text-align: left; justify-content: flex-start;
+  box-shadow: 0 8px 32px rgba(2, 44, 34, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+.btn-card-dark {
+  background: rgba(255, 255, 255, 0.10); border: 1px solid rgba(255, 255, 255, 0.15); color: #ffffff;
+  border-radius: 1rem; padding: 1rem; text-align: left; justify-content: flex-start;
+}
+.btn-card-dark:hover { background: rgba(255, 255, 255, 0.15); }
+
 /* Premium hero: deep emerald with soft radial highlights, no flat block. */
 .premium-hero {
   position: relative;
