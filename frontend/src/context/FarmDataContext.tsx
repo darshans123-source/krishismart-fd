@@ -675,7 +675,27 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   // Real Supabase session: the single source of truth for identity.
+  // Callback handling: supabase-js (detectSessionInUrl: true) exchanges
+  // a ?code= from Google/Supabase automatically on client creation, then
+  // onAuthStateChange fires SIGNED_IN. This effect only surfaces a
+  // ?error= callback (e.g. user denied Google, or redirect not
+  // allow-listed) as a toast instead of silently landing logged out,
+  // and strips auth params from the URL so a refresh cannot replay them
+  // or loop. It never redirects by itself — no redirect loop.
   useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const callbackError = params.get('error');
+      if (callbackError) {
+        const desc = params.get('error_description')?.replace(/\+/g, ' ') || '';
+        showToast(`Google sign-in failed: ${desc || callbackError}. Please try again from the public production site.`, 'error');
+        params.delete('error');
+        params.delete('error_code');
+        params.delete('error_description');
+        const rest = params.toString();
+        window.history.replaceState(null, '', window.location.pathname + (rest ? `?${rest}` : ''));
+      }
+    } catch { /* ignore malformed callback URL */ }
     supabase.auth.getSession().then(({ data }) => {
       const sessionUser = (data as any)?.session?.user;
       setUser(sessionUser ? mapSessionUser(sessionUser) : null);

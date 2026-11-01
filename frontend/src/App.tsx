@@ -67,6 +67,14 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
 
   const { isAuthenticated, isLocationModalOpen, setIsLocationModalOpen, setIsAIChatOpen } = useFarmData();
 
+  // Expected login flow, step 7: after a real session arrives, a user
+  // sitting on the public landing page goes to the dashboard. This
+  // only fires landing -> dashboard, never the reverse, so it cannot
+  // loop, and unauthenticated users stay free to browse the public page.
+  useEffect(() => {
+    if (isAuthenticated && currentTab === 'landing') setCurrentTab('dashboard');
+  }, [isAuthenticated, currentTab]);
+
   const handleOpenAuth = (mode: 'login' | 'register' | 'onboarding' = 'login') => {
     setAuthInitialMode(mode);
     setIsAuthModalOpen(true);

@@ -28,18 +28,28 @@ interface AuthModalProps {
 }
 
 
-// Canonical site for auth redirects. Vercel preview deployments
-// (*-git-*.vercel.app) are behind Vercel Deployment Protection by
-// default, so if Supabase/Google redirected back to a preview URL the
-// user would hit Vercel's own login wall and the auth code would be
-// lost before the app ever sees it. Always send OAuth / email links
-// back to the public production site, except on localhost dev.
-const PRODUCTION_SITE = 'https://krishismart-ai-by-darshan.vercel.app';
-const getAuthRedirectUrl = (): string => {
-  const host = window.location.hostname;
-  if (host === 'localhost' || host === '127.0.0.1') return window.location.origin;
-  if (host === 'krishismart-ai-by-darshan.vercel.app') return window.location.origin;
-  return PRODUCTION_SITE;
+// Auth redirect rule (fixes PR #12's cross-origin bug): redirectTo MUST
+// be window.location.origin — the exact origin that started login.
+// Supabase PKCE stores its code verifier in that origin's localStorage;
+// sending Google back to a different domain loses the verifier, so the
+// code exchange fails and the user stays logged out. The Vercel login
+// wall is NOT fixed by redirecting elsewhere: it is Vercel Deployment
+// Protection on the deployment URL itself, and must be turned off in
+// Vercel (see PR body) and the public production URL used instead.
+// Supabase must allow-list every origin users actually start from.
+const getAuthRedirectUrl = (): string => window.location.origin;
+
+// Friendly auth errors: keep Supabase's message as the fallback, but
+// translate the common cases into what the user should actually do.
+const friendlyAuthError = (err: any): string => {
+  const raw = err?.message || '';
+  const lower = raw.toLowerCase();
+  if (lower.includes('invalid login credentials')) return 'Wrong email or password. Try again, or use Forgot password to reset it.';
+  if (lower.includes('email not confirmed')) return 'Please confirm your email first — check your inbox for the confirmation link, then sign in.';
+  if (lower.includes('provider is not enabled') || lower.includes('unsupported provider')) return 'Google sign-in is not enabled in Supabase yet. Enable the Google provider in Supabase Authentication, then try again.';
+  if (lower.includes('redirect')) return 'This site URL is not allow-listed in Supabase Auth. Add this exact site URL to Supabase Authentication → Redirect URLs, then try again.';
+  if (lower.includes('user already registered') || lower.includes('already registered')) return 'This email already has an account. Sign in instead of creating a new account.';
+  return raw || 'Authentication failed. Please try again.';
 };
 
 export const AuthModal: React.FC<AuthModalProps> = ({
@@ -115,7 +125,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       if (error) throw error;
       onClose(); // onAuthStateChange in FarmDataContext sets the real user
     } catch (err: any) {
-      setAuthError(err?.message || 'Authentication failed. Please try again.');
+      setAuthError(friendlyAuthError(err));
     } finally {
       setAuthLoading(false);
     }
@@ -133,7 +143,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       if (error) throw error;
       // Browser redirects to Google/Supabase now; the session returns here.
     } catch (err: any) {
-      setAuthError(err?.message || 'Google sign-in failed. Please try again.');
+      setAuthError(friendlyAuthError(err));
       setAuthLoading(false);
     }
   };

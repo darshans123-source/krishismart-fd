@@ -4,7 +4,20 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 export const supabase = supabaseUrl && supabaseAnonKey
-  ? createClient(supabaseUrl, supabaseAnonKey)
+  ? createClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        // PKCE flow (Supabase default, made explicit): Google returns a
+        // ?code= to the SAME origin that started login, and supabase-js
+        // exchanges it using the code verifier stored in that origin's
+        // localStorage. Redirecting to a different origin would lose the
+        // verifier and break login — so AuthModal must use
+        // window.location.origin, never a hardcoded different domain.
+        flowType: 'pkce',
+        detectSessionInUrl: true,
+        persistSession: true,
+        autoRefreshToken: true,
+      },
+    })
   : ({
       auth: {
         setSession: async () => ({}),
