@@ -27,6 +27,11 @@
   --color-earth-700: #44403c;
   --color-earth-800: #292524;
   --color-earth-900: #1c1917;
+
+  /* Premium shadow tokens: soft for cards, lift for hover/focus states. */
+  --shadow-soft: 0 1px 2px rgba(28, 25, 23, 0.05), 0 8px 24px -12px rgba(28, 25, 23, 0.12);
+  --shadow-lift: 0 2px 4px rgba(28, 25, 23, 0.06), 0 16px 32px -12px rgba(22, 101, 52, 0.22);
+  --shadow-hero: 0 20px 40px -16px rgba(5, 46, 22, 0.45);
 }
 
 @layer base {
@@ -38,10 +43,18 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
   }
   body {
-    background-color: #fbfcf9;
+    background-color: #f6f5f1;
     color: #1c1917;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 2px solid #16a34a;
+    outline-offset: 2px;
   }
   h1, h2, h3, h4, .font-heading {
     font-family: 'Outfit', sans-serif;
@@ -87,6 +100,33 @@
 
 .gradient-green-hero {
   background: linear-gradient(135deg, #14532d 0%, #166534 60%, #15803d 100%);
+}
+
+/* Premium hero: deep emerald with soft radial highlights, no flat block. */
+.premium-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(420px 220px at 88% -20%, rgba(74, 222, 128, 0.28), transparent 70%),
+    radial-gradient(360px 240px at 8% 115%, rgba(245, 158, 11, 0.18), transparent 70%),
+    linear-gradient(135deg, #052e16 0%, #14532d 52%, #166534 100%);
+  box-shadow: var(--shadow-hero);
+}
+
+/* Premium card: quiet border, soft shadow, gentle lift on hover. */
+.premium-card {
+  background: #ffffff;
+  border: 1px solid rgba(231, 229, 228, 0.9);
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-soft);
+}
+.premium-card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.premium-card-hover:hover {
+  transform: translateY(-3px);
+  border-color: #bbf7d0;
+  box-shadow: var(--shadow-lift);
 }
 
 .gradient-gold-badge {
