@@ -35,6 +35,7 @@ import {
   INITIAL_ACHIEVEMENTS
 } from '../constants/mockData';
 import { useToast } from './ToastContext';
+import { supabase } from '../supabase';
 import {
   LocationState,
   getStoredLocation,
@@ -74,7 +75,8 @@ export interface AIBriefing {
 interface FarmDataContextType {
   user: UserProfile | null;
   isAuthenticated: boolean;
-  login: (email: string, name?: string, remember?: boolean) => void;
+  // No local login() anymore: AuthModal signs in through Supabase directly,
+  // and this provider only trusts a real Supabase session (see below).
   logout: () => void;
   updateUser: (updated: Partial<UserProfile>) => void;
   completeOnboarding: (data: Partial<UserProfile>) => void;
@@ -171,10 +173,10 @@ const FarmDataContext = createContext<FarmDataContextType | undefined>(undefined
 export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { showToast } = useToast();
 
-  const [user, setUser] = useState<UserProfile | null>(() => {
-    const saved = localStorage.getItem('krishi_user');
-    return saved ? JSON.parse(saved) : INITIAL_USER;
-  });
+  // Real identity: null until a Supabase session is verified. No default
+  // logged-in user, no local-only login — a saved profile is only merged
+  // in after its email matches the verified session (see mapSessionUser).
+  const [user, setUser] = useState<UserProfile | null>(null);
 
   const [farms, setFarms] = useState<Farm[]>(() => {
     const saved = localStorage.getItem('krishi_farms');
@@ -545,8 +547,7 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   // Persistence to localStorage
   useEffect(() => {
-    if (user && rememberMe) localStorage.setItem('krishi_user', JSON.stringify(user));
-    if (user && !rememberMe) localStorage.removeItem('krishi_user');
+    if (user) localStorage.setItem('krishi_user', JSON.stringify(user));
   }, [user]);
 
   useEffect(() => {
@@ -651,18 +652,49 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   // User Actions
-  const [rememberMe, setRememberMe] = useState(true);
-  const login = (email: string, name?: string, remember: boolean = true) => {
-    setRememberMe(remember);
-    setUser((prev) => ({
-      ...(prev || INITIAL_USER),
-      email,
-      name: name || prev?.name || 'Darshan Patil'
-    }));
-    showToast(`Welcome back, ${name || 'Farmer'}!`, 'success');
+  // Map a verified Supabase user to the app profile. Local farm fields
+  // (district, land size, etc.) are restored only when the saved profile
+  // belongs to the same email as the session — a stale local profile can
+  // never masquerade as a logged-in account.
+  const mapSessionUser = (sessionUser: any): UserProfile => {
+    let saved: Partial<UserProfile> = {};
+    try {
+      const raw = localStorage.getItem('krishi_user');
+      const parsed = raw ? JSON.parse(raw) : null;
+      if (parsed && parsed.email === sessionUser.email) saved = parsed;
+    } catch { /* ignore corrupt local profile */ }
+    const meta = sessionUser.user_metadata || {};
+    const displayName = meta.full_name || meta.name || sessionUser.email?.split('@')[0] || 'Farmer';
+    return {
+      ...INITIAL_USER,
+      ...saved,
+      name: displayName,
+      email: sessionUser.email || '',
+      avatarUrl: meta.avatar_url || (saved as any).avatarUrl || INITIAL_USER.avatarUrl,
+    };
   };
 
-  const logout = () => {
+  // Real Supabase session: the single source of truth for identity.
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      const sessionUser = (data as any)?.session?.user;
+      setUser(sessionUser ? mapSessionUser(sessionUser) : null);
+    }).catch(() => setUser(null));
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      const sessionUser = (session as any)?.user;
+      if (sessionUser) {
+        setUser(mapSessionUser(sessionUser));
+      } else {
+        setUser(null);
+        localStorage.removeItem('krishi_user');
+      }
+    });
+    return () => { listener?.subscription?.unsubscribe(); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const logout = async () => {
+    await supabase.auth.signOut();
     setUser(null);
     localStorage.removeItem('krishi_user');
     showToast('Logged out successfully', 'info');
@@ -675,7 +707,8 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const completeOnboarding = (data: Partial<UserProfile>) => {
     setUser((prev) => {
-      const base = prev || INITIAL_USER;
+      if (!prev) return prev; // Onboarding only updates a real, signed-in user
+      const base = prev;
       return {
         ...base,
         ...data,
@@ -1021,7 +1054,6 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       value={{
         user,
         isAuthenticated: !!user,
-        login,
         logout,
         updateUser,
         completeOnboarding,

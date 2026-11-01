@@ -11,7 +11,11 @@ export const supabase = supabaseUrl && supabaseAnonKey
         getSession: async () => ({ data: { session: null }, error: null }),
         onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } }),
         signOut: async () => ({ error: null }),
-        signInWithOAuth: async () => ({ data: null, error: new Error("Supabase is not configured.") })
+        signInWithOAuth: async () => ({ data: null, error: new Error("Supabase is not configured.") }),
+        signInWithPassword: async () => ({ data: null, error: new Error("Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in Vercel and redeploy.") }),
+        signUp: async () => ({ data: null, error: new Error("Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in Vercel and redeploy.") }),
+        resetPasswordForEmail: async () => ({ data: null, error: new Error("Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in Vercel and redeploy.") }),
+        getUser: async () => ({ data: { user: null }, error: null })
       },
       channel: () => ({
         on: () => ({

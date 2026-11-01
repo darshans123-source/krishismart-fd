@@ -77,7 +77,7 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
       case 'landing':
         return (
           <LandingPage
-            onGetStarted={() => handleOpenAuth('onboarding')}
+            onGetStarted={() => handleOpenAuth('register')}
             onExploreApp={() => setCurrentTab('dashboard')}
             onSelectModule={(mod) => setCurrentTab(mod)}
           />

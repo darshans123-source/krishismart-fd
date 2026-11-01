@@ -16,6 +16,7 @@ import {
   Layers
 } from 'lucide-react';
 import { useFarmData } from '../context/FarmDataContext';
+import { supabase } from '../supabase';
 import { useLanguage } from '../context/LanguageContext';
 import { INDIAN_STATES, INDIAN_STATES_CITIES } from '../constants/indianRegions';
 import { Language } from '../types';
@@ -31,7 +32,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   onClose,
   initialMode = 'login'
 }) => {
-  const { login, completeOnboarding } = useFarmData();
+  const { isAuthenticated, completeOnboarding } = useFarmData();
   const { language, setLanguage, t } = useLanguage();
 
   const [mode, setMode] = useState<'login' | 'register' | 'forgot' | 'onboarding'>(initialMode);
@@ -39,7 +40,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(true);
+  const [authLoading, setAuthLoading] = useState(false);
+  const [authError, setAuthError] = useState('');
+  const [authMessage, setAuthMessage] = useState('');
 
   // Onboarding multi-step state
   const [onboardStep, setOnboardStep] = useState(1);
@@ -54,19 +57,79 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
   if (!isOpen) return null;
 
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  // REAL Supabase auth. Wrong passwords, unregistered emails and
+  // unconfirmed accounts fail here with Supabase's own error — nothing
+  // is logged in locally. Google redirects to Supabase/Google and back
+  // to this site (redirectTo must be allow-listed in Supabase Auth).
+  const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    login(email || 'darshan.agri@krishismart.ai', name || 'Darshan Patil', rememberMe);
-    onClose();
+    setAuthError('');
+    setAuthMessage('');
+    setAuthLoading(true);
+    try {
+      if (mode === 'forgot') {
+        const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+          redirectTo: window.location.origin,
+        });
+        if (error) throw error;
+        setAuthMessage('If this email has an account, a password reset link has been sent. Check your inbox.');
+        return;
+      }
+      if (mode === 'register') {
+        const { data, error } = await supabase.auth.signUp({
+          email: email.trim(),
+          password,
+          options: {
+            data: { full_name: name.trim() },
+            emailRedirectTo: window.location.origin,
+          },
+        });
+        if (error) throw error;
+        if (data.session) {
+          onClose(); // Signed in immediately (email confirmation off)
+        } else {
+          setAuthMessage('Account created. Check your email to confirm your account, then sign in.');
+          setMode('login');
+        }
+        return;
+      }
+      const { error } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      });
+      if (error) throw error;
+      onClose(); // onAuthStateChange in FarmDataContext sets the real user
+    } catch (err: any) {
+      setAuthError(err?.message || 'Authentication failed. Please try again.');
+    } finally {
+      setAuthLoading(false);
+    }
   };
 
-  const handleGoogleAuth = () => {
-    login('darshan.google@krishismart.ai', 'Darshan Patil');
-    onClose();
+  const handleGoogleAuth = async () => {
+    setAuthError('');
+    setAuthMessage('');
+    setAuthLoading(true);
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: window.location.origin },
+      });
+      if (error) throw error;
+      // Browser redirects to Google/Supabase now; the session returns here.
+    } catch (err: any) {
+      setAuthError(err?.message || 'Google sign-in failed. Please try again.');
+      setAuthLoading(false);
+    }
   };
 
   const handleOnboardingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isAuthenticated) {
+      setMode('register');
+      setName(farmerName);
+      return;
+    }
     completeOnboarding({
       name: farmerName,
       phone,
@@ -142,7 +205,22 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         </div>
 
         {/* ONBOARDING FLOW */}
-        {mode === 'onboarding' ? (
+        {mode === 'onboarding' && !isAuthenticated ? (
+          <div className="p-6 space-y-4 text-center">
+            <h3 className="font-extrabold text-lg font-heading">Create your account first</h3>
+            <p className="text-sm text-[#5A6E64] leading-relaxed">
+              Farm setup is saved to your real Supabase account. Sign up or sign in, then come back to complete your farm setup.
+            </p>
+            <div className="flex gap-2">
+              <button type="button" onClick={() => setMode('register')} className="flex-1 py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md">
+                Create Account
+              </button>
+              <button type="button" onClick={() => setMode('login')} className="flex-1 py-3 rounded-xl border border-[#CBD8D0] hover:bg-[#F7FAF7] text-[#3E5248] font-bold text-sm">
+                Sign In
+              </button>
+            </div>
+          </div>
+        ) : mode === 'onboarding' ? (
           <form onSubmit={handleOnboardingSubmit} className="p-6 space-y-5">
             {/* Step Indicators */}
             <div className="flex items-center justify-between gap-2 border-b border-[#EFF4EF] pb-3">
@@ -363,6 +441,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           <div className="p-6 space-y-4">
             {/* Social Google Login Button */}
             <button
+              type="button"
+              disabled={authLoading}
               onClick={handleGoogleAuth}
               className="w-full py-3 rounded-xl border border-[#CBD8D0] hover:bg-[#F7FAF7] text-[#243A32] font-bold text-xs flex items-center justify-center gap-3 transition-colors shadow-xs"
             >
@@ -409,14 +489,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               )}
 
               <div>
-                <label className="block text-xs font-bold text-[#3E5248] mb-1">Email or Phone</label>
+                <label className="block text-xs font-bold text-[#3E5248] mb-1">Email</label>
                 <input
-                  type="text"
+                  type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden"
-                  placeholder="farmer@krishismart.ai"
+                  placeholder="farmer@example.com"
                 />
               </div>
 
@@ -455,23 +535,24 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 </div>
               )}
 
-              {mode === 'login' && (
-                <label className="flex items-center gap-2 text-xs font-semibold text-[#3E5248] cursor-pointer select-none">
-                  <input
-                    type="checkbox"
-                    checked={rememberMe}
-                    onChange={(e) => setRememberMe(e.target.checked)}
-                    className="w-4 h-4 accent-[#059669]"
-                  />
-                  Remember me on this device
-                </label>
+
+              {authError && (
+                <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs font-semibold text-red-700">
+                  {authError}
+                </div>
+              )}
+              {authMessage && (
+                <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800">
+                  {authMessage}
+                </div>
               )}
 
               <button
                 type="submit"
-                className="w-full py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md shadow-[#059669]/20 transition-all"
+                disabled={authLoading}
+                className="w-full py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md shadow-[#059669]/20 transition-all disabled:opacity-60"
               >
-                {mode === 'register' ? 'Create Account' : mode === 'forgot' ? 'Send Reset Link' : 'Sign In'}
+                {authLoading ? 'Please wait…' : mode === 'register' ? 'Create Account' : mode === 'forgot' ? 'Send Reset Link' : 'Sign In'}
               </button>
             </form>
 
