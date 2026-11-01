@@ -272,3 +272,17 @@
 .safe-area-top {
   padding-top: env(safe-area-inset-top);
 }
+
+/* Phone/tablet: the app shell and main content must fill the viewport.
+   This overrides any centred max-width container that would otherwise
+   leave a blank gutter on the right on a phone. Desktop keeps its
+   normal layout above lg. */
+@media (max-width: 1023px) {
+  #root > div,
+  main {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}

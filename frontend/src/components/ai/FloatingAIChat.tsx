@@ -170,7 +170,7 @@ export const FloatingAIChat: React.FC = () => {
   return (
     <>
       {/* Floating Trigger Button */}
-      <div className="fixed bottom-16 lg:bottom-6 left-4 sm:left-6 z-40">
+      <div className="fixed bottom-24 lg:bottom-6 left-4 sm:left-6 z-40">
         <button
           onClick={() => setIsAIChatOpen(!isAIChatOpen)}
           className="relative group flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-[#064E3B] via-[#059669] to-green-600 text-white shadow-xl shadow-[#064E3B]/30 hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-[#34D399]/40"

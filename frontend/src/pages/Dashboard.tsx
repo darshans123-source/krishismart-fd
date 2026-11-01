@@ -168,7 +168,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
     : defaultQuickActions;
 
   return (
-    <div className="w-full min-w-0 space-y-6 sm:space-y-8 pb-2 animate-in fade-in duration-200">
+    <div className="w-full min-w-0 max-w-none space-y-6 sm:space-y-8 pb-32 lg:pb-2 animate-in fade-in duration-200">
       {/* ================================================== */}
       {/* 1. TOP 5-SECOND OVERVIEW & GREETING BANNER */}
       {/* ================================================== */}

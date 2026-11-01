@@ -103,16 +103,16 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <div
             onClick={() => setCurrentTab('dashboard')}
-            className="flex items-center gap-2.5 cursor-pointer group"
+            className="flex items-center gap-2 cursor-pointer group min-w-0 shrink-0"
           >
             <img
               src="/logo-icon.svg"
               alt="KrishiSmart AI logo"
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl shadow-xs group-hover:scale-105 transition-transform"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-2xl shadow-xs group-hover:scale-105 transition-transform shrink-0"
             />
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-sm sm:text-xl tracking-tight text-[#172B24] font-heading truncate">
+                <span className="font-extrabold text-sm sm:text-xl tracking-tight text-[#172B24] font-heading whitespace-nowrap">
                   KRISHISMART <span className="text-[#064E3B]">AI</span>
                 </span>
                 <span className="hidden sm:inline-flex px-2 py-0.5 text-[10px] font-bold bg-[#ECFDF5] text-[#064E3B] rounded-md border border-[#A7F3D0]">
@@ -160,7 +160,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }`}
               ></span>
             </span>
-            <span className="text-[11px] sm:text-xs font-bold text-[#243A32] group-hover:text-[#064E3B] truncate max-w-[92px] sm:max-w-[170px]">
+            <span className="text-[11px] sm:text-xs font-bold text-[#243A32] group-hover:text-[#064E3B] truncate max-w-[84px] sm:max-w-[170px]">
               📍 {locationState.address.district || 'Raichur'}, {locationState.address.state || 'Karnataka'}
             </span>
           </button>
