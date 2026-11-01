@@ -18,7 +18,8 @@
   --color-brand-900: #064e3b;
   --color-brand-950: #022c22;
 
-  --color-ink: #172b24;
+  --color-ink: #14251d;
+  --color-gold: #d6ad55;
   --color-muted: #718078;
   --color-line: #e5ede7;
   --color-paper: #f7faf7;
@@ -59,8 +60,9 @@
     width: 100%;
     min-width: 0;
     overflow-x: clip;
-    background-color: #f7faf7;
-    color: #172b24;
+    background: linear-gradient(180deg, #f8fbf6 0%, #eff7ef 45%, #e5f2e8 100%);
+    background-attachment: fixed;
+    color: #14251d;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -106,8 +108,8 @@
   box-shadow: var(--shadow-lift);
 }
 .ds-page {
-  background: #f7faf7;
-  color: #172b24;
+  background: linear-gradient(180deg, #f8fbf6 0%, #eff7ef 45%, #e5f2e8 100%);
+  color: #14251d;
 }
 .ds-section-title {
   font-family: 'Manrope', 'Inter', sans-serif;
@@ -179,9 +181,8 @@
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(420px 220px at 88% -20%, rgba(16, 185, 129, 0.28), transparent 70%),
-    radial-gradient(360px 240px at 8% 115%, rgba(245, 158, 11, 0.18), transparent 70%),
-    linear-gradient(135deg, #022c22 0%, #064e3b 52%, #059669 100%);
+    linear-gradient(135deg, rgba(2, 44, 34, 0.96) 0%, rgba(6, 78, 59, 0.88) 52%, rgba(5, 150, 105, 0.82) 100%),
+    url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1600&auto=format&fit=crop&q=80') center / cover no-repeat;
   box-shadow: var(--shadow-hero);
 }
 
@@ -296,3 +297,37 @@
 @media (prefers-reduced-motion: reduce) {
   .splash-float, .splash-float-slow { animation: none; }
 }
+
+/* Ultra-premium splash screen (initial load only, see SplashScreen.tsx). */
+@keyframes splash-logo-in {
+  0% { opacity: 0; transform: scale(0.85) translateY(12px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes splash-text-in {
+  0% { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes splash-progress {
+  0% { width: 8%; }
+  60% { width: 72%; }
+  100% { width: 100%; }
+}
+@keyframes splash-particle {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+  50% { transform: translateY(-18px) rotate(20deg); opacity: 0.9; }
+}
+.splash-logo { animation: splash-logo-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.splash-text { animation: splash-text-in 0.7s 0.25s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.splash-tagline { animation: splash-text-in 0.7s 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.splash-progress-bar { animation: splash-progress 0.9s ease-out forwards; }
+.splash-particle { animation: splash-particle 5s ease-in-out infinite; }
+.splash-fade-out { opacity: 0; transition: opacity 0.5s ease; }
+@media (prefers-reduced-motion: reduce) {
+  .splash-logo, .splash-text, .splash-tagline, .splash-progress-bar, .splash-particle { animation: none; }
+  .splash-fade-out { transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* Premium page transition: every page fades in once on mount (CSS only,
+   no new animation library, so no dependency or build risk). */
+.page-fade-in { animation: splash-text-in 0.35s ease-out both; }

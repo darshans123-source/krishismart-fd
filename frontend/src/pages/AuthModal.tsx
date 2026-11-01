@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import {
   X,
+  Eye,
+  EyeOff,
   Sprout,
   User,
   Mail,
@@ -36,6 +38,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
 
   // Onboarding multi-step state
   const [onboardStep, setOnboardStep] = useState(1);
@@ -52,7 +56,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
   const handleLoginSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    login(email || 'darshan.agri@krishismart.ai', name || 'Darshan Patil');
+    login(email || 'darshan.agri@krishismart.ai', name || 'Darshan Patil', rememberMe);
     onClose();
   };
 
@@ -79,8 +83,32 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const districtsForState = INDIAN_STATES_CITIES[selectedState] || [];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/70 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-[#E5EDE7] overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center sm:p-4 bg-[#022C22]/70 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
+      <div className="relative w-full max-w-4xl bg-white sm:rounded-[1.75rem] shadow-2xl border border-[#E5EDE7] overflow-hidden md:flex min-h-full sm:min-h-0">
+        {/* LEFT: full-height farm image (desktop) / top banner (mobile) */}
+        <div className="relative md:w-5/12 shrink-0 h-44 md:h-auto overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&auto=format&fit=crop&q=80"
+            alt="Green farmland in India"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#022C22]/70 via-[#022C22]/40 to-[#022C22]/90" />
+          <div className="relative z-10 flex h-full flex-col justify-end md:justify-between p-5 sm:p-6 text-white">
+            <div className="hidden md:flex items-center gap-2">
+              <img src="/logo-icon.svg" alt="KrishiSmart AI" className="w-10 h-10 rounded-xl ring-1 ring-white/30" />
+              <span className="font-extrabold font-heading tracking-tight">KRISHISMART AI</span>
+            </div>
+            <div>
+              <p className="text-lg sm:text-2xl font-extrabold font-heading leading-tight drop-shadow">
+                Smart Farming.<br />Better Decisions.<br />Better Future.
+              </p>
+              <p className="mt-2 text-xs sm:text-sm text-white/85 leading-relaxed max-w-xs">
+                Crop health, weather, mandi prices and smart irrigation — in one premium farm platform.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="flex-1 min-w-0">
         {/* Top Header */}
         <div className="p-6 bg-gradient-to-r from-[#064E3B] to-[#064E3B] text-white flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -406,15 +434,37 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       </button>
                     )}
                   </div>
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden"
-                    placeholder="••••••••"
-                  />
+                  <div className="relative">
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      className="w-full px-3.5 py-2.5 pr-11 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden"
+                      placeholder="••••••••"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((v) => !v)}
+                      aria-label={showPassword ? 'Hide password' : 'Show password'}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-lg text-[#718078] hover:text-[#064E3B] hover:bg-[#EFF4EF]"
+                    >
+                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
                 </div>
+              )}
+
+              {mode === 'login' && (
+                <label className="flex items-center gap-2 text-xs font-semibold text-[#3E5248] cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                    className="w-4 h-4 accent-[#059669]"
+                  />
+                  Remember me on this device
+                </label>
               )}
 
               <button
@@ -450,6 +500,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );

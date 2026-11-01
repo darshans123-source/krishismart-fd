@@ -176,7 +176,7 @@ export const FloatingAIChat: React.FC = () => {
               <div>
                 <div className="flex items-center gap-1.5">
                   <h3 className="font-bold text-sm leading-tight font-heading">
-                    KrishiSmart AI Assistant
+                    KRISHI AI COPILOT
                   </h3>
                   <span className="px-1.5 py-0.2 bg-[#10B981]/40 text-[#A7F3D0] text-[9px] font-extrabold rounded-sm uppercase tracking-wider">
                     24/7 Live

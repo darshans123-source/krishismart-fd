@@ -74,7 +74,7 @@ export interface AIBriefing {
 interface FarmDataContextType {
   user: UserProfile | null;
   isAuthenticated: boolean;
-  login: (email: string, name?: string) => void;
+  login: (email: string, name?: string, remember?: boolean) => void;
   logout: () => void;
   updateUser: (updated: Partial<UserProfile>) => void;
   completeOnboarding: (data: Partial<UserProfile>) => void;
@@ -545,7 +545,8 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   // Persistence to localStorage
   useEffect(() => {
-    if (user) localStorage.setItem('krishi_user', JSON.stringify(user));
+    if (user && rememberMe) localStorage.setItem('krishi_user', JSON.stringify(user));
+    if (user && !rememberMe) localStorage.removeItem('krishi_user');
   }, [user]);
 
   useEffect(() => {
@@ -650,7 +651,9 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   // User Actions
-  const login = (email: string, name?: string) => {
+  const [rememberMe, setRememberMe] = useState(true);
+  const login = (email: string, name?: string, remember: boolean = true) => {
+    setRememberMe(remember);
     setUser((prev) => ({
       ...(prev || INITIAL_USER),
       email,

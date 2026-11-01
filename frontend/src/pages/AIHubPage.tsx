@@ -92,7 +92,7 @@ export const AIHubPage: React.FC = () => {
             <span>Farm Intelligence Advisor</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-[#172B24] font-heading">
-            AI Advisor & Crop Health
+            KRISHI AI COPILOT
           </h1>
           <p className="text-xs sm:text-sm text-[#718078]">
             Crop disease diagnosis, soil health guidance, and customized fertilizer recommendations.
