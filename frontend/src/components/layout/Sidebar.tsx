@@ -132,7 +132,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           onClick={onToggleCollapse}
           title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          className="mb-4 ml-auto flex items-center justify-center w-8 h-8 rounded-lg text-[#718078] hover:bg-white hover:text-[#064E3B] hover:shadow-soft transition-all"
+          className="mb-4 ml-auto flex items-center justify-center w-8 h-8 rounded-lg text-[#718078] hover:bg-white/75 backdrop-blur-xl hover:text-[#064E3B] hover:shadow-soft transition-all"
         >
           {collapsed ? <PanelLeftOpen className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
         </button>
@@ -159,7 +159,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     className={`w-full flex items-center ${!isMobile && collapsed ? 'justify-center px-0' : 'justify-between px-2.5'} py-2 rounded-xl text-xs font-semibold transition-all duration-150 group ${
                       isActive
                         ? 'bg-[#064E3B] text-white shadow-md shadow-[#064E3B]/20 font-bold'
-                        : 'text-[#3E5248] hover:bg-white hover:text-[#064E3B] hover:shadow-soft'
+                        : 'text-[#3E5248] hover:bg-white/75 backdrop-blur-xl hover:text-[#064E3B] hover:shadow-soft'
                     }`}
                   >
                     <div className="flex items-center gap-3 truncate">

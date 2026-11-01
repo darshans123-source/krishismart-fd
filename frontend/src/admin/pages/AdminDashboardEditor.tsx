@@ -135,7 +135,7 @@ export const AdminDashboardEditor: React.FC<AdminDashboardEditorProps> = ({ onNa
   return (
     <div className="space-y-8 pb-20 animate-in fade-in duration-150">
       {/* Top Header & Save Control */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-extrabold text-[#172B24] font-heading">Dashboard Hero & Widgets Editor</h2>
@@ -178,7 +178,7 @@ export const AdminDashboardEditor: React.FC<AdminDashboardEditorProps> = ({ onNa
       {/* ================================================== */}
       {/* 1. HERO SECTION EDITOR */}
       {/* ================================================== */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-5">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-5">
         <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
           <div>
             <h3 className="text-base font-extrabold text-[#172B24] font-heading">
@@ -289,7 +289,7 @@ export const AdminDashboardEditor: React.FC<AdminDashboardEditorProps> = ({ onNa
                   hero: { ...config.hero, heroBg: e.target.value }
                 })
               }
-              className="w-full px-4 py-2.5 rounded-2xl border border-[#E5EDE7] text-xs bg-white font-semibold"
+              className="w-full px-4 py-2.5 rounded-2xl border border-[#E5EDE7] text-xs bg-white/75 backdrop-blur-xl font-semibold"
             >
               <option value="from-[#064E3B] to-[#064E3B]">Classic Emerald Forest (Default)</option>
               <option value="from-[#064E3B] to-teal-950">Deep Pine & Teal Night</option>
@@ -332,7 +332,7 @@ export const AdminDashboardEditor: React.FC<AdminDashboardEditorProps> = ({ onNa
       {/* ================================================== */}
       {/* 2. CURRENT FARM STATUS CARDS */}
       {/* ================================================== */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
         <div className="border-b border-[#EFF4EF] pb-3">
           <h3 className="text-base font-extrabold text-[#172B24] font-heading">
             2. Current Farm Status Cards
@@ -378,7 +378,7 @@ export const AdminDashboardEditor: React.FC<AdminDashboardEditorProps> = ({ onNa
                     );
                     setConfig({ ...config, statusCards: updated });
                   }}
-                  className="w-full px-3 py-1.5 rounded-xl border border-[#E5EDE7] text-xs font-bold text-[#172B24] bg-white"
+                  className="w-full px-3 py-1.5 rounded-xl border border-[#E5EDE7] text-xs font-bold text-[#172B24] bg-white/75 backdrop-blur-xl"
                 />
               </div>
 
@@ -393,7 +393,7 @@ export const AdminDashboardEditor: React.FC<AdminDashboardEditorProps> = ({ onNa
                     );
                     setConfig({ ...config, statusCards: updated });
                   }}
-                  className="w-full px-3 py-1.5 rounded-xl border border-[#E5EDE7] text-xs font-bold text-[#243A32] bg-white"
+                  className="w-full px-3 py-1.5 rounded-xl border border-[#E5EDE7] text-xs font-bold text-[#243A32] bg-white/75 backdrop-blur-xl"
                 />
               </div>
 
@@ -408,7 +408,7 @@ export const AdminDashboardEditor: React.FC<AdminDashboardEditorProps> = ({ onNa
                     );
                     setConfig({ ...config, statusCards: updated });
                   }}
-                  className="w-full px-3 py-1.5 rounded-xl border border-[#E5EDE7] text-xs text-[#5A6E64] bg-white"
+                  className="w-full px-3 py-1.5 rounded-xl border border-[#E5EDE7] text-xs text-[#5A6E64] bg-white/75 backdrop-blur-xl"
                 />
               </div>
             </div>
@@ -419,7 +419,7 @@ export const AdminDashboardEditor: React.FC<AdminDashboardEditorProps> = ({ onNa
       {/* ================================================== */}
       {/* 3. QUICK ACTIONS EDITOR */}
       {/* ================================================== */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#EFF4EF] pb-3">
           <div>
             <h3 className="text-base font-extrabold text-[#172B24] font-heading">
@@ -533,7 +533,7 @@ export const AdminDashboardEditor: React.FC<AdminDashboardEditorProps> = ({ onNa
                 <select
                   value={editingQuickAction.route}
                   onChange={(e) => setEditingQuickAction({ ...editingQuickAction, route: e.target.value })}
-                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs font-semibold bg-white"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs font-semibold bg-white/75 backdrop-blur-xl"
                 >
                   <option value="aiHub">aiHub (Crop Scan / Diagnostics)</option>
                   <option value="weather">weather (Weather Center)</option>
@@ -553,7 +553,7 @@ export const AdminDashboardEditor: React.FC<AdminDashboardEditorProps> = ({ onNa
                 <select
                   value={editingQuickAction.bg}
                   onChange={(e) => setEditingQuickAction({ ...editingQuickAction, bg: e.target.value })}
-                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs font-semibold bg-white"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs font-semibold bg-white/75 backdrop-blur-xl"
                 >
                   <option value="bg-[#ECFDF5] hover:bg-[#D1FAE5] text-[#064E3B] border-[#A7F3D0]">Emerald Green</option>
                   <option value="bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-200">Amber Sunshine</option>

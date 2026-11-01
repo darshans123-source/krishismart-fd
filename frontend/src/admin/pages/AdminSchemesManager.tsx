@@ -106,7 +106,7 @@ export const AdminSchemesManager: React.FC = () => {
   return (
     <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-200">
       {/* Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white rounded-2xl border border-[#E5EDE7] p-5 sm:p-6 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-5 sm:p-6 shadow-2xs">
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-extrabold text-[#172B24] font-heading">Government Schemes & Subsidies</h2>
@@ -137,7 +137,7 @@ export const AdminSchemesManager: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search schemes, departments..."
-            className="w-full pl-9 pr-4 py-2.5 rounded-2xl bg-white border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981]"
+            className="w-full pl-9 pr-4 py-2.5 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981]"
           />
         </div>
 
@@ -147,7 +147,7 @@ export const AdminSchemesManager: React.FC = () => {
               key={st}
               onClick={() => setStatusFilter(st)}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                statusFilter === st ? 'bg-white text-[#172B24] shadow-2xs font-bold' : 'text-[#718078] hover:text-[#172B24]'
+                statusFilter === st ? 'bg-white/75 backdrop-blur-xl text-[#172B24] shadow-2xs font-bold' : 'text-[#718078] hover:text-[#172B24]'
               }`}
             >
               {st === 'all' ? 'All' : st}
@@ -157,7 +157,7 @@ export const AdminSchemesManager: React.FC = () => {
       </div>
 
       {/* Schemes Table */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] shadow-2xs overflow-hidden">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] shadow-2xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead className="bg-[#F7FAF7]/70 border-b border-[#E5EDE7] text-[#718078] font-bold uppercase tracking-wider">
@@ -282,7 +282,7 @@ export const AdminSchemesManager: React.FC = () => {
                 <select
                   value={editingScheme.category}
                   onChange={(e) => setEditingScheme({ ...editingScheme, category: e.target.value })}
-                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs bg-white"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs bg-white/75 backdrop-blur-xl"
                 >
                   <option value="Direct Income">Direct Income (DBT)</option>
                   <option value="Equipment & Solar">Equipment & Solar (PM-KUSUM / PMKSY)</option>
@@ -320,7 +320,7 @@ export const AdminSchemesManager: React.FC = () => {
                 <select
                   value={editingScheme.status}
                   onChange={(e) => setEditingScheme({ ...editingScheme, status: e.target.value })}
-                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs bg-white"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs bg-white/75 backdrop-blur-xl"
                 >
                   <option value="Open">Open</option>
                   <option value="Expiring Soon">Expiring Soon</option>

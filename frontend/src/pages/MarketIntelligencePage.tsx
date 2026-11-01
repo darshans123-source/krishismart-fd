@@ -67,7 +67,7 @@ export const MarketIntelligencePage: React.FC = () => {
 
         <button
           onClick={() => setIsLocationModalOpen(true)}
-          className="px-3.5 py-2 rounded-xl bg-white hover:bg-[#F7FAF7] border border-[#E5EDE7] text-[#3E5248] font-bold text-xs shadow-2xs flex items-center gap-1.5 transition-colors self-start sm:self-auto"
+          className="px-3.5 py-2 rounded-xl bg-white/75 backdrop-blur-xl hover:bg-[#F7FAF7] border border-[#E5EDE7] text-[#3E5248] font-bold text-xs shadow-2xs flex items-center gap-1.5 transition-colors self-start sm:self-auto"
         >
           <span>📍 {locationState.address.district}</span>
           <span className="text-[#8A9A90] font-normal">Change</span>
@@ -183,7 +183,7 @@ export const MarketIntelligencePage: React.FC = () => {
             className={`px-3.5 py-2 rounded-2xl text-xs font-bold transition-all shrink-0 ${
               selectedCommodity === comm
                 ? 'bg-[#059669] text-white shadow-xs'
-                : 'bg-white text-[#5A6E64] hover:bg-[#EFF4EF] border border-[#E5EDE7]'
+                : 'bg-white/75 backdrop-blur-xl text-[#5A6E64] hover:bg-[#EFF4EF] border border-[#E5EDE7]'
             }`}
           >
             {comm}
@@ -196,7 +196,7 @@ export const MarketIntelligencePage: React.FC = () => {
         {filteredMandis.map((m) => (
           <div
             key={m.id}
-            className="bg-white rounded-2xl border border-[#E5EDE7] p-5 shadow-xs flex flex-col justify-between space-y-4 hover:border-[#34D399] transition-all"
+            className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-5 shadow-xs flex flex-col justify-between space-y-4 hover:border-[#34D399] transition-all"
           >
             <div>
               <div className="flex items-center justify-between mb-2">

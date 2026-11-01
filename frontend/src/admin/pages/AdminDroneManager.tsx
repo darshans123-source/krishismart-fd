@@ -141,7 +141,7 @@ export const AdminDroneManager: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/75 backdrop-blur-xl p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
         <div>
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#064E3B] text-xs font-semibold mb-2">
             <Plane className="w-3.5 h-3.5 text-[#059669]" />
@@ -174,7 +174,7 @@ export const AdminDroneManager: React.FC = () => {
 
       {/* Fleet Live Telemetry Quick Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white/75 backdrop-blur-xl p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-medium text-[#718078]">Active Drone Fleet</div>
             <div className="text-2xl font-black text-[#172B24] mt-1">4 Quadcopters</div>
@@ -185,7 +185,7 @@ export const AdminDroneManager: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white/75 backdrop-blur-xl p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-medium text-[#718078]">Acreage Sprayed</div>
             <div className="text-2xl font-black text-[#172B24] mt-1">1,240 Acres</div>
@@ -196,7 +196,7 @@ export const AdminDroneManager: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white/75 backdrop-blur-xl p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-medium text-[#718078]">Avg. Spray Cost</div>
             <div className="text-2xl font-black text-[#172B24] mt-1">₹450 / Acre</div>
@@ -207,7 +207,7 @@ export const AdminDroneManager: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white/75 backdrop-blur-xl p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-medium text-[#718078]">RTK GPS Precision</div>
             <div className="text-2xl font-black text-[#064E3B] mt-1">± 2.5 cm</div>
@@ -220,7 +220,7 @@ export const AdminDroneManager: React.FC = () => {
       </div>
 
       {/* Search & Filter */}
-      <div className="bg-white p-4 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
+      <div className="bg-white/75 backdrop-blur-xl p-4 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
         <div className="relative">
           <Search className="w-4 h-4 text-[#8A9A90] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
@@ -240,7 +240,7 @@ export const AdminDroneManager: React.FC = () => {
           <p className="text-xs text-[#718078]">Loading drone mission fleet...</p>
         </div>
       ) : filteredServices.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-dashed border-[#CBD8D0] p-12 text-center">
+        <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-dashed border-[#CBD8D0] p-12 text-center">
           <Plane className="w-10 h-10 text-[#CBD8D0] mx-auto mb-3" />
           <h3 className="text-sm font-bold text-[#243A32]">No drone services found</h3>
           <p className="text-xs text-[#718078] mt-1">Add a drone service package or modify your search.</p>
@@ -250,7 +250,7 @@ export const AdminDroneManager: React.FC = () => {
           {filteredServices.map(srv => (
             <div
               key={srv.id}
-              className="bg-white rounded-2xl border border-[#E5EDE7]/90 shadow-xs hover:shadow-md transition overflow-hidden flex flex-col justify-between"
+              className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7]/90 shadow-xs hover:shadow-md transition overflow-hidden flex flex-col justify-between"
             >
               <div>
                 <div className="h-44 w-full overflow-hidden bg-[#EFF4EF] relative">
@@ -319,14 +319,14 @@ export const AdminDroneManager: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => handleOpenEdit(srv)}
-                    className="p-1.5 rounded-lg text-[#5A6E64] hover:text-[#064E3B] hover:bg-white transition"
+                    className="p-1.5 rounded-lg text-[#5A6E64] hover:text-[#064E3B] hover:bg-white/75 backdrop-blur-xl transition"
                     title="Edit Service"
                   >
                     <Edit2 className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => setDeleteTarget(srv)}
-                    className="p-1.5 rounded-lg text-[#8A9A90] hover:text-rose-600 hover:bg-white transition"
+                    className="p-1.5 rounded-lg text-[#8A9A90] hover:text-rose-600 hover:bg-white/75 backdrop-blur-xl transition"
                     title="Delete Service"
                   >
                     <Trash2 className="w-4 h-4" />

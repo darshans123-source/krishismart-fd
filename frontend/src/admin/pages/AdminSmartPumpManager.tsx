@@ -106,7 +106,7 @@ export const AdminSmartPumpManager: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/75 backdrop-blur-xl p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
         <div>
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-semibold mb-2">
             <Zap className="w-3.5 h-3.5 text-teal-600" />
@@ -140,7 +140,7 @@ export const AdminSmartPumpManager: React.FC = () => {
               <span className={`px-3 py-1 rounded-full text-xs font-extrabold flex items-center gap-1.5 ${
                 pump?.status === 'ON' ? 'bg-[#10B981] text-white' : 'bg-[#3E5248] text-[#CBD8D0]'
               }`}>
-                <span className={`w-2 h-2 rounded-full ${pump?.status === 'ON' ? 'bg-white animate-ping' : 'bg-[#8A9A90]'}`} />
+                <span className={`w-2 h-2 rounded-full ${pump?.status === 'ON' ? 'bg-white/75 backdrop-blur-xl animate-ping' : 'bg-[#8A9A90]'}`} />
                 PUMP {pump?.status || 'OFF'}
               </span>
               <span className="px-3 py-1 rounded-full bg-white/10 text-[#6EE7B7] text-xs font-semibold">
@@ -194,7 +194,7 @@ export const AdminSmartPumpManager: React.FC = () => {
 
       {/* Metrics Strip */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white/75 backdrop-blur-xl p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-medium text-[#718078]">Today's Water Delivered</div>
             <div className="text-2xl font-black text-[#172B24] mt-1">
@@ -207,7 +207,7 @@ export const AdminSmartPumpManager: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white/75 backdrop-blur-xl p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-medium text-[#718078]">Scheduled Timing</div>
             <div className="text-2xl font-black text-[#172B24] mt-1">{pump?.schedule || '06:00 AM - 08:30 AM'}</div>
@@ -218,7 +218,7 @@ export const AdminSmartPumpManager: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white/75 backdrop-blur-xl p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-medium text-[#718078]">Telemetry Health</div>
             <div className="text-2xl font-black text-[#064E3B] mt-1">Nominal</div>
@@ -231,7 +231,7 @@ export const AdminSmartPumpManager: React.FC = () => {
       </div>
 
       {/* Configuration Form */}
-      <div className="bg-white p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
+      <div className="bg-white/75 backdrop-blur-xl p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
         <h3 className="text-base font-bold text-[#172B24] mb-1">Actuator Automation Settings</h3>
         <p className="text-xs text-[#718078] mb-6">
           Adjust automatic threshold triggers, schedule timers, and location descriptions.

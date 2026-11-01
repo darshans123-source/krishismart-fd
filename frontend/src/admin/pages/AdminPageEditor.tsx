@@ -301,7 +301,7 @@ export const AdminPageEditor: React.FC<AdminPageEditorProps> = ({ pageId, onBack
           <button
             onClick={() => setViewMode('edit')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-              viewMode === 'edit' ? 'bg-white text-[#172B24] shadow-2xs font-bold' : 'text-[#718078] hover:text-[#172B24]'
+              viewMode === 'edit' ? 'bg-white/75 backdrop-blur-xl text-[#172B24] shadow-2xs font-bold' : 'text-[#718078] hover:text-[#172B24]'
             }`}
           >
             Editor
@@ -309,7 +309,7 @@ export const AdminPageEditor: React.FC<AdminPageEditorProps> = ({ pageId, onBack
           <button
             onClick={() => setViewMode('split')}
             className={`hidden md:block px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-              viewMode === 'split' ? 'bg-white text-[#172B24] shadow-2xs font-bold' : 'text-[#718078] hover:text-[#172B24]'
+              viewMode === 'split' ? 'bg-white/75 backdrop-blur-xl text-[#172B24] shadow-2xs font-bold' : 'text-[#718078] hover:text-[#172B24]'
             }`}
           >
             Split View
@@ -317,7 +317,7 @@ export const AdminPageEditor: React.FC<AdminPageEditorProps> = ({ pageId, onBack
           <button
             onClick={() => setViewMode('preview')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-              viewMode === 'preview' ? 'bg-white text-[#064E3B] shadow-2xs font-bold' : 'text-[#718078] hover:text-[#172B24]'
+              viewMode === 'preview' ? 'bg-white/75 backdrop-blur-xl text-[#064E3B] shadow-2xs font-bold' : 'text-[#718078] hover:text-[#172B24]'
             }`}
           >
             Live Preview
@@ -360,7 +360,7 @@ export const AdminPageEditor: React.FC<AdminPageEditorProps> = ({ pageId, onBack
         {viewMode !== 'preview' && (
           <div className="space-y-6">
             {/* Section List & Ordering Bar */}
-            <div className="bg-white rounded-2xl border border-[#E5EDE7] p-5 shadow-2xs space-y-4">
+            <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-5 shadow-2xs space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-sm font-extrabold text-[#172B24] font-heading uppercase tracking-wider">
@@ -459,7 +459,7 @@ export const AdminPageEditor: React.FC<AdminPageEditorProps> = ({ pageId, onBack
 
             {/* Active Section Detail & Nested Components Editor */}
             {activeSection && (
-              <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-6">
+              <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#EFF4EF]">
                   <div>
                     <h3 className="text-base font-extrabold text-[#172B24] font-heading">
@@ -506,7 +506,7 @@ export const AdminPageEditor: React.FC<AdminPageEditorProps> = ({ pageId, onBack
                         );
                         setPage({ ...page, sections: updated });
                       }}
-                      className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs font-semibold bg-white"
+                      className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs font-semibold bg-white/75 backdrop-blur-xl"
                     >
                       <option value="hero">Hero Header (Large Greeting)</option>
                       <option value="grid">Multi-Column Card Grid</option>
@@ -553,7 +553,7 @@ export const AdminPageEditor: React.FC<AdminPageEditorProps> = ({ pageId, onBack
                         <div className="flex items-center gap-1.5 shrink-0">
                           <button
                             onClick={() => handleOpenEditComponent(comp)}
-                            className="px-2.5 py-1.5 rounded-xl bg-white border border-[#E5EDE7] hover:bg-[#EFF4EF] text-xs font-bold text-[#3E5248] transition-colors cursor-pointer"
+                            className="px-2.5 py-1.5 rounded-xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] hover:bg-[#EFF4EF] text-xs font-bold text-[#3E5248] transition-colors cursor-pointer"
                           >
                             Edit
                           </button>
@@ -578,7 +578,7 @@ export const AdminPageEditor: React.FC<AdminPageEditorProps> = ({ pageId, onBack
         {/* LIVE PREVIEW PANEL (Shown in 'preview' or 'split') */}
         {/* ================================================== */}
         {viewMode !== 'edit' && (
-          <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-sm space-y-6">
+          <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-sm space-y-6">
             <div className="flex items-center justify-between pb-3 border-b border-[#E5EDE7]">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-[#059669]" />
@@ -623,7 +623,7 @@ export const AdminPageEditor: React.FC<AdminPageEditorProps> = ({ pageId, onBack
                     ) : sec.type === 'grid' ? (
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                         {sec.components?.map((c: any) => (
-                          <div key={c.id} className="p-4 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-1">
+                          <div key={c.id} className="p-4 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs space-y-1">
                             <div className="text-sm font-bold text-[#172B24]">{c.title}</div>
                             {c.content && <p className="text-xs text-[#5A6E64]">{c.content}</p>}
                           </div>
@@ -639,7 +639,7 @@ export const AdminPageEditor: React.FC<AdminPageEditorProps> = ({ pageId, onBack
                         ))}
                       </div>
                     ) : (
-                      <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-2">
+                      <div className="p-5 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs space-y-2">
                         {sec.components?.map((c: any) => (
                           <div key={c.id} className="space-y-1">
                             <div className="text-sm font-bold text-[#172B24]">{c.title}</div>
@@ -673,7 +673,7 @@ export const AdminPageEditor: React.FC<AdminPageEditorProps> = ({ pageId, onBack
                 <select
                   value={editingComponent.type}
                   onChange={(e) => setEditingComponent({ ...editingComponent, type: e.target.value })}
-                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs font-semibold bg-white"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs font-semibold bg-white/75 backdrop-blur-xl"
                 >
                   <option value="heading">Heading</option>
                   <option value="paragraph">Paragraph Text</option>

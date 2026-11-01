@@ -76,7 +76,7 @@ export const SmartFarmIoTPage: React.FC = () => {
       {/* ================================================== */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
         {/* 1. Soil Moisture */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-2 flex flex-col justify-between">
+        <div className="p-4 sm:p-5 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs space-y-2 flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#5A6E64] flex items-center gap-1">
               <span>🌱</span> Soil Moisture
@@ -93,7 +93,7 @@ export const SmartFarmIoTPage: React.FC = () => {
         </div>
 
         {/* 2. Soil Temperature */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-2 flex flex-col justify-between">
+        <div className="p-4 sm:p-5 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs space-y-2 flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#5A6E64] flex items-center gap-1">
               <span>🌡️</span> Soil Temp
@@ -110,7 +110,7 @@ export const SmartFarmIoTPage: React.FC = () => {
         </div>
 
         {/* 3. Water Tank */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-2 flex flex-col justify-between">
+        <div className="p-4 sm:p-5 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs space-y-2 flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#5A6E64] flex items-center gap-1">
               <span>💧</span> Water Tank
@@ -127,7 +127,7 @@ export const SmartFarmIoTPage: React.FC = () => {
         </div>
 
         {/* 4. Rain Sensor */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-2 flex flex-col justify-between">
+        <div className="p-4 sm:p-5 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs space-y-2 flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#5A6E64] flex items-center gap-1">
               <span>🌧️</span> Rain Sensor
@@ -143,7 +143,7 @@ export const SmartFarmIoTPage: React.FC = () => {
         </div>
 
         {/* 5. Device Status */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-2 flex flex-col justify-between col-span-2 sm:col-span-1">
+        <div className="p-4 sm:p-5 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs space-y-2 flex flex-col justify-between col-span-2 sm:col-span-1">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#5A6E64] flex items-center gap-1">
               <span>📡</span> Device Status
@@ -162,7 +162,7 @@ export const SmartFarmIoTPage: React.FC = () => {
       {/* ================================================== */}
       {/* 3. REAL-LOOKING FARM EQUIPMENT & SENSOR DIAGRAM */}
       {/* ================================================== */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-5">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-5">
         <div className="border-b border-[#EFF4EF] pb-3">
           <h2 className="text-base font-extrabold text-[#172B24] font-heading">
             Farm Sensor Network Overview
@@ -249,7 +249,7 @@ export const SmartFarmIoTPage: React.FC = () => {
       {/* ================================================== */}
       {/* 4. REGISTERED SENSORS LIST */}
       {/* ================================================== */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#EFF4EF] pb-3">
           <div>
             <h3 className="font-extrabold text-base text-[#172B24] font-heading">
@@ -296,19 +296,19 @@ export const SmartFarmIoTPage: React.FC = () => {
 
                 <div className="grid grid-cols-3 gap-2 mt-3 pt-2.5 border-t border-[#E5EDE7] text-xs">
                   {dev.metrics.soilMoisture !== undefined && (
-                    <div className="p-2 rounded-xl bg-white border border-[#E5EDE7] text-center">
+                    <div className="p-2 rounded-xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] text-center">
                       <div className="text-[10px] text-[#8A9A90] font-bold">Moisture</div>
                       <div className="font-bold text-[#172B24]">{dev.metrics.soilMoisture}%</div>
                     </div>
                   )}
                   {dev.metrics.soilTemp !== undefined && (
-                    <div className="p-2 rounded-xl bg-white border border-[#E5EDE7] text-center">
+                    <div className="p-2 rounded-xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] text-center">
                       <div className="text-[10px] text-[#8A9A90] font-bold">Soil Temp</div>
                       <div className="font-bold text-[#172B24]">{dev.metrics.soilTemp}°C</div>
                     </div>
                   )}
                   {dev.metrics.ambientTemp !== undefined && (
-                    <div className="p-2 rounded-xl bg-white border border-[#E5EDE7] text-center">
+                    <div className="p-2 rounded-xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] text-center">
                       <div className="text-[10px] text-[#8A9A90] font-bold">Air Temp</div>
                       <div className="font-bold text-[#172B24]">{dev.metrics.ambientTemp}°C</div>
                     </div>
@@ -328,7 +328,7 @@ export const SmartFarmIoTPage: React.FC = () => {
       {/* CONNECT DEVICE MODAL */}
       {showAddModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl border border-[#E5EDE7] space-y-4">
+          <div className="bg-white/75 backdrop-blur-xl rounded-2xl p-6 max-w-md w-full shadow-2xl border border-[#E5EDE7] space-y-4">
             <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
               <h3 className="font-bold text-base text-[#172B24] font-heading">
                 Connect Wireless Sensor
@@ -359,7 +359,7 @@ export const SmartFarmIoTPage: React.FC = () => {
                 <select
                   value={devType}
                   onChange={(e: any) => setDevType(e.target.value)}
-                  className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white"
+                  className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white/75 backdrop-blur-xl"
                 >
                   <option value="Soil Probe">Soil Moisture & Temp Probe</option>
                   <option value="Weather Node">Micro-Climate Farm Station</option>

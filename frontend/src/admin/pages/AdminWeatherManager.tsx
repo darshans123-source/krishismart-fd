@@ -102,7 +102,7 @@ export const AdminWeatherManager: React.FC = () => {
   return (
     <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-200">
       {/* Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white rounded-2xl border border-[#E5EDE7] p-5 sm:p-6 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-5 sm:p-6 shadow-2xs">
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-extrabold text-[#172B24] font-heading">Weather Advisory & Alerts Console</h2>
@@ -127,7 +127,7 @@ export const AdminWeatherManager: React.FC = () => {
       {/* Live Weather Telemetry Snapshot */}
       {weatherData && (
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="p-4 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-1">
+          <div className="p-4 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs space-y-1">
             <span className="text-[11px] font-bold text-[#718078] flex items-center gap-1.5">
               <Sun className="w-4 h-4 text-amber-500" />
               <span>Ambient Temperature</span>
@@ -136,7 +136,7 @@ export const AdminWeatherManager: React.FC = () => {
             <div className="text-[11px] text-[#718078]">{weatherData.condition}</div>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-1">
+          <div className="p-4 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs space-y-1">
             <span className="text-[11px] font-bold text-[#718078] flex items-center gap-1.5">
               <Droplets className="w-4 h-4 text-cyan-500" />
               <span>Rain Probability</span>
@@ -145,7 +145,7 @@ export const AdminWeatherManager: React.FC = () => {
             <div className="text-[11px] text-cyan-700 font-semibold">Relative Humidity: {weatherData.humidity}%</div>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-1">
+          <div className="p-4 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs space-y-1">
             <span className="text-[11px] font-bold text-[#718078] flex items-center gap-1.5">
               <Droplets className="w-4 h-4 text-[#10B981]" />
               <span>Soil Moisture Probe</span>
@@ -154,7 +154,7 @@ export const AdminWeatherManager: React.FC = () => {
             <div className="text-[11px] text-[#064E3B] font-semibold">Optimal root hydration</div>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-1">
+          <div className="p-4 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs space-y-1">
             <span className="text-[11px] font-bold text-[#718078] flex items-center gap-1.5">
               <Wind className="w-4 h-4 text-purple-500" />
               <span>Wind Velocity</span>
@@ -166,7 +166,7 @@ export const AdminWeatherManager: React.FC = () => {
       )}
 
       {/* Advisory Warnings List */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
         <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
           <h3 className="text-base font-extrabold text-[#172B24] font-heading">
             Active Warning Banners & Climate Advisories ({advisories.length})
@@ -207,14 +207,14 @@ export const AdminWeatherManager: React.FC = () => {
               <div className="flex items-center gap-1.5 self-end sm:self-auto shrink-0">
                 <button
                   onClick={() => handleToggleVisibility(adv)}
-                  className="p-2 rounded-xl bg-white border border-[#E5EDE7] hover:bg-[#EFF4EF] text-[#3E5248] transition-colors cursor-pointer"
+                  className="p-2 rounded-xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] hover:bg-[#EFF4EF] text-[#3E5248] transition-colors cursor-pointer"
                   title={adv.visible ? 'Hide Advisory' : 'Show Advisory'}
                 >
                   {adv.visible ? <Eye className="w-4 h-4 text-[#064E3B]" /> : <EyeOff className="w-4 h-4" />}
                 </button>
                 <button
                   onClick={() => handleOpenEdit(adv)}
-                  className="p-2 rounded-xl bg-white border border-[#E5EDE7] hover:bg-[#EFF4EF] text-[#3E5248] transition-colors cursor-pointer"
+                  className="p-2 rounded-xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] hover:bg-[#EFF4EF] text-[#3E5248] transition-colors cursor-pointer"
                   title="Edit Advisory"
                 >
                   <Edit3 className="w-4 h-4" />
@@ -271,7 +271,7 @@ export const AdminWeatherManager: React.FC = () => {
                 <select
                   value={editingAdvisory.type}
                   onChange={(e) => setEditingAdvisory({ ...editingAdvisory, type: e.target.value })}
-                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs bg-white"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs bg-white/75 backdrop-blur-xl"
                 >
                   <option value="Warning">Warning (Red Critical)</option>
                   <option value="Alert">Alert (Amber Caution)</option>
@@ -285,7 +285,7 @@ export const AdminWeatherManager: React.FC = () => {
                 <select
                   value={editingAdvisory.priority}
                   onChange={(e) => setEditingAdvisory({ ...editingAdvisory, priority: e.target.value })}
-                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs bg-white"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs bg-white/75 backdrop-blur-xl"
                 >
                   <option value="High">High</option>
                   <option value="Medium">Medium</option>

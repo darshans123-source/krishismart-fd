@@ -71,7 +71,7 @@ export const GovernmentSchemesPage: React.FC = () => {
 
         <button
           onClick={() => setSelectedCategory('All')}
-          className="px-4 py-2 rounded-xl bg-white text-blue-950 text-xs font-extrabold hover:bg-blue-50 transition-colors shrink-0"
+          className="px-4 py-2 rounded-xl bg-white/75 backdrop-blur-xl text-blue-950 text-xs font-extrabold hover:bg-blue-50 transition-colors shrink-0"
         >
           View Matched Subsidies
         </button>
@@ -87,7 +87,7 @@ export const GovernmentSchemesPage: React.FC = () => {
               className={`px-3.5 py-2 rounded-2xl text-xs font-bold transition-all shrink-0 ${
                 selectedCategory === cat
                   ? 'bg-blue-600 text-white shadow-xs'
-                  : 'bg-white text-[#5A6E64] hover:bg-[#EFF4EF] border border-[#E5EDE7]'
+                  : 'bg-white/75 backdrop-blur-xl text-[#5A6E64] hover:bg-[#EFF4EF] border border-[#E5EDE7]'
               }`}
             >
               {cat}
@@ -102,7 +102,7 @@ export const GovernmentSchemesPage: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search PM-KISAN, KCC, Solar..."
-            className="w-full pl-9 pr-4 py-2 rounded-2xl border border-[#E5EDE7] text-xs bg-white focus:outline-hidden focus:ring-2 focus:ring-blue-500"
+            className="w-full pl-9 pr-4 py-2 rounded-2xl border border-[#E5EDE7] text-xs bg-white/75 backdrop-blur-xl focus:outline-hidden focus:ring-2 focus:ring-blue-500"
           />
         </div>
       </div>
@@ -112,7 +112,7 @@ export const GovernmentSchemesPage: React.FC = () => {
         {filteredSchemes.map((scheme) => (
           <div
             key={scheme.id}
-            className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-blue-400 hover:shadow-md transition-all group"
+            className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-blue-400 hover:shadow-md transition-all group"
           >
             <div>
               <div className="flex items-center justify-between mb-2">
@@ -182,7 +182,7 @@ export const GovernmentSchemesPage: React.FC = () => {
       {/* DETAILED SCHEME CHECKLIST MODAL */}
       {selectedSchemeForModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-2xl border border-[#E5EDE7] space-y-5 max-h-[90vh] overflow-y-auto">
+          <div className="bg-white/75 backdrop-blur-xl rounded-2xl p-6 max-w-lg w-full shadow-2xl border border-[#E5EDE7] space-y-5 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
               <div>
                 <span className="text-[10px] font-extrabold text-blue-700 uppercase">

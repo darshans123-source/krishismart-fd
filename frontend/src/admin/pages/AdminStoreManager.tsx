@@ -163,7 +163,7 @@ export const AdminStoreManager: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/75 backdrop-blur-xl p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
         <div>
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#064E3B] text-xs font-semibold mb-2">
             <ShoppingBag className="w-3.5 h-3.5 text-[#059669]" />
@@ -196,7 +196,7 @@ export const AdminStoreManager: React.FC = () => {
 
       {/* Summary KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white/75 backdrop-blur-xl p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-medium text-[#718078]">Catalog SKUs</div>
             <div className="text-2xl font-black text-[#172B24] mt-1">{products.length} Items</div>
@@ -207,7 +207,7 @@ export const AdminStoreManager: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white/75 backdrop-blur-xl p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-medium text-[#718078]">In Stock Ratio</div>
             <div className="text-2xl font-black text-[#064E3B] mt-1">
@@ -222,7 +222,7 @@ export const AdminStoreManager: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white/75 backdrop-blur-xl p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-medium text-[#718078]">Avg Farmer Rating</div>
             <div className="text-2xl font-black text-amber-900 mt-1">4.8 / 5.0</div>
@@ -233,7 +233,7 @@ export const AdminStoreManager: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white/75 backdrop-blur-xl p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-medium text-[#718078]">Avg Farmer Savings</div>
             <div className="text-2xl font-black text-[#064E3B] mt-1">22%</div>
@@ -246,7 +246,7 @@ export const AdminStoreManager: React.FC = () => {
       </div>
 
       {/* Filter Toolbar */}
-      <div className="bg-white p-4 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex flex-col md:flex-row items-center gap-3">
+      <div className="bg-white/75 backdrop-blur-xl p-4 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex flex-col md:flex-row items-center gap-3">
         <div className="relative flex-1 w-full">
           <Search className="w-4 h-4 text-[#8A9A90] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
@@ -288,7 +288,7 @@ export const AdminStoreManager: React.FC = () => {
           <p className="text-xs text-[#718078]">Loading catalog items...</p>
         </div>
       ) : filteredProducts.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-dashed border-[#CBD8D0] p-12 text-center">
+        <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-dashed border-[#CBD8D0] p-12 text-center">
           <Package className="w-10 h-10 text-[#CBD8D0] mx-auto mb-3" />
           <h3 className="text-sm font-bold text-[#243A32]">No products found</h3>
           <p className="text-xs text-[#718078] mt-1">Try relaxing your search terms or add a new product.</p>
@@ -303,7 +303,7 @@ export const AdminStoreManager: React.FC = () => {
             return (
               <div
                 key={prod.id}
-                className="bg-white rounded-2xl border border-[#E5EDE7]/90 shadow-xs hover:shadow-md transition overflow-hidden flex flex-col justify-between"
+                className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7]/90 shadow-xs hover:shadow-md transition overflow-hidden flex flex-col justify-between"
               >
                 <div>
                   <div className="h-44 w-full overflow-hidden bg-[#EFF4EF] relative">
@@ -366,14 +366,14 @@ export const AdminStoreManager: React.FC = () => {
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={() => handleOpenEdit(prod)}
-                      className="p-1.5 rounded-lg text-[#5A6E64] hover:text-[#064E3B] hover:bg-white transition"
+                      className="p-1.5 rounded-lg text-[#5A6E64] hover:text-[#064E3B] hover:bg-white/75 backdrop-blur-xl transition"
                       title="Edit Product"
                     >
                       <Edit2 className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={() => setDeleteTarget(prod)}
-                      className="p-1.5 rounded-lg text-[#8A9A90] hover:text-rose-600 hover:bg-white transition"
+                      className="p-1.5 rounded-lg text-[#8A9A90] hover:text-rose-600 hover:bg-white/75 backdrop-blur-xl transition"
                       title="Delete Product"
                     >
                       <Trash2 className="w-3.5 h-3.5" />

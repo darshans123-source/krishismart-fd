@@ -64,7 +64,7 @@ export const SmartPumpPage: React.FC = () => {
       {/* ================================================== */}
       {/* 2. LARGE PUMP STATUS CARD */}
       {/* ================================================== */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 sm:p-8 shadow-2xs space-y-6">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 sm:p-8 shadow-2xs space-y-6">
         {/* Top Status Indicators: PUMP ON/OFF, Soil Moisture, Water Tank */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pb-6 border-b border-[#EFF4EF]">
           {/* Pump Status Display */}
@@ -221,7 +221,7 @@ export const SmartPumpPage: React.FC = () => {
       {/* ================================================== */}
       {/* 3. WATER USAGE CHART */}
       {/* ================================================== */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 sm:p-8 shadow-2xs space-y-4">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 sm:p-8 shadow-2xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#EFF4EF] pb-3">
           <div>
             <h3 className="font-extrabold text-base text-[#172B24] font-heading">
@@ -257,7 +257,7 @@ export const SmartPumpPage: React.FC = () => {
       {/* ================================================== */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Auto Threshold */}
-        <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-3">
+        <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-3">
           <div className="flex items-center justify-between">
             <div>
               <h3 className="font-extrabold text-sm text-[#172B24] font-heading">
@@ -288,7 +288,7 @@ export const SmartPumpPage: React.FC = () => {
         </div>
 
         {/* Irrigation Schedules List */}
-        <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-3">
+        <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-3">
           <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-2">
             <h3 className="font-extrabold text-sm text-[#172B24] font-heading">
               Automated Irrigation Schedules

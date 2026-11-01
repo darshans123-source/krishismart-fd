@@ -49,7 +49,7 @@ export const WeatherCenterPage: React.FC = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsLocationModalOpen(true)}
-            className="px-3.5 py-2 rounded-xl bg-white hover:bg-[#F7FAF7] border border-[#E5EDE7] text-[#3E5248] font-bold text-xs shadow-2xs flex items-center gap-1.5 transition-colors"
+            className="px-3.5 py-2 rounded-xl bg-white/75 backdrop-blur-xl hover:bg-[#F7FAF7] border border-[#E5EDE7] text-[#3E5248] font-bold text-xs shadow-2xs flex items-center gap-1.5 transition-colors"
           >
             <MapPin className="w-3.5 h-3.5 text-[#059669]" />
             <span>📍 Change Location</span>
@@ -120,7 +120,7 @@ export const WeatherCenterPage: React.FC = () => {
         {/* Right Smart Spraying & Irrigation Advisory Cards */}
         <div className="lg:col-span-5 space-y-4">
           {/* Foliar Spraying Window */}
-          <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-3">
+          <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-5 h-5 text-[#059669]" />
@@ -145,7 +145,7 @@ export const WeatherCenterPage: React.FC = () => {
           </div>
 
           {/* Irrigation & Rain Alert */}
-          <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-3">
+          <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Droplets className="w-5 h-5 text-cyan-600" />
@@ -168,7 +168,7 @@ export const WeatherCenterPage: React.FC = () => {
       </div>
 
       {/* 2. 7-DAY FORECAST GRID */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-4">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-4">
         <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
           <div>
             <h3 className="font-extrabold text-base text-[#172B24] font-heading">

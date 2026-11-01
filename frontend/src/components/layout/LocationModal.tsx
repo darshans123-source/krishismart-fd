@@ -66,7 +66,7 @@ export const LocationModal: React.FC<LocationModalProps> = ({ isOpen, onClose })
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in">
-      <div className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-2xl border border-[#E5EDE7] space-y-5 animate-in zoom-in-95 duration-150 max-h-[90vh] flex flex-col">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl p-6 max-w-lg w-full shadow-2xl border border-[#E5EDE7] space-y-5 animate-in zoom-in-95 duration-150 max-h-[90vh] flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3 shrink-0">
           <div className="flex items-center gap-2.5">
@@ -186,7 +186,7 @@ export const LocationModal: React.FC<LocationModalProps> = ({ isOpen, onClose })
                   setSelectedState(e.target.value);
                   setDistrictSearch('');
                 }}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5EDE7] text-xs bg-white text-[#243A32] font-semibold focus:outline-hidden focus:ring-2 focus:ring-[#10B981]"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5EDE7] text-xs bg-white/75 backdrop-blur-xl text-[#243A32] font-semibold focus:outline-hidden focus:ring-2 focus:ring-[#10B981]"
               >
                 {INDIAN_STATES.map((s) => (
                   <option key={s} value={s}>
@@ -220,7 +220,7 @@ export const LocationModal: React.FC<LocationModalProps> = ({ isOpen, onClose })
                       className={`p-2 rounded-lg text-left text-xs font-semibold truncate transition-colors ${
                         isSelected
                           ? 'bg-[#059669] text-white shadow-xs'
-                          : 'bg-white text-[#3E5248] hover:bg-[#ECFDF5] hover:text-[#064E3B] border border-[#E5EDE7]/80'
+                          : 'bg-white/75 backdrop-blur-xl text-[#3E5248] hover:bg-[#ECFDF5] hover:text-[#064E3B] border border-[#E5EDE7]/80'
                       }`}
                     >
                       {district}

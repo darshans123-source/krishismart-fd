@@ -99,7 +99,7 @@ export const PremiumPage: React.FC = () => {
             className={`rounded-2xl p-6 sm:p-7 flex flex-col justify-between space-y-6 transition-all duration-300 relative ${
               plan.isPopular
                 ? 'bg-gradient-to-b from-[#172B24] via-[#172B24] to-[#022C22] text-white shadow-2xl border-2 border-amber-400/80 -translate-y-2'
-                : 'bg-white text-[#172B24] border border-[#E5EDE7] shadow-sm'
+                : 'bg-white/75 backdrop-blur-xl text-[#172B24] border border-[#E5EDE7] shadow-sm'
             }`}
           >
             {plan.isPopular && (

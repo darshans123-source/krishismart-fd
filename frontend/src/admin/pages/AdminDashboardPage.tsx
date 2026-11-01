@@ -95,7 +95,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
           <div className="flex flex-wrap items-center gap-2.5 self-start md:self-auto">
             <button
               onClick={() => onNavigateTab('dashboard-editor')}
-              className="px-4 py-2.5 rounded-2xl bg-white text-[#172B24] hover:bg-[#ECFDF5] text-xs font-extrabold flex items-center gap-2 transition-all shadow-xs cursor-pointer"
+              className="px-4 py-2.5 rounded-2xl bg-white/75 backdrop-blur-xl text-[#172B24] hover:bg-[#ECFDF5] text-xs font-extrabold flex items-center gap-2 transition-all shadow-xs cursor-pointer"
             >
               <Sliders className="w-4 h-4 text-[#064E3B]" />
               <span>Edit Dashboard</span>
@@ -114,7 +114,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-4">
         {/* Total Users */}
-        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs hover:border-[#6EE7B7] transition-all">
+        <div className="p-5 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs hover:border-[#6EE7B7] transition-all">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#718078] uppercase tracking-wider font-heading">Users</span>
             <div className="p-2 rounded-xl bg-[#ECFDF5] text-[#064E3B]">
@@ -131,7 +131,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
         </div>
 
         {/* Active Farmers */}
-        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs hover:border-[#6EE7B7] transition-all">
+        <div className="p-5 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs hover:border-[#6EE7B7] transition-all">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#718078] uppercase tracking-wider font-heading">Farmers</span>
             <div className="p-2 rounded-xl bg-blue-50 text-blue-700">
@@ -145,7 +145,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
         </div>
 
         {/* Total Crops */}
-        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs hover:border-[#6EE7B7] transition-all">
+        <div className="p-5 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs hover:border-[#6EE7B7] transition-all">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#718078] uppercase tracking-wider font-heading">Crops</span>
             <div className="p-2 rounded-xl bg-amber-50 text-amber-700">
@@ -159,7 +159,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
         </div>
 
         {/* Total Products */}
-        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs hover:border-[#6EE7B7] transition-all">
+        <div className="p-5 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs hover:border-[#6EE7B7] transition-all">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#718078] uppercase tracking-wider font-heading">Products</span>
             <div className="p-2 rounded-xl bg-teal-50 text-teal-700">
@@ -173,7 +173,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
         </div>
 
         {/* Government Schemes */}
-        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs hover:border-[#6EE7B7] transition-all col-span-2 sm:col-span-1">
+        <div className="p-5 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs hover:border-[#6EE7B7] transition-all col-span-2 sm:col-span-1">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#718078] uppercase tracking-wider font-heading">Schemes</span>
             <div className="p-2 rounded-xl bg-purple-50 text-purple-700">
@@ -188,7 +188,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
       </div>
 
       {/* Quick Actions Shortcuts Bar */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-5 shadow-2xs space-y-3">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-5 shadow-2xs space-y-3">
         <div className="flex items-center justify-between">
           <h2 className="text-xs font-bold text-[#718078] uppercase tracking-wider font-heading">
             Admin Management Actions
@@ -247,7 +247,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
       {/* Analytics Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Growth Area Chart */}
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
+        <div className="lg:col-span-2 bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-base font-extrabold text-[#172B24] font-heading">
@@ -288,7 +288,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
         </div>
 
         {/* Crop Distribution Bar Chart */}
-        <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
+        <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-base font-extrabold text-[#172B24] font-heading">
@@ -323,7 +323,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
       {/* Bottom: Recent Activity & System Status */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Activity Table */}
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
+        <div className="lg:col-span-2 bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-base font-extrabold text-[#172B24] font-heading">
@@ -381,7 +381,7 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
         </div>
 
         {/* System Health Card */}
-        <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
+        <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-base font-extrabold text-[#172B24] font-heading">
               Platform Status

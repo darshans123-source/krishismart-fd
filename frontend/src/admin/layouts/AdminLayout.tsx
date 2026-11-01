@@ -52,7 +52,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ initialTab = 'dashboar
       case 'finance':
         return (
           <div className="space-y-6">
-            <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs">
+            <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs">
               <h2 className="text-lg font-extrabold text-[#172B24] font-heading">KrishiNidhi Finance Settings</h2>
               <p className="text-xs text-[#718078] mt-1">Configure interest subvention rates, crop loan limits, and credit scores.</p>
               <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -80,7 +80,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ initialTab = 'dashboar
       case 'krishibhavishya':
         return (
           <div className="space-y-6">
-            <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs">
+            <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs">
               <h2 className="text-lg font-extrabold text-[#172B24] font-heading">KrishiBhavishya Forecast Parameters</h2>
               <p className="text-xs text-[#718078] mt-1">Fine-tune AI price prediction weights, mandi arrival multipliers, and export sentiments.</p>
               <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">

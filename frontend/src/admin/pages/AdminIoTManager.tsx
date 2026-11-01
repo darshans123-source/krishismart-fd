@@ -74,7 +74,7 @@ export const AdminIoTManager: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/75 backdrop-blur-xl p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
         <div>
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#064E3B] text-xs font-semibold mb-2">
             <Cpu className="w-3.5 h-3.5 text-[#059669]" />
@@ -90,7 +90,7 @@ export const AdminIoTManager: React.FC = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={fetchDevices}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#E5EDE7] text-[#3E5248] bg-white hover:bg-[#F7FAF7] text-xs font-bold transition cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#E5EDE7] text-[#3E5248] bg-white/75 backdrop-blur-xl hover:bg-[#F7FAF7] text-xs font-bold transition cursor-pointer"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
             Sync Telemetry
@@ -100,7 +100,7 @@ export const AdminIoTManager: React.FC = () => {
 
       {/* Network Health Summary */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white/75 backdrop-blur-xl p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-medium text-[#718078]">Connected Probes</div>
             <div className="text-2xl font-black text-[#172B24] mt-1">{devices.length} Nodes</div>
@@ -111,7 +111,7 @@ export const AdminIoTManager: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white/75 backdrop-blur-xl p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-medium text-[#718078]">Avg Soil Moisture</div>
             <div className="text-2xl font-black text-teal-900 mt-1">
@@ -126,7 +126,7 @@ export const AdminIoTManager: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white/75 backdrop-blur-xl p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-medium text-[#718078]">Ambient Soil Temp</div>
             <div className="text-2xl font-black text-amber-900 mt-1">
@@ -139,7 +139,7 @@ export const AdminIoTManager: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white/75 backdrop-blur-xl p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-medium text-[#718078]">Network Uptime</div>
             <div className="text-2xl font-black text-[#064E3B] mt-1">99.8%</div>
@@ -158,7 +158,7 @@ export const AdminIoTManager: React.FC = () => {
           <p className="text-xs text-[#718078]">Reading IoT telemetry channels...</p>
         </div>
       ) : devices.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-dashed border-[#CBD8D0] p-12 text-center">
+        <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-dashed border-[#CBD8D0] p-12 text-center">
           <Cpu className="w-10 h-10 text-[#CBD8D0] mx-auto mb-3" />
           <h3 className="text-sm font-bold text-[#243A32]">No IoT devices registered</h3>
           <p className="text-xs text-[#718078] mt-1">Deploy sensor nodes to capture live telemetry.</p>
@@ -168,7 +168,7 @@ export const AdminIoTManager: React.FC = () => {
           {devices.map(dev => (
             <div
               key={dev.id}
-              className="bg-white rounded-2xl border border-[#E5EDE7]/90 shadow-xs hover:shadow-md transition p-5 flex flex-col justify-between"
+              className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7]/90 shadow-xs hover:shadow-md transition p-5 flex flex-col justify-between"
             >
               <div className="space-y-4">
                 {/* Header */}

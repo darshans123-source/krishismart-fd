@@ -145,7 +145,7 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
       <div className="flex-1 w-full max-w-none min-w-0 flex">
         {/* Desktop Sidebar (hidden on public landing page) */}
         {currentTab !== 'landing' && (
-          <div className="hidden lg:block">
+          <div className="hidden lg:block glass-strong border-r border-white/60">
             <Sidebar
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
@@ -169,7 +169,7 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
       {/* Mobile Drawer Navigation Sidebar */}
       {isMobileSidebarOpen && (
         <div className="fixed inset-0 z-50 flex lg:hidden bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in">
-          <div className="w-4/5 max-w-xs bg-white h-full shadow-2xl p-4 animate-in slide-in-from-left duration-200 overflow-y-auto">
+          <div className="w-4/5 max-w-xs bg-white/75 backdrop-blur-xl h-full shadow-2xl p-4 animate-in slide-in-from-left duration-200 overflow-y-auto">
             <Sidebar
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}

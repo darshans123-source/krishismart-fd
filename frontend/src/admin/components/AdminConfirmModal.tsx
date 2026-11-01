@@ -24,7 +24,7 @@ export const AdminConfirmModal: React.FC<AdminConfirmModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in duration-150">
-      <div className="w-full max-w-md bg-white rounded-2xl border border-[#E5EDE7] shadow-2xl p-6 space-y-4 animate-in zoom-in-95 duration-200">
+      <div className="w-full max-w-md bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] shadow-2xl p-6 space-y-4 animate-in zoom-in-95 duration-200">
         <div className="flex items-center gap-3">
           <div
             className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 ${

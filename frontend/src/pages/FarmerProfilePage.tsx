@@ -67,7 +67,7 @@ export const FarmerProfilePage: React.FC = () => {
       </div>
 
       {/* 1. PRIMARY PROFILE CARD */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 sm:p-8 shadow-xs space-y-6">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 sm:p-8 shadow-xs space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 pb-6 border-b border-[#EFF4EF]">
           <div className="w-24 h-24 rounded-2xl bg-[#D1FAE5] text-[#064E3B] flex items-center justify-center font-black text-3xl border-2 border-[#6EE7B7] overflow-hidden shadow-sm shrink-0">
             {user?.avatarUrl ? (
@@ -141,7 +141,7 @@ export const FarmerProfilePage: React.FC = () => {
 
       {/* 2. PARCELS & ACTIVE CROPS SNAPSHOT */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-4">
+        <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-4">
           <h3 className="font-extrabold text-base text-[#172B24] font-heading">
             Registered Farm Parcels ({farms.length})
           </h3>
@@ -161,7 +161,7 @@ export const FarmerProfilePage: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-4">
+        <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-4">
           <h3 className="font-extrabold text-base text-[#172B24] font-heading">
             Active Crop Portfolio ({crops.length})
           </h3>
@@ -184,7 +184,7 @@ export const FarmerProfilePage: React.FC = () => {
       {/* EDIT PROFILE MODAL */}
       {isEditing && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl border border-[#E5EDE7] space-y-4">
+          <div className="bg-white/75 backdrop-blur-xl rounded-2xl p-6 max-w-md w-full shadow-2xl border border-[#E5EDE7] space-y-4">
             <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
               <h3 className="font-extrabold text-base text-[#172B24] font-heading">
                 Update Farmer Profile

@@ -60,7 +60,13 @@
     width: 100%;
     min-width: 0;
     overflow-x: clip;
-    background: linear-gradient(180deg, #f8fbf6 0%, #eff7ef 45%, #e5f2e8 100%);
+    /* Glassmorphism canvas: a soft farm-photo wash under a light green
+       gradient, fixed so frosted panels have something to blur over.
+       The wash is deliberately light (92-96% white) so dark text on
+       glass stays readable — this is not a dark photo background. */
+    background:
+      linear-gradient(180deg, rgba(248, 251, 246, 0.93) 0%, rgba(239, 247, 239, 0.94) 45%, rgba(229, 242, 232, 0.96) 100%),
+      url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600&auto=format&fit=crop&q=80') center / cover no-repeat fixed;
     background-attachment: fixed;
     color: #14251d;
     -webkit-font-smoothing: antialiased;
@@ -92,12 +98,49 @@
   }
 }
 
+/* Glassmorphism system — applied fully, but kept readable.
+   Light frosted glass (white 55-75%), strong blur + saturation,
+   a bright top edge (inset highlight) and a white border, so panels
+   feel like glass over the farm-photo wash without washing out text.
+   Reduced motion / low-transparency users still get the same layout:
+   the panels stay opaque enough to read. */
+.glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.52));
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 8px 32px rgba(2, 44, 34, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+.glass-strong {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.68));
+  -webkit-backdrop-filter: blur(22px) saturate(170%);
+  backdrop-filter: blur(22px) saturate(170%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 10px 32px rgba(2, 44, 34, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+.glass-dark {
+  background: linear-gradient(135deg, rgba(2, 44, 34, 0.72), rgba(6, 78, 59, 0.58));
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 8px 32px rgba(2, 44, 34, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+.glass-input {
+  background: rgba(255, 255, 255, 0.62);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
 /* Shared design-system utilities: every page uses these, so the app feels like one product. */
 .ds-card {
-  background: #ffffff;
-  border: 1px solid #e5ede7;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.52));
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 1rem;
-  box-shadow: var(--shadow-soft);
+  box-shadow: 0 8px 32px rgba(2, 44, 34, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.75);
 }
 .ds-card-hover {
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -108,7 +151,7 @@
   box-shadow: var(--shadow-lift);
 }
 .ds-page {
-  background: linear-gradient(180deg, #f8fbf6 0%, #eff7ef 45%, #e5f2e8 100%);
+  background: transparent;
   color: #14251d;
 }
 .ds-section-title {
@@ -121,8 +164,10 @@
   color: #718078;
 }
 .ds-input {
-  background: #ffffff;
-  border: 1px solid #e5ede7;
+  background: rgba(255, 255, 255, 0.62);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 0.75rem;
   color: #172b24;
 }
@@ -143,17 +188,22 @@
 
 /* Legacy card utilities, kept so existing pages keep working, now on brand colours. */
 .glass-panel {
-  background: #ffffff;
-  border: 1px solid #e5ede7;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.52));
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 8px 32px rgba(2, 44, 34, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.75);
 }
 .glass-panel-dark {
   background: #022c22;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 .glass-card {
-  background: #ffffff;
-  border: 1px solid #e5ede7;
-  box-shadow: 0 1px 3px 0 rgba(2, 44, 34, 0.04);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.52));
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 8px 32px rgba(2, 44, 34, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.75);
   transition: all 0.2s ease-in-out;
 }
 .glass-card:hover {
@@ -162,10 +212,12 @@
   border-color: #a7f3d0;
 }
 .agri-card {
-  background: #ffffff;
-  border: 1px solid #e5ede7;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.52));
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 1rem;
-  box-shadow: 0 1px 3px 0 rgba(2, 44, 34, 0.04);
+  box-shadow: 0 8px 32px rgba(2, 44, 34, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.75);
   transition: all 0.2s ease;
 }
 .agri-card:hover {
@@ -188,10 +240,12 @@
 
 /* Premium card: quiet border, soft shadow, gentle lift on hover. */
 .premium-card {
-  background: #ffffff;
-  border: 1px solid #e5ede7;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.52));
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 1rem;
-  box-shadow: var(--shadow-soft);
+  box-shadow: 0 8px 32px rgba(2, 44, 34, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.75);
 }
 .premium-card-hover {
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;

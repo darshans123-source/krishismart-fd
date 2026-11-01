@@ -133,7 +133,7 @@ export const MyFarmsPage: React.FC = () => {
               className={`p-4 rounded-2xl border text-left transition-all shrink-0 min-w-[240px] ${
                 isSelected
                   ? 'bg-[#064E3B] text-white border-[#064E3B] shadow-lg shadow-[#064E3B]/20'
-                  : 'bg-white border-[#E5EDE7] text-[#3E5248] hover:border-[#6EE7B7]'
+                  : 'bg-white/75 backdrop-blur-xl border-[#E5EDE7] text-[#3E5248] hover:border-[#6EE7B7]'
               }`}
             >
               <div className="flex items-center justify-between mb-1">
@@ -155,7 +155,7 @@ export const MyFarmsPage: React.FC = () => {
 
       {/* Farm Overview Stats Bar */}
       {selectedFarm && (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white p-4 rounded-2xl border border-[#E5EDE7] shadow-2xs text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white/75 backdrop-blur-xl p-4 rounded-2xl border border-[#E5EDE7] shadow-2xs text-xs">
           <div>
             <span className="text-[#8A9A90] font-medium">Soil Classification</span>
             <div className="font-bold text-[#243A32] text-sm mt-0.5">{selectedFarm.soilType}</div>
@@ -187,7 +187,7 @@ export const MyFarmsPage: React.FC = () => {
         </div>
 
         {farmCrops.length === 0 ? (
-          <div className="text-center py-12 bg-white rounded-2xl border border-dashed border-[#CBD8D0] p-8 space-y-3">
+          <div className="text-center py-12 bg-white/75 backdrop-blur-xl rounded-2xl border border-dashed border-[#CBD8D0] p-8 space-y-3">
             <Sprout className="w-12 h-12 text-[#CBD8D0] mx-auto" />
             <h3 className="font-bold text-[#3E5248]">No active crops registered in this farm parcel</h3>
             <p className="text-xs text-[#718078] max-w-sm mx-auto">
@@ -204,7 +204,7 @@ export const MyFarmsPage: React.FC = () => {
           farmCrops.map((crop) => (
             <div
               key={crop.id}
-              className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-6 hover:border-[#34D399] transition-all"
+              className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-6 hover:border-[#34D399] transition-all"
             >
               {/* Crop Header */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#EFF4EF] pb-4">
@@ -319,7 +319,7 @@ export const MyFarmsPage: React.FC = () => {
       {/* ADD CROP MODAL */}
       {showAddCropModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-2xl border border-[#E5EDE7] space-y-4 max-h-[90vh] overflow-y-auto">
+          <div className="bg-white/75 backdrop-blur-xl rounded-2xl p-6 max-w-lg w-full shadow-2xl border border-[#E5EDE7] space-y-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
               <h3 className="font-extrabold text-lg text-[#172B24] font-heading">
                 Register New Crop to Farm
@@ -446,7 +446,7 @@ export const MyFarmsPage: React.FC = () => {
       {/* ADD FARM PARCEL MODAL */}
       {showAddFarmModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl border border-[#E5EDE7] space-y-4">
+          <div className="bg-white/75 backdrop-blur-xl rounded-2xl p-6 max-w-md w-full shadow-2xl border border-[#E5EDE7] space-y-4">
             <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
               <h3 className="font-extrabold text-base text-[#172B24] font-heading">
                 Add New Farm Parcel
@@ -497,7 +497,7 @@ export const MyFarmsPage: React.FC = () => {
                   <select
                     value={farmWaterSource}
                     onChange={(e: any) => setFarmWaterSource(e.target.value)}
-                    className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white"
+                    className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white/75 backdrop-blur-xl"
                   >
                     <option value="Borewell">Borewell</option>
                     <option value="Canal">Canal</option>

@@ -197,7 +197,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center sm:p-4 bg-[#022C22]/70 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
-      <div className="relative w-full max-w-4xl bg-white sm:rounded-[1.75rem] shadow-2xl border border-[#E5EDE7] overflow-hidden md:flex min-h-full sm:min-h-0">
+      <div className="relative w-full max-w-4xl bg-white/75 backdrop-blur-xl sm:rounded-[1.75rem] shadow-2xl border border-[#E5EDE7] overflow-hidden md:flex min-h-full sm:min-h-0">
         {/* LEFT: full-height farm image (desktop) / top banner (mobile) */}
         <div className="relative md:w-5/12 shrink-0 h-44 md:h-auto overflow-hidden">
           <img
@@ -361,7 +361,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       const cities = INDIAN_STATES_CITIES[e.target.value] || [];
                       if (cities.length > 0) setSelectedDistrict(cities[0]);
                     }}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden bg-white"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden bg-white/75 backdrop-blur-xl"
                   >
                     {INDIAN_STATES.map((st) => (
                       <option key={st} value={st}>
@@ -375,7 +375,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   <select
                     value={selectedDistrict}
                     onChange={(e) => setSelectedDistrict(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden bg-white"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden bg-white/75 backdrop-blur-xl"
                   >
                     {districtsForState.map((dst) => (
                       <option key={dst} value={dst}>

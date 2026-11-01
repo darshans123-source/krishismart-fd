@@ -97,7 +97,7 @@ export const KrishiJourneyPage: React.FC = () => {
       </div>
 
       {/* 2. ACHIEVEMENTS & BADGES MATRIX */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-6">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-6">
         <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
           <div>
             <h3 className="font-extrabold text-base text-[#172B24] font-heading">
