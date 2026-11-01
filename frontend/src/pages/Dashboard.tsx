@@ -22,7 +22,8 @@ import {
   ArrowRight,
   Activity,
   Wheat,
-  ShieldCheck
+  ShieldCheck,
+  ScanSearch
 } from 'lucide-react';
 import { useFarmData } from '../context/FarmDataContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -127,14 +128,37 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
     { id: 'iot', label: 'IoT', icon: '📡', route: 'iot', bg: 'bg-stone-100 hover:bg-stone-200 text-stone-900 border-stone-300' }
   ];
 
+  // Premium quick-action visuals: one clean Lucide icon in a muted tint,
+  // instead of rainbow pastel tiles with emoji. CMS actions fall back to
+  // their supplied icon only when no mapped visual exists.
+  const quickActionVisuals: Record<string, { icon: React.ComponentType<{ className?: string }>; tint: string }> = {
+    aiHub: { icon: ScanSearch, tint: 'bg-emerald-50 text-emerald-700 ring-emerald-100' },
+    weather: { icon: CloudSun, tint: 'bg-amber-50 text-amber-700 ring-amber-100' },
+    market: { icon: TrendingUp, tint: 'bg-sky-50 text-sky-700 ring-sky-100' },
+    finance: { icon: Coins, tint: 'bg-teal-50 text-teal-700 ring-teal-100' },
+    drone: { icon: Plane, tint: 'bg-violet-50 text-violet-700 ring-violet-100' },
+    pump: { icon: Droplets, tint: 'bg-cyan-50 text-cyan-700 ring-cyan-100' },
+    iot: { icon: Activity, tint: 'bg-stone-100 text-stone-700 ring-stone-200' }
+  };
+
   const heroConfig = cmsDashboard?.hero;
   const showHero = heroConfig ? heroConfig.visible !== false : true;
 
+  // Real, time-aware greeting in sentence case — not a shouted, all-caps
+  // "GOOD AFTERNOON" at every hour, and no emoji in the heading.
+  const formatDisplayName = (name?: string) =>
+    (name || 'Farmer')
+      .split(' ')
+      .filter(Boolean)
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+      .join(' ');
+  const hourNow = new Date().getHours();
+  const timeGreeting = hourNow < 12 ? 'Good morning' : hourNow < 17 ? 'Good afternoon' : 'Good evening';
   const heroHeading = heroConfig?.mainHeading
-    ? heroConfig.mainHeading.replace(/\{name\}/gi, user?.name ? user.name.toUpperCase() : 'FARMER')
+    ? heroConfig.mainHeading.replace(/\{name\}/gi, formatDisplayName(user?.name)).replace(/🌱/g, '').trim()
     : heroConfig?.greeting
-    ? `${heroConfig.greeting.toUpperCase()}, ${user?.name ? user.name.toUpperCase() : 'FARMER'} 🌱`
-    : `GOOD AFTERNOON, ${user?.name ? user.name.toUpperCase() : 'FARMER'} 🌱`;
+    ? `${heroConfig.greeting.replace(/🌱/g, '').trim()}, ${formatDisplayName(user?.name)}`
+    : `${timeGreeting}, ${formatDisplayName(user?.name)}`;
 
   const heroSubtitle = heroConfig?.subtitle || `Real-time farm status for ${locationState.address.district || 'Raichur'}, ${locationState.address.state || 'Karnataka'}.`;
   const heroBtnText = heroConfig?.buttonText || `Farm Health: ${aiFarmHealth.overall}/100`;
@@ -149,44 +173,49 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       {/* 1. TOP 5-SECOND OVERVIEW & GREETING BANNER */}
       {/* ================================================== */}
       {showHero && (
-        <div className="rounded-3xl bg-gradient-to-r from-emerald-800 to-emerald-900 text-white p-6 sm:p-8 shadow-sm border border-emerald-700/80 space-y-5">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="space-y-1.5">
-              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-700/60 border border-emerald-500/30 text-emerald-200 text-xs font-semibold">
-                <Sprout className="w-3.5 h-3.5 text-emerald-300" />
-                <span>Smart Farming Platform</span>
+        <div className="premium-hero rounded-[1.75rem] text-white p-6 sm:p-8 border border-emerald-900/20 space-y-5">
+          <div className="pointer-events-none absolute -right-10 -top-16 w-64 h-64 rounded-full bg-emerald-400/20 blur-3xl" />
+          <div className="pointer-events-none absolute -left-8 bottom-0 w-48 h-48 rounded-full bg-amber-400/10 blur-3xl" />
+          <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-emerald-100 text-[11px] font-semibold tracking-wide">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                </span>
+                <span>Live · Smart Farming Platform</span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold font-heading text-white tracking-tight">
+              <h1 className="text-3xl sm:text-4xl font-bold font-heading text-white tracking-tight leading-tight">
                 {heroHeading}
               </h1>
-              <p className="text-xs sm:text-sm text-emerald-100 max-w-xl leading-relaxed">
+              <p className="text-sm sm:text-base text-emerald-100/90 max-w-xl leading-relaxed">
                 {heroSubtitle}
               </p>
             </div>
 
             <button
               onClick={() => setShowHealthModal(true)}
-              className="px-4 py-2.5 rounded-2xl bg-white/15 hover:bg-white/25 border border-white/20 text-white text-xs font-bold flex items-center gap-2 self-start md:self-auto transition-all shadow-xs cursor-pointer"
+              className="px-4 py-2.5 rounded-full bg-white hover:bg-emerald-50 text-emerald-950 text-xs font-bold flex items-center gap-2 self-start md:self-auto transition-all shadow-md cursor-pointer"
             >
-              <HelpCircle className="w-4 h-4 text-emerald-200" />
+              <HelpCircle className="w-4 h-4 text-emerald-700" />
               <span>{heroBtnText}</span>
               <ChevronRight className="w-3.5 h-3.5" />
             </button>
           </div>
 
           {/* 4 Clean Quick Metrics */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 pt-3 border-t border-emerald-700/70">
+          <div className="relative grid grid-cols-2 lg:grid-cols-4 gap-3 pt-5 border-t border-white/10">
             {/* 1. Location */}
             <button
               onClick={() => setIsLocationModalOpen(true)}
-              className="p-3.5 rounded-2xl bg-emerald-950/40 hover:bg-emerald-950/60 border border-emerald-600/30 text-left transition-colors group cursor-pointer"
+              className="p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer"
             >
               <div className="text-[11px] text-emerald-200 flex items-center gap-1.5 font-medium">
                 <MapPin className="w-3.5 h-3.5 text-emerald-300 shrink-0" />
-                <span>Current Location</span>
+                <span className="uppercase tracking-wider">Current Location</span>
               </div>
               <div className="text-sm font-bold text-white mt-1 truncate group-hover:text-emerald-200">
-                📍 {locationState.address.district || 'Raichur'}, {locationState.address.state || 'Karnataka'}
+                {locationState.address.district || 'Raichur'}, {locationState.address.state || 'Karnataka'}
               </div>
               <div className="text-[10px] text-emerald-300 mt-0.5">Click to change</div>
             </button>
@@ -194,14 +223,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             {/* 2. Weather */}
             <button
               onClick={() => onNavigate('weather')}
-              className="p-3.5 rounded-2xl bg-emerald-950/40 hover:bg-emerald-950/60 border border-emerald-600/30 text-left transition-colors group cursor-pointer"
+              className="p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer"
             >
               <div className="text-[11px] text-emerald-200 flex items-center gap-1.5 font-medium">
                 <Sun className="w-3.5 h-3.5 text-amber-300 shrink-0" />
-                <span>Weather</span>
+                <span className="uppercase tracking-wider">Weather</span>
               </div>
               <div className="text-sm font-bold text-white mt-1 group-hover:text-emerald-200">
-                🌡️ {weather.temp}°C • {weather.condition}
+                {weather.temp}°C • {weather.condition}
               </div>
               <div className="text-[10px] text-emerald-300 mt-0.5">Wind: {weather.windSpeed} km/h</div>
             </button>
@@ -209,14 +238,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             {/* 3. Crop Health */}
             <button
               onClick={() => onNavigate('myFarms')}
-              className="p-3.5 rounded-2xl bg-emerald-950/40 hover:bg-emerald-950/60 border border-emerald-600/30 text-left transition-colors group cursor-pointer"
+              className="p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer"
             >
               <div className="text-[11px] text-emerald-200 flex items-center gap-1.5 font-medium">
                 <Wheat className="w-3.5 h-3.5 text-emerald-300 shrink-0" />
-                <span>Crop Health</span>
+                <span className="uppercase tracking-wider">Crop Health</span>
               </div>
               <div className="text-sm font-bold text-white mt-1 group-hover:text-emerald-200">
-                🌾 {aiFarmHealth.cropHealth}% Healthy
+                {aiFarmHealth.cropHealth}% Healthy
               </div>
               <div className="text-[10px] text-emerald-300 mt-0.5">{crops.length} crops active</div>
             </button>
@@ -224,14 +253,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             {/* 4. Soil Moisture */}
             <button
               onClick={() => onNavigate('pump')}
-              className="p-3.5 rounded-2xl bg-emerald-950/40 hover:bg-emerald-950/60 border border-emerald-600/30 text-left transition-colors group cursor-pointer"
+              className="p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/15 text-left transition-colors group cursor-pointer"
             >
               <div className="text-[11px] text-emerald-200 flex items-center gap-1.5 font-medium">
                 <Droplets className="w-3.5 h-3.5 text-cyan-300 shrink-0" />
-                <span>Soil Moisture</span>
+                <span className="uppercase tracking-wider">Soil Moisture</span>
               </div>
               <div className="text-sm font-bold text-white mt-1 group-hover:text-emerald-200">
-                💧 {weather.soilMoisture}% (Optimal)
+                {weather.soilMoisture}% (Optimal)
               </div>
               <div className="text-[10px] text-emerald-300 mt-0.5">Pump: {smartPump.status}</div>
             </button>
@@ -244,25 +273,34 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       {/* ================================================== */}
       <div className="space-y-2.5">
         <div className="flex items-center justify-between">
-          <h2 className="text-xs font-black uppercase tracking-wider text-stone-500 font-heading">
-            Quick Actions
+          <h2 className="text-sm font-bold text-stone-900 font-heading">
+            Quick actions
           </h2>
-          <span className="text-[11px] text-stone-500 font-medium">One-tap farm shortcuts</span>
+          <span className="text-xs text-stone-500 font-medium">One-tap farm shortcuts</span>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
-          {activeQuickActions.map((act: any) => (
-            <button
-              key={act.id}
-              onClick={() => onNavigate(act.route || act.id)}
-              className={`p-3.5 rounded-2xl border transition-all duration-150 flex flex-col items-center justify-center text-center shadow-2xs hover:shadow-sm active:scale-98 cursor-pointer ${
-                act.bg || 'bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border-emerald-200'
-              }`}
-            >
-              <span className="text-2xl mb-1">{act.icon}</span>
-              <span className="text-xs font-bold">{act.label || act.title}</span>
-            </button>
-          ))}
+          {activeQuickActions.map((act: any) => {
+            const visual = quickActionVisuals[act.route || act.id];
+            const VisualIcon = visual?.icon;
+            return (
+              <button
+                key={act.id}
+                onClick={() => onNavigate(act.route || act.id)}
+                className="premium-card premium-card-hover p-4 flex flex-col items-center justify-center text-center cursor-pointer group"
+              >
+                {VisualIcon ? (
+                  <span className={`w-11 h-11 rounded-2xl ring-1 flex items-center justify-center mb-2 ${visual.tint}`}>
+                    <VisualIcon className="w-5 h-5" />
+                  </span>
+                ) : (
+                  <span className="text-2xl mb-1">{act.icon}</span>
+                )}
+                <span className="text-xs font-bold text-stone-900">{act.label || act.title}</span>
+                <span className="text-[10px] font-medium text-stone-400 group-hover:text-emerald-700 mt-0.5">Open →</span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -272,11 +310,11 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <h2 className="text-base font-extrabold text-stone-900 font-heading">
-              MY CROPS
+            <h2 className="text-base font-bold text-stone-900 font-heading">
+              My crops
             </h2>
             <span className="px-2.5 py-0.5 bg-emerald-50 text-emerald-800 text-xs font-bold rounded-full border border-emerald-200">
-              {crops.length} Fields Monitored
+              {crops.length} fields monitored
             </span>
           </div>
 
@@ -294,11 +332,15 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             <div
               key={crop.id}
               onClick={() => onNavigate('myFarms')}
-              className="bg-white rounded-3xl border border-stone-200 overflow-hidden shadow-2xs hover:border-emerald-400 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group"
+              className="premium-card premium-card-hover overflow-hidden cursor-pointer flex flex-col justify-between group"
             >
-              {/* Realistic Crop Image */}
-              <div className="relative w-full h-36 bg-stone-100 overflow-hidden">
+              {/* Realistic Crop Image — gradient behind it so a failed
+                  image never shows a broken-image icon in the card. */}
+              <div className="relative w-full h-40 bg-gradient-to-br from-emerald-100 via-emerald-50 to-amber-50 overflow-hidden">
                 <img
+                  onError={(e) => {
+                    e.currentTarget.style.opacity = '0';
+                  }}
                   src={
                     crop.imageUrl ||
                     (crop.name.toLowerCase().includes('tomato')
@@ -312,13 +354,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                   alt={crop.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                <span
-                  className={`absolute top-3 right-3 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow-xs ${
-                    crop.status === 'Healthy'
-                      ? 'bg-emerald-600 text-white'
-                      : 'bg-amber-600 text-white'
-                  }`}
-                >
+                <span className="absolute top-3 right-3 inline-flex items-center gap-1.5 text-[10px] font-bold px-2.5 py-1 rounded-full bg-white/95 text-stone-900 shadow-sm ring-1 ring-stone-200/80">
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full ${
+                      crop.status === 'Healthy' ? 'bg-emerald-500' : 'bg-amber-500'
+                    }`}
+                  />
                   {crop.status}
                 </span>
                 <span className="absolute bottom-2 left-2 bg-stone-900/70 text-white backdrop-blur-xs text-[10px] font-bold px-2 py-0.5 rounded-md">
@@ -330,7 +371,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               <div className="p-4 space-y-2 flex-1 flex flex-col justify-between">
                 <div>
                   <h3 className="font-extrabold text-stone-900 text-base font-heading">
-                    {crop.name === 'Paddy' ? '🌾 Paddy' : crop.name === 'Tomato' ? '🍅 Tomato' : crop.name === 'Sugarcane' ? '🎋 Sugarcane' : `🌱 ${crop.name}`}
+                    {crop.name}
                   </h3>
                   <div className="text-xs text-stone-500 capitalize mt-0.5">
                     Stage: <strong className="text-stone-700">{crop.currentStage} stage</strong>
@@ -364,7 +405,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         {/* Left Column (Farm Advice & Today's Recommendations) */}
         <div className="lg:col-span-8 space-y-6">
           {/* Farm Advice Card */}
-          <div className="p-5 sm:p-6 rounded-3xl bg-white border border-stone-200 shadow-2xs space-y-4">
+          <div className="p-5 sm:p-6 premium-card space-y-4">
             <div className="flex items-center justify-between border-b border-stone-100 pb-3">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
@@ -554,7 +595,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           </div>
 
           {/* Nearby Mandi Rates */}
-          <div className="p-5 rounded-3xl bg-white border border-stone-200 shadow-2xs space-y-3">
+          <div className="p-5 premium-card space-y-3">
             <div className="flex items-center justify-between border-b border-stone-100 pb-2.5">
               <div className="flex items-center gap-2">
                 <Store className="w-4 h-4 text-emerald-700" />
