@@ -9,6 +9,5 @@ router.post('/soil-analysis', AIController.analyzeSoil);
 router.post('/yield-prediction', AIController.predictYield);
 router.post('/crop-recommendation', AIController.recommendCrops);
 router.post('/chat', AIController.chat);
-router.post('/generate', AIController.generate);
 
 export default router;

@@ -21,15 +21,12 @@ import { SAMPLE_DIAGNOSTICS } from '../constants/mockData';
 import { useFarmData } from '../context/FarmDataContext';
 import { useLanguage } from '../context/LanguageContext';
 import { DiseaseDetectionResult } from '../types';
-import { OpenAIAskPanel } from '../components/ai/OpenAIAskPanel';
-import { AiFeature } from '../services/openai';
 
 export const AIHubPage: React.FC = () => {
   const { t } = useLanguage();
   const { addToCart, storeProducts, addXP } = useFarmData();
 
   const [activeTab, setActiveTab] = useState<'doctor' | 'soil' | 'recommendation' | 'fertilizer' | 'yield'>('doctor');
-  const [openAiFeature, setOpenAiFeature] = useState<AiFeature>('ai-advisor');
 
   // AI Doctor States
   const [selectedSample, setSelectedSample] = useState<any>(SAMPLE_DIAGNOSTICS[0]);
@@ -128,53 +125,11 @@ export const AIHubPage: React.FC = () => {
         })}
       </div>
 
-      {/* OpenAI text advisor — all 8 text features, one endpoint.
-          Crop Doctor (photo) is intentionally NOT sent to OpenAI:
-          this integration is text only, no image analysis. */}
-      <div className="space-y-3">
-        <div className="flex gap-2 overflow-x-auto pb-1">
-          {([
-            ['ai-advisor', 'AI Advisor'],
-            ['qa', 'Farming Q&A'],
-            ['crop-recommendation', 'Crop Recommendations'],
-            ['fertilizer', 'Fertilizer Guidance'],
-            ['irrigation', 'Irrigation'],
-            ['natural-farming', 'Natural Farming'],
-            ['daily-briefing', 'Daily Briefing'],
-            ['ask-krishi', 'Ask Krishi AI'],
-          ] as [AiFeature, string][]).map(([id, label]) => (
-            <button
-              key={id}
-              onClick={() => setOpenAiFeature(id)}
-              className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
-                openAiFeature === id
-                  ? 'bg-[#064E3B] text-white shadow-sm'
-                  : 'bg-white text-[#5A6E64] hover:bg-[#EFF4EF] border border-[#E5EDE7]'
-              }`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-        <OpenAIAskPanel
-          key={openAiFeature}
-          feature={openAiFeature}
-          title="Ask OpenAI — text only"
-          description="Your question goes to OpenAI through the secure backend endpoint. No images, no voice, no key in the browser."
-          defaultPrompt={
-            openAiFeature === 'daily-briefing'
-              ? "Give me today's farming briefing for my farm."
-              : openAiFeature === 'crop-recommendation'
-                ? 'Which crops should I grow this season on my farm?'
-                : openAiFeature === 'fertilizer'
-                  ? 'What fertilizer should I use for my crops, and how much per acre?'
-                  : openAiFeature === 'irrigation'
-                    ? 'Should I irrigate my crops today, and for how long?'
-                    : openAiFeature === 'natural-farming'
-                      ? 'Give me natural farming suggestions for my crops.'
-                      : 'Ask any farming question here.'
-          }
-        />
+      {/* Chatbot note: AI text advice for these topics now lives only in the
+          floating KRISHI AI COPILOT chatbot (Gemini, text only). The tabs
+          below are the app's own local tools. */}
+      <div className="p-4 rounded-2xl bg-[#ECFDF5] border border-[#A7F3D0] text-sm text-[#064E3B] leading-relaxed">
+        For AI farming advice, open the <strong>KRISHI AI COPILOT</strong> chatbot (bottom-left button) and ask your question there. It answers in English, Kannada or Hindi, using your farm context.
       </div>
 
       {/* 1. AI CROP DOCTOR & DISEASE SCAN TAB */}
