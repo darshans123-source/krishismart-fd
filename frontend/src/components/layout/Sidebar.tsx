@@ -84,7 +84,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside
-      className={`h-full flex flex-col justify-between bg-white border-r border-stone-200 py-5 select-none overflow-y-auto ${
+      className={`h-full flex flex-col justify-between bg-transparent py-5 select-none overflow-y-auto ${
         isMobile ? 'w-full px-4' : 'w-64 px-4 shrink-0'
       }`}
     >
@@ -120,20 +120,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   <button
                     key={item.id}
                     onClick={() => handleSelect(item.id)}
-                    className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-150 group ${
+                    className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-xs font-semibold transition-all duration-150 group ${
                       isActive
-                        ? 'bg-emerald-700 text-white shadow-sm font-bold'
-                        : 'text-stone-700 hover:bg-emerald-50/80 hover:text-emerald-900'
+                        ? 'bg-emerald-700 text-white shadow-md shadow-emerald-700/20 font-bold'
+                        : 'text-stone-700 hover:bg-white hover:text-emerald-900 hover:shadow-soft'
                     }`}
                   >
                     <div className="flex items-center gap-3 truncate">
-                      <Icon
-                        className={`w-4 h-4 shrink-0 ${
+                      <span
+                        className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
                           isActive
-                            ? 'text-white'
-                            : 'text-stone-400 group-hover:text-emerald-700'
+                            ? 'bg-white/15 text-white'
+                            : 'bg-stone-100 text-stone-500 group-hover:bg-emerald-100 group-hover:text-emerald-700'
                         }`}
-                      />
+                      >
+                        <Icon className="w-4 h-4" />
+                      </span>
                       <span className="truncate">{item.label}</span>
                     </div>
 
@@ -156,7 +158,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Bottom Farm Snapshot Card */}
       <div className="mt-6 pt-4 border-t border-stone-200">
-        <div className="p-3.5 rounded-2xl bg-stone-900 text-white shadow-xs relative overflow-hidden">
+        <div className="p-3.5 rounded-2xl bg-gradient-to-br from-emerald-950 via-stone-900 to-stone-900 text-white shadow-soft relative overflow-hidden">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-1.5">
               <Flame className="w-4 h-4 text-amber-400" />
