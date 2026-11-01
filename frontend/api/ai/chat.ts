@@ -25,7 +25,7 @@ const SYSTEM_INSTRUCTIONS = [
   'Answer ONLY in the requested language.',
   'Use only the farm context supplied in the user message. Do not invent mandi prices, weather forecasts, dates, yields, subsidies or eligibility.',
   'If the supplied context does not support a specific number, say so and give a general, safe practice instead of a made-up number.',
-  'Keep the answer concise and structured with short headings and bullet points. Prefer locally available, low-cost options first.',
+  'SHORT AND FAST ANSWER ONLY: maximum 4 short bullet points, no long paragraphs, no preamble, no repeated explanation. Get straight to the answer. Prefer locally available, low-cost options first.',
   'Add a one-line caution where a chemical dose is mentioned: follow the product label and local agricultural officer advice.',
 ].join(' ');
 
@@ -75,16 +75,24 @@ export default async function handler(req: any, res: any) {
       `Farmer question: ${prompt}`,
     ].join('\n');
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
-      body: JSON.stringify({
-        system_instruction: { parts: [{ text: SYSTEM_INSTRUCTIONS }] },
-        contents: [{ role: 'user', parts: [{ text: userText }] }],
-        generationConfig: { temperature: 0.3, maxOutputTokens: 1200 },
-      }),
-    });
-    const data: any = await response.json().catch(() => ({}));
+    // High demand (503) is usually temporary: retry ONCE after a short
+    // pause, then give up with a short message — never hammer Gemini.
+    let response: any = null;
+    let data: any = {};
+    for (let attempt = 0; attempt < 2; attempt++) {
+      if (attempt > 0) await new Promise((r) => setTimeout(r, 1500));
+      response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+        body: JSON.stringify({
+          system_instruction: { parts: [{ text: SYSTEM_INSTRUCTIONS }] },
+          contents: [{ role: 'user', parts: [{ text: userText }] }],
+          generationConfig: { temperature: 0.3, maxOutputTokens: 500 },
+        }),
+      });
+      data = await response.json().catch(() => ({}));
+      if (response.status !== 503) break;
+    }
     if (!response.ok) {
       const upstreamMsg = typeof data?.error?.message === 'string' ? data.error.message : '';
       if (response.status === 401 || response.status === 403) {
@@ -92,6 +100,9 @@ export default async function handler(req: any, res: any) {
       }
       if (response.status === 429) {
         return res.status(429).json({ success: false, message: upstreamMsg || 'Gemini is rate-limited right now. Please try again in a minute.' });
+      }
+      if (response.status === 503) {
+        return res.status(503).json({ success: false, message: 'AI is busy right now. Please try again in a moment.' });
       }
       return res.status(502).json({ success: false, message: upstreamMsg || `Gemini returned status ${response.status}.` });
     }
