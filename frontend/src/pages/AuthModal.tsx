@@ -27,6 +27,21 @@ interface AuthModalProps {
   initialMode?: 'login' | 'register' | 'onboarding';
 }
 
+
+// Canonical site for auth redirects. Vercel preview deployments
+// (*-git-*.vercel.app) are behind Vercel Deployment Protection by
+// default, so if Supabase/Google redirected back to a preview URL the
+// user would hit Vercel's own login wall and the auth code would be
+// lost before the app ever sees it. Always send OAuth / email links
+// back to the public production site, except on localhost dev.
+const PRODUCTION_SITE = 'https://krishismart-ai-by-darshan.vercel.app';
+const getAuthRedirectUrl = (): string => {
+  const host = window.location.hostname;
+  if (host === 'localhost' || host === '127.0.0.1') return window.location.origin;
+  if (host === 'krishismart-ai-by-darshan.vercel.app') return window.location.origin;
+  return PRODUCTION_SITE;
+};
+
 export const AuthModal: React.FC<AuthModalProps> = ({
   isOpen,
   onClose,
@@ -69,7 +84,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     try {
       if (mode === 'forgot') {
         const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
-          redirectTo: window.location.origin,
+          redirectTo: getAuthRedirectUrl(),
         });
         if (error) throw error;
         setAuthMessage('If this email has an account, a password reset link has been sent. Check your inbox.');
@@ -81,7 +96,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           password,
           options: {
             data: { full_name: name.trim() },
-            emailRedirectTo: window.location.origin,
+            emailRedirectTo: getAuthRedirectUrl(),
           },
         });
         if (error) throw error;
@@ -113,7 +128,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: { redirectTo: window.location.origin },
+        options: { redirectTo: getAuthRedirectUrl() },
       });
       if (error) throw error;
       // Browser redirects to Google/Supabase now; the session returns here.
