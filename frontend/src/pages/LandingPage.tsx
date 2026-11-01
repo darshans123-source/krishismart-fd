@@ -250,7 +250,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
                 {/* Floating 3D chips, in front of the main card */}
                 <div
-                  className="splash-float absolute -top-4 -left-2 sm:-left-6 rounded-2xl bg-white text-[#172B24] px-3.5 py-2.5 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.55)] border border-white/60 flex items-center gap-2"
+                  className="splash-float absolute -top-4 -left-2 sm:-left-6 rounded-2xl bg-white/75 backdrop-blur-xl text-[#172B24] px-3.5 py-2.5 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.55)] border border-white/60 flex items-center gap-2"
                   style={{ transform: 'translateZ(60px)' }}
                 >
                   <BrainCircuit className="w-5 h-5 text-[#059669]" />
@@ -280,7 +280,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </section>
 
       {/* 2. CORE FEATURES GRID */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white/75 backdrop-blur-xl">
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ECFDF5] text-[#064E3B] text-xs font-bold mb-3 border border-[#A7F3D0]">
@@ -440,7 +440,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-6 border border-[#E5EDE7] shadow-sm flex flex-col justify-between">
+              <div key={idx} className="bg-white/75 backdrop-blur-xl rounded-2xl p-6 border border-[#E5EDE7] shadow-sm flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-1 mb-3 text-amber-400">
                     {[...Array(t.rating)].map((_, i) => (
@@ -482,7 +482,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <button
               onClick={onGetStarted}
-              className="px-8 py-4 rounded-2xl bg-white hover:bg-[#ECFDF5] text-[#064E3B] font-extrabold text-base shadow-xl transition-all"
+              className="px-8 py-4 rounded-2xl bg-white/75 backdrop-blur-xl hover:bg-[#ECFDF5] text-[#064E3B] font-extrabold text-base shadow-xl transition-all"
             >
               Get Started for Free
             </button>

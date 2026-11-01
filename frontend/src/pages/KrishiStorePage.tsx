@@ -126,7 +126,7 @@ export const KrishiStorePage: React.FC = () => {
               className={`px-3.5 py-2 rounded-2xl text-xs font-bold transition-all shrink-0 ${
                 activeCategory === cat
                   ? 'bg-[#059669] text-white shadow-xs'
-                  : 'bg-white text-[#5A6E64] hover:bg-[#EFF4EF] border border-[#E5EDE7]'
+                  : 'bg-white/75 backdrop-blur-xl text-[#5A6E64] hover:bg-[#EFF4EF] border border-[#E5EDE7]'
               }`}
             >
               {cat}
@@ -141,7 +141,7 @@ export const KrishiStorePage: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search seeds, nano urea, drip..."
-            className="w-full pl-9 pr-4 py-2 rounded-2xl border border-[#E5EDE7] text-xs bg-white focus:outline-hidden focus:ring-2 focus:ring-[#10B981]"
+            className="w-full pl-9 pr-4 py-2 rounded-2xl border border-[#E5EDE7] text-xs bg-white/75 backdrop-blur-xl focus:outline-hidden focus:ring-2 focus:ring-[#10B981]"
           />
         </div>
       </div>
@@ -220,7 +220,7 @@ export const KrishiStorePage: React.FC = () => {
       {/* 1. SLIDE-OVER CART DRAWER */}
       {showCartDrawer && (
         <div className="fixed inset-0 z-50 flex justify-end bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between animate-in slide-in-from-right duration-200">
+          <div className="bg-white/75 backdrop-blur-xl w-full max-w-md h-full shadow-2xl flex flex-col justify-between animate-in slide-in-from-right duration-200">
             {/* Cart Header */}
             <div className="p-5 border-b border-[#EFF4EF] flex items-center justify-between">
               <div className="flex items-center gap-2.5">
@@ -268,7 +268,7 @@ export const KrishiStorePage: React.FC = () => {
 
                       {/* Quantity Controls */}
                       <div className="flex items-center justify-between pt-1">
-                        <div className="flex items-center gap-2 bg-white rounded-lg border border-[#E5EDE7] px-2 py-0.5">
+                        <div className="flex items-center gap-2 bg-white/75 backdrop-blur-xl rounded-lg border border-[#E5EDE7] px-2 py-0.5">
                           <button
                             onClick={() => updateCartQuantity(item.product.id, item.quantity - 1)}
                             className="text-[#718078] hover:text-[#172B24]"
@@ -331,7 +331,7 @@ export const KrishiStorePage: React.FC = () => {
       {/* 2. CHECKOUT MODAL */}
       {showCheckoutModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-2xl border border-[#E5EDE7] space-y-4">
+          <div className="bg-white/75 backdrop-blur-xl rounded-2xl p-6 max-w-lg w-full shadow-2xl border border-[#E5EDE7] space-y-4">
             <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
               <h3 className="font-extrabold text-base text-[#172B24] font-heading">
                 Confirm Doorstep Farm Delivery
@@ -358,7 +358,7 @@ export const KrishiStorePage: React.FC = () => {
                 <select
                   value={paymentMethod}
                   onChange={(e) => setPaymentMethod(e.target.value)}
-                  className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white"
+                  className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white/75 backdrop-blur-xl"
                 >
                   <option value="UPI (Google Pay / PhonePe)">UPI (Google Pay / PhonePe / Paytm)</option>
                   <option value="Cash on Delivery (COD)">Cash on Delivery (COD at Farm Gate)</option>
@@ -374,7 +374,7 @@ export const KrishiStorePage: React.FC = () => {
                     ₹{cartSubtotal.toLocaleString('en-IN')}
                   </div>
                 </div>
-                <span className="text-[10px] font-bold text-[#064E3B] bg-white px-2 py-1 rounded-lg">
+                <span className="text-[10px] font-bold text-[#064E3B] bg-white/75 backdrop-blur-xl px-2 py-1 rounded-lg">
                   Free Transit Insurance
                 </span>
               </div>
@@ -393,7 +393,7 @@ export const KrishiStorePage: React.FC = () => {
       {/* 3. ORDER HISTORY & LIVE STEP TRACKING MODAL */}
       {showOrdersModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-2xl border border-[#E5EDE7] space-y-4 max-h-[85vh] overflow-y-auto">
+          <div className="bg-white/75 backdrop-blur-xl rounded-2xl p-6 max-w-lg w-full shadow-2xl border border-[#E5EDE7] space-y-4 max-h-[85vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
               <h3 className="font-extrabold text-base text-[#172B24] font-heading">
                 My Farm Orders & Live Tracking

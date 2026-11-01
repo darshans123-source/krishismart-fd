@@ -45,7 +45,7 @@ export const AlertCenterModal: React.FC<AlertCenterModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in">
-      <div className="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between animate-in slide-in-from-right duration-200">
+      <div className="bg-white/75 backdrop-blur-xl w-full max-w-md h-full shadow-2xl flex flex-col justify-between animate-in slide-in-from-right duration-200">
         {/* Header */}
         <div className="p-5 border-b border-[#EFF4EF] flex items-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -87,7 +87,7 @@ export const AlertCenterModal: React.FC<AlertCenterModalProps> = ({
               className={`px-3 py-1 rounded-xl text-xs font-bold transition-all shrink-0 ${
                 priorityFilter === prio
                   ? 'bg-[#172B24] text-white shadow-xs'
-                  : 'bg-white text-[#5A6E64] border border-[#E5EDE7] hover:bg-[#EFF4EF]'
+                  : 'bg-white/75 backdrop-blur-xl text-[#5A6E64] border border-[#E5EDE7] hover:bg-[#EFF4EF]'
               }`}
             >
               {prio}
@@ -113,7 +113,7 @@ export const AlertCenterModal: React.FC<AlertCenterModalProps> = ({
                 className={`p-4 rounded-2xl border transition-all space-y-2.5 ${
                   notif.read
                     ? 'bg-[#F7FAF7]/70 border-[#E5EDE7] opacity-70'
-                    : 'bg-white border-[#E5EDE7] shadow-2xs hover:border-[#6EE7B7]'
+                    : 'bg-white/75 backdrop-blur-xl border-[#E5EDE7] shadow-2xs hover:border-[#6EE7B7]'
                 }`}
               >
                 <div className="flex items-center justify-between">

@@ -39,7 +39,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in duration-150">
       <div
-        className={`w-full ${maxWidth} bg-white rounded-2xl border border-[#E5EDE7] shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-200`}
+        className={`w-full ${maxWidth} bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-200`}
       >
         {/* Header */}
         <div className="px-6 py-4 border-b border-[#E5EDE7] flex items-center justify-between bg-[#F7FAF7]/70">

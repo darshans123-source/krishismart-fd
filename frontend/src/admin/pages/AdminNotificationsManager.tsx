@@ -125,7 +125,7 @@ export const AdminNotificationsManager: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/75 backdrop-blur-xl p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
         <div>
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#064E3B] text-xs font-semibold mb-2">
             <Bell className="w-3.5 h-3.5 text-[#059669]" />
@@ -157,7 +157,7 @@ export const AdminNotificationsManager: React.FC = () => {
       </div>
 
       {/* Filter bar */}
-      <div className="bg-white p-4 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex flex-col md:flex-row items-center gap-3">
+      <div className="bg-white/75 backdrop-blur-xl p-4 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex flex-col md:flex-row items-center gap-3">
         <div className="relative flex-1 w-full">
           <Search className="w-4 h-4 text-[#8A9A90] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
@@ -190,7 +190,7 @@ export const AdminNotificationsManager: React.FC = () => {
           <p className="text-xs text-[#718078]">Retrieving notification dispatch logs...</p>
         </div>
       ) : filteredNotifications.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-dashed border-[#CBD8D0] p-12 text-center">
+        <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-dashed border-[#CBD8D0] p-12 text-center">
           <Bell className="w-10 h-10 text-[#CBD8D0] mx-auto mb-3" />
           <h3 className="text-sm font-bold text-[#243A32]">No active notifications</h3>
           <p className="text-xs text-[#718078] mt-1">Broadcast an emergency weather warning or crop pest bulletin.</p>
@@ -202,7 +202,7 @@ export const AdminNotificationsManager: React.FC = () => {
             return (
               <div
                 key={n.id}
-                className="bg-white rounded-2xl border border-[#E5EDE7] p-5 shadow-xs hover:shadow-md transition flex flex-col justify-between"
+                className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-5 shadow-xs hover:shadow-md transition flex flex-col justify-between"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between gap-2">

@@ -81,7 +81,7 @@ export const AdminSettingsPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/75 backdrop-blur-xl p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
         <div>
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#064E3B] text-xs font-semibold mb-2">
             <Settings className="w-3.5 h-3.5 text-[#059669]" />
@@ -114,7 +114,7 @@ export const AdminSettingsPage: React.FC = () => {
 
       <form onSubmit={handleSave} className="space-y-6">
         {/* Brand & Identity */}
-        <div className="bg-white p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs space-y-4">
+        <div className="bg-white/75 backdrop-blur-xl p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs space-y-4">
           <h2 className="text-base font-bold text-[#172B24] flex items-center gap-2">
             <Globe className="w-4 h-4 text-[#059669]" />
             Brand Identity & Meta
@@ -167,7 +167,7 @@ export const AdminSettingsPage: React.FC = () => {
         </div>
 
         {/* Localization & Language */}
-        <div className="bg-white p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs space-y-4">
+        <div className="bg-white/75 backdrop-blur-xl p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs space-y-4">
           <h2 className="text-base font-bold text-[#172B24] flex items-center gap-2">
             <Globe className="w-4 h-4 text-teal-600" />
             Localization Defaults
@@ -203,7 +203,7 @@ export const AdminSettingsPage: React.FC = () => {
         </div>
 
         {/* Farmer Support & Helpline */}
-        <div className="bg-white p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs space-y-4">
+        <div className="bg-white/75 backdrop-blur-xl p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs space-y-4">
           <h2 className="text-base font-bold text-[#172B24] flex items-center gap-2">
             <HelpCircle className="w-4 h-4 text-blue-600" />
             Farmer Helpline & Support Contacts

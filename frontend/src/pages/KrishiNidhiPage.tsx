@@ -173,7 +173,7 @@ export const KrishiNidhiPage: React.FC = () => {
       {/* 2. RECHARTS CASHFLOW & EXPENSE GRAPHS */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Cashflow Trend AreaChart */}
-        <div className="lg:col-span-8 bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-4">
+        <div className="lg:col-span-8 bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-4">
           <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
             <div>
               <h3 className="font-extrabold text-base text-[#172B24] font-heading">
@@ -225,7 +225,7 @@ export const KrishiNidhiPage: React.FC = () => {
         </div>
 
         {/* Expense Category Breakdown BarChart */}
-        <div className="lg:col-span-4 bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-4">
+        <div className="lg:col-span-4 bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-4">
           <div className="border-b border-[#EFF4EF] pb-3">
             <h3 className="font-extrabold text-base text-[#172B24] font-heading">
               Expense Allocation
@@ -253,7 +253,7 @@ export const KrishiNidhiPage: React.FC = () => {
       </div>
 
       {/* 3. TRANSACTION LEDGER TABLE */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-4">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-4">
         <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
           <div>
             <h3 className="font-extrabold text-base text-[#172B24] font-heading">
@@ -308,7 +308,7 @@ export const KrishiNidhiPage: React.FC = () => {
       {/* RECORD TRANSACTION MODAL */}
       {showAddTxModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl border border-[#E5EDE7] space-y-4">
+          <div className="bg-white/75 backdrop-blur-xl rounded-2xl p-6 max-w-md w-full shadow-2xl border border-[#E5EDE7] space-y-4">
             <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
               <h3 className="font-extrabold text-base text-[#172B24] font-heading">
                 Record Financial Entry
@@ -350,7 +350,7 @@ export const KrishiNidhiPage: React.FC = () => {
                 <select
                   value={txCategory}
                   onChange={(e) => setTxCategory(e.target.value)}
-                  className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white"
+                  className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white/75 backdrop-blur-xl"
                 >
                   {txType === 'Income' ? (
                     <>

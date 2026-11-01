@@ -115,7 +115,7 @@ export const AIHubPage: React.FC = () => {
               className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
                 isActive
                   ? 'bg-[#064E3B] text-white shadow-sm'
-                  : 'bg-white text-[#5A6E64] hover:bg-[#EFF4EF] border border-[#E5EDE7]'
+                  : 'bg-white/75 backdrop-blur-xl text-[#5A6E64] hover:bg-[#EFF4EF] border border-[#E5EDE7]'
               }`}
             >
               <Icon className="w-4 h-4" />
@@ -138,7 +138,7 @@ export const AIHubPage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Left Upload / Sample Selector */}
             <div className="lg:col-span-5 space-y-5">
-              <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-4">
+              <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-4">
                 <h3 className="font-extrabold text-base text-[#172B24] font-heading">
                   Upload Crop Photo for AI Diagnosis
                 </h3>
@@ -178,7 +178,7 @@ export const AIHubPage: React.FC = () => {
                         className={`p-2 rounded-2xl border text-left transition-all overflow-hidden ${
                           selectedSample?.id === diag.id
                             ? 'border-[#059669] ring-2 ring-[#10B981]/30 bg-[#ECFDF5]/50'
-                            : 'border-[#E5EDE7] bg-white hover:border-[#CBD8D0]'
+                            : 'border-[#E5EDE7] bg-white/75 backdrop-blur-xl hover:border-[#CBD8D0]'
                         }`}
                       >
                         <img
@@ -202,7 +202,7 @@ export const AIHubPage: React.FC = () => {
             {/* Right Diagnostic Result Panel */}
             <div className="lg:col-span-7">
               {isScanning ? (
-                <div className="bg-white rounded-2xl border border-[#E5EDE7] p-12 shadow-xs text-center space-y-4 flex flex-col items-center justify-center min-h-[420px]">
+                <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-12 shadow-xs text-center space-y-4 flex flex-col items-center justify-center min-h-[420px]">
                   <div className="w-16 h-16 rounded-full border-4 border-[#10B981] border-t-transparent animate-spin" />
                   <div>
                     <h4 className="font-extrabold text-base text-[#172B24] font-heading">
@@ -214,7 +214,7 @@ export const AIHubPage: React.FC = () => {
                   </div>
                 </div>
               ) : diagnosticResult ? (
-                <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-6">
+                <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-6">
                   {/* Top Result Banner */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#EFF4EF] pb-4">
                     <div>
@@ -318,7 +318,7 @@ export const AIHubPage: React.FC = () => {
 
       {/* 2. SOIL HEALTH & NPK LAB TAB */}
       {activeTab === 'soil' && (
-        <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-6 animate-in fade-in">
+        <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-6 animate-in fade-in">
           <div>
             <h3 className="text-lg font-black text-[#172B24] font-heading">
               Soil Chemistry & N-P-K Nutrient Lab
@@ -429,7 +429,7 @@ export const AIHubPage: React.FC = () => {
 
       {/* 3. CROP RECOMMENDATION TAB */}
       {activeTab === 'recommendation' && (
-        <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-6 animate-in fade-in">
+        <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-6 animate-in fade-in">
           <div>
             <h3 className="text-lg font-black text-[#172B24] font-heading">
               AI Crop Recommendation Engine
@@ -497,7 +497,7 @@ export const AIHubPage: React.FC = () => {
 
       {/* 4. FERTILIZER CALCULATOR TAB */}
       {activeTab === 'fertilizer' && (
-        <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-6 animate-in fade-in">
+        <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-6 animate-in fade-in">
           <div>
             <h3 className="text-lg font-black text-[#172B24] font-heading">
               Precision Fertilizer & Dose Calculator
@@ -513,7 +513,7 @@ export const AIHubPage: React.FC = () => {
               <select
                 value={selectedCropForFert}
                 onChange={(e) => setSelectedCropForFert(e.target.value)}
-                className="w-full p-3 rounded-2xl border border-[#CBD8D0] text-xs bg-white"
+                className="w-full p-3 rounded-2xl border border-[#CBD8D0] text-xs bg-white/75 backdrop-blur-xl"
               >
                 <option value="Paddy">Paddy / Rice (BPT-5204)</option>
                 <option value="Tomato">Tomato (Hybrid)</option>
@@ -572,7 +572,7 @@ export const AIHubPage: React.FC = () => {
 
       {/* 5. YIELD PREDICTOR TAB */}
       {activeTab === 'yield' && (
-        <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-6 animate-in fade-in">
+        <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-6 animate-in fade-in">
           <div>
             <h3 className="text-lg font-black text-[#172B24] font-heading">
               AI Harvest Yield & Output Forecaster
@@ -589,7 +589,7 @@ export const AIHubPage: React.FC = () => {
                 <select
                   value={targetCrop}
                   onChange={(e) => setTargetCrop(e.target.value)}
-                  className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white"
+                  className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white/75 backdrop-blur-xl"
                 >
                   <option value="Tomato">Tomato Hybrid (2.0 Acres)</option>
                   <option value="Paddy">Paddy BPT-5204 (2.5 Acres)</option>

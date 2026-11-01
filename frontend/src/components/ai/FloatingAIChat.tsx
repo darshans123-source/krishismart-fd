@@ -165,7 +165,7 @@ export const FloatingAIChat: React.FC = () => {
 
       {/* Floating Chat Modal */}
       {isAIChatOpen && (
-        <div className="fixed bottom-20 left-3 sm:left-6 z-50 w-[94vw] sm:w-[420px] h-[580px] max-h-[82vh] bg-white rounded-2xl shadow-2xl border border-[#E5EDE7]/90 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-6 duration-200">
+        <div className="fixed bottom-20 left-3 sm:left-6 z-50 w-[94vw] sm:w-[420px] h-[580px] max-h-[82vh] bg-white/75 backdrop-blur-xl rounded-2xl shadow-2xl border border-[#E5EDE7]/90 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-6 duration-200">
           {/* Header */}
           <div className="p-4 bg-gradient-to-r from-[#064E3B] to-[#064E3B] text-white flex items-center justify-between border-b border-[#059669]/50">
             <div className="flex items-center gap-3">
@@ -211,7 +211,7 @@ export const FloatingAIChat: React.FC = () => {
                   className={`max-w-[82%] p-3.5 rounded-2xl leading-relaxed ${
                     msg.sender === 'user'
                       ? 'bg-[#059669] text-white rounded-br-xs shadow-sm font-medium'
-                      : 'bg-white border border-[#E5EDE7]/90 text-[#243A32] rounded-bl-xs shadow-xs whitespace-pre-line'
+                      : 'bg-white/75 backdrop-blur-xl border border-[#E5EDE7]/90 text-[#243A32] rounded-bl-xs shadow-xs whitespace-pre-line'
                   }`}
                 >
                   {msg.text}
@@ -232,7 +232,7 @@ export const FloatingAIChat: React.FC = () => {
             ))}
 
             {isTyping && (
-              <div className="flex items-center gap-2 text-[#718078] bg-white p-3 rounded-2xl border border-[#E5EDE7] max-w-[140px] shadow-xs">
+              <div className="flex items-center gap-2 text-[#718078] bg-white/75 backdrop-blur-xl p-3 rounded-2xl border border-[#E5EDE7] max-w-[140px] shadow-xs">
                 <div className="w-2 h-2 rounded-full bg-[#10B981] animate-bounce"></div>
                 <div className="w-2 h-2 rounded-full bg-[#10B981] animate-bounce [animation-delay:0.2s]"></div>
                 <div className="w-2 h-2 rounded-full bg-[#10B981] animate-bounce [animation-delay:0.4s]"></div>
@@ -248,7 +248,7 @@ export const FloatingAIChat: React.FC = () => {
               <button
                 key={i}
                 onClick={() => handleSend(prompt)}
-                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-white hover:bg-[#ECFDF5] text-[10px] font-medium text-[#3E5248] hover:text-[#064E3B] border border-[#E5EDE7] transition-colors shadow-2xs shrink-0"
+                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-white/75 backdrop-blur-xl hover:bg-[#ECFDF5] text-[10px] font-medium text-[#3E5248] hover:text-[#064E3B] border border-[#E5EDE7] transition-colors shadow-2xs shrink-0"
               >
                 {prompt}
               </button>
@@ -256,7 +256,7 @@ export const FloatingAIChat: React.FC = () => {
           </div>
 
           {/* Input Footer */}
-          <div className="p-3 bg-white border-t border-[#E5EDE7] flex items-center gap-2">
+          <div className="p-3 bg-white/75 backdrop-blur-xl border-t border-[#E5EDE7] flex items-center gap-2">
             
             <input
               type="text"
@@ -270,7 +270,7 @@ export const FloatingAIChat: React.FC = () => {
                   ? "कृषि प्रश्न पूछें..."
                   : "Ask about crops, pests, prices, schemes..."
               }
-              className="flex-1 bg-[#EFF4EF] border border-[#E5EDE7] rounded-xl px-3.5 py-2.5 text-xs text-[#243A32] focus:outline-hidden focus:ring-2 focus:ring-[#10B981] focus:bg-white transition-all placeholder:text-[#8A9A90]"
+              className="flex-1 bg-[#EFF4EF] border border-[#E5EDE7] rounded-xl px-3.5 py-2.5 text-xs text-[#243A32] focus:outline-hidden focus:ring-2 focus:ring-[#10B981] focus:bg-white/75 backdrop-blur-xl transition-all placeholder:text-[#8A9A90]"
             />
 
             <button

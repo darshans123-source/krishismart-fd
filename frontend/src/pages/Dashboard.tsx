@@ -194,7 +194,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
             <button
               onClick={() => setShowHealthModal(true)}
-              className="px-4 py-2.5 rounded-full bg-white hover:bg-[#ECFDF5] text-[#022C22] text-xs font-bold flex items-center gap-2 self-start md:self-auto transition-all shadow-md cursor-pointer"
+              className="px-4 py-2.5 rounded-full bg-white/75 backdrop-blur-xl hover:bg-[#ECFDF5] text-[#022C22] text-xs font-bold flex items-center gap-2 self-start md:self-auto transition-all shadow-md cursor-pointer"
             >
               <HelpCircle className="w-4 h-4 text-[#064E3B]" />
               <span>{heroBtnText}</span>
@@ -528,7 +528,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           </div>
 
           {/* Today's Farm Tasks Checklist */}
-          <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
+          <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
             <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
               <div>
                 <h2 className="text-sm font-extrabold text-[#172B24] uppercase tracking-wider font-heading">
@@ -555,7 +555,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                   className={`flex items-center justify-between p-3.5 rounded-2xl border transition-all cursor-pointer ${
                     task.completed
                       ? 'bg-[#F7FAF7] border-[#E5EDE7] opacity-60'
-                      : 'bg-white border-[#E5EDE7] hover:border-[#6EE7B7] hover:bg-[#ECFDF5]/20'
+                      : 'bg-white/75 backdrop-blur-xl border-[#E5EDE7] hover:border-[#6EE7B7] hover:bg-[#ECFDF5]/20'
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -563,7 +563,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                       className={`w-5 h-5 rounded-lg border flex items-center justify-center transition-colors ${
                         task.completed
                           ? 'bg-[#064E3B] border-[#064E3B] text-white'
-                          : 'border-[#CBD8D0] bg-white'
+                          : 'border-[#CBD8D0] bg-white/75 backdrop-blur-xl'
                       }`}
                     >
                       {task.completed && <CheckCircle2 className="w-3.5 h-3.5" />}
@@ -623,11 +623,11 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
             {/* 3 Price points */}
             <div className="grid grid-cols-3 gap-2 text-center pt-1">
-              <div className="p-2 rounded-xl bg-white border border-amber-200">
+              <div className="p-2 rounded-xl bg-white/75 backdrop-blur-xl border border-amber-200">
                 <div className="text-[10px] text-[#8A9A90] font-bold uppercase">Today</div>
                 <div className="text-sm font-black text-[#172B24] mt-0.5">₹24/kg</div>
               </div>
-              <div className="p-2 rounded-xl bg-white border border-amber-200">
+              <div className="p-2 rounded-xl bg-white/75 backdrop-blur-xl border border-amber-200">
                 <div className="text-[10px] text-[#8A9A90] font-bold uppercase">15 Days</div>
                 <div className="text-sm font-black text-amber-800 mt-0.5">₹29/kg</div>
               </div>
@@ -737,7 +737,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       {/* ADD TASK MODAL */}
       {showAddTaskModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl border border-[#E5EDE7] space-y-4">
+          <div className="bg-white/75 backdrop-blur-xl rounded-2xl p-6 max-w-md w-full shadow-2xl border border-[#E5EDE7] space-y-4">
             <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
               <h3 className="font-bold text-base text-[#172B24] font-heading">
                 Schedule New Farm Task
@@ -769,7 +769,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                   <select
                     value={newTaskCategory}
                     onChange={(e: any) => setNewTaskCategory(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#CBD8D0] text-xs bg-white"
+                    className="w-full px-3 py-2 rounded-xl border border-[#CBD8D0] text-xs bg-white/75 backdrop-blur-xl"
                   >
                     <option value="Irrigation">Irrigation</option>
                     <option value="Fertilizer">Fertilizer</option>
@@ -785,7 +785,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                   <select
                     value={newTaskPriority}
                     onChange={(e: any) => setNewTaskPriority(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#CBD8D0] text-xs bg-white"
+                    className="w-full px-3 py-2 rounded-xl border border-[#CBD8D0] text-xs bg-white/75 backdrop-blur-xl"
                   >
                     <option value="High">High Priority</option>
                     <option value="Medium">Medium Priority</option>

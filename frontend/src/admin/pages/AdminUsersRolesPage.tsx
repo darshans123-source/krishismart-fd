@@ -139,7 +139,7 @@ export const AdminUsersRolesPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/75 backdrop-blur-xl p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
         <div>
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-rose-50 text-rose-800 text-xs font-semibold mb-2">
             <ShieldAlert className="w-3.5 h-3.5 text-rose-600" />
@@ -184,7 +184,7 @@ export const AdminUsersRolesPage: React.FC = () => {
       {/* Role Matrix Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {Object.entries(ROLE_DESCRIPTIONS).map(([k, v]) => (
-          <div key={k} className="bg-white p-5 rounded-2xl border border-[#E5EDE7] shadow-xs space-y-2">
+          <div key={k} className="bg-white/75 backdrop-blur-xl p-5 rounded-2xl border border-[#E5EDE7] shadow-xs space-y-2">
             <div className="flex items-center justify-between">
               <span className={`px-2.5 py-1 rounded-full text-xs font-extrabold border ${v.badge}`}>
                 {v.label}
@@ -207,7 +207,7 @@ export const AdminUsersRolesPage: React.FC = () => {
           <p className="text-xs text-[#718078]">Checking credentials...</p>
         </div>
       ) : (
-        <div className="bg-white rounded-2xl border border-[#E5EDE7] overflow-hidden shadow-xs">
+        <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] overflow-hidden shadow-xs">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>

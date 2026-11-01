@@ -89,7 +89,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full min-w-0 bg-white border-b border-[#E5EDE7] shadow-soft overflow-x-clip">
+    <header className="sticky top-0 z-40 w-full min-w-0 glass-strong border-b border-white/60 overflow-x-clip">
       <div className="w-full min-w-0 px-3 sm:px-4 md:px-6 lg:px-8">
       {/* Row 1: hamburger + logo/brand + essential actions only.
           On phones the brand text is hidden (logo stays) and the
@@ -153,7 +153,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={t('searchPlaceholder')}
-              className="w-full pl-10 pr-4 py-2 bg-[#EFF4EF]/80 border border-[#E5EDE7]/80 rounded-full text-xs focus:outline-hidden focus:ring-2 focus:ring-[#059669] focus:bg-white focus:border-[#6EE7B7] transition-all placeholder:text-[#8A9A90] shadow-2xs"
+              className="w-full pl-10 pr-4 py-2 bg-[#EFF4EF]/80 border border-[#E5EDE7]/80 rounded-full text-xs focus:outline-hidden focus:ring-2 focus:ring-[#059669] focus:bg-white/75 backdrop-blur-xl focus:border-[#6EE7B7] transition-all placeholder:text-[#8A9A90] shadow-2xs"
             />
           </form>
         </div>
@@ -163,7 +163,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Real-time Location Control Pill */}
           <button
             onClick={() => setIsLocationModalOpen(true)}
-            className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-[#ECFDF5] border border-[#E5EDE7] hover:border-[#6EE7B7] transition-all text-[#243A32] group shadow-2xs min-w-0 max-w-[180px] lg:max-w-[220px]"
+            className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/75 backdrop-blur-xl hover:bg-[#ECFDF5] border border-[#E5EDE7] hover:border-[#6EE7B7] transition-all text-[#243A32] group shadow-2xs min-w-0 max-w-[180px] lg:max-w-[220px]"
             title="Click to detect GPS or change farm location"
           >
             <span className="relative flex h-2 w-2">
@@ -205,7 +205,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             {showLangMenu && (
-              <div className="absolute right-0 mt-2 w-36 bg-white rounded-2xl shadow-xl border border-[#EFF4EF] py-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+              <div className="absolute right-0 mt-2 w-36 bg-white/75 backdrop-blur-xl rounded-2xl shadow-xl border border-[#EFF4EF] py-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                 {(['en', 'kn', 'hi'] as Language[]).map((lang) => (
                   <button
                     key={lang}
@@ -309,7 +309,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="md:hidden pb-2.5 min-w-0">
         <button
           onClick={() => setIsLocationModalOpen(true)}
-          className="flex w-full min-w-0 items-center gap-1.5 px-3 py-2 rounded-full bg-white border border-[#E5EDE7] text-[#243A32] shadow-2xs"
+          className="flex w-full min-w-0 items-center gap-1.5 px-3 py-2 rounded-full bg-white/75 backdrop-blur-xl border border-[#E5EDE7] text-[#243A32] shadow-2xs"
           title="Click to detect GPS or change farm location"
         >
           <span className="relative flex h-2 w-2 shrink-0">

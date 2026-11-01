@@ -162,7 +162,7 @@ export const AdminPagesManager: React.FC<AdminPagesManagerProps> = ({ onNavigate
   return (
     <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-200">
       {/* Header Description & Actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white rounded-2xl border border-[#E5EDE7] p-5 sm:p-6 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-5 sm:p-6 shadow-2xs">
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-extrabold text-[#172B24] font-heading">Universal Page Manager</h2>
@@ -203,7 +203,7 @@ export const AdminPagesManager: React.FC<AdminPagesManagerProps> = ({ onNavigate
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search pages or routes..."
-            className="w-full pl-9 pr-4 py-2.5 rounded-2xl bg-white border border-[#E5EDE7] text-xs focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981]"
+            className="w-full pl-9 pr-4 py-2.5 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] text-xs focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981]"
           />
         </div>
 
@@ -212,7 +212,7 @@ export const AdminPagesManager: React.FC<AdminPagesManagerProps> = ({ onNavigate
           <button
             onClick={() => setStatusFilter('all')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-              statusFilter === 'all' ? 'bg-white text-[#172B24] shadow-2xs font-bold' : 'text-[#718078] hover:text-[#172B24]'
+              statusFilter === 'all' ? 'bg-white/75 backdrop-blur-xl text-[#172B24] shadow-2xs font-bold' : 'text-[#718078] hover:text-[#172B24]'
             }`}
           >
             All ({pages.length})
@@ -220,7 +220,7 @@ export const AdminPagesManager: React.FC<AdminPagesManagerProps> = ({ onNavigate
           <button
             onClick={() => setStatusFilter('Published')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-              statusFilter === 'Published' ? 'bg-white text-[#064E3B] shadow-2xs font-bold' : 'text-[#718078] hover:text-[#172B24]'
+              statusFilter === 'Published' ? 'bg-white/75 backdrop-blur-xl text-[#064E3B] shadow-2xs font-bold' : 'text-[#718078] hover:text-[#172B24]'
             }`}
           >
             Published
@@ -228,7 +228,7 @@ export const AdminPagesManager: React.FC<AdminPagesManagerProps> = ({ onNavigate
           <button
             onClick={() => setStatusFilter('Draft')}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-              statusFilter === 'Draft' ? 'bg-white text-amber-800 shadow-2xs font-bold' : 'text-[#718078] hover:text-[#172B24]'
+              statusFilter === 'Draft' ? 'bg-white/75 backdrop-blur-xl text-amber-800 shadow-2xs font-bold' : 'text-[#718078] hover:text-[#172B24]'
             }`}
           >
             Drafts
@@ -237,7 +237,7 @@ export const AdminPagesManager: React.FC<AdminPagesManagerProps> = ({ onNavigate
       </div>
 
       {/* Pages Data Table */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] shadow-2xs overflow-hidden">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] shadow-2xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead className="bg-[#F7FAF7]/70 border-b border-[#E5EDE7] text-[#718078] font-bold uppercase tracking-wider">
@@ -434,7 +434,7 @@ export const AdminPagesManager: React.FC<AdminPagesManagerProps> = ({ onNavigate
               <div className="text-xs font-bold text-[#3E5248] uppercase tracking-wider">Page Schema Summary</div>
               <div className="text-xs text-[#5A6E64]">Sections count: {previewPage.sections?.length || 0}</div>
               {previewPage.sections?.map((sec: any, idx: number) => (
-                <div key={sec.id || idx} className="p-3 rounded-xl bg-white border border-[#E5EDE7] space-y-1">
+                <div key={sec.id || idx} className="p-3 rounded-xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] space-y-1">
                   <div className="text-xs font-bold text-[#064E3B]">
                     Section {idx + 1}: {sec.title} ({sec.type})
                   </div>

@@ -84,7 +84,7 @@ export const DroneSprayPage: React.FC = () => {
       {/* ================================================== */}
       {/* 2. FIELD PARAMETERS (Selection, Crop, Area, Stage) */}
       {/* ================================================== */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
         <div className="border-b border-[#EFF4EF] pb-3">
           <h2 className="text-base font-extrabold text-[#172B24] font-heading">
             Field Configuration
@@ -103,7 +103,7 @@ export const DroneSprayPage: React.FC = () => {
             <select
               value={selectedField}
               onChange={(e) => setSelectedField(e.target.value)}
-              className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white text-[#243A32] font-medium focus:ring-2 focus:ring-[#059669] outline-hidden"
+              className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white/75 backdrop-blur-xl text-[#243A32] font-medium focus:ring-2 focus:ring-[#059669] outline-hidden"
             >
               <option value="Field 2 (North Tomato Plot)">Field 2 (North Tomato Plot)</option>
               <option value="Field 1 (Cauvery Paddy Basin)">Field 1 (Cauvery Paddy Basin)</option>
@@ -120,7 +120,7 @@ export const DroneSprayPage: React.FC = () => {
             <select
               value={selectedCrop}
               onChange={(e) => setSelectedCrop(e.target.value)}
-              className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white text-[#243A32] font-medium focus:ring-2 focus:ring-[#059669] outline-hidden"
+              className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white/75 backdrop-blur-xl text-[#243A32] font-medium focus:ring-2 focus:ring-[#059669] outline-hidden"
             >
               <option value="Tomato">Tomato (Hybrid F1)</option>
               <option value="Paddy">Paddy / Rice (Samba)</option>
@@ -137,7 +137,7 @@ export const DroneSprayPage: React.FC = () => {
             <select
               value={fieldAreaAcres}
               onChange={(e) => setFieldAreaAcres(parseFloat(e.target.value))}
-              className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white text-[#243A32] font-medium focus:ring-2 focus:ring-[#059669] outline-hidden"
+              className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white/75 backdrop-blur-xl text-[#243A32] font-medium focus:ring-2 focus:ring-[#059669] outline-hidden"
             >
               <option value={1.5}>1.5 Acres</option>
               <option value={2.0}>2.0 Acres</option>
@@ -154,7 +154,7 @@ export const DroneSprayPage: React.FC = () => {
             <select
               value={cropStage}
               onChange={(e) => setCropStage(e.target.value)}
-              className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white text-[#243A32] font-medium focus:ring-2 focus:ring-[#059669] outline-hidden"
+              className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white/75 backdrop-blur-xl text-[#243A32] font-medium focus:ring-2 focus:ring-[#059669] outline-hidden"
             >
               <option value="Flowering Stage">Flowering Stage</option>
               <option value="Vegetative Stage">Vegetative Stage</option>
@@ -170,7 +170,7 @@ export const DroneSprayPage: React.FC = () => {
       {/* ================================================== */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Metric 1: Drone Coverage */}
-        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-1">
+        <div className="p-5 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs space-y-1">
           <div className="text-[10px] font-extrabold uppercase tracking-wider text-[#8A9A90]">
             Drone Coverage
           </div>
@@ -183,7 +183,7 @@ export const DroneSprayPage: React.FC = () => {
         </div>
 
         {/* Metric 2: Estimated Flight Time */}
-        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-1">
+        <div className="p-5 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs space-y-1">
           <div className="text-[10px] font-extrabold uppercase tracking-wider text-[#8A9A90]">
             Estimated Flight Time
           </div>
@@ -196,7 +196,7 @@ export const DroneSprayPage: React.FC = () => {
         </div>
 
         {/* Metric 3: Coverage Area */}
-        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-1">
+        <div className="p-5 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs space-y-1">
           <div className="text-[10px] font-extrabold uppercase tracking-wider text-[#8A9A90]">
             Coverage Area
           </div>
@@ -209,7 +209,7 @@ export const DroneSprayPage: React.FC = () => {
         </div>
 
         {/* Metric 4: Planning Window */}
-        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-1">
+        <div className="p-5 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs space-y-1">
           <div className="text-[10px] font-extrabold uppercase tracking-wider text-[#8A9A90]">
             Planning Window
           </div>
@@ -225,7 +225,7 @@ export const DroneSprayPage: React.FC = () => {
       {/* ================================================== */}
       {/* 4. SIMPLE FIELD MAP WITH DRONE FLIGHT PATH */}
       {/* ================================================== */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-5">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#EFF4EF] pb-3">
           <div>
             <h3 className="font-extrabold text-base text-[#172B24] font-heading">

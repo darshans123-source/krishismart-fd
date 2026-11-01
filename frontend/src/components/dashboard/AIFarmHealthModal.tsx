@@ -79,7 +79,7 @@ export const AIFarmHealthModal: React.FC<AIFarmHealthModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/65 backdrop-blur-xs animate-in fade-in">
-      <div className="bg-white rounded-2xl p-6 max-w-xl w-full shadow-2xl border border-[#E5EDE7] space-y-5 animate-in zoom-in-95 duration-150 max-h-[90vh] flex flex-col">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl p-6 max-w-xl w-full shadow-2xl border border-[#E5EDE7] space-y-5 animate-in zoom-in-95 duration-150 max-h-[90vh] flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3 shrink-0">
           <div className="flex items-center gap-2.5">
@@ -140,7 +140,7 @@ export const AIFarmHealthModal: React.FC<AIFarmHealthModalProps> = ({
               return (
                 <div
                   key={p.title}
-                  className="p-3 rounded-2xl border border-[#E5EDE7]/90 bg-white hover:border-[#6EE7B7] transition-colors space-y-2"
+                  className="p-3 rounded-2xl border border-[#E5EDE7]/90 bg-white/75 backdrop-blur-xl hover:border-[#6EE7B7] transition-colors space-y-2"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">

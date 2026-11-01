@@ -73,7 +73,7 @@ export const KrishiBhavishyaPage: React.FC = () => {
       {/* ================================================== */}
       {/* 2. CROP SELECTOR */}
       {/* ================================================== */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
         <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
           <h2 className="text-base font-extrabold text-[#172B24] font-heading">
             Select Your Crop & Output
@@ -90,7 +90,7 @@ export const KrishiBhavishyaPage: React.FC = () => {
                 setSelectedCropKey(e.target.value);
                 addXP(20, `Checked Bhavishya for ${e.target.value}`);
               }}
-              className="w-full p-3 rounded-xl border border-[#CBD8D0] text-xs font-bold bg-white text-[#243A32] focus:ring-2 focus:ring-[#059669]"
+              className="w-full p-3 rounded-xl border border-[#CBD8D0] text-xs font-bold bg-white/75 backdrop-blur-xl text-[#243A32] focus:ring-2 focus:ring-[#059669]"
             >
               <option value="Tomato">Tomato (Hybrid F1)</option>
               <option value="Paddy (Rice)">Paddy / Rice (Samba Mahsuri)</option>
@@ -126,7 +126,7 @@ export const KrishiBhavishyaPage: React.FC = () => {
       {/* ================================================== */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* TODAY */}
-        <div className="p-6 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-2 text-center">
+        <div className="p-6 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs space-y-2 text-center">
           <div className="text-xs font-black uppercase tracking-wider text-[#8A9A90]">
             TODAY
           </div>
@@ -142,7 +142,7 @@ export const KrishiBhavishyaPage: React.FC = () => {
         </div>
 
         {/* 15 DAYS */}
-        <div className="p-6 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-2 text-center">
+        <div className="p-6 rounded-2xl bg-white/75 backdrop-blur-xl border border-[#E5EDE7] shadow-2xs space-y-2 text-center">
           <div className="text-xs font-black uppercase tracking-wider text-[#8A9A90]">
             15 DAYS
           </div>
@@ -225,7 +225,7 @@ export const KrishiBhavishyaPage: React.FC = () => {
       {/* ================================================== */}
       {/* 5. CLEAN 60-DAY TIMELINE CHART */}
       {/* ================================================== */}
-      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
+      <div className="bg-white/75 backdrop-blur-xl rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#EFF4EF] pb-3">
           <div>
             <h3 className="font-extrabold text-base text-[#172B24] font-heading">
