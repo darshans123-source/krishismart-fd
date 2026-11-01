@@ -4,8 +4,6 @@ import {
   X,
   Send,
   Sparkles,
-  Mic,
-  MicOff,
   Bot,
   User as UserIcon,
   RotateCcw,
@@ -14,6 +12,7 @@ import {
 import { useLanguage } from '../../context/LanguageContext';
 import { useFarmData } from '../../context/FarmDataContext';
 import { AIChatMessage } from '../../types';
+import { askOpenAi } from '../../services/openai';
 
 export const FloatingAIChat: React.FC = () => {
   const { language, t } = useLanguage();
@@ -33,7 +32,6 @@ export const FloatingAIChat: React.FC = () => {
   } = useFarmData();
 
   const [input, setInput] = useState('');
-  const [isListening, setIsListening] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const chatBottomRef = useRef<HTMLDivElement>(null);
 
@@ -90,10 +88,9 @@ export const FloatingAIChat: React.FC = () => {
     chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isTyping]);
 
-  const handleSend = (textToSend?: string) => {
+  const handleSend = async (textToSend?: string) => {
     const query = textToSend || input.trim();
     if (!query) return;
-
     const userMsg: AIChatMessage = {
       id: `usr-${Date.now()}`,
       sender: 'user',
@@ -101,67 +98,47 @@ export const FloatingAIChat: React.FC = () => {
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       language
     };
-
     setMessages((prev) => [...prev, userMsg]);
     setInput('');
     setIsTyping(true);
-
-    // Dynamic AI response generation based on live farm state & location
-    setTimeout(() => {
-      let reply = '';
-      const q = query.toLowerCase();
-
-      if (q.includes('analyze') || q.includes('analysis') || q.includes('ವಿಶ್ಲೇಷಿಸಿ') || q.includes('विश्लेषण')) {
-        reply = `🌾 **AI Daily Farm Diagnostic (${locationState.address.formatted}):**\n\n• **Farm Health Score:** ${aiFarmHealth.overall}/100 (Optimal)\n• **Crop Foliar Vigor:** ${aiFarmHealth.cropHealth}% across ${crops.length} active plots\n• **Micro-Climate:** ${weather.temp}°C, ${weather.condition}, Humidity ${weather.humidity}%\n• **Soil Moisture:** ${weather.soilMoisture}% (Field Capacity Satisfactory)\n• **Advisory:** ${weather.sprayingAdvisory.reason}`;
-      } else if (q.includes('what should i do') || q.includes('do today') || q.includes('ಮಾಡಬೇಕು') || q.includes('क्या काम')) {
-        reply = `📋 **Today's AI Action Plan for ${user?.name || 'Farmer'}:**\n\n1. **Spraying Window:** ${weather.sprayingAdvisory.bestWindow} (${weather.sprayingAdvisory.status}). Wind speed is safe at ${weather.windSpeed} km/h.\n2. **Irrigation:** ${weather.irrigationAdvisory.reason}\n3. **Field Scout:** Inspect tomato parcel lower leaves for early blight spores.\n4. **Market Opportunity:** Regional APMC prices for your crops are currently peaking.`;
-      } else if (q.includes('financial') || q.includes('profit') || q.includes('money') || q.includes('ಲಾಭ') || q.includes('मुनाफा')) {
-        reply = `💰 **KrishiNidhi Financial Intelligence:**\n\n• **Projected Net Income:** ₹${financialSummary.netProfit.toLocaleString('en-IN')}\n• **Total Income:** ₹${financialSummary.totalIncome.toLocaleString('en-IN')}\n• **Input Expenses:** ₹${financialSummary.totalExpenses.toLocaleString('en-IN')}\n• **Profit Margin:** ${financialSummary.profitMargin}%\n• **Financial Health Rating:** A+ (Excellent working capital liquidity)`;
-      } else if (q.includes('irrigate') || q.includes('ನೀರು') || q.includes('सिंचाई') || q.includes('water')) {
-        reply =
-          language === 'kn'
-            ? `💧 **ನೀರಾವರಿ ಸಲಹೆ (${locationState.address.district}):**\nಪ್ರಸ್ತುತ ನಿಮ್ಮ ಮಣ್ಣಿನ ತೇವಾಂಶ **${weather.soilMoisture}%** ನಲ್ಲಿದೆ. ಮಳೆಯ ಮುನ್ಸೂಚನೆ **${weather.rainProbability}%** ಇರುವುದರಿಂದ, ನೀರಾವರಿ ಕಡಿಮೆ ಮಾಡಲು ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ.`
-            : language === 'hi'
-            ? `💧 **सिंचाई सलाह (${locationState.address.district}):**\nवर्तमान में आपके खेत की मिट्टी में नमी **${weather.soilMoisture}%** है। बारिश की संभावना **${weather.rainProbability}%** होने के कारण अतिरिक्त सिंचाई टालें।`
-            : `💧 **Smart Irrigation Advisory for ${locationState.address.district}:**\nYour current soil moisture is optimal at **${weather.soilMoisture}%**. With **${weather.rainProbability}% rain probability** forecasted, you can save energy and postpone pump operation.`;
-      } else if (q.includes('spot') || q.includes('disease') || q.includes('tomato') || q.includes('ರೋಗ') || q.includes('ಇಲಾಜು') || q.includes('धब्बे')) {
-        reply = `🔬 **AI Pathology Diagnosis:**\nTarget-board concentric dark rings on tomato foliage indicate **Early Blight (Alternaria solani)** with 94% probability.\n\n✅ **Organic Treatment:** Spray Trichoderma viride @ 5g/L or 1% Bordeaux mixture.\n⚠️ **Chemical Remedy:** Azoxystrobin 18.2% + Difenoconazole 11.4% SC @ 1 ml/L in the cool evening window.`;
-      } else if (q.includes('sell') || q.includes('price') || q.includes('ಮಾರಾಟ') || q.includes('ಮಂಡಿ') || q.includes('भाव') || q.includes('बेचने')) {
-        reply = `📈 **KrishiBhavishya Market Forecast (${locationState.address.district} & Surrounding Hubs):**\nOur predictive engine projects Tomato prices surging from current rates to a peak in 20–25 days (+38.6% profit lift). Top demand is concentrated at Kolar and Bengaluru APMCs.`;
-      } else if (q.includes('scheme') || q.includes('subsidy') || q.includes('ಯೋಜನೆ') || q.includes('ಸಬ್ಸಿಡಿ') || q.includes('योजना') || q.includes('सब्सिडी')) {
-        reply = `🏛️ **Government Scheme Match:**\nBased on your registered **${user?.landSize || 6.5} acres** in ${locationState.address.district}, you are eligible for **PMKSY Micro-Irrigation (up to 75–90% capital subsidy)** and **PM-KISAN (₹6,000/yr DBT)**. You can apply directly in the Scheme Finder tab!`;
-      } else {
-        reply = `🌾 **KrishiSmart AI Insight:** Based on your farm in **${locationState.address.formatted}**, your current Farm Health Index is strong at **${aiFarmHealth.overall}/100**, and projected net revenue is **₹${financialSummary.netProfit.toLocaleString('en-IN')}**. Let me know what specific action you'd like to explore!`;
-      }
-
+    try {
+      const result = await askOpenAi({
+        feature: 'ask-krishi',
+        prompt: query,
+        language,
+        context: {
+          district: locationState.address.district,
+          state: locationState.address.state,
+          crops: crops.map((c) => c.name),
+          temperature: weather.temp,
+          condition: weather.condition,
+          humidity: weather.humidity,
+          soilMoisture: weather.soilMoisture,
+          rainProbability: weather.rainProbability,
+          farmHealth: aiFarmHealth.overall,
+          netProfit: financialSummary.netProfit,
+        },
+      });
       const aiMsg: AIChatMessage = {
         id: `ai-${Date.now()}`,
         sender: 'assistant',
-        text: reply,
+        text: result.text,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         language
       };
-
       setMessages((prev) => [...prev, aiMsg]);
-      setIsTyping(false);
       addXP(15, 'Consulted Krishi AI');
-    }, 900);
-  };
-
-  const handleVoiceToggle = () => {
-    setIsListening((prev) => !prev);
-    if (!isListening) {
-      setTimeout(() => {
-        setIsListening(false);
-        const sampleVoicePrompt =
-          language === 'kn'
-            ? "ಇಂದು ನನ್ನ ಬೆಳೆಗೆ ನೀರು ಹಾಯಿಸಬೇಕೇ?"
-            : language === 'hi'
-            ? "क्या मुझे आज अपने खेत में सिंचाई करनी चाहिए?"
-            : "Should I irrigate my crops today?";
-        setInput(sampleVoicePrompt);
-        handleSend(sampleVoicePrompt);
-      }, 2500);
+    } catch (e: any) {
+      const aiMsg: AIChatMessage = {
+        id: `ai-${Date.now()}`,
+        sender: 'assistant',
+        text: `AI is unavailable right now: ${e?.message || 'Please try again.'}`,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        language
+      };
+      setMessages((prev) => [...prev, aiMsg]);
+    } finally {
+      setIsTyping(false);
     }
   };
 
@@ -281,18 +258,7 @@ export const FloatingAIChat: React.FC = () => {
 
           {/* Input Footer */}
           <div className="p-3 bg-white border-t border-[#E5EDE7] flex items-center gap-2">
-            <button
-              onClick={handleVoiceToggle}
-              className={`p-2.5 rounded-xl transition-all ${
-                isListening
-                  ? 'bg-rose-500 text-white animate-pulse'
-                  : 'bg-[#EFF4EF] text-[#5A6E64] hover:bg-[#D1FAE5] hover:text-[#064E3B]'
-              }`}
-              title="Voice Input (English, Kannada, Hindi)"
-            >
-              {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
-            </button>
-
+            
             <input
               type="text"
               value={input}

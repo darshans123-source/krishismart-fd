@@ -20,6 +20,7 @@ import {
 } from 'recharts';
 import { useFarmData } from '../context/FarmDataContext';
 import { useLanguage } from '../context/LanguageContext';
+import { OpenAIAskPanel } from '../components/ai/OpenAIAskPanel';
 
 export const SmartPumpPage: React.FC = () => {
   const { smartPump, togglePumpStatus, setPumpMode, updatePumpThreshold, weather } = useFarmData();
@@ -318,6 +319,13 @@ export const SmartPumpPage: React.FC = () => {
           </div>
         </div>
       </div>
+      <OpenAIAskPanel
+        feature="irrigation"
+        title="OpenAI Irrigation Recommendations — text only"
+        description="Uses your current soil moisture, weather and pump status. No images, no voice."
+        defaultPrompt="Should I irrigate my crops today, and for how long?"
+      />
     </div>
+
   );
 };

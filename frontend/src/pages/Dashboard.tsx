@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 import { useFarmData } from '../context/FarmDataContext';
 import { useLanguage } from '../context/LanguageContext';
+import { askOpenAi } from '../services/openai';
 import { AIFarmHealthModal } from '../components/dashboard/AIFarmHealthModal';
 
 interface DashboardProps {
@@ -66,6 +67,38 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
   const [newTaskDueDate, setNewTaskDueDate] = useState('Today, 5:00 PM');
   const [isSpeakingBriefing, setIsSpeakingBriefing] = useState(false);
   const [commandInput, setCommandInput] = useState('');
+  const [openAiBriefing, setOpenAiBriefing] = useState('');
+  const [openAiBriefingLoading, setOpenAiBriefingLoading] = useState(false);
+  const [openAiBriefingError, setOpenAiBriefingError] = useState('');
+
+  const handleGenerateOpenAiBriefing = async () => {
+    if (openAiBriefingLoading) return;
+    setOpenAiBriefingLoading(true);
+    setOpenAiBriefingError('');
+    setOpenAiBriefing('');
+    try {
+      const result = await askOpenAi({
+        feature: 'daily-briefing',
+        prompt: "Give me today's farming briefing for my farm.",
+        language: 'en',
+        context: {
+          district: locationState.address.district,
+          state: locationState.address.state,
+          temperature: weather.temp,
+          condition: weather.condition,
+          humidity: weather.humidity,
+          soilMoisture: weather.soilMoisture,
+          rainProbability: weather.rainProbability,
+          farmHealth: aiFarmHealth.overall,
+        },
+      });
+      setOpenAiBriefing(result.text);
+    } catch (e: any) {
+      setOpenAiBriefingError(e?.message || 'AI request failed. Please try again.');
+    } finally {
+      setOpenAiBriefingLoading(false);
+    }
+  };
 
   const pendingTasks = tasks.filter((t) => !t.completed);
 
@@ -471,6 +504,23 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             <p className="text-xs sm:text-sm text-[#3E5248] font-medium leading-relaxed bg-[#F7FAF7] p-3.5 rounded-2xl border border-[#E5EDE7]/80">
               "{aiBriefing.summary}"
             </p>
+            <button
+              onClick={handleGenerateOpenAiBriefing}
+              disabled={openAiBriefingLoading}
+              className="px-4 py-2 rounded-xl bg-[#059669] hover:bg-[#064E3B] disabled:opacity-50 text-white text-xs font-bold transition-all"
+            >
+              {openAiBriefingLoading ? 'Generating briefing…' : "Generate today's briefing with OpenAI"}
+            </button>
+            {openAiBriefingError && (
+              <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-900 text-xs leading-relaxed">
+                AI is unavailable right now: {openAiBriefingError}
+              </div>
+            )}
+            {openAiBriefing && (
+              <div className="p-4 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7] text-sm text-[#243A32] leading-relaxed whitespace-pre-line">
+                {openAiBriefing}
+              </div>
+            )}
 
             {/* 3 Actionable Natural Recommendations */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
