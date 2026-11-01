@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { useFarmData } from '../context/FarmDataContext';
 import { supabase } from '../supabase';
+import { registerPinAccount, verifyPinLogin } from '../services/farmerPinAuth';
 import { useLanguage } from '../context/LanguageContext';
 import { INDIAN_STATES, INDIAN_STATES_CITIES } from '../constants/indianRegions';
 import { Language } from '../types';
@@ -24,7 +25,7 @@ import { Language } from '../types';
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
-  initialMode?: 'login' | 'register' | 'onboarding';
+  initialMode?: 'login' | 'register' | 'onboarding' | 'pin';
 }
 
 
@@ -55,12 +56,15 @@ const friendlyAuthError = (err: any): string => {
 export const AuthModal: React.FC<AuthModalProps> = ({
   isOpen,
   onClose,
-  initialMode = 'login'
+  initialMode = 'pin'
 }) => {
-  const { isAuthenticated, completeOnboarding } = useFarmData();
+  const { isAuthenticated, completeOnboarding, loginWithPin } = useFarmData();
   const { language, setLanguage, t } = useLanguage();
 
-  const [mode, setMode] = useState<'login' | 'register' | 'forgot' | 'onboarding'>(initialMode);
+  const [mode, setMode] = useState<'login' | 'register' | 'forgot' | 'onboarding' | 'pin'>(initialMode);
+  const [pinName, setPinName] = useState('');
+  const [pinCode, setPinCode] = useState('');
+  const [pinAction, setPinAction] = useState<'login' | 'register'>('login');
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -148,6 +152,27 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     }
   };
 
+  // Fast PIN login: Name + 4 digits, one Supabase RPC call, no redirect.
+  // Register sets the PIN once; Login reuses the same PIN every time.
+  const handlePinSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAuthError('');
+    setAuthMessage('');
+    setAuthLoading(true);
+    try {
+      const cleanPin = pinCode.replace(/\D/g, '').slice(0, 4);
+      const result = pinAction === 'register'
+        ? await registerPinAccount(pinName, cleanPin)
+        : await verifyPinLogin(pinName, cleanPin);
+      loginWithPin(result.name);
+      onClose();
+    } catch (err: any) {
+      setAuthError(err?.message || 'PIN login failed. Please try again.');
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
   const handleOnboardingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!isAuthenticated) {
@@ -205,7 +230,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             </div>
             <div>
               <h3 className="font-extrabold text-lg font-heading leading-tight">
-                {mode === 'onboarding'
+                {mode === 'pin'
+                  ? 'Fast PIN Login'
+                  : mode === 'onboarding'
                   ? 'Farmer Setup & Onboarding'
                   : mode === 'register'
                   ? 'Create KrishiSmart Account'
@@ -237,11 +264,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               Farm setup is saved to your real Supabase account. Sign up or sign in, then come back to complete your farm setup.
             </p>
             <div className="flex gap-2">
-              <button type="button" onClick={() => setMode('register')} className="flex-1 py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md">
-                Create Account
+              <button type="button" onClick={() => setMode('pin')} className="flex-1 py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md">
+                Fast PIN Login
               </button>
               <button type="button" onClick={() => setMode('login')} className="flex-1 py-3 rounded-xl border border-[#CBD8D0] hover:bg-[#F7FAF7] text-[#3E5248] font-bold text-sm">
-                Sign In
+                Email / Google
               </button>
             </div>
           </div>
@@ -461,6 +488,90 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               </div>
             )}
           </form>
+        ) : mode === 'pin' ? (
+          <div className="p-6 space-y-4">
+            <p className="text-sm text-[#5A6E64] leading-relaxed">
+              Just your name and a 4-digit PIN — no email, no password, no redirect. Set your PIN once, then use the same PIN every time.
+            </p>
+            <form onSubmit={handlePinSubmit} className="w-full min-w-0 space-y-3.5">
+              <div>
+                <label className="block text-xs font-bold text-[#3E5248] mb-1">Your Name</label>
+                <input
+                  type="text"
+                  value={pinName}
+                  onChange={(e) => setPinName(e.target.value)}
+                  required
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden"
+                  placeholder="e.g. Darshan Patil"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-[#3E5248] mb-1">4-Digit PIN</label>
+                <input
+                  type="password"
+                  inputMode="numeric"
+                  value={pinCode}
+                  onChange={(e) => setPinCode(e.target.value.replace(/\D/g, '').slice(0, 4))}
+                  required
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD8D0] text-sm focus:ring-2 focus:ring-[#10B981] outline-hidden tracking-[0.5em]"
+                  placeholder="••••"
+                />
+              </div>
+              {authError && (
+                <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs font-semibold text-red-700">
+                  {authError}
+                </div>
+              )}
+              {authMessage && (
+                <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800">
+                  {authMessage}
+                </div>
+              )}
+              <button
+                type="submit"
+                disabled={authLoading}
+                className="w-full py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md shadow-[#059669]/20 transition-all disabled:opacity-60"
+              >
+                {authLoading ? 'Please wait…' : pinAction === 'register' ? 'Create PIN Account' : 'Login with PIN'}
+              </button>
+            </form>
+            <div className="pt-2 text-center text-xs text-[#718078]">
+              {pinAction === 'login' ? (
+                <>
+                  New here?{' '}
+                  <button onClick={() => setPinAction('register')} className="text-[#064E3B] font-bold hover:underline">
+                    Create a PIN account →
+                  </button>
+                </>
+              ) : (
+                <>
+                  Already have a PIN?{' '}
+                  <button onClick={() => setPinAction('login')} className="text-[#064E3B] font-bold hover:underline">
+                    Login with PIN
+                  </button>
+                </>
+              )}
+            </div>
+            <div className="flex items-center">
+              <div className="flex-1 border-t border-[#E5EDE7]"></div>
+              <span className="px-3 text-[11px] font-bold text-[#8A9A90] uppercase">Or</span>
+              <div className="flex-1 border-t border-[#E5EDE7]"></div>
+            </div>
+            <button
+              type="button"
+              disabled={authLoading}
+              onClick={handleGoogleAuth}
+              className="w-full py-3 rounded-xl border border-[#CBD8D0] hover:bg-[#F7FAF7] text-[#243A32] font-bold text-xs flex items-center justify-center gap-3 transition-colors shadow-xs disabled:opacity-60"
+            >
+              <span>Continue with Google</span>
+            </button>
+            <div className="text-center text-xs text-[#718078]">
+              Prefer email?{' '}
+              <button onClick={() => setMode('login')} className="text-[#064E3B] font-bold hover:underline">
+                Email login
+              </button>
+            </div>
+          </div>
         ) : (
           /* REGULAR LOGIN / REGISTER FORM */
           <div className="p-6 space-y-4">
@@ -581,6 +692,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               </button>
             </form>
 
+            <div className="pt-2 text-center">
+              <button onClick={() => setMode('pin')} className="text-[#064E3B] font-bold hover:underline text-xs">
+                Fast PIN login (Name + 4 digits) →
+              </button>
+            </div>
             <div className="pt-2 text-center">
               {mode === 'login' ? (
                 <div className="text-xs text-[#718078]">
