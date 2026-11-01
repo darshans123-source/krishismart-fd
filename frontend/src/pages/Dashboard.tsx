@@ -346,7 +346,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                     (crop.name.toLowerCase().includes('tomato')
                       ? 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=600&auto=format&fit=crop&q=80'
                       : crop.name.toLowerCase().includes('sugarcane')
-                      ? 'https://images.unsplash.com/photo-1598112972019-91e30f406976?w=600&auto=format&fit=crop&q=80'
+                      ? 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=600&auto=format&fit=crop&q=80'
                       : crop.name.toLowerCase().includes('cotton')
                       ? 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?w=600&auto=format&fit=crop&q=80'
                       : 'https://images.unsplash.com/photo-1536657464919-892534f60d6e?w=600&auto=format&fit=crop&q=80')
