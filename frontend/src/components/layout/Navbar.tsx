@@ -89,7 +89,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-stone-200 shadow-2xs transition-all">
+    <header className="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-stone-200/80 shadow-soft transition-all">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-3">
         {/* Left: Mobile Menu Toggle & Brand Logo */}
         <div className="flex items-center gap-2 sm:gap-3">
@@ -135,7 +135,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={t('searchPlaceholder')}
-              className="w-full pl-10 pr-4 py-2 bg-stone-50 border border-stone-200 rounded-full text-xs focus:outline-hidden focus:ring-2 focus:ring-emerald-600 focus:bg-white transition-all placeholder:text-stone-400"
+              className="w-full pl-10 pr-4 py-2 bg-stone-100/80 border border-stone-200/80 rounded-full text-xs focus:outline-hidden focus:ring-2 focus:ring-emerald-600 focus:bg-white focus:border-emerald-300 transition-all placeholder:text-stone-400 shadow-2xs"
             />
           </form>
         </div>
@@ -145,7 +145,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Real-time Location Control Pill */}
           <button
             onClick={() => setIsLocationModalOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-stone-100 hover:bg-emerald-50 border border-stone-200 hover:border-emerald-300 transition-all text-stone-800 group"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-emerald-50 border border-stone-200 hover:border-emerald-300 transition-all text-stone-800 group shadow-2xs"
             title="Click to detect GPS or change farm location"
           >
             <span className="relative flex h-2 w-2">
