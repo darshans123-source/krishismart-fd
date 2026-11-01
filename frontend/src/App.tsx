@@ -58,8 +58,9 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
   const [showSplash, setShowSplash] = useState(true);
   const [splashFading, setSplashFading] = useState(false);
   useEffect(() => {
-    const fade = window.setTimeout(() => setSplashFading(true), 650);
-    const remove = window.setTimeout(() => setShowSplash(false), 1150);
+    // Splash stays for 5 seconds total: fade out starts at 4.5s, removed at 5s.
+    const fade = window.setTimeout(() => setSplashFading(true), 4500);
+    const remove = window.setTimeout(() => setShowSplash(false), 5000);
     return () => { window.clearTimeout(fade); window.clearTimeout(remove); };
   }, []);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);

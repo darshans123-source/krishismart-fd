@@ -427,7 +427,7 @@
 .splash-logo { animation: splash-logo-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
 .splash-text { animation: splash-text-in 0.7s 0.25s cubic-bezier(0.22, 1, 0.36, 1) both; }
 .splash-tagline { animation: splash-text-in 0.7s 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
-.splash-progress-bar { animation: splash-progress 0.9s ease-out forwards; }
+.splash-progress-bar { animation: splash-progress 4.5s ease-out forwards; }
 .splash-particle { animation: splash-particle 5s ease-in-out infinite; }
 .splash-fade-out { opacity: 0; transition: opacity 0.5s ease; }
 @media (prefers-reduced-motion: reduce) {
