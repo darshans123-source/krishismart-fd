@@ -100,7 +100,7 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#fbfcf9] text-stone-900 flex flex-col selection:bg-emerald-600 selection:text-white">
+    <div className="min-h-screen bg-[#f6f5f1] text-stone-900 flex flex-col selection:bg-emerald-600 selection:text-white">
       {/* Top Universal Navbar */}
       <Navbar
         currentTab={currentTab}
