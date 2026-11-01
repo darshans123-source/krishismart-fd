@@ -77,6 +77,9 @@ interface FarmDataContextType {
   isAuthenticated: boolean;
   // No local login() anymore: AuthModal signs in through Supabase directly,
   // and this provider only trusts a real Supabase session (see below).
+  // PIN login is the one extra: after Supabase RPC verifies the PIN
+  // server-side, loginWithPin creates a local PIN session (name only).
+  loginWithPin: (name: string) => void;
   logout: () => void;
   updateUser: (updated: Partial<UserProfile>) => void;
   completeOnboarding: (data: Partial<UserProfile>) => void;
@@ -698,25 +701,52 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     } catch { /* ignore malformed callback URL */ }
     supabase.auth.getSession().then(({ data }) => {
       const sessionUser = (data as any)?.session?.user;
-      setUser(sessionUser ? mapSessionUser(sessionUser) : null);
+      if (sessionUser) {
+        setUser(mapSessionUser(sessionUser));
+        return;
+      }
+      // Verified PIN session fallback (created only after Supabase RPC
+      // verified the PIN). No Supabase session + no PIN session = signed out.
+      try {
+        const raw = localStorage.getItem('krishi_pin_session');
+        const pin = raw ? JSON.parse(raw) : null;
+        if (pin?.name) {
+          const savedRaw = localStorage.getItem('krishi_user');
+          const saved = savedRaw ? JSON.parse(savedRaw) : null;
+          setUser({ ...INITIAL_USER, ...(saved && saved.name === pin.name ? saved : {}), name: pin.name, email: '' });
+          return;
+        }
+      } catch { /* ignore corrupt PIN session */ }
+      setUser(null);
     }).catch(() => setUser(null));
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       const sessionUser = (session as any)?.user;
       if (sessionUser) {
         setUser(mapSessionUser(sessionUser));
-      } else {
+      } else if (_event === 'SIGNED_OUT') {
+        // Only a real sign-out clears the user. An INITIAL_SESSION with
+        // no Supabase session must NOT wipe a verified PIN session.
         setUser(null);
         localStorage.removeItem('krishi_user');
+        localStorage.removeItem('krishi_pin_session');
       }
     });
     return () => { listener?.subscription?.unsubscribe(); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const loginWithPin = (name: string) => {
+    const cleanName = name.trim();
+    try { localStorage.setItem('krishi_pin_session', JSON.stringify({ name: cleanName, at: Date.now() })); } catch { /* ignore */ }
+    setUser((prev) => ({ ...(prev || INITIAL_USER), name: cleanName, email: '' }));
+    showToast(`Welcome back, ${cleanName}!`, 'success');
+  };
+
   const logout = async () => {
     await supabase.auth.signOut();
     setUser(null);
     localStorage.removeItem('krishi_user');
+    localStorage.removeItem('krishi_pin_session');
     showToast('Logged out successfully', 'info');
   };
 
@@ -1074,6 +1104,7 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       value={{
         user,
         isAuthenticated: !!user,
+        loginWithPin,
         logout,
         updateUser,
         completeOnboarding,

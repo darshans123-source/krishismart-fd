@@ -63,7 +63,7 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
     return () => { window.clearTimeout(fade); window.clearTimeout(remove); };
   }, []);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
-  const [authInitialMode, setAuthInitialMode] = useState<'login' | 'register' | 'onboarding'>('login');
+  const [authInitialMode, setAuthInitialMode] = useState<'login' | 'register' | 'onboarding' | 'pin'>('pin');
 
   const { isAuthenticated, isLocationModalOpen, setIsLocationModalOpen, setIsAIChatOpen } = useFarmData();
 
@@ -75,7 +75,7 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
     if (isAuthenticated && currentTab === 'landing') setCurrentTab('dashboard');
   }, [isAuthenticated, currentTab]);
 
-  const handleOpenAuth = (mode: 'login' | 'register' | 'onboarding' = 'login') => {
+  const handleOpenAuth = (mode: 'login' | 'register' | 'onboarding' | 'pin' = 'pin') => {
     setAuthInitialMode(mode);
     setIsAuthModalOpen(true);
   };
@@ -85,7 +85,7 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
       case 'landing':
         return (
           <LandingPage
-            onGetStarted={() => handleOpenAuth('register')}
+            onGetStarted={() => handleOpenAuth('pin')}
             onExploreApp={() => setCurrentTab('dashboard')}
             onSelectModule={(mod) => setCurrentTab(mod)}
           />
@@ -135,7 +135,7 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
         currentTab={currentTab}
         setCurrentTab={setCurrentTab}
         onOpenNotifications={() => setIsNotificationsOpen(true)}
-        onOpenAuth={() => handleOpenAuth('login')}
+        onOpenAuth={() => handleOpenAuth('pin')}
         onOpenCart={() => setCurrentTab('store')}
         onToggleMobileSidebar={() => setIsMobileSidebarOpen(true)}
         onNavigateAdmin={onNavigateAdmin}
