@@ -91,9 +91,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* Top Header if in Mobile Drawer */}
       {isMobile && (
         <div className="flex items-center gap-3 pb-4 mb-4 border-b border-stone-200">
-          <div className="w-10 h-10 rounded-2xl bg-emerald-700 flex items-center justify-center text-white shadow-sm">
-            <Sprout className="w-5 h-5" />
-          </div>
+          <img
+            src="/logo-icon.svg"
+            alt="KrishiSmart AI logo"
+            className="w-10 h-10 rounded-2xl shadow-sm"
+          />
           <div>
             <div className="font-extrabold text-base text-stone-900 font-heading tracking-tight">
               KRISHISMART <span className="text-emerald-700">AI</span>
