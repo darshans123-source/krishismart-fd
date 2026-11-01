@@ -95,10 +95,10 @@ export const MyFarmsPage: React.FC = () => {
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-heading">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#172B24] font-heading">
             {t('myFarms')}
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500">
+          <p className="text-xs sm:text-sm text-[#718078]">
             Multi-field lifecycle management, growth stages, schedules, and projected harvest yields.
           </p>
         </div>
@@ -106,14 +106,14 @@ export const MyFarmsPage: React.FC = () => {
         <div className="flex items-center gap-2.5">
           <button
             onClick={() => setShowAddFarmModal(true)}
-            className="px-4 py-2.5 rounded-2xl border border-slate-300 hover:bg-slate-50 text-slate-800 text-xs font-bold transition-all shadow-xs"
+            className="px-4 py-2.5 rounded-2xl border border-[#CBD8D0] hover:bg-[#F7FAF7] text-[#243A32] text-xs font-bold transition-all shadow-xs"
           >
             + Add Farm Parcel
           </button>
 
           <button
             onClick={() => setShowAddCropModal(true)}
-            className="px-4 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all flex items-center gap-1.5"
+            className="px-4 py-2.5 rounded-2xl bg-[#059669] hover:bg-[#064E3B] text-white text-xs font-bold shadow-md shadow-[#059669]/20 transition-all flex items-center gap-1.5"
           >
             <Plus className="w-4 h-4" />
             <span>{t('addCrop')}</span>
@@ -130,22 +130,22 @@ export const MyFarmsPage: React.FC = () => {
             <button
               key={farm.id}
               onClick={() => setSelectedFarmId(farm.id)}
-              className={`p-4 rounded-3xl border text-left transition-all shrink-0 min-w-[240px] ${
+              className={`p-4 rounded-2xl border text-left transition-all shrink-0 min-w-[240px] ${
                 isSelected
-                  ? 'bg-emerald-800 text-white border-emerald-800 shadow-lg shadow-emerald-900/20'
-                  : 'bg-white border-slate-200 text-slate-700 hover:border-emerald-300'
+                  ? 'bg-[#064E3B] text-white border-[#064E3B] shadow-lg shadow-[#064E3B]/20'
+                  : 'bg-white border-[#E5EDE7] text-[#3E5248] hover:border-[#6EE7B7]'
               }`}
             >
               <div className="flex items-center justify-between mb-1">
-                <span className={`text-[10px] font-bold uppercase tracking-wider ${isSelected ? 'text-emerald-200' : 'text-slate-400'}`}>
+                <span className={`text-[10px] font-bold uppercase tracking-wider ${isSelected ? 'text-[#A7F3D0]' : 'text-[#8A9A90]'}`}>
                   {farm.totalArea} Acres • {farm.waterSource}
                 </span>
-                <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${isSelected ? 'bg-emerald-700 text-emerald-100' : 'bg-slate-100 text-slate-700'}`}>
+                <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${isSelected ? 'bg-[#064E3B] text-[#D1FAE5]' : 'bg-[#EFF4EF] text-[#3E5248]'}`}>
                   {farmCropCount} Crops
                 </span>
               </div>
               <div className="font-bold text-sm font-heading">{farm.name}</div>
-              <div className={`text-[11px] truncate mt-0.5 ${isSelected ? 'text-emerald-100/80' : 'text-slate-400'}`}>
+              <div className={`text-[11px] truncate mt-0.5 ${isSelected ? 'text-[#D1FAE5]/80' : 'text-[#8A9A90]'}`}>
                 {farm.location}
               </div>
             </button>
@@ -155,22 +155,22 @@ export const MyFarmsPage: React.FC = () => {
 
       {/* Farm Overview Stats Bar */}
       {selectedFarm && (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white p-4 rounded-3xl border border-slate-200 shadow-2xs text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white p-4 rounded-2xl border border-[#E5EDE7] shadow-2xs text-xs">
           <div>
-            <span className="text-slate-400 font-medium">Soil Classification</span>
-            <div className="font-bold text-slate-800 text-sm mt-0.5">{selectedFarm.soilType}</div>
+            <span className="text-[#8A9A90] font-medium">Soil Classification</span>
+            <div className="font-bold text-[#243A32] text-sm mt-0.5">{selectedFarm.soilType}</div>
           </div>
           <div>
-            <span className="text-slate-400 font-medium">Irrigation Source</span>
-            <div className="font-bold text-slate-800 text-sm mt-0.5">{selectedFarm.waterSource}</div>
+            <span className="text-[#8A9A90] font-medium">Irrigation Source</span>
+            <div className="font-bold text-[#243A32] text-sm mt-0.5">{selectedFarm.waterSource}</div>
           </div>
           <div>
-            <span className="text-slate-400 font-medium">Fields / Plots</span>
-            <div className="font-bold text-slate-800 text-sm mt-0.5">{selectedFarm.fieldsCount} Zones Active</div>
+            <span className="text-[#8A9A90] font-medium">Fields / Plots</span>
+            <div className="font-bold text-[#243A32] text-sm mt-0.5">{selectedFarm.fieldsCount} Zones Active</div>
           </div>
           <div>
-            <span className="text-slate-400 font-medium">Est. Seasonal Revenue</span>
-            <div className="font-bold text-emerald-700 text-sm mt-0.5">
+            <span className="text-[#8A9A90] font-medium">Est. Seasonal Revenue</span>
+            <div className="font-bold text-[#064E3B] text-sm mt-0.5">
               ₹{farmCrops.reduce((s, c) => s + c.expectedRevenue, 0).toLocaleString('en-IN')}
             </div>
           </div>
@@ -180,22 +180,22 @@ export const MyFarmsPage: React.FC = () => {
       {/* Crops List with 5-Stage Timelines */}
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-extrabold text-slate-900 font-heading">
+          <h2 className="text-lg font-extrabold text-[#172B24] font-heading">
             Active Crops in {selectedFarm?.name || 'Farm'}
           </h2>
-          <span className="text-xs text-slate-500">{farmCrops.length} planted</span>
+          <span className="text-xs text-[#718078]">{farmCrops.length} planted</span>
         </div>
 
         {farmCrops.length === 0 ? (
-          <div className="text-center py-12 bg-white rounded-3xl border border-dashed border-slate-300 p-8 space-y-3">
-            <Sprout className="w-12 h-12 text-slate-300 mx-auto" />
-            <h3 className="font-bold text-slate-700">No active crops registered in this farm parcel</h3>
-            <p className="text-xs text-slate-500 max-w-sm mx-auto">
+          <div className="text-center py-12 bg-white rounded-2xl border border-dashed border-[#CBD8D0] p-8 space-y-3">
+            <Sprout className="w-12 h-12 text-[#CBD8D0] mx-auto" />
+            <h3 className="font-bold text-[#3E5248]">No active crops registered in this farm parcel</h3>
+            <p className="text-xs text-[#718078] max-w-sm mx-auto">
               Add a new crop to start tracking its 5-stage timeline, irrigation schedules, and yield forecasts.
             </p>
             <button
               onClick={() => setShowAddCropModal(true)}
-              className="px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700"
+              className="px-4 py-2 rounded-xl bg-[#059669] text-white text-xs font-bold hover:bg-[#064E3B]"
             >
               + Add Crop Now
             </button>
@@ -204,30 +204,30 @@ export const MyFarmsPage: React.FC = () => {
           farmCrops.map((crop) => (
             <div
               key={crop.id}
-              className="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs space-y-6 hover:border-emerald-400 transition-all"
+              className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-6 hover:border-[#34D399] transition-all"
             >
               {/* Crop Header */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#EFF4EF] pb-4">
                 <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-xl">
+                  <div className="w-12 h-12 rounded-2xl bg-[#D1FAE5] text-[#064E3B] flex items-center justify-center font-bold text-xl">
                     🌱
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className="text-lg font-black text-slate-900 font-heading">
+                      <h3 className="text-lg font-black text-[#172B24] font-heading">
                         {crop.name}
                       </h3>
                       <span
                         className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-full ${
                           crop.status === 'Healthy'
-                            ? 'bg-emerald-100 text-emerald-800'
+                            ? 'bg-[#D1FAE5] text-[#064E3B]'
                             : 'bg-amber-100 text-amber-800'
                         }`}
                       >
                         {crop.status} • {crop.healthScore}% Vigor
                       </span>
                     </div>
-                    <p className="text-xs text-slate-500 font-medium">
+                    <p className="text-xs text-[#718078] font-medium">
                       Variety: {crop.variety} • Allocated Land: <strong>{crop.area} Acres</strong>
                     </p>
                   </div>
@@ -235,16 +235,16 @@ export const MyFarmsPage: React.FC = () => {
 
                 <div className="flex items-center gap-3">
                   <div className="text-right">
-                    <div className="text-[10px] uppercase font-bold text-slate-400">Projected Value</div>
-                    <div className="text-base font-black text-emerald-700 font-heading">
+                    <div className="text-[10px] uppercase font-bold text-[#8A9A90]">Projected Value</div>
+                    <div className="text-base font-black text-[#064E3B] font-heading">
                       ₹{crop.expectedRevenue.toLocaleString('en-IN')}
                     </div>
-                    <div className="text-[10px] text-slate-500">{crop.projectedYieldKg.toLocaleString('en-IN')} kg est.</div>
+                    <div className="text-[10px] text-[#718078]">{crop.projectedYieldKg.toLocaleString('en-IN')} kg est.</div>
                   </div>
 
                   <button
                     onClick={() => deleteCrop(crop.id)}
-                    className="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+                    className="p-2 rounded-xl text-[#8A9A90] hover:text-rose-600 hover:bg-rose-50 transition-colors"
                     title="Remove Crop"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -255,10 +255,10 @@ export const MyFarmsPage: React.FC = () => {
               {/* 5-STAGE VISUAL TIMELINE */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-bold text-slate-700 font-heading uppercase tracking-wider text-[10px]">
+                  <span className="font-bold text-[#3E5248] font-heading uppercase tracking-wider text-[10px]">
                     Visual Crop Timeline
                   </span>
-                  <span className="text-slate-500">
+                  <span className="text-[#718078]">
                     Sown: <strong>{crop.sowingDate}</strong> | Harvest: <strong>{crop.expectedHarvestDate}</strong>
                   </span>
                 </div>
@@ -274,17 +274,17 @@ export const MyFarmsPage: React.FC = () => {
                         onClick={() => advanceCropStage(crop.id, stg.id)}
                         className={`p-3 rounded-2xl border text-center transition-all cursor-pointer group ${
                           isActive
-                            ? 'bg-emerald-600 text-white border-emerald-600 shadow-md ring-2 ring-emerald-400/40'
+                            ? 'bg-[#059669] text-white border-[#059669] shadow-md ring-2 ring-[#34D399]/40'
                             : isCompleted
-                            ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
-                            : 'bg-slate-50 text-slate-400 border-slate-200 hover:bg-slate-100'
+                            ? 'bg-[#ECFDF5] text-[#064E3B] border-[#A7F3D0]'
+                            : 'bg-[#F7FAF7] text-[#8A9A90] border-[#E5EDE7] hover:bg-[#EFF4EF]'
                         }`}
                       >
                         <div className="text-base mb-1">{stg.icon}</div>
-                        <div className={`text-[11px] font-bold ${isActive ? 'text-white' : isCompleted ? 'text-emerald-900' : 'text-slate-600'}`}>
+                        <div className={`text-[11px] font-bold ${isActive ? 'text-white' : isCompleted ? 'text-[#064E3B]' : 'text-[#5A6E64]'}`}>
                           {stg.label}
                         </div>
-                        <div className={`text-[9px] mt-0.5 font-semibold ${isActive ? 'text-emerald-100' : isCompleted ? 'text-emerald-600' : 'text-slate-400'}`}>
+                        <div className={`text-[9px] mt-0.5 font-semibold ${isActive ? 'text-[#D1FAE5]' : isCompleted ? 'text-[#059669]' : 'text-[#8A9A90]'}`}>
                           {isCompleted ? '✓ Done' : isActive ? '● Active' : 'Upcoming'}
                         </div>
                       </div>
@@ -295,20 +295,20 @@ export const MyFarmsPage: React.FC = () => {
 
               {/* Schedules & Direct Insights */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-                <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 text-xs">
-                  <div className="flex items-center gap-2 font-bold text-slate-800 mb-1">
+                <div className="p-3.5 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7]/80 text-xs">
+                  <div className="flex items-center gap-2 font-bold text-[#243A32] mb-1">
                     <Droplets className="w-4 h-4 text-cyan-600" />
                     <span>Irrigation Protocol</span>
                   </div>
-                  <p className="text-slate-600">{crop.irrigationSchedule}</p>
+                  <p className="text-[#5A6E64]">{crop.irrigationSchedule}</p>
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 text-xs">
-                  <div className="flex items-center gap-2 font-bold text-slate-800 mb-1">
+                <div className="p-3.5 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7]/80 text-xs">
+                  <div className="flex items-center gap-2 font-bold text-[#243A32] mb-1">
                     <Zap className="w-4 h-4 text-amber-600" />
                     <span>Fertilizer & Nutrition Schedule</span>
                   </div>
-                  <p className="text-slate-600">{crop.fertilizerSchedule}</p>
+                  <p className="text-[#5A6E64]">{crop.fertilizerSchedule}</p>
                 </div>
               </div>
             </div>
@@ -318,13 +318,13 @@ export const MyFarmsPage: React.FC = () => {
 
       {/* ADD CROP MODAL */}
       {showAddCropModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white rounded-3xl p-6 max-w-lg w-full shadow-2xl border border-slate-200 space-y-4 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <h3 className="font-extrabold text-lg text-slate-900 font-heading">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in">
+          <div className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-2xl border border-[#E5EDE7] space-y-4 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
+              <h3 className="font-extrabold text-lg text-[#172B24] font-heading">
                 Register New Crop to Farm
               </h3>
-              <button onClick={() => setShowAddCropModal(false)} className="text-slate-400 hover:text-slate-700">
+              <button onClick={() => setShowAddCropModal(false)} className="text-[#8A9A90] hover:text-[#3E5248]">
                 ✕
               </button>
             </div>
@@ -332,24 +332,24 @@ export const MyFarmsPage: React.FC = () => {
             <form onSubmit={handleAddCropSubmit} className="space-y-3.5 text-xs">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">Crop Name</label>
+                  <label className="block font-bold text-[#3E5248] mb-1">Crop Name</label>
                   <input
                     type="text"
                     value={cropName}
                     onChange={(e) => setCropName(e.target.value)}
                     required
-                    className="w-full p-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-emerald-500 outline-hidden"
+                    className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs focus:ring-2 focus:ring-[#10B981] outline-hidden"
                     placeholder="e.g. Tomato, Cotton, Wheat"
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">Variety / Hybrid</label>
+                  <label className="block font-bold text-[#3E5248] mb-1">Variety / Hybrid</label>
                   <input
                     type="text"
                     value={variety}
                     onChange={(e) => setVariety(e.target.value)}
                     required
-                    className="w-full p-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-emerald-500 outline-hidden"
+                    className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs focus:ring-2 focus:ring-[#10B981] outline-hidden"
                     placeholder="e.g. Arka Rakshak F1"
                   />
                 </div>
@@ -357,84 +357,84 @@ export const MyFarmsPage: React.FC = () => {
 
               <div className="grid grid-cols-3 gap-3">
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">Area (Acres)</label>
+                  <label className="block font-bold text-[#3E5248] mb-1">Area (Acres)</label>
                   <input
                     type="number"
                     step="0.5"
                     value={cropArea}
                     onChange={(e) => setCropArea(parseFloat(e.target.value))}
                     required
-                    className="w-full p-2.5 rounded-xl border border-slate-300 text-xs"
+                    className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs"
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">Sowing Date</label>
+                  <label className="block font-bold text-[#3E5248] mb-1">Sowing Date</label>
                   <input
                     type="date"
                     value={sowingDate}
                     onChange={(e) => setSowingDate(e.target.value)}
                     required
-                    className="w-full p-2.5 rounded-xl border border-slate-300 text-xs"
+                    className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs"
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">Expected Harvest</label>
+                  <label className="block font-bold text-[#3E5248] mb-1">Expected Harvest</label>
                   <input
                     type="date"
                     value={expectedHarvestDate}
                     onChange={(e) => setExpectedHarvestDate(e.target.value)}
                     required
-                    className="w-full p-2.5 rounded-xl border border-slate-300 text-xs"
+                    className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block font-bold text-slate-700 mb-1">Irrigation Schedule</label>
+                <label className="block font-bold text-[#3E5248] mb-1">Irrigation Schedule</label>
                 <input
                   type="text"
                   value={irrigationSchedule}
                   onChange={(e) => setIrrigationSchedule(e.target.value)}
-                  className="w-full p-2.5 rounded-xl border border-slate-300 text-xs"
+                  className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs"
                   placeholder="e.g. Drip 45 mins daily"
                 />
               </div>
 
               <div>
-                <label className="block font-bold text-slate-700 mb-1">Fertilizer Plan</label>
+                <label className="block font-bold text-[#3E5248] mb-1">Fertilizer Plan</label>
                 <input
                   type="text"
                   value={fertilizerSchedule}
                   onChange={(e) => setFertilizerSchedule(e.target.value)}
-                  className="w-full p-2.5 rounded-xl border border-slate-300 text-xs"
+                  className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs"
                   placeholder="e.g. 19:19:19 fertigation twice a week"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">Projected Yield (Kg)</label>
+                  <label className="block font-bold text-[#3E5248] mb-1">Projected Yield (Kg)</label>
                   <input
                     type="number"
                     value={projectedYieldKg}
                     onChange={(e) => setProjectedYieldKg(parseInt(e.target.value))}
-                    className="w-full p-2.5 rounded-xl border border-slate-300 text-xs"
+                    className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs"
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">Expected Revenue (₹)</label>
+                  <label className="block font-bold text-[#3E5248] mb-1">Expected Revenue (₹)</label>
                   <input
                     type="number"
                     value={expectedRevenue}
                     onChange={(e) => setExpectedRevenue(parseInt(e.target.value))}
-                    className="w-full p-2.5 rounded-xl border border-slate-300 text-xs"
+                    className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs"
                   />
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition-all mt-2"
+                className="w-full py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md transition-all mt-2"
               >
                 Save Crop (+200 XP)
               </button>
@@ -445,59 +445,59 @@ export const MyFarmsPage: React.FC = () => {
 
       {/* ADD FARM PARCEL MODAL */}
       {showAddFarmModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl border border-slate-200 space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <h3 className="font-extrabold text-base text-slate-900 font-heading">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/60 backdrop-blur-xs animate-in fade-in">
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl border border-[#E5EDE7] space-y-4">
+            <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
+              <h3 className="font-extrabold text-base text-[#172B24] font-heading">
                 Add New Farm Parcel
               </h3>
-              <button onClick={() => setShowAddFarmModal(false)} className="text-slate-400 hover:text-slate-700">
+              <button onClick={() => setShowAddFarmModal(false)} className="text-[#8A9A90] hover:text-[#3E5248]">
                 ✕
               </button>
             </div>
 
             <form onSubmit={handleAddFarmSubmit} className="space-y-3.5 text-xs">
               <div>
-                <label className="block font-bold text-slate-700 mb-1">Farm Parcel Name</label>
+                <label className="block font-bold text-[#3E5248] mb-1">Farm Parcel Name</label>
                 <input
                   type="text"
                   value={farmName}
                   onChange={(e) => setFarmName(e.target.value)}
                   placeholder="e.g. North Cauvery High Parcel"
                   required
-                  className="w-full p-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-emerald-500 outline-hidden"
+                  className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs focus:ring-2 focus:ring-[#10B981] outline-hidden"
                 />
               </div>
 
               <div>
-                <label className="block font-bold text-slate-700 mb-1">Location / Village</label>
+                <label className="block font-bold text-[#3E5248] mb-1">Location / Village</label>
                 <input
                   type="text"
                   value={farmLocation}
                   onChange={(e) => setFarmLocation(e.target.value)}
                   placeholder="e.g. Pandavapura, Mandya"
-                  className="w-full p-2.5 rounded-xl border border-slate-300 text-xs"
+                  className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">Total Land (Acres)</label>
+                  <label className="block font-bold text-[#3E5248] mb-1">Total Land (Acres)</label>
                   <input
                     type="number"
                     step="0.5"
                     value={farmTotalArea}
                     onChange={(e) => setFarmTotalArea(parseFloat(e.target.value))}
                     required
-                    className="w-full p-2.5 rounded-xl border border-slate-300 text-xs"
+                    className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs"
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">Primary Water Source</label>
+                  <label className="block font-bold text-[#3E5248] mb-1">Primary Water Source</label>
                   <select
                     value={farmWaterSource}
                     onChange={(e: any) => setFarmWaterSource(e.target.value)}
-                    className="w-full p-2.5 rounded-xl border border-slate-300 text-xs bg-white"
+                    className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white"
                   >
                     <option value="Borewell">Borewell</option>
                     <option value="Canal">Canal</option>
@@ -508,19 +508,19 @@ export const MyFarmsPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block font-bold text-slate-700 mb-1">Soil Type</label>
+                <label className="block font-bold text-[#3E5248] mb-1">Soil Type</label>
                 <input
                   type="text"
                   value={farmSoilType}
                   onChange={(e) => setFarmSoilType(e.target.value)}
-                  className="w-full p-2.5 rounded-xl border border-slate-300 text-xs"
+                  className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs"
                   placeholder="e.g. Red Loamy / Black Cotton"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition-all mt-2"
+                className="w-full py-3 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white font-bold text-sm shadow-md transition-all mt-2"
               >
                 Register Farm Parcel (+150 XP)
               </button>

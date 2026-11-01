@@ -139,23 +139,23 @@ export const AdminUsersRolesPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-stone-200/80 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
         <div>
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-rose-50 text-rose-800 text-xs font-semibold mb-2">
             <ShieldAlert className="w-3.5 h-3.5 text-rose-600" />
             Security & Role-Based Access Control (RBAC)
           </div>
-          <h1 className="text-2xl font-black text-stone-900 tracking-tight font-heading">
+          <h1 className="text-2xl font-black text-[#172B24] tracking-tight font-heading">
             Admin Staff & Permissions
           </h1>
-          <p className="text-xs text-stone-500 mt-1">
+          <p className="text-xs text-[#718078] mt-1">
             Manage administrative personnel, assign granular permission tiers, and enforce authentication security.
           </p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={fetchAdmins}
-            className="p-2.5 rounded-xl border border-stone-200 text-stone-600 hover:bg-stone-50 transition"
+            className="p-2.5 rounded-xl border border-[#E5EDE7] text-[#5A6E64] hover:bg-[#F7FAF7] transition"
             title="Refresh"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
@@ -163,7 +163,7 @@ export const AdminUsersRolesPage: React.FC = () => {
           {isSuperAdmin && (
             <button
               onClick={handleOpenCreate}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition cursor-pointer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white text-xs font-bold shadow-sm transition cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               Add Admin User
@@ -184,16 +184,16 @@ export const AdminUsersRolesPage: React.FC = () => {
       {/* Role Matrix Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {Object.entries(ROLE_DESCRIPTIONS).map(([k, v]) => (
-          <div key={k} className="bg-white p-5 rounded-3xl border border-stone-200 shadow-xs space-y-2">
+          <div key={k} className="bg-white p-5 rounded-2xl border border-[#E5EDE7] shadow-xs space-y-2">
             <div className="flex items-center justify-between">
               <span className={`px-2.5 py-1 rounded-full text-xs font-extrabold border ${v.badge}`}>
                 {v.label}
               </span>
-              <span className="text-xs font-bold text-stone-400">
+              <span className="text-xs font-bold text-[#8A9A90]">
                 {admins.filter(a => a.role === k).length} Accounts
               </span>
             </div>
-            <p className="text-xs text-stone-600 leading-relaxed pt-1">
+            <p className="text-xs text-[#5A6E64] leading-relaxed pt-1">
               {v.desc}
             </p>
           </div>
@@ -203,15 +203,15 @@ export const AdminUsersRolesPage: React.FC = () => {
       {/* Admin Users Table */}
       {loading ? (
         <div className="py-20 text-center">
-          <RefreshCw className="w-8 h-8 text-emerald-600 animate-spin mx-auto mb-3" />
-          <p className="text-xs text-stone-500">Checking credentials...</p>
+          <RefreshCw className="w-8 h-8 text-[#059669] animate-spin mx-auto mb-3" />
+          <p className="text-xs text-[#718078]">Checking credentials...</p>
         </div>
       ) : (
-        <div className="bg-white rounded-3xl border border-stone-200 overflow-hidden shadow-xs">
+        <div className="bg-white rounded-2xl border border-[#E5EDE7] overflow-hidden shadow-xs">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-stone-50/80 border-b border-stone-200 text-[11px] font-bold text-stone-500 uppercase tracking-wider">
+                <tr className="bg-[#F7FAF7]/80 border-b border-[#E5EDE7] text-[11px] font-bold text-[#718078] uppercase tracking-wider">
                   <th className="py-3.5 px-5">Staff Member</th>
                   <th className="py-3.5 px-4">Role Tier</th>
                   <th className="py-3.5 px-4">Status</th>
@@ -219,28 +219,28 @@ export const AdminUsersRolesPage: React.FC = () => {
                   <th className="py-3.5 px-5 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-stone-100 text-xs text-stone-700">
+              <tbody className="divide-y divide-[#EFF4EF] text-xs text-[#3E5248]">
                 {admins.map(acc => {
-                  const roleConfig = ROLE_DESCRIPTIONS[acc.role] || { label: acc.role, badge: 'bg-stone-100 text-stone-700' };
+                  const roleConfig = ROLE_DESCRIPTIONS[acc.role] || { label: acc.role, badge: 'bg-[#EFF4EF] text-[#3E5248]' };
                   const isCurrent = acc.email === currentAdmin?.email;
 
                   return (
-                    <tr key={acc.id} className="hover:bg-stone-50/60 transition">
+                    <tr key={acc.id} className="hover:bg-[#F7FAF7]/60 transition">
                       <td className="py-4 px-5">
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-full bg-stone-900 text-white font-extrabold flex items-center justify-center text-xs shrink-0">
+                          <div className="w-9 h-9 rounded-full bg-[#172B24] text-white font-extrabold flex items-center justify-center text-xs shrink-0">
                             {acc.name ? acc.name.charAt(0).toUpperCase() : 'A'}
                           </div>
                           <div>
-                            <div className="font-bold text-stone-900 flex items-center gap-2">
+                            <div className="font-bold text-[#172B24] flex items-center gap-2">
                               {acc.name}
                               {isCurrent && (
-                                <span className="px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-bold">
+                                <span className="px-1.5 py-0.5 rounded bg-[#D1FAE5] text-[#064E3B] text-[10px] font-bold">
                                   You
                                 </span>
                               )}
                             </div>
-                            <div className="text-[11px] text-stone-400 font-mono">{acc.email}</div>
+                            <div className="text-[11px] text-[#8A9A90] font-mono">{acc.email}</div>
                           </div>
                         </div>
                       </td>
@@ -253,14 +253,14 @@ export const AdminUsersRolesPage: React.FC = () => {
 
                       <td className="py-4 px-4">
                         <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase ${
-                          acc.active ? 'bg-emerald-100 text-emerald-800' : 'bg-stone-200 text-stone-600'
+                          acc.active ? 'bg-[#D1FAE5] text-[#064E3B]' : 'bg-[#E5EDE7] text-[#5A6E64]'
                         }`}>
-                          <span className={`w-1.5 h-1.5 rounded-full ${acc.active ? 'bg-emerald-600' : 'bg-stone-400'}`} />
+                          <span className={`w-1.5 h-1.5 rounded-full ${acc.active ? 'bg-[#059669]' : 'bg-[#8A9A90]'}`} />
                           {acc.active ? 'Active' : 'Disabled'}
                         </span>
                       </td>
 
-                      <td className="py-4 px-4 text-stone-500 text-[11px]">
+                      <td className="py-4 px-4 text-[#718078] text-[11px]">
                         {acc.lastLogin || 'Recent'}
                       </td>
 
@@ -269,7 +269,7 @@ export const AdminUsersRolesPage: React.FC = () => {
                           <div className="flex items-center justify-end gap-1.5">
                             <button
                               onClick={() => handleOpenEdit(acc)}
-                              className="p-1.5 rounded-lg text-stone-500 hover:text-emerald-700 hover:bg-stone-100 transition"
+                              className="p-1.5 rounded-lg text-[#718078] hover:text-[#064E3B] hover:bg-[#EFF4EF] transition"
                               title="Edit Permissions"
                             >
                               <Edit2 className="w-4 h-4" />
@@ -277,7 +277,7 @@ export const AdminUsersRolesPage: React.FC = () => {
                             {!isCurrent && (
                               <button
                                 onClick={() => setDeleteTarget(acc)}
-                                className="p-1.5 rounded-lg text-stone-400 hover:text-rose-600 hover:bg-rose-50 transition"
+                                className="p-1.5 rounded-lg text-[#8A9A90] hover:text-rose-600 hover:bg-rose-50 transition"
                                 title="Revoke Access"
                               >
                                 <Trash2 className="w-4 h-4" />
@@ -303,29 +303,29 @@ export const AdminUsersRolesPage: React.FC = () => {
       >
         <form onSubmit={handleSave} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-stone-700 mb-1">Full Name *</label>
+            <label className="block text-xs font-semibold text-[#3E5248] mb-1">Full Name *</label>
             <input
               type="text"
               required
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-stone-700 mb-1">Email Address *</label>
+            <label className="block text-xs font-semibold text-[#3E5248] mb-1">Email Address *</label>
             <input
               type="email"
               required
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-stone-700 mb-1">
+            <label className="block text-xs font-semibold text-[#3E5248] mb-1">
               {editingAdmin ? 'Reset Password (leave empty to keep current)' : 'Initial Password *'}
             </label>
             <input
@@ -333,16 +333,16 @@ export const AdminUsersRolesPage: React.FC = () => {
               value={formData.password || ''}
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               placeholder={editingAdmin ? '••••••••' : 'Minimum 6 characters'}
-              className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-stone-700 mb-1">Permission Role Tier *</label>
+            <label className="block text-xs font-semibold text-[#3E5248] mb-1">Permission Role Tier *</label>
             <select
               value={formData.role}
               onChange={(e) => setFormData({ ...formData, role: e.target.value as any })}
-              className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30"
+              className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30"
             >
               <option value="editor">Content Editor (CMS editing only)</option>
               <option value="admin">Admin (CMS, Users, Settings, Products, Schemes)</option>
@@ -350,18 +350,18 @@ export const AdminUsersRolesPage: React.FC = () => {
             </select>
           </div>
 
-          <div className="flex items-center justify-end gap-3 pt-3 border-t border-stone-100">
+          <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#EFF4EF]">
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}
-              className="px-4 py-2 rounded-xl border border-stone-200 text-xs font-semibold text-stone-600 hover:bg-stone-50"
+              className="px-4 py-2 rounded-xl border border-[#E5EDE7] text-xs font-semibold text-[#5A6E64] hover:bg-[#F7FAF7]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white text-xs font-bold shadow-sm transition disabled:opacity-50"
             >
               {saving ? 'Saving...' : editingAdmin ? 'Save Changes' : 'Create Account'}
             </button>

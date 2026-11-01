@@ -43,12 +43,12 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
   const currentInfo = tabTitles[currentTab] || { title: 'Admin Portal', subtitle: 'KrishiSmart AI Content Management System' };
 
   return (
-    <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-stone-200 px-4 sm:px-6 py-3.5 flex items-center justify-between shadow-2xs">
+    <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-[#E5EDE7] px-4 sm:px-6 py-3.5 flex items-center justify-between shadow-2xs">
       {/* Left: Mobile Toggle & Title */}
       <div className="flex items-center gap-3">
         <button
           onClick={onToggleMobileMenu}
-          className="p-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 lg:hidden transition-colors cursor-pointer"
+          className="p-2 rounded-xl bg-[#EFF4EF] hover:bg-[#E5EDE7] text-[#3E5248] lg:hidden transition-colors cursor-pointer"
           title="Toggle Navigation Drawer"
         >
           <Menu className="w-5 h-5" />
@@ -56,15 +56,15 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
 
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-base sm:text-lg font-extrabold text-stone-900 font-heading tracking-tight">
+            <h1 className="text-base sm:text-lg font-extrabold text-[#172B24] font-heading tracking-tight">
               {currentInfo.title}
             </h1>
-            <span className="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-[10px] font-bold">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#ECFDF5] text-[#064E3B] border border-[#A7F3D0] text-[10px] font-bold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
               Live CMS
             </span>
           </div>
-          <p className="text-xs text-stone-500 hidden sm:block truncate max-w-lg">
+          <p className="text-xs text-[#718078] hidden sm:block truncate max-w-lg">
             {currentInfo.subtitle}
           </p>
         </div>
@@ -75,7 +75,7 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
         {/* Switch to Farmer App */}
         <button
           onClick={onNavigateFarmer}
-          className="px-3.5 py-2 rounded-2xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs hover:shadow-sm cursor-pointer"
+          className="px-3.5 py-2 rounded-2xl bg-[#064E3B] hover:bg-[#064E3B] text-white text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs hover:shadow-sm cursor-pointer"
           title="Open Farmer Front-facing Application"
         >
           <ExternalLink className="w-3.5 h-3.5" />
@@ -84,13 +84,13 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
 
         {/* Current Admin Badge */}
         {admin && (
-          <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-stone-100 border border-stone-200">
-            <div className="w-7 h-7 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-500 text-white font-black text-xs flex items-center justify-center shadow-2xs">
+          <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-[#EFF4EF] border border-[#E5EDE7]">
+            <div className="w-7 h-7 rounded-xl bg-gradient-to-tr from-[#059669] to-[#10B981] text-white font-black text-xs flex items-center justify-center shadow-2xs">
               {admin.name.charAt(0).toUpperCase()}
             </div>
             <div className="text-left">
-              <div className="text-xs font-bold text-stone-900 leading-none">{admin.name.split(' ')[0]}</div>
-              <div className="text-[10px] text-emerald-700 font-semibold mt-0.5">{admin.role}</div>
+              <div className="text-xs font-bold text-[#172B24] leading-none">{admin.name.split(' ')[0]}</div>
+              <div className="text-[10px] text-[#064E3B] font-semibold mt-0.5">{admin.role}</div>
             </div>
           </div>
         )}

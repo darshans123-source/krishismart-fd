@@ -42,7 +42,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       title: 'AI Crop Doctor & Soil Labs',
       description: 'Upload crop photos to detect 120+ diseases with 95%+ accuracy. Get organic & chemical prescriptions instantly.',
       icon: BrainCircuit,
-      color: 'from-emerald-500 to-teal-600',
+      color: 'from-[#10B981] to-teal-600',
       badge: '95%+ Accuracy'
     },
     {
@@ -115,23 +115,23 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 overflow-hidden">
+    <div className="min-h-screen bg-[#F7FAF7] text-[#172B24] overflow-hidden">
       {/* 1. HERO SECTION */}
-      <section className="relative pt-12 pb-20 lg:pt-16 lg:pb-24 overflow-hidden bg-[#fbfcf9] border-b border-stone-200">
+      <section className="relative pt-12 pb-20 lg:pt-16 lg:pb-24 overflow-hidden bg-[#F7FAF7] border-b border-[#E5EDE7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Hero Copy */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold shadow-2xs">
-                <Sprout className="w-3.5 h-3.5 text-emerald-700" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#D1FAE5] text-[#064E3B] text-xs font-bold shadow-2xs">
+                <Sprout className="w-3.5 h-3.5 text-[#064E3B]" />
                 <span>Agricultural Technology Platform for Farmers</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-stone-900 leading-[1.15] font-heading">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#172B24] leading-[1.15] font-heading">
                 Smart Farming. Better Decisions. Better Future.
               </h1>
 
-              <p className="text-base sm:text-lg text-stone-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              <p className="text-base sm:text-lg text-[#5A6E64] leading-relaxed max-w-2xl mx-auto lg:mx-0">
                 A simple, human-friendly agriculture platform designed for real farmers. Monitor crop health, automated water pumps, drone spraying, and real-time mandi prices in one place.
               </p>
 
@@ -139,7 +139,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                 <button
                   onClick={onGetStarted}
-                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-emerald-700 hover:bg-emerald-800 active:scale-95 text-white font-bold text-base shadow-lg transition-all flex items-center justify-center gap-2.5 group cursor-pointer"
+                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#064E3B] hover:bg-[#064E3B] active:scale-95 text-white font-bold text-base shadow-lg transition-all flex items-center justify-center gap-2.5 group cursor-pointer"
                 >
                   <span>{t('getStarted')}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -147,26 +147,26 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
                 <button
                   onClick={onExploreApp}
-                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white hover:bg-stone-50 active:scale-95 text-stone-800 font-bold text-base border border-stone-300 shadow-2xs transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white hover:bg-[#F7FAF7] active:scale-95 text-[#243A32] font-bold text-base border border-[#CBD8D0] shadow-2xs transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>{t('exploreApp')}</span>
-                  <ChevronRight className="w-4 h-4 text-stone-500" />
+                  <ChevronRight className="w-4 h-4 text-[#718078]" />
                 </button>
               </div>
 
               {/* Trust Indicators */}
-              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-stone-200 text-left">
+              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-[#E5EDE7] text-left">
                 <div>
-                  <div className="text-2xl font-black text-emerald-800 font-heading">50,000+</div>
-                  <div className="text-xs text-stone-500 font-medium">Active Farmers</div>
+                  <div className="text-2xl font-black text-[#064E3B] font-heading">50,000+</div>
+                  <div className="text-xs text-[#718078] font-medium">Active Farmers</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-black text-emerald-800 font-heading">94.8%</div>
-                  <div className="text-xs text-stone-500 font-medium">Crop Health Accuracy</div>
+                  <div className="text-2xl font-black text-[#064E3B] font-heading">94.8%</div>
+                  <div className="text-xs text-[#718078] font-medium">Crop Health Accuracy</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-black text-emerald-800 font-heading">₹2.4 Cr+</div>
-                  <div className="text-xs text-stone-500 font-medium">Extra Value Realized</div>
+                  <div className="text-2xl font-black text-[#064E3B] font-heading">₹2.4 Cr+</div>
+                  <div className="text-xs text-[#718078] font-medium">Extra Value Realized</div>
                 </div>
               </div>
             </div>
@@ -175,16 +175,16 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             <div className="lg:col-span-5 relative">
               <div className="relative mx-auto max-w-md lg:max-w-none">
                 {/* Hero Agricultural Card */}
-                <div className="bg-white rounded-3xl border border-stone-200 shadow-md overflow-hidden space-y-4">
-                  <div className="relative h-56 w-full bg-stone-100 overflow-hidden">
+                <div className="bg-white rounded-2xl border border-[#E5EDE7] shadow-md overflow-hidden space-y-4">
+                  <div className="relative h-56 w-full bg-[#EFF4EF] overflow-hidden">
                     <img
                       src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=800&auto=format&fit=crop&q=80"
                       alt="Farmer in healthy agricultural field"
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent flex items-end p-4">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#022C22]/80 via-transparent to-transparent flex items-end p-4">
                       <div className="text-white">
-                        <div className="text-xs font-bold text-emerald-300">Live Farm Monitoring</div>
+                        <div className="text-xs font-bold text-[#6EE7B7]">Live Farm Monitoring</div>
                         <div className="text-base font-extrabold">Cauvery Valley Field 2 (Tomato)</div>
                       </div>
                     </div>
@@ -192,25 +192,25 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
                   {/* Clean Metrics Grid */}
                   <div className="p-4 grid grid-cols-2 gap-2.5">
-                    <div className="p-3 rounded-2xl bg-[#fbfcf9] border border-stone-200">
-                      <div className="text-[10px] text-stone-400 font-bold uppercase">Soil Moisture</div>
-                      <div className="text-base font-bold text-stone-900 mt-0.5">58% Optimal</div>
-                      <div className="text-[10px] text-emerald-700 font-semibold">Pump Ready</div>
+                    <div className="p-3 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7]">
+                      <div className="text-[10px] text-[#8A9A90] font-bold uppercase">Soil Moisture</div>
+                      <div className="text-base font-bold text-[#172B24] mt-0.5">58% Optimal</div>
+                      <div className="text-[10px] text-[#064E3B] font-semibold">Pump Ready</div>
                     </div>
-                    <div className="p-3 rounded-2xl bg-[#fbfcf9] border border-stone-200">
-                      <div className="text-[10px] text-stone-400 font-bold uppercase">Mandi Rate</div>
-                      <div className="text-base font-bold text-stone-900 mt-0.5">₹31/kg</div>
-                      <div className="text-[10px] text-emerald-700 font-semibold">+38% 25-day trend</div>
+                    <div className="p-3 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7]">
+                      <div className="text-[10px] text-[#8A9A90] font-bold uppercase">Mandi Rate</div>
+                      <div className="text-base font-bold text-[#172B24] mt-0.5">₹31/kg</div>
+                      <div className="text-[10px] text-[#064E3B] font-semibold">+38% 25-day trend</div>
                     </div>
-                    <div className="p-3 rounded-2xl bg-[#fbfcf9] border border-stone-200">
-                      <div className="text-[10px] text-stone-400 font-bold uppercase">Farm Weather</div>
-                      <div className="text-base font-bold text-stone-900 mt-0.5">29.4°C Calm</div>
-                      <div className="text-[10px] text-stone-500">Good for spraying</div>
+                    <div className="p-3 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7]">
+                      <div className="text-[10px] text-[#8A9A90] font-bold uppercase">Farm Weather</div>
+                      <div className="text-base font-bold text-[#172B24] mt-0.5">29.4°C Calm</div>
+                      <div className="text-[10px] text-[#718078]">Good for spraying</div>
                     </div>
-                    <div className="p-3 rounded-2xl bg-[#fbfcf9] border border-stone-200">
-                      <div className="text-[10px] text-stone-400 font-bold uppercase">Drone Status</div>
-                      <div className="text-base font-bold text-emerald-800 mt-0.5">Ready to Fly</div>
-                      <div className="text-[10px] text-stone-500">14 min spray flight</div>
+                    <div className="p-3 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7]">
+                      <div className="text-[10px] text-[#8A9A90] font-bold uppercase">Drone Status</div>
+                      <div className="text-base font-bold text-[#064E3B] mt-0.5">Ready to Fly</div>
+                      <div className="text-[10px] text-[#718078]">14 min spray flight</div>
                     </div>
                   </div>
                 </div>
@@ -224,14 +224,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold mb-3 border border-emerald-200">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ECFDF5] text-[#064E3B] text-xs font-bold mb-3 border border-[#A7F3D0]">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Full-Stack Farm Operating System</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#172B24] font-heading">
               Everything an Indian Farmer Needs to Prosper
             </h2>
-            <p className="mt-3 text-slate-600 text-base">
+            <p className="mt-3 text-[#5A6E64] text-base">
               Engineered specifically for Indian agricultural realities—from mandi price volatility to drip water conservation and government subsidies.
             </p>
           </div>
@@ -243,7 +243,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 <div
                   key={pillar.id}
                   onClick={() => onSelectModule(pillar.id)}
-                  className="glass-card rounded-3xl p-7 flex flex-col justify-between cursor-pointer group"
+                  className="glass-card rounded-2xl p-7 flex flex-col justify-between cursor-pointer group"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-5">
@@ -252,20 +252,20 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                       >
                         <Icon className="w-6 h-6" />
                       </div>
-                      <span className="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                      <span className="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-[#EFF4EF] text-[#3E5248] border border-[#E5EDE7]">
                         {pillar.badge}
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-bold text-slate-900 group-hover:text-emerald-700 transition-colors font-heading mb-2">
+                    <h3 className="text-lg font-bold text-[#172B24] group-hover:text-[#064E3B] transition-colors font-heading mb-2">
                       {pillar.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#5A6E64] leading-relaxed">
                       {pillar.description}
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-emerald-600 group-hover:text-emerald-700">
+                  <div className="mt-6 pt-4 border-t border-[#EFF4EF] flex items-center justify-between text-xs font-bold text-[#059669] group-hover:text-[#064E3B]">
                     <span>Explore Module</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
                   </div>
@@ -277,7 +277,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </section>
 
       {/* 3. KRISHIBHAVISHYA SPOTLIGHT */}
-      <section className="py-20 bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950 text-white relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-br from-[#022C22] via-[#172B24] to-[#022C22] text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6 space-y-6">
@@ -289,7 +289,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 KrishiBhavishya AI: <br />
                 <span className="text-amber-400">The Farm Time Machine</span>
               </h2>
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+              <p className="text-[#CBD8D0] text-sm sm:text-base leading-relaxed">
                 Never sell at distress prices again. Our AI models predict wholesale APMC price trajectories for Tomato, Paddy, Onion, Cotton, and Wheat up to 60 days into the future.
               </p>
 
@@ -299,8 +299,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   'Festival demand spike indexing across major metro consumption hubs',
                   'Real-time transport cost vs distance arbitrage calculator'
                 ].map((point, i) => (
-                  <div key={i} className="flex items-center gap-3 text-xs sm:text-sm text-slate-200">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <div key={i} className="flex items-center gap-3 text-xs sm:text-sm text-[#E5EDE7]">
+                    <CheckCircle2 className="w-4 h-4 text-[#34D399] shrink-0" />
                     <span>{point}</span>
                   </div>
                 ))}
@@ -308,7 +308,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
               <button
                 onClick={() => onSelectModule('krishiBhavishya')}
-                className="px-6 py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-sm shadow-xl transition-all flex items-center gap-2"
+                className="px-6 py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-[#022C22] font-extrabold text-sm shadow-xl transition-all flex items-center gap-2"
               >
                 <span>Launch KrishiBhavishya AI</span>
                 <ArrowRight className="w-4 h-4" />
@@ -316,13 +316,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
 
             <div className="lg:col-span-6">
-              <div className="bg-slate-900/90 border border-slate-700/80 rounded-3xl p-6 shadow-2xl backdrop-blur-md">
-                <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
+              <div className="bg-[#172B24]/90 border border-[#3E5248]/80 rounded-2xl p-6 shadow-2xl backdrop-blur-md">
+                <div className="flex items-center justify-between border-b border-[#243A32] pb-4 mb-4">
                   <div>
-                    <div className="text-xs text-slate-400 font-bold uppercase">Sample Forecast</div>
+                    <div className="text-xs text-[#8A9A90] font-bold uppercase">Sample Forecast</div>
                     <div className="text-lg font-bold text-white font-heading">Tomato (Hybrid F1) - 60 Day Outlook</div>
                   </div>
-                  <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold">
+                  <span className="px-2.5 py-1 rounded-full bg-[#10B981]/20 text-[#6EE7B7] border border-[#10B981]/30 text-xs font-bold">
                     Bullish (+38.6%)
                   </span>
                 </div>
@@ -341,24 +341,24 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                       className={`p-2.5 rounded-2xl border ${
                         st.isPeak
                           ? 'bg-amber-500/20 border-amber-400 text-amber-300'
-                          : 'bg-slate-800/80 border-slate-700 text-slate-300'
+                          : 'bg-[#243A32]/80 border-[#3E5248] text-[#CBD8D0]'
                       }`}
                     >
-                      <div className="text-[10px] uppercase font-bold text-slate-400">{st.label}</div>
+                      <div className="text-[10px] uppercase font-bold text-[#8A9A90]">{st.label}</div>
                       <div className="text-xs sm:text-sm font-extrabold mt-1">{st.price}</div>
                       <div className="text-[9px] font-bold mt-0.5">{st.status}</div>
                     </div>
                   ))}
                 </div>
 
-                <div className="p-4 rounded-2xl bg-emerald-950/60 border border-emerald-800/60 flex items-center justify-between">
+                <div className="p-4 rounded-2xl bg-[#022C22]/60 border border-[#064E3B]/60 flex items-center justify-between">
                   <div>
-                    <div className="text-[11px] font-bold text-emerald-300">Recommended Selling Window:</div>
-                    <div className="text-xs text-slate-200 font-medium">Day 25 to Day 35 (Kolar & Bengaluru Mandi)</div>
+                    <div className="text-[11px] font-bold text-[#6EE7B7]">Recommended Selling Window:</div>
+                    <div className="text-xs text-[#E5EDE7] font-medium">Day 25 to Day 35 (Kolar & Bengaluru Mandi)</div>
                   </div>
                   <div className="text-right">
-                    <div className="text-[10px] text-slate-400">Potential Extra Profit</div>
-                    <div className="text-sm font-black text-emerald-400">+₹87,000 / 100 Qtl</div>
+                    <div className="text-[10px] text-[#8A9A90]">Potential Extra Profit</div>
+                    <div className="text-sm font-black text-[#34D399]">+₹87,000 / 100 Qtl</div>
                   </div>
                 </div>
               </div>
@@ -368,41 +368,41 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </section>
 
       {/* 4. TESTIMONIALS */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-20 bg-[#F7FAF7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="text-3xl font-extrabold text-slate-900 font-heading">
+            <h2 className="text-3xl font-extrabold text-[#172B24] font-heading">
               Loved by Farmers Across India
             </h2>
-            <p className="mt-2 text-slate-600 text-sm">
+            <p className="mt-2 text-[#5A6E64] text-sm">
               Real results from grassroots agricultural innovators and progressive farmers.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t, idx) => (
-              <div key={idx} className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between">
+              <div key={idx} className="bg-white rounded-2xl p-6 border border-[#E5EDE7] shadow-sm flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-1 mb-3 text-amber-400">
                     {[...Array(t.rating)].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-amber-400" />
                     ))}
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-700 italic leading-relaxed mb-6">
+                  <p className="text-xs sm:text-sm text-[#3E5248] italic leading-relaxed mb-6">
                     "{t.quote}"
                   </p>
                 </div>
 
-                <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+                <div className="flex items-center gap-3 pt-4 border-t border-[#EFF4EF]">
                   <img
                     src={t.avatar}
                     alt={t.name}
-                    className="w-10 h-10 rounded-full object-cover border border-emerald-300"
+                    className="w-10 h-10 rounded-full object-cover border border-[#6EE7B7]"
                   />
                   <div>
-                    <div className="font-bold text-xs text-slate-900">{t.name}</div>
-                    <div className="text-[10px] text-emerald-600 font-semibold">{t.role}</div>
-                    <div className="text-[10px] text-slate-400">{t.location}</div>
+                    <div className="font-bold text-xs text-[#172B24]">{t.name}</div>
+                    <div className="text-[10px] text-[#059669] font-semibold">{t.role}</div>
+                    <div className="text-[10px] text-[#8A9A90]">{t.location}</div>
                   </div>
                 </div>
               </div>
@@ -412,24 +412,24 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </section>
 
       {/* 5. CTA FOOTER SECTION */}
-      <section className="py-16 bg-gradient-to-r from-emerald-800 via-emerald-700 to-teal-800 text-white text-center">
+      <section className="py-16 bg-gradient-to-r from-[#064E3B] via-[#064E3B] to-teal-800 text-white text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           <h2 className="text-3xl sm:text-4xl font-extrabold font-heading">
             Transform Your Farm With AI Today
           </h2>
-          <p className="text-emerald-100 text-sm sm:text-base max-w-xl mx-auto">
+          <p className="text-[#D1FAE5] text-sm sm:text-base max-w-xl mx-auto">
             Join thousands of smart farmers using KrishiSmart AI to protect crops, optimize water, and maximize harvest profit.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <button
               onClick={onGetStarted}
-              className="px-8 py-4 rounded-2xl bg-white hover:bg-emerald-50 text-emerald-900 font-extrabold text-base shadow-xl transition-all"
+              className="px-8 py-4 rounded-2xl bg-white hover:bg-[#ECFDF5] text-[#064E3B] font-extrabold text-base shadow-xl transition-all"
             >
               Get Started for Free
             </button>
             <button
               onClick={onExploreApp}
-              className="px-8 py-4 rounded-2xl bg-emerald-900/60 hover:bg-emerald-900 text-white font-bold text-base border border-white/20 transition-all"
+              className="px-8 py-4 rounded-2xl bg-[#064E3B]/60 hover:bg-[#064E3B] text-white font-bold text-base border border-white/20 transition-all"
             >
               View Live Demo Dashboard
             </button>

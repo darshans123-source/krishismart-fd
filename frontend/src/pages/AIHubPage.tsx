@@ -84,21 +84,21 @@ export const AIHubPage: React.FC = () => {
       {/* Top Title Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold mb-1 border border-emerald-200">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D1FAE5] text-[#064E3B] text-xs font-bold mb-1 border border-[#A7F3D0]">
             <BrainCircuit className="w-3.5 h-3.5" />
             <span>Farm Intelligence Advisor</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900 font-heading">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#172B24] font-heading">
             AI Advisor & Crop Health
           </h1>
-          <p className="text-xs sm:text-sm text-stone-500">
+          <p className="text-xs sm:text-sm text-[#718078]">
             Crop disease diagnosis, soil health guidance, and customized fertilizer recommendations.
           </p>
         </div>
       </div>
 
       {/* Feature Sub-Navigation Tabs */}
-      <div className="flex gap-2 border-b border-stone-200 overflow-x-auto pb-1">
+      <div className="flex gap-2 border-b border-[#E5EDE7] overflow-x-auto pb-1">
         {[
           { id: 'doctor', label: 'Crop Doctor (Scan)', icon: Camera },
           { id: 'soil', label: 'Soil Health', icon: FlaskConical },
@@ -114,8 +114,8 @@ export const AIHubPage: React.FC = () => {
               onClick={() => setActiveTab(tab.id as any)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
                 isActive
-                  ? 'bg-emerald-700 text-white shadow-sm'
-                  : 'bg-white text-stone-600 hover:bg-stone-100 border border-stone-200'
+                  ? 'bg-[#064E3B] text-white shadow-sm'
+                  : 'bg-white text-[#5A6E64] hover:bg-[#EFF4EF] border border-[#E5EDE7]'
               }`}
             >
               <Icon className="w-4 h-4" />
@@ -131,23 +131,23 @@ export const AIHubPage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Left Upload / Sample Selector */}
             <div className="lg:col-span-5 space-y-5">
-              <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs space-y-4">
-                <h3 className="font-extrabold text-base text-slate-900 font-heading">
+              <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-4">
+                <h3 className="font-extrabold text-base text-[#172B24] font-heading">
                   Upload Crop Photo for AI Diagnosis
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-[#718078]">
                   Take a clear photo of the leaf, fruit, or stem showing symptoms.
                 </p>
 
                 {/* Upload Box */}
-                <label className="border-2 border-dashed border-emerald-300 hover:border-emerald-500 rounded-3xl p-6 flex flex-col items-center justify-center cursor-pointer bg-emerald-50/40 hover:bg-emerald-50 transition-all text-center group">
-                  <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <label className="border-2 border-dashed border-[#6EE7B7] hover:border-[#10B981] rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer bg-[#ECFDF5]/40 hover:bg-[#ECFDF5] transition-all text-center group">
+                  <div className="w-12 h-12 rounded-2xl bg-[#D1FAE5] text-[#064E3B] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                     <Upload className="w-6 h-6" />
                   </div>
-                  <span className="font-bold text-xs text-slate-800">
+                  <span className="font-bold text-xs text-[#243A32]">
                     Click to browse or drop crop photo
                   </span>
-                  <span className="text-[10px] text-slate-400 mt-1">
+                  <span className="text-[10px] text-[#8A9A90] mt-1">
                     Supports JPG, PNG, WEBP (Up to 10MB)
                   </span>
                   <input
@@ -160,7 +160,7 @@ export const AIHubPage: React.FC = () => {
 
                 {/* Quick 1-Tap Sample Previews */}
                 <div>
-                  <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2.5">
+                  <div className="text-[11px] font-bold text-[#8A9A90] uppercase tracking-wider mb-2.5">
                     Or Test With Sample Images
                   </div>
                   <div className="grid grid-cols-3 gap-2">
@@ -170,8 +170,8 @@ export const AIHubPage: React.FC = () => {
                         onClick={() => handleSelectSample(diag)}
                         className={`p-2 rounded-2xl border text-left transition-all overflow-hidden ${
                           selectedSample?.id === diag.id
-                            ? 'border-emerald-600 ring-2 ring-emerald-500/30 bg-emerald-50/50'
-                            : 'border-slate-200 bg-white hover:border-slate-300'
+                            ? 'border-[#059669] ring-2 ring-[#10B981]/30 bg-[#ECFDF5]/50'
+                            : 'border-[#E5EDE7] bg-white hover:border-[#CBD8D0]'
                         }`}
                       >
                         <img
@@ -179,10 +179,10 @@ export const AIHubPage: React.FC = () => {
                           alt={diag.cropName}
                           className="w-full h-16 object-cover rounded-xl mb-1.5"
                         />
-                        <div className="font-bold text-[10px] text-slate-800 truncate">
+                        <div className="font-bold text-[10px] text-[#243A32] truncate">
                           {diag.cropName}
                         </div>
-                        <div className="text-[9px] text-slate-500 truncate">
+                        <div className="text-[9px] text-[#718078] truncate">
                           {diag.title.split('(')[0]}
                         </div>
                       </button>
@@ -195,21 +195,21 @@ export const AIHubPage: React.FC = () => {
             {/* Right Diagnostic Result Panel */}
             <div className="lg:col-span-7">
               {isScanning ? (
-                <div className="bg-white rounded-3xl border border-slate-200 p-12 shadow-xs text-center space-y-4 flex flex-col items-center justify-center min-h-[420px]">
-                  <div className="w-16 h-16 rounded-full border-4 border-emerald-500 border-t-transparent animate-spin" />
+                <div className="bg-white rounded-2xl border border-[#E5EDE7] p-12 shadow-xs text-center space-y-4 flex flex-col items-center justify-center min-h-[420px]">
+                  <div className="w-16 h-16 rounded-full border-4 border-[#10B981] border-t-transparent animate-spin" />
                   <div>
-                    <h4 className="font-extrabold text-base text-stone-900 font-heading">
+                    <h4 className="font-extrabold text-base text-[#172B24] font-heading">
                       Analyzing Crop Health...
                     </h4>
-                    <p className="text-xs text-stone-500 mt-1 max-w-sm">
+                    <p className="text-xs text-[#718078] mt-1 max-w-sm">
                       Identifying symptoms and preparing treatment recommendations.
                     </p>
                   </div>
                 </div>
               ) : diagnosticResult ? (
-                <div className="bg-white rounded-3xl border border-stone-200 p-6 shadow-2xs space-y-6">
+                <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-6">
                   {/* Top Result Banner */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stone-100 pb-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#EFF4EF] pb-4">
                     <div>
                       <div className="flex items-center gap-2">
                         <span
@@ -218,53 +218,53 @@ export const AIHubPage: React.FC = () => {
                               ? 'bg-rose-100 text-rose-800'
                               : diagnosticResult.severity === 'Moderate'
                               ? 'bg-amber-100 text-amber-800'
-                              : 'bg-emerald-100 text-emerald-800'
+                              : 'bg-[#D1FAE5] text-[#064E3B]'
                           }`}
                         >
                           {diagnosticResult.severity} Severity
                         </span>
-                        <span className="text-xs text-stone-500 font-semibold">
-                          Confidence: <strong className="text-emerald-700">{diagnosticResult.confidence}%</strong>
+                        <span className="text-xs text-[#718078] font-semibold">
+                          Confidence: <strong className="text-[#064E3B]">{diagnosticResult.confidence}%</strong>
                         </span>
                       </div>
 
-                      <h3 className="text-xl font-black text-stone-900 font-heading mt-1">
+                      <h3 className="text-xl font-black text-[#172B24] font-heading mt-1">
                         {diagnosticResult.diseaseName}
                       </h3>
-                      <p className="text-xs text-stone-500 italic">
+                      <p className="text-xs text-[#718078] italic">
                         {diagnosticResult.cropType} • {diagnosticResult.scientificName}
                       </p>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <div className="w-14 h-14 rounded-2xl bg-emerald-700 text-white flex flex-col items-center justify-center font-black">
+                      <div className="w-14 h-14 rounded-2xl bg-[#064E3B] text-white flex flex-col items-center justify-center font-black">
                         <span className="text-sm">{Math.round(diagnosticResult.confidence)}%</span>
-                        <span className="text-[8px] uppercase tracking-wider text-emerald-200">Match</span>
+                        <span className="text-[8px] uppercase tracking-wider text-[#A7F3D0]">Match</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Crop Health Explanation */}
-                  <div className="p-4 rounded-2xl bg-stone-50 border border-stone-200 text-xs">
-                    <div className="font-bold text-stone-800 mb-1 flex items-center gap-1.5">
+                  <div className="p-4 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7] text-xs">
+                    <div className="font-bold text-[#243A32] mb-1 flex items-center gap-1.5">
                       <ShieldAlert className="w-4 h-4 text-amber-600" />
                       <span>Crop Health & Symptoms</span>
                     </div>
-                    <p className="text-stone-600 leading-relaxed">{diagnosticResult.pathology}</p>
+                    <p className="text-[#5A6E64] leading-relaxed">{diagnosticResult.pathology}</p>
                   </div>
 
                   {/* Treatments Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Organic Treatment */}
-                    <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-2">
-                      <div className="flex items-center gap-1.5 font-bold text-emerald-900 text-xs">
-                        <Leaf className="w-4 h-4 text-emerald-700" />
+                    <div className="p-4 rounded-2xl bg-[#ECFDF5]/70 border border-[#A7F3D0] space-y-2">
+                      <div className="flex items-center gap-1.5 font-bold text-[#064E3B] text-xs">
+                        <Leaf className="w-4 h-4 text-[#064E3B]" />
                         <span>Farm Advice: Organic Remedy</span>
                       </div>
-                      <ul className="space-y-1 text-xs text-emerald-800">
+                      <ul className="space-y-1 text-xs text-[#064E3B]">
                         {diagnosticResult.organicTreatment.map((t, idx) => (
                           <li key={idx} className="flex items-start gap-1.5">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#059669] shrink-0 mt-0.5" />
                             <span>{t}</span>
                           </li>
                         ))}
@@ -311,22 +311,22 @@ export const AIHubPage: React.FC = () => {
 
       {/* 2. SOIL HEALTH & NPK LAB TAB */}
       {activeTab === 'soil' && (
-        <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs space-y-6 animate-in fade-in">
+        <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-6 animate-in fade-in">
           <div>
-            <h3 className="text-lg font-black text-slate-900 font-heading">
+            <h3 className="text-lg font-black text-[#172B24] font-heading">
               Soil Chemistry & N-P-K Nutrient Lab
             </h3>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-[#718078]">
               Interactive soil health simulator based on your latest Soil Health Card (SHC) sample report.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {/* pH Meter */}
-            <div className="p-5 rounded-3xl bg-slate-50 border border-slate-200 space-y-3">
+            <div className="p-5 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7] space-y-3">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-slate-700">Soil pH</span>
-                <span className="font-black text-emerald-700 text-base">{soilPh}</span>
+                <span className="font-bold text-[#3E5248]">Soil pH</span>
+                <span className="font-black text-[#064E3B] text-base">{soilPh}</span>
               </div>
               <input
                 type="range"
@@ -335,9 +335,9 @@ export const AIHubPage: React.FC = () => {
                 step="0.1"
                 value={soilPh}
                 onChange={(e) => setSoilPh(parseFloat(e.target.value))}
-                className="w-full accent-emerald-600"
+                className="w-full accent-[#059669]"
               />
-              <div className="text-[10px] text-slate-400 font-semibold flex justify-between">
+              <div className="text-[10px] text-[#8A9A90] font-semibold flex justify-between">
                 <span>Acidic (5.0)</span>
                 <span>Ideal (6.5-7.5)</span>
                 <span>Alkaline (9.0)</span>
@@ -345,9 +345,9 @@ export const AIHubPage: React.FC = () => {
             </div>
 
             {/* Nitrogen (N) */}
-            <div className="p-5 rounded-3xl bg-slate-50 border border-slate-200 space-y-3">
+            <div className="p-5 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7] space-y-3">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-slate-700">Nitrogen (N)</span>
+                <span className="font-bold text-[#3E5248]">Nitrogen (N)</span>
                 <span className="font-black text-blue-700 text-base">{nitrogenLevel} kg/ha</span>
               </div>
               <input
@@ -359,7 +359,7 @@ export const AIHubPage: React.FC = () => {
                 onChange={(e) => setNitrogenLevel(parseInt(e.target.value))}
                 className="w-full accent-blue-600"
               />
-              <div className="text-[10px] text-slate-400 font-semibold flex justify-between">
+              <div className="text-[10px] text-[#8A9A90] font-semibold flex justify-between">
                 <span>Low</span>
                 <span>Medium (280)</span>
                 <span>High</span>
@@ -367,9 +367,9 @@ export const AIHubPage: React.FC = () => {
             </div>
 
             {/* Phosphorus (P) */}
-            <div className="p-5 rounded-3xl bg-slate-50 border border-slate-200 space-y-3">
+            <div className="p-5 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7] space-y-3">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-slate-700">Phosphorus (P)</span>
+                <span className="font-bold text-[#3E5248]">Phosphorus (P)</span>
                 <span className="font-black text-amber-700 text-base">{phosphorusLevel} kg/ha</span>
               </div>
               <input
@@ -381,7 +381,7 @@ export const AIHubPage: React.FC = () => {
                 onChange={(e) => setPhosphorusLevel(parseInt(e.target.value))}
                 className="w-full accent-amber-600"
               />
-              <div className="text-[10px] text-slate-400 font-semibold flex justify-between">
+              <div className="text-[10px] text-[#8A9A90] font-semibold flex justify-between">
                 <span>Low</span>
                 <span>Medium (25-45)</span>
                 <span>High</span>
@@ -389,9 +389,9 @@ export const AIHubPage: React.FC = () => {
             </div>
 
             {/* Potassium (K) */}
-            <div className="p-5 rounded-3xl bg-slate-50 border border-slate-200 space-y-3">
+            <div className="p-5 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7] space-y-3">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-slate-700">Potassium (K)</span>
+                <span className="font-bold text-[#3E5248]">Potassium (K)</span>
                 <span className="font-black text-purple-700 text-base">{potassiumLevel} kg/ha</span>
               </div>
               <input
@@ -403,7 +403,7 @@ export const AIHubPage: React.FC = () => {
                 onChange={(e) => setPotassiumLevel(parseInt(e.target.value))}
                 className="w-full accent-purple-600"
               />
-              <div className="text-[10px] text-slate-400 font-semibold flex justify-between">
+              <div className="text-[10px] text-[#8A9A90] font-semibold flex justify-between">
                 <span>Low</span>
                 <span>Optimal (280)</span>
                 <span>High</span>
@@ -411,9 +411,9 @@ export const AIHubPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="p-5 rounded-3xl bg-emerald-50 border border-emerald-200 space-y-2">
-            <div className="font-bold text-emerald-900 text-xs">AI Soil Health Diagnosis & Correction</div>
-            <p className="text-xs text-emerald-800 leading-relaxed">
+          <div className="p-5 rounded-2xl bg-[#ECFDF5] border border-[#A7F3D0] space-y-2">
+            <div className="font-bold text-[#064E3B] text-xs">AI Soil Health Diagnosis & Correction</div>
+            <p className="text-xs text-[#064E3B] leading-relaxed">
               Your soil pH is near neutral ({soilPh}) which supports optimal micronutrient absorption. Nitrogen is slightly below benchmark—supplement with <strong>25kg Nano Urea foliar spray</strong> per acre. Phosphorus and Potassium balance is well-suited for Tomato, Sugarcane, and Paddy tillering.
             </p>
           </div>
@@ -422,12 +422,12 @@ export const AIHubPage: React.FC = () => {
 
       {/* 3. CROP RECOMMENDATION TAB */}
       {activeTab === 'recommendation' && (
-        <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs space-y-6 animate-in fade-in">
+        <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-6 animate-in fade-in">
           <div>
-            <h3 className="text-lg font-black text-slate-900 font-heading">
+            <h3 className="text-lg font-black text-[#172B24] font-heading">
               AI Crop Recommendation Engine
             </h3>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-[#718078]">
               Ranked crop viability based on regional soil chemistry, monsoon outlook, and historical mandi profit margins.
             </p>
           </div>
@@ -459,28 +459,28 @@ export const AIHubPage: React.FC = () => {
                 reason: 'High sucrose content; direct crushing tie-up with Cauvery Sugar Mills.'
               }
             ].map((rc, idx) => (
-              <div key={idx} className="glass-card p-5 rounded-3xl space-y-3 flex flex-col justify-between">
+              <div key={idx} className="glass-card p-5 rounded-2xl space-y-3 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                    <span className="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-[#D1FAE5] text-[#064E3B]">
                       {rc.rank}
                     </span>
-                    <span className="text-xs font-black text-emerald-700">{rc.match}</span>
+                    <span className="text-xs font-black text-[#064E3B]">{rc.match}</span>
                   </div>
 
-                  <h4 className="font-extrabold text-slate-900 text-base font-heading mt-2">
+                  <h4 className="font-extrabold text-[#172B24] text-base font-heading mt-2">
                     {rc.name}
                   </h4>
-                  <div className="text-xs text-slate-500 mt-1">Cycle: {rc.duration}</div>
+                  <div className="text-xs text-[#718078] mt-1">Cycle: {rc.duration}</div>
 
-                  <p className="text-xs text-slate-600 mt-3 leading-relaxed">
+                  <p className="text-xs text-[#5A6E64] mt-3 leading-relaxed">
                     {rc.reason}
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                  <span className="text-slate-400">Est. Profit:</span>
-                  <span className="font-black text-emerald-700">{rc.projectedProfit}</span>
+                <div className="pt-3 border-t border-[#EFF4EF] flex items-center justify-between text-xs">
+                  <span className="text-[#8A9A90]">Est. Profit:</span>
+                  <span className="font-black text-[#064E3B]">{rc.projectedProfit}</span>
                 </div>
               </div>
             ))}
@@ -490,23 +490,23 @@ export const AIHubPage: React.FC = () => {
 
       {/* 4. FERTILIZER CALCULATOR TAB */}
       {activeTab === 'fertilizer' && (
-        <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs space-y-6 animate-in fade-in">
+        <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-6 animate-in fade-in">
           <div>
-            <h3 className="text-lg font-black text-slate-900 font-heading">
+            <h3 className="text-lg font-black text-[#172B24] font-heading">
               Precision Fertilizer & Dose Calculator
             </h3>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-[#718078]">
               Calculate exact nutrient requirement per acre to prevent over-fertilization and chemical runoff.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">Target Crop</label>
+              <label className="block text-xs font-bold text-[#3E5248] mb-1">Target Crop</label>
               <select
                 value={selectedCropForFert}
                 onChange={(e) => setSelectedCropForFert(e.target.value)}
-                className="w-full p-3 rounded-2xl border border-slate-300 text-xs bg-white"
+                className="w-full p-3 rounded-2xl border border-[#CBD8D0] text-xs bg-white"
               >
                 <option value="Paddy">Paddy / Rice (BPT-5204)</option>
                 <option value="Tomato">Tomato (Hybrid)</option>
@@ -517,45 +517,45 @@ export const AIHubPage: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">Area (Acres)</label>
+              <label className="block text-xs font-bold text-[#3E5248] mb-1">Area (Acres)</label>
               <input
                 type="number"
                 step="0.5"
                 value={fertAreaAcres}
                 onChange={(e) => setFertAreaAcres(parseFloat(e.target.value) || 1)}
-                className="w-full p-3 rounded-2xl border border-slate-300 text-xs"
+                className="w-full p-3 rounded-2xl border border-[#CBD8D0] text-xs"
               />
             </div>
           </div>
 
           {/* Dosage Recommendations Quad */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-center">
-              <div className="text-[10px] uppercase font-bold text-slate-400">Urea (or Nano Urea)</div>
-              <div className="text-2xl font-black text-slate-900 mt-1">
+            <div className="p-4 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7] text-center">
+              <div className="text-[10px] uppercase font-bold text-[#8A9A90]">Urea (or Nano Urea)</div>
+              <div className="text-2xl font-black text-[#172B24] mt-1">
                 {(fertAreaAcres * 45).toFixed(0)} kg
               </div>
-              <div className="text-[11px] text-emerald-600 font-semibold mt-0.5">
+              <div className="text-[11px] text-[#059669] font-semibold mt-0.5">
                 or {(fertAreaAcres * 2).toFixed(0)} bottles Nano Urea
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-center">
-              <div className="text-[10px] uppercase font-bold text-slate-400">DAP (Di-Ammonium Phosphate)</div>
-              <div className="text-2xl font-black text-slate-900 mt-1">
+            <div className="p-4 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7] text-center">
+              <div className="text-[10px] uppercase font-bold text-[#8A9A90]">DAP (Di-Ammonium Phosphate)</div>
+              <div className="text-2xl font-black text-[#172B24] mt-1">
                 {(fertAreaAcres * 30).toFixed(0)} kg
               </div>
-              <div className="text-[11px] text-slate-500 font-medium mt-0.5">
+              <div className="text-[11px] text-[#718078] font-medium mt-0.5">
                 Basal dose during planting
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-center">
-              <div className="text-[10px] uppercase font-bold text-slate-400">MOP (Muriate of Potash)</div>
-              <div className="text-2xl font-black text-slate-900 mt-1">
+            <div className="p-4 rounded-2xl bg-[#F7FAF7] border border-[#E5EDE7] text-center">
+              <div className="text-[10px] uppercase font-bold text-[#8A9A90]">MOP (Muriate of Potash)</div>
+              <div className="text-2xl font-black text-[#172B24] mt-1">
                 {(fertAreaAcres * 20).toFixed(0)} kg
               </div>
-              <div className="text-[11px] text-slate-500 font-medium mt-0.5">
+              <div className="text-[11px] text-[#718078] font-medium mt-0.5">
                 Split at tillering & flowering
               </div>
             </div>
@@ -565,12 +565,12 @@ export const AIHubPage: React.FC = () => {
 
       {/* 5. YIELD PREDICTOR TAB */}
       {activeTab === 'yield' && (
-        <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs space-y-6 animate-in fade-in">
+        <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-xs space-y-6 animate-in fade-in">
           <div>
-            <h3 className="text-lg font-black text-slate-900 font-heading">
+            <h3 className="text-lg font-black text-[#172B24] font-heading">
               AI Harvest Yield & Output Forecaster
             </h3>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-[#718078]">
               Correlating irrigation efficiency, soil health, and weather variables to estimate total quintals and revenue.
             </p>
           </div>
@@ -578,11 +578,11 @@ export const AIHubPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">Target Crop</label>
+                <label className="block text-xs font-bold text-[#3E5248] mb-1">Target Crop</label>
                 <select
                   value={targetCrop}
                   onChange={(e) => setTargetCrop(e.target.value)}
-                  className="w-full p-2.5 rounded-xl border border-slate-300 text-xs bg-white"
+                  className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white"
                 >
                   <option value="Tomato">Tomato Hybrid (2.0 Acres)</option>
                   <option value="Paddy">Paddy BPT-5204 (2.5 Acres)</option>
@@ -591,7 +591,7 @@ export const AIHubPage: React.FC = () => {
               </div>
 
               <div>
-                <div className="flex justify-between text-xs font-bold text-slate-700 mb-1">
+                <div className="flex justify-between text-xs font-bold text-[#3E5248] mb-1">
                   <span>Irrigation Health Index: {irrigationHealth}%</span>
                 </div>
                 <input
@@ -605,7 +605,7 @@ export const AIHubPage: React.FC = () => {
               </div>
 
               <div>
-                <div className="flex justify-between text-xs font-bold text-slate-700 mb-1">
+                <div className="flex justify-between text-xs font-bold text-[#3E5248] mb-1">
                   <span>Soil Vigor Score: {soilHealthRating}%</span>
                 </div>
                 <input
@@ -614,13 +614,13 @@ export const AIHubPage: React.FC = () => {
                   max="100"
                   value={soilHealthRating}
                   onChange={(e) => setSoilHealthRating(parseInt(e.target.value))}
-                  className="w-full accent-emerald-600"
+                  className="w-full accent-[#059669]"
                 />
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-gradient-to-br from-emerald-900 to-teal-950 text-white space-y-4">
-              <div className="text-xs text-emerald-300 font-bold uppercase tracking-wider">
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-[#064E3B] to-teal-950 text-white space-y-4">
+              <div className="text-xs text-[#6EE7B7] font-bold uppercase tracking-wider">
                 Predicted Yield Forecast
               </div>
               <div>
@@ -631,7 +631,7 @@ export const AIHubPage: React.FC = () => {
                     ? `${(62.5 * (irrigationHealth / 90)).toFixed(1)} Quintals`
                     : `${(950 * (irrigationHealth / 90)).toFixed(0)} Quintals`}
                 </div>
-                <div className="text-xs text-emerald-200 mt-1">
+                <div className="text-xs text-[#A7F3D0] mt-1">
                   Est. Net Revenue:{' '}
                   <strong className="text-amber-300">
                     ₹
@@ -643,7 +643,7 @@ export const AIHubPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="text-[11px] text-emerald-100/80 pt-3 border-t border-emerald-800/80">
+              <div className="text-[11px] text-[#D1FAE5]/80 pt-3 border-t border-[#064E3B]/80">
                 Confidence: 91.4% • Based on 5-year regional micro-climate datasets.
               </div>
             </div>

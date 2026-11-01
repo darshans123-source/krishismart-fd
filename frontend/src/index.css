@@ -1,100 +1,196 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Kannada:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&family=Noto+Sans+Kannada:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Plus Jakarta Sans', 'Noto Sans Devanagari', 'Noto Sans Kannada', sans-serif;
-  --font-display: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  --font-sans: 'Inter', 'Noto Sans Devanagari', 'Noto Sans Kannada', system-ui, sans-serif;
+  --font-display: 'Manrope', 'Inter', sans-serif;
 
-  --color-brand-50: #f0fdf4;
-  --color-brand-100: #dcfce7;
-  --color-brand-200: #bbf7d0;
-  --color-brand-300: #86efac;
-  --color-brand-400: #4ade80;
-  --color-brand-500: #22c55e;
-  --color-brand-600: #16a34a;
-  --color-brand-700: #15803d;
-  --color-brand-800: #166534;
-  --color-brand-900: #14532d;
-  --color-brand-950: #052e16;
+  /* KrishiSmart AI brand palette (master brief, 2026-11-01). */
+  --color-brand-50: #ecfdf5;
+  --color-brand-100: #d1fae5;
+  --color-brand-200: #a7f3d0;
+  --color-brand-300: #6ee7b7;
+  --color-brand-400: #34d399;
+  --color-brand-500: #10b981;
+  --color-brand-600: #059669;
+  --color-brand-700: #059669;
+  --color-brand-800: #064e3b;
+  --color-brand-900: #064e3b;
+  --color-brand-950: #022c22;
+
+  --color-ink: #172b24;
+  --color-muted: #718078;
+  --color-line: #e5ede7;
+  --color-paper: #f7faf7;
+
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-info: #3b82f6;
 
   --color-harvest-500: #f59e0b;
   --color-harvest-600: #d97706;
   --color-harvest-700: #b45309;
 
-  --color-earth-50: #fafaf9;
-  --color-earth-100: #f5f5f4;
-  --color-earth-200: #e7e5e4;
-  --color-earth-700: #44403c;
-  --color-earth-800: #292524;
-  --color-earth-900: #1c1917;
+  --color-earth-50: #f7faf7;
+  --color-earth-100: #eff4ef;
+  --color-earth-200: #e5ede7;
+  --color-earth-700: #3e5248;
+  --color-earth-800: #243a32;
+  --color-earth-900: #172b24;
+
+  /* Premium shadow tokens: soft for cards, lift for hover/focus states. */
+  --shadow-soft: 0 1px 2px rgba(2, 44, 34, 0.05), 0 8px 24px -12px rgba(2, 44, 34, 0.12);
+  --shadow-lift: 0 2px 4px rgba(2, 44, 34, 0.06), 0 16px 32px -12px rgba(6, 78, 59, 0.22);
+  --shadow-hero: 0 20px 40px -16px rgba(2, 44, 34, 0.45);
 }
 
 @layer base {
   * {
-    border-color: #e2e8f0;
+    border-color: #e5ede7;
   }
   html {
     scroll-behavior: smooth;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
   body {
-    background-color: #fbfcf9;
-    color: #1c1917;
+    background-color: #f7faf7;
+    color: #172b24;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid #059669;
+    outline-offset: 2px;
   }
   h1, h2, h3, h4, .font-heading {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Manrope', 'Inter', sans-serif;
+    letter-spacing: -0.01em;
+  }
+  ::selection {
+    background: #a7f3d0;
+    color: #022c22;
   }
 }
 
-/* Simple, natural agricultural card utilities */
+/* Shared design-system utilities: every page uses these, so the app feels like one product. */
+.ds-card {
+  background: #ffffff;
+  border: 1px solid #e5ede7;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
+}
+.ds-card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.ds-card-hover:hover {
+  transform: translateY(-3px);
+  border-color: #a7f3d0;
+  box-shadow: var(--shadow-lift);
+}
+.ds-page {
+  background: #f7faf7;
+  color: #172b24;
+}
+.ds-section-title {
+  font-family: 'Manrope', 'Inter', sans-serif;
+  font-weight: 700;
+  color: #172b24;
+  letter-spacing: -0.01em;
+}
+.ds-muted {
+  color: #718078;
+}
+.ds-input {
+  background: #ffffff;
+  border: 1px solid #e5ede7;
+  border-radius: 0.75rem;
+  color: #172b24;
+}
+.ds-input:focus {
+  border-color: #059669;
+  outline: none;
+}
+.ds-table th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #718078;
+}
+.ds-table td, .ds-table th {
+  border-bottom: 1px solid #e5ede7;
+}
+
+/* Legacy card utilities, kept so existing pages keep working, now on brand colours. */
 .glass-panel {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e5ede7;
 }
-
 .glass-panel-dark {
-  background: #1c1917;
+  background: #022c22;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 .glass-card {
   background: #ffffff;
-  border: 1px solid #e7e5e4;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+  border: 1px solid #e5ede7;
+  box-shadow: 0 1px 3px 0 rgba(2, 44, 34, 0.04);
   transition: all 0.2s ease-in-out;
 }
-
 .glass-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px -2px rgba(22, 101, 52, 0.08);
-  border-color: #86efac;
+  box-shadow: 0 6px 16px -2px rgba(6, 78, 59, 0.08);
+  border-color: #a7f3d0;
 }
-
 .agri-card {
   background: #ffffff;
-  border: 1px solid #e7e5e4;
-  border-radius: 1.25rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+  border: 1px solid #e5ede7;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px 0 rgba(2, 44, 34, 0.04);
   transition: all 0.2s ease;
 }
-
 .agri-card:hover {
-  border-color: #86efac;
-  box-shadow: 0 4px 14px -2px rgba(22, 101, 52, 0.08);
+  border-color: #a7f3d0;
+  box-shadow: 0 4px 14px -2px rgba(6, 78, 59, 0.08);
 }
-
 .gradient-green-hero {
-  background: linear-gradient(135deg, #14532d 0%, #166534 60%, #15803d 100%);
+  background: linear-gradient(135deg, #022c22 0%, #064e3b 60%, #059669 100%);
 }
 
+/* Premium hero: deep emerald with soft radial highlights, no flat block. */
+.premium-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(420px 220px at 88% -20%, rgba(16, 185, 129, 0.28), transparent 70%),
+    radial-gradient(360px 240px at 8% 115%, rgba(245, 158, 11, 0.18), transparent 70%),
+    linear-gradient(135deg, #022c22 0%, #064e3b 52%, #059669 100%);
+  box-shadow: var(--shadow-hero);
+}
+
+/* Premium card: quiet border, soft shadow, gentle lift on hover. */
+.premium-card {
+  background: #ffffff;
+  border: 1px solid #e5ede7;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
+}
+.premium-card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.premium-card-hover:hover {
+  transform: translateY(-3px);
+  border-color: #a7f3d0;
+  box-shadow: var(--shadow-lift);
+}
 .gradient-gold-badge {
   background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
 }
-
 .gradient-mesh-bg {
-  background-color: #fbfcf9;
+  background-color: #f7faf7;
 }
 
 /* Custom Scrollbar */
@@ -102,18 +198,15 @@
   width: 6px;
   height: 6px;
 }
-
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #cbd8d0;
   border-radius: 9999px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #8a9a90;
 }
 
 /* Pulse animation for live IoT */
@@ -121,7 +214,6 @@
   0%, 100% { transform: scale(1); opacity: 1; }
   50% { transform: scale(1.15); opacity: 0.7; }
 }
-
 .animate-sensor-pulse {
   animation: sensor-pulse 2s infinite ease-in-out;
 }
@@ -132,12 +224,10 @@
     transform: translateX(100%);
   }
 }
-
 .shimmer-effect {
   position: relative;
   overflow: hidden;
 }
-
 .shimmer-effect::after {
   position: absolute;
   top: 0; right: 0; bottom: 0; left: 0;
@@ -151,4 +241,12 @@
   );
   animation: shimmer 2.5s infinite;
   content: '';
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

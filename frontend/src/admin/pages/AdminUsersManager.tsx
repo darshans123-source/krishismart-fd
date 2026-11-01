@@ -96,23 +96,23 @@ export const AdminUsersManager: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-stone-200/80 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
         <div>
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold mb-2">
-            <Users className="w-3.5 h-3.5 text-emerald-600" />
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#064E3B] text-xs font-semibold mb-2">
+            <Users className="w-3.5 h-3.5 text-[#059669]" />
             Registered Kisan Directory
           </div>
-          <h1 className="text-2xl font-black text-stone-900 tracking-tight font-heading">
+          <h1 className="text-2xl font-black text-[#172B24] tracking-tight font-heading">
             Farmer & User Management
           </h1>
-          <p className="text-xs text-stone-500 mt-1">
+          <p className="text-xs text-[#718078] mt-1">
             Directory of registered agriculturalists, location credentials, subscription statuses, and roles.
           </p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={fetchUsers}
-            className="p-2.5 rounded-xl border border-stone-200 text-stone-600 hover:bg-stone-50 transition"
+            className="p-2.5 rounded-xl border border-[#E5EDE7] text-[#5A6E64] hover:bg-[#F7FAF7] transition"
             title="Refresh"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
@@ -122,33 +122,33 @@ export const AdminUsersManager: React.FC = () => {
 
       {/* KPI Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white p-5 rounded-2xl border border-stone-200/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
-            <div className="text-xs font-medium text-stone-500">Total Registered Farmers</div>
-            <div className="text-2xl font-black text-stone-900 mt-1">1,982</div>
-            <div className="text-[11px] text-emerald-600 font-semibold mt-0.5">Across 14 Karnataka Districts</div>
+            <div className="text-xs font-medium text-[#718078]">Total Registered Farmers</div>
+            <div className="text-2xl font-black text-[#172B24] mt-1">1,982</div>
+            <div className="text-[11px] text-[#059669] font-semibold mt-0.5">Across 14 Karnataka Districts</div>
           </div>
-          <div className="p-3 bg-emerald-50 text-emerald-700 rounded-2xl">
+          <div className="p-3 bg-[#ECFDF5] text-[#064E3B] rounded-2xl">
             <Users className="w-6 h-6" />
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-stone-200/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
-            <div className="text-xs font-medium text-stone-500">Active Accounts</div>
-            <div className="text-2xl font-black text-emerald-800 mt-1">98.4%</div>
-            <div className="text-[11px] text-emerald-600 font-semibold mt-0.5">Verified Mobile OTP</div>
+            <div className="text-xs font-medium text-[#718078]">Active Accounts</div>
+            <div className="text-2xl font-black text-[#064E3B] mt-1">98.4%</div>
+            <div className="text-[11px] text-[#059669] font-semibold mt-0.5">Verified Mobile OTP</div>
           </div>
           <div className="p-3 bg-teal-50 text-teal-700 rounded-2xl">
             <UserCheck className="w-6 h-6" />
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-stone-200/80 shadow-xs flex items-center justify-between">
+        <div className="bg-white p-5 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex items-center justify-between">
           <div>
-            <div className="text-xs font-medium text-stone-500">Role Breakdown</div>
-            <div className="text-2xl font-black text-stone-900 mt-1">Farmers & Admins</div>
-            <div className="text-[11px] text-stone-500 font-semibold mt-0.5">Role-based Access Control (RBAC)</div>
+            <div className="text-xs font-medium text-[#718078]">Role Breakdown</div>
+            <div className="text-2xl font-black text-[#172B24] mt-1">Farmers & Admins</div>
+            <div className="text-[11px] text-[#718078] font-semibold mt-0.5">Role-based Access Control (RBAC)</div>
           </div>
           <div className="p-3 bg-amber-50 text-amber-700 rounded-2xl">
             <Shield className="w-6 h-6" />
@@ -157,15 +157,15 @@ export const AdminUsersManager: React.FC = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white p-4 rounded-2xl border border-stone-200/80 shadow-xs flex flex-col md:flex-row items-center gap-3">
+      <div className="bg-white p-4 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex flex-col md:flex-row items-center gap-3">
         <div className="relative flex-1 w-full">
-          <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#8A9A90] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search by farmer name, email, phone number or village..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+            className="w-full pl-9 pr-4 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
           />
         </div>
 
@@ -173,7 +173,7 @@ export const AdminUsersManager: React.FC = () => {
           <select
             value={selectedRole}
             onChange={(e) => setSelectedRole(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 bg-stone-50 focus:ring-2 focus:ring-emerald-600/30"
+            className="px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs font-medium text-[#3E5248] bg-[#F7FAF7] focus:ring-2 focus:ring-[#059669]/30"
           >
             <option value="all">All Roles</option>
             <option value="Farmer">Farmer</option>
@@ -184,7 +184,7 @@ export const AdminUsersManager: React.FC = () => {
           <select
             value={selectedStatus}
             onChange={(e) => setSelectedStatus(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 bg-stone-50 focus:ring-2 focus:ring-emerald-600/30"
+            className="px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs font-medium text-[#3E5248] bg-[#F7FAF7] focus:ring-2 focus:ring-[#059669]/30"
           >
             <option value="all">All Statuses</option>
             <option value="Active">Active</option>
@@ -197,21 +197,21 @@ export const AdminUsersManager: React.FC = () => {
       {/* Table */}
       {loading ? (
         <div className="py-20 text-center">
-          <RefreshCw className="w-8 h-8 text-emerald-600 animate-spin mx-auto mb-3" />
-          <p className="text-xs text-stone-500">Loading farmer accounts...</p>
+          <RefreshCw className="w-8 h-8 text-[#059669] animate-spin mx-auto mb-3" />
+          <p className="text-xs text-[#718078]">Loading farmer accounts...</p>
         </div>
       ) : filteredUsers.length === 0 ? (
-        <div className="bg-white rounded-3xl border border-dashed border-stone-300 p-12 text-center">
-          <Users className="w-10 h-10 text-stone-300 mx-auto mb-3" />
-          <h3 className="text-sm font-bold text-stone-800">No users match your criteria</h3>
-          <p className="text-xs text-stone-500 mt-1">Try adjusting the search or filter filters.</p>
+        <div className="bg-white rounded-2xl border border-dashed border-[#CBD8D0] p-12 text-center">
+          <Users className="w-10 h-10 text-[#CBD8D0] mx-auto mb-3" />
+          <h3 className="text-sm font-bold text-[#243A32]">No users match your criteria</h3>
+          <p className="text-xs text-[#718078] mt-1">Try adjusting the search or filter filters.</p>
         </div>
       ) : (
-        <div className="bg-white rounded-3xl border border-stone-200 overflow-hidden shadow-xs">
+        <div className="bg-white rounded-2xl border border-[#E5EDE7] overflow-hidden shadow-xs">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-stone-50/80 border-b border-stone-200 text-[11px] font-bold text-stone-500 uppercase tracking-wider">
+                <tr className="bg-[#F7FAF7]/80 border-b border-[#E5EDE7] text-[11px] font-bold text-[#718078] uppercase tracking-wider">
                   <th className="py-3.5 px-5">Farmer / User</th>
                   <th className="py-3.5 px-4">Contact</th>
                   <th className="py-3.5 px-4">Location</th>
@@ -221,35 +221,35 @@ export const AdminUsersManager: React.FC = () => {
                   <th className="py-3.5 px-5 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-stone-100 text-xs text-stone-700">
+              <tbody className="divide-y divide-[#EFF4EF] text-xs text-[#3E5248]">
                 {filteredUsers.map(u => (
-                  <tr key={u.id} className="hover:bg-stone-50/60 transition">
+                  <tr key={u.id} className="hover:bg-[#F7FAF7]/60 transition">
                     <td className="py-4 px-5">
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 font-extrabold flex items-center justify-center text-xs shrink-0">
+                        <div className="w-9 h-9 rounded-full bg-[#D1FAE5] text-[#064E3B] font-extrabold flex items-center justify-center text-xs shrink-0">
                           {u.name ? u.name.charAt(0).toUpperCase() : 'F'}
                         </div>
                         <div>
-                          <div className="font-bold text-stone-900">{u.name}</div>
-                          <div className="text-[11px] text-stone-400 font-mono">{u.id}</div>
+                          <div className="font-bold text-[#172B24]">{u.name}</div>
+                          <div className="text-[11px] text-[#8A9A90] font-mono">{u.id}</div>
                         </div>
                       </div>
                     </td>
 
                     <td className="py-4 px-4 space-y-0.5">
-                      <div className="flex items-center gap-1.5 text-stone-600">
-                        <Mail className="w-3 h-3 text-stone-400" />
+                      <div className="flex items-center gap-1.5 text-[#5A6E64]">
+                        <Mail className="w-3 h-3 text-[#8A9A90]" />
                         <span className="truncate max-w-[180px]">{u.email}</span>
                       </div>
-                      <div className="flex items-center gap-1.5 text-stone-500 text-[11px]">
-                        <Phone className="w-3 h-3 text-stone-400" />
+                      <div className="flex items-center gap-1.5 text-[#718078] text-[11px]">
+                        <Phone className="w-3 h-3 text-[#8A9A90]" />
                         <span>{u.phone || '+91 98450 12345'}</span>
                       </div>
                     </td>
 
                     <td className="py-4 px-4">
-                      <div className="flex items-center gap-1.5 text-stone-600">
-                        <MapPin className="w-3.5 h-3.5 text-stone-400 shrink-0" />
+                      <div className="flex items-center gap-1.5 text-[#5A6E64]">
+                        <MapPin className="w-3.5 h-3.5 text-[#8A9A90] shrink-0" />
                         <span>{u.location || 'Mandya, KA'}</span>
                       </div>
                     </td>
@@ -260,7 +260,7 @@ export const AdminUsersManager: React.FC = () => {
                           ? 'bg-purple-100 text-purple-800'
                           : u.role === 'Editor'
                           ? 'bg-blue-100 text-blue-800'
-                          : 'bg-emerald-50 text-emerald-800'
+                          : 'bg-[#ECFDF5] text-[#064E3B]'
                       }`}>
                         {u.role}
                       </span>
@@ -269,15 +269,15 @@ export const AdminUsersManager: React.FC = () => {
                     <td className="py-4 px-4">
                       <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase ${
                         u.status === 'Active'
-                          ? 'bg-emerald-100 text-emerald-800'
+                          ? 'bg-[#D1FAE5] text-[#064E3B]'
                           : 'bg-rose-100 text-rose-800'
                       }`}>
-                        <span className={`w-1.5 h-1.5 rounded-full ${u.status === 'Active' ? 'bg-emerald-600' : 'bg-rose-600'}`} />
+                        <span className={`w-1.5 h-1.5 rounded-full ${u.status === 'Active' ? 'bg-[#059669]' : 'bg-rose-600'}`} />
                         {u.status}
                       </span>
                     </td>
 
-                    <td className="py-4 px-4 text-stone-500 text-[11px]">
+                    <td className="py-4 px-4 text-[#718078] text-[11px]">
                       {u.registrationDate || '2026-04-12'}
                     </td>
 
@@ -288,7 +288,7 @@ export const AdminUsersManager: React.FC = () => {
                           className={`p-1.5 rounded-lg text-xs font-semibold transition ${
                             u.status === 'Active'
                               ? 'text-rose-600 hover:bg-rose-50'
-                              : 'text-emerald-600 hover:bg-emerald-50'
+                              : 'text-[#059669] hover:bg-[#ECFDF5]'
                           }`}
                           title={u.status === 'Active' ? 'Suspend Account' : 'Activate Account'}
                         >
@@ -296,7 +296,7 @@ export const AdminUsersManager: React.FC = () => {
                         </button>
                         <button
                           onClick={() => handleOpenEdit(u)}
-                          className="p-1.5 rounded-lg text-stone-500 hover:text-emerald-700 hover:bg-stone-100 transition"
+                          className="p-1.5 rounded-lg text-[#718078] hover:text-[#064E3B] hover:bg-[#EFF4EF] transition"
                           title="Edit User"
                         >
                           <Edit2 className="w-4 h-4" />
@@ -319,56 +319,56 @@ export const AdminUsersManager: React.FC = () => {
       >
         <form onSubmit={handleSave} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-stone-700 mb-1">Full Name</label>
+            <label className="block text-xs font-semibold text-[#3E5248] mb-1">Full Name</label>
             <input
               type="text"
               required
               value={formData.name || ''}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">Email Address</label>
+              <label className="block text-xs font-semibold text-[#3E5248] mb-1">Email Address</label>
               <input
                 type="email"
                 required
                 value={formData.email || ''}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">Phone Number</label>
+              <label className="block text-xs font-semibold text-[#3E5248] mb-1">Phone Number</label>
               <input
                 type="text"
                 value={formData.phone || ''}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">Farm / Village Location</label>
+              <label className="block text-xs font-semibold text-[#3E5248] mb-1">Farm / Village Location</label>
               <input
                 type="text"
                 value={formData.location || ''}
                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">Access Role</label>
+              <label className="block text-xs font-semibold text-[#3E5248] mb-1">Access Role</label>
               <select
                 value={formData.role}
                 onChange={(e) => setFormData({ ...formData, role: e.target.value as any })}
-                className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30"
+                className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30"
               >
                 <option value="Farmer">Farmer (Consumer App)</option>
                 <option value="Editor">Editor (CMS Content Only)</option>
@@ -378,11 +378,11 @@ export const AdminUsersManager: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-stone-700 mb-1">Account Status</label>
+            <label className="block text-xs font-semibold text-[#3E5248] mb-1">Account Status</label>
             <select
               value={formData.status}
               onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
-              className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30"
+              className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30"
             >
               <option value="Active">Active</option>
               <option value="Suspended">Suspended</option>
@@ -390,18 +390,18 @@ export const AdminUsersManager: React.FC = () => {
             </select>
           </div>
 
-          <div className="flex items-center justify-end gap-3 pt-3 border-t border-stone-100">
+          <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#EFF4EF]">
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}
-              className="px-4 py-2 rounded-xl border border-stone-200 text-xs font-semibold text-stone-600 hover:bg-stone-50"
+              className="px-4 py-2 rounded-xl border border-[#E5EDE7] text-xs font-semibold text-[#5A6E64] hover:bg-[#F7FAF7]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white text-xs font-bold shadow-sm transition disabled:opacity-50"
             >
               {saving ? 'Saving...' : 'Update Profile'}
             </button>

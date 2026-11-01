@@ -102,22 +102,22 @@ export const AdminWeatherManager: React.FC = () => {
   return (
     <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-200">
       {/* Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white rounded-3xl border border-stone-200 p-5 sm:p-6 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white rounded-2xl border border-[#E5EDE7] p-5 sm:p-6 shadow-2xs">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-extrabold text-stone-900 font-heading">Weather Advisory & Alerts Console</h2>
+            <h2 className="text-xl font-extrabold text-[#172B24] font-heading">Weather Advisory & Alerts Console</h2>
             <span className="px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-bold">
               Real API Preserved
             </span>
           </div>
-          <p className="text-xs text-stone-500 mt-1">
+          <p className="text-xs text-[#718078] mt-1">
             Publish agricultural weather warnings, spraying windows, and seasonal crop climate advice.
           </p>
         </div>
 
         <button
           onClick={handleOpenCreate}
-          className="px-4 py-2.5 rounded-2xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold flex items-center gap-2 transition-all shadow-xs cursor-pointer"
+          className="px-4 py-2.5 rounded-2xl bg-[#064E3B] hover:bg-[#064E3B] text-white text-xs font-bold flex items-center gap-2 transition-all shadow-xs cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           <span>New Weather Alert</span>
@@ -127,48 +127,48 @@ export const AdminWeatherManager: React.FC = () => {
       {/* Live Weather Telemetry Snapshot */}
       {weatherData && (
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="p-4 rounded-3xl bg-white border border-stone-200 shadow-2xs space-y-1">
-            <span className="text-[11px] font-bold text-stone-500 flex items-center gap-1.5">
+          <div className="p-4 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-1">
+            <span className="text-[11px] font-bold text-[#718078] flex items-center gap-1.5">
               <Sun className="w-4 h-4 text-amber-500" />
               <span>Ambient Temperature</span>
             </span>
-            <div className="text-2xl font-black text-stone-900 font-heading">{weatherData.temp}°C</div>
-            <div className="text-[11px] text-stone-500">{weatherData.condition}</div>
+            <div className="text-2xl font-black text-[#172B24] font-heading">{weatherData.temp}°C</div>
+            <div className="text-[11px] text-[#718078]">{weatherData.condition}</div>
           </div>
 
-          <div className="p-4 rounded-3xl bg-white border border-stone-200 shadow-2xs space-y-1">
-            <span className="text-[11px] font-bold text-stone-500 flex items-center gap-1.5">
+          <div className="p-4 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-1">
+            <span className="text-[11px] font-bold text-[#718078] flex items-center gap-1.5">
               <Droplets className="w-4 h-4 text-cyan-500" />
               <span>Rain Probability</span>
             </span>
-            <div className="text-2xl font-black text-stone-900 font-heading">{weatherData.rainProbability}%</div>
+            <div className="text-2xl font-black text-[#172B24] font-heading">{weatherData.rainProbability}%</div>
             <div className="text-[11px] text-cyan-700 font-semibold">Relative Humidity: {weatherData.humidity}%</div>
           </div>
 
-          <div className="p-4 rounded-3xl bg-white border border-stone-200 shadow-2xs space-y-1">
-            <span className="text-[11px] font-bold text-stone-500 flex items-center gap-1.5">
-              <Droplets className="w-4 h-4 text-emerald-500" />
+          <div className="p-4 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-1">
+            <span className="text-[11px] font-bold text-[#718078] flex items-center gap-1.5">
+              <Droplets className="w-4 h-4 text-[#10B981]" />
               <span>Soil Moisture Probe</span>
             </span>
-            <div className="text-2xl font-black text-stone-900 font-heading">{weatherData.soilMoisture}%</div>
-            <div className="text-[11px] text-emerald-700 font-semibold">Optimal root hydration</div>
+            <div className="text-2xl font-black text-[#172B24] font-heading">{weatherData.soilMoisture}%</div>
+            <div className="text-[11px] text-[#064E3B] font-semibold">Optimal root hydration</div>
           </div>
 
-          <div className="p-4 rounded-3xl bg-white border border-stone-200 shadow-2xs space-y-1">
-            <span className="text-[11px] font-bold text-stone-500 flex items-center gap-1.5">
+          <div className="p-4 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-1">
+            <span className="text-[11px] font-bold text-[#718078] flex items-center gap-1.5">
               <Wind className="w-4 h-4 text-purple-500" />
               <span>Wind Velocity</span>
             </span>
-            <div className="text-2xl font-black text-stone-900 font-heading">{weatherData.windSpeed} km/h</div>
-            <div className="text-[11px] text-stone-500">Air Quality: {weatherData.airQuality}</div>
+            <div className="text-2xl font-black text-[#172B24] font-heading">{weatherData.windSpeed} km/h</div>
+            <div className="text-[11px] text-[#718078]">Air Quality: {weatherData.airQuality}</div>
           </div>
         </div>
       )}
 
       {/* Advisory Warnings List */}
-      <div className="bg-white rounded-3xl border border-stone-200 p-6 shadow-2xs space-y-4">
-        <div className="flex items-center justify-between border-b border-stone-100 pb-3">
-          <h3 className="text-base font-extrabold text-stone-900 font-heading">
+      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
+        <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
+          <h3 className="text-base font-extrabold text-[#172B24] font-heading">
             Active Warning Banners & Climate Advisories ({advisories.length})
           </h3>
         </div>
@@ -182,7 +182,7 @@ export const AdminWeatherManager: React.FC = () => {
                   ? 'bg-rose-50/60 border-rose-200 text-rose-950'
                   : adv.type === 'Alert'
                   ? 'bg-amber-50/60 border-amber-200 text-amber-950'
-                  : 'bg-emerald-50/60 border-emerald-200 text-emerald-950'
+                  : 'bg-[#ECFDF5]/60 border-[#A7F3D0] text-[#022C22]'
               } ${!adv.visible ? 'opacity-50' : ''}`}
             >
               <div className="space-y-1 flex-1">
@@ -193,7 +193,7 @@ export const AdminWeatherManager: React.FC = () => {
                         ? 'bg-rose-600 text-white'
                         : adv.type === 'Alert'
                         ? 'bg-amber-600 text-white'
-                        : 'bg-emerald-600 text-white'
+                        : 'bg-[#059669] text-white'
                     }`}
                   >
                     {adv.type}
@@ -207,21 +207,21 @@ export const AdminWeatherManager: React.FC = () => {
               <div className="flex items-center gap-1.5 self-end sm:self-auto shrink-0">
                 <button
                   onClick={() => handleToggleVisibility(adv)}
-                  className="p-2 rounded-xl bg-white border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors cursor-pointer"
+                  className="p-2 rounded-xl bg-white border border-[#E5EDE7] hover:bg-[#EFF4EF] text-[#3E5248] transition-colors cursor-pointer"
                   title={adv.visible ? 'Hide Advisory' : 'Show Advisory'}
                 >
-                  {adv.visible ? <Eye className="w-4 h-4 text-emerald-700" /> : <EyeOff className="w-4 h-4" />}
+                  {adv.visible ? <Eye className="w-4 h-4 text-[#064E3B]" /> : <EyeOff className="w-4 h-4" />}
                 </button>
                 <button
                   onClick={() => handleOpenEdit(adv)}
-                  className="p-2 rounded-xl bg-white border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors cursor-pointer"
+                  className="p-2 rounded-xl bg-white border border-[#E5EDE7] hover:bg-[#EFF4EF] text-[#3E5248] transition-colors cursor-pointer"
                   title="Edit Advisory"
                 >
                   <Edit3 className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setDeleteConfirmId(adv.id)}
-                  className="p-2 rounded-xl hover:bg-rose-100 text-stone-400 hover:text-rose-600 transition-colors cursor-pointer"
+                  className="p-2 rounded-xl hover:bg-rose-100 text-[#8A9A90] hover:text-rose-600 transition-colors cursor-pointer"
                   title="Delete"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -242,36 +242,36 @@ export const AdminWeatherManager: React.FC = () => {
         >
           <form onSubmit={handleSave} className="space-y-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-stone-700">Advisory Title</label>
+              <label className="text-xs font-bold text-[#3E5248]">Advisory Title</label>
               <input
                 type="text"
                 value={editingAdvisory.title}
                 onChange={(e) => setEditingAdvisory({ ...editingAdvisory, title: e.target.value })}
                 placeholder="e.g. Monsoon Heavy Rainfall Warning"
                 required
-                className="w-full px-3.5 py-2 rounded-xl border border-stone-200 text-xs font-bold"
+                className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs font-bold"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-stone-700">Detailed Message & Agronomy Advice</label>
+              <label className="text-xs font-bold text-[#3E5248]">Detailed Message & Agronomy Advice</label>
               <textarea
                 rows={3}
                 value={editingAdvisory.message}
                 onChange={(e) => setEditingAdvisory({ ...editingAdvisory, message: e.target.value })}
                 placeholder="Explain rain risk, hold off chemical sprays, drainage advice..."
                 required
-                className="w-full px-3.5 py-2 rounded-xl border border-stone-200 text-xs"
+                className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-stone-700">Advisory Type</label>
+                <label className="text-xs font-bold text-[#3E5248]">Advisory Type</label>
                 <select
                   value={editingAdvisory.type}
                   onChange={(e) => setEditingAdvisory({ ...editingAdvisory, type: e.target.value })}
-                  className="w-full px-3.5 py-2 rounded-xl border border-stone-200 text-xs bg-white"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs bg-white"
                 >
                   <option value="Warning">Warning (Red Critical)</option>
                   <option value="Alert">Alert (Amber Caution)</option>
@@ -281,11 +281,11 @@ export const AdminWeatherManager: React.FC = () => {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-stone-700">Priority</label>
+                <label className="text-xs font-bold text-[#3E5248]">Priority</label>
                 <select
                   value={editingAdvisory.priority}
                   onChange={(e) => setEditingAdvisory({ ...editingAdvisory, priority: e.target.value })}
-                  className="w-full px-3.5 py-2 rounded-xl border border-stone-200 text-xs bg-white"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs bg-white"
                 >
                   <option value="High">High</option>
                   <option value="Medium">Medium</option>
@@ -296,39 +296,39 @@ export const AdminWeatherManager: React.FC = () => {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-stone-700">Valid Until</label>
+                <label className="text-xs font-bold text-[#3E5248]">Valid Until</label>
                 <input
                   type="date"
                   value={editingAdvisory.validUntil}
                   onChange={(e) => setEditingAdvisory({ ...editingAdvisory, validUntil: e.target.value })}
-                  className="w-full px-3.5 py-2 rounded-xl border border-stone-200 text-xs"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs"
                 />
               </div>
 
               <div className="flex items-center gap-2 pt-6">
-                <label className="flex items-center gap-2 text-xs font-bold text-stone-700 cursor-pointer">
+                <label className="flex items-center gap-2 text-xs font-bold text-[#3E5248] cursor-pointer">
                   <input
                     type="checkbox"
                     checked={editingAdvisory.visible !== false}
                     onChange={(e) => setEditingAdvisory({ ...editingAdvisory, visible: e.target.checked })}
-                    className="rounded border-stone-300 text-emerald-600 focus:ring-emerald-500"
+                    className="rounded border-[#CBD8D0] text-[#059669] focus:ring-[#10B981]"
                   />
                   <span>Active & Visible to Farmers</span>
                 </label>
               </div>
             </div>
 
-            <div className="pt-4 flex justify-end gap-2 border-t border-stone-200">
+            <div className="pt-4 flex justify-end gap-2 border-t border-[#E5EDE7]">
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 rounded-xl border border-stone-300 text-stone-700 text-xs font-semibold hover:bg-stone-100"
+                className="px-4 py-2 rounded-xl border border-[#CBD8D0] text-[#3E5248] text-xs font-semibold hover:bg-[#EFF4EF]"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold shadow-xs cursor-pointer"
+                className="px-5 py-2 rounded-xl bg-[#064E3B] hover:bg-[#064E3B] text-white text-xs font-bold shadow-xs cursor-pointer"
               >
                 Save Advisory
               </button>

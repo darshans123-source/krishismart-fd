@@ -51,22 +51,22 @@ export const DroneSprayPage: React.FC = () => {
       {/* ================================================== */}
       {/* 1. HERO SECTION WITH REALISTIC AGRI-DRONE IMAGE */}
       {/* ================================================== */}
-      <div className="relative rounded-3xl overflow-hidden shadow-sm border border-stone-200">
-        <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-stone-900">
+      <div className="relative rounded-2xl overflow-hidden shadow-sm border border-[#E5EDE7]">
+        <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-[#172B24]">
           <img
             src="https://images.unsplash.com/photo-1527061011665-3652c757a4d4?w=1200&auto=format&fit=crop&q=80"
             alt="Agricultural drone spraying crops"
             className="w-full h-full object-cover opacity-90 hover:scale-102 transition-transform duration-500"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-900/40 to-transparent flex flex-col justify-end p-6 sm:p-8 text-white">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-700/80 backdrop-blur-xs text-white text-xs font-bold w-fit mb-2">
+          <div className="absolute inset-0 bg-gradient-to-t from-[#022C22]/90 via-[#172B24]/40 to-transparent flex flex-col justify-end p-6 sm:p-8 text-white">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#064E3B]/80 backdrop-blur-xs text-white text-xs font-bold w-fit mb-2">
               <Plane className="w-3.5 h-3.5" />
               <span>Agricultural Aviation & Precision Spraying</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-extrabold font-heading text-white tracking-tight">
               Smart Drone Planning
             </h1>
-            <p className="text-xs sm:text-base text-stone-200 mt-1 max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-base text-[#E5EDE7] mt-1 max-w-2xl leading-relaxed">
               Plan efficient field coverage with drone-based farm monitoring and spraying.
             </p>
           </div>
@@ -84,12 +84,12 @@ export const DroneSprayPage: React.FC = () => {
       {/* ================================================== */}
       {/* 2. FIELD PARAMETERS (Selection, Crop, Area, Stage) */}
       {/* ================================================== */}
-      <div className="bg-white rounded-3xl border border-stone-200 p-6 shadow-2xs space-y-4">
-        <div className="border-b border-stone-100 pb-3">
-          <h2 className="text-base font-extrabold text-stone-900 font-heading">
+      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-4">
+        <div className="border-b border-[#EFF4EF] pb-3">
+          <h2 className="text-base font-extrabold text-[#172B24] font-heading">
             Field Configuration
           </h2>
-          <p className="text-xs text-stone-500">
+          <p className="text-xs text-[#718078]">
             Select the parcel and growth stage to calibrate flight paths and droplet volume.
           </p>
         </div>
@@ -97,13 +97,13 @@ export const DroneSprayPage: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* 1. Field Selection */}
           <div>
-            <label className="block text-xs font-bold text-stone-700 mb-1.5">
+            <label className="block text-xs font-bold text-[#3E5248] mb-1.5">
               Field Selection
             </label>
             <select
               value={selectedField}
               onChange={(e) => setSelectedField(e.target.value)}
-              className="w-full p-2.5 rounded-xl border border-stone-300 text-xs bg-white text-stone-800 font-medium focus:ring-2 focus:ring-emerald-600 outline-hidden"
+              className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white text-[#243A32] font-medium focus:ring-2 focus:ring-[#059669] outline-hidden"
             >
               <option value="Field 2 (North Tomato Plot)">Field 2 (North Tomato Plot)</option>
               <option value="Field 1 (Cauvery Paddy Basin)">Field 1 (Cauvery Paddy Basin)</option>
@@ -114,13 +114,13 @@ export const DroneSprayPage: React.FC = () => {
 
           {/* 2. Crop */}
           <div>
-            <label className="block text-xs font-bold text-stone-700 mb-1.5">
+            <label className="block text-xs font-bold text-[#3E5248] mb-1.5">
               Crop
             </label>
             <select
               value={selectedCrop}
               onChange={(e) => setSelectedCrop(e.target.value)}
-              className="w-full p-2.5 rounded-xl border border-stone-300 text-xs bg-white text-stone-800 font-medium focus:ring-2 focus:ring-emerald-600 outline-hidden"
+              className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white text-[#243A32] font-medium focus:ring-2 focus:ring-[#059669] outline-hidden"
             >
               <option value="Tomato">Tomato (Hybrid F1)</option>
               <option value="Paddy">Paddy / Rice (Samba)</option>
@@ -131,13 +131,13 @@ export const DroneSprayPage: React.FC = () => {
 
           {/* 3. Field Area */}
           <div>
-            <label className="block text-xs font-bold text-stone-700 mb-1.5">
+            <label className="block text-xs font-bold text-[#3E5248] mb-1.5">
               Field Area
             </label>
             <select
               value={fieldAreaAcres}
               onChange={(e) => setFieldAreaAcres(parseFloat(e.target.value))}
-              className="w-full p-2.5 rounded-xl border border-stone-300 text-xs bg-white text-stone-800 font-medium focus:ring-2 focus:ring-emerald-600 outline-hidden"
+              className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white text-[#243A32] font-medium focus:ring-2 focus:ring-[#059669] outline-hidden"
             >
               <option value={1.5}>1.5 Acres</option>
               <option value={2.0}>2.0 Acres</option>
@@ -148,13 +148,13 @@ export const DroneSprayPage: React.FC = () => {
 
           {/* 4. Crop Stage */}
           <div>
-            <label className="block text-xs font-bold text-stone-700 mb-1.5">
+            <label className="block text-xs font-bold text-[#3E5248] mb-1.5">
               Crop Stage
             </label>
             <select
               value={cropStage}
               onChange={(e) => setCropStage(e.target.value)}
-              className="w-full p-2.5 rounded-xl border border-stone-300 text-xs bg-white text-stone-800 font-medium focus:ring-2 focus:ring-emerald-600 outline-hidden"
+              className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs bg-white text-[#243A32] font-medium focus:ring-2 focus:ring-[#059669] outline-hidden"
             >
               <option value="Flowering Stage">Flowering Stage</option>
               <option value="Vegetative Stage">Vegetative Stage</option>
@@ -170,53 +170,53 @@ export const DroneSprayPage: React.FC = () => {
       {/* ================================================== */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Metric 1: Drone Coverage */}
-        <div className="p-5 rounded-3xl bg-white border border-stone-200 shadow-2xs space-y-1">
-          <div className="text-[10px] font-extrabold uppercase tracking-wider text-stone-400">
+        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-1">
+          <div className="text-[10px] font-extrabold uppercase tracking-wider text-[#8A9A90]">
             Drone Coverage
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-emerald-800 font-heading">
+          <div className="text-2xl sm:text-3xl font-black text-[#064E3B] font-heading">
             {activePlan?.coverageProgress || 85}%
           </div>
-          <div className="text-xs text-emerald-700 font-semibold">
+          <div className="text-xs text-[#064E3B] font-semibold">
             Uniform Canopy Penetration
           </div>
         </div>
 
         {/* Metric 2: Estimated Flight Time */}
-        <div className="p-5 rounded-3xl bg-white border border-stone-200 shadow-2xs space-y-1">
-          <div className="text-[10px] font-extrabold uppercase tracking-wider text-stone-400">
+        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-1">
+          <div className="text-[10px] font-extrabold uppercase tracking-wider text-[#8A9A90]">
             Estimated Flight Time
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-stone-900 font-heading">
+          <div className="text-2xl sm:text-3xl font-black text-[#172B24] font-heading">
             {Math.round(fieldAreaAcres * 7)} Mins
           </div>
-          <div className="text-xs text-stone-500">
+          <div className="text-xs text-[#718078]">
             ~7 mins per acre @ 18 km/h
           </div>
         </div>
 
         {/* Metric 3: Coverage Area */}
-        <div className="p-5 rounded-3xl bg-white border border-stone-200 shadow-2xs space-y-1">
-          <div className="text-[10px] font-extrabold uppercase tracking-wider text-stone-400">
+        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-1">
+          <div className="text-[10px] font-extrabold uppercase tracking-wider text-[#8A9A90]">
             Coverage Area
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-stone-900 font-heading">
+          <div className="text-2xl sm:text-3xl font-black text-[#172B24] font-heading">
             {fieldAreaAcres} Acres
           </div>
-          <div className="text-xs text-stone-500">
+          <div className="text-xs text-[#718078]">
             Spray Volume: {fieldAreaAcres * 20} Litres
           </div>
         </div>
 
         {/* Metric 4: Planning Window */}
-        <div className="p-5 rounded-3xl bg-white border border-stone-200 shadow-2xs space-y-1">
-          <div className="text-[10px] font-extrabold uppercase tracking-wider text-stone-400">
+        <div className="p-5 rounded-2xl bg-white border border-[#E5EDE7] shadow-2xs space-y-1">
+          <div className="text-[10px] font-extrabold uppercase tracking-wider text-[#8A9A90]">
             Planning Window
           </div>
           <div className="text-xl sm:text-2xl font-black text-amber-900 font-heading">
             4:30 PM – 6:30 PM
           </div>
-          <div className="text-xs text-stone-500">
+          <div className="text-xs text-[#718078]">
             Wind: {weather.windSpeed} km/h (Safe &lt; 14 km/h)
           </div>
         </div>
@@ -225,24 +225,24 @@ export const DroneSprayPage: React.FC = () => {
       {/* ================================================== */}
       {/* 4. SIMPLE FIELD MAP WITH DRONE FLIGHT PATH */}
       {/* ================================================== */}
-      <div className="bg-white rounded-3xl border border-stone-200 p-6 shadow-2xs space-y-5">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-100 pb-3">
+      <div className="bg-white rounded-2xl border border-[#E5EDE7] p-6 shadow-2xs space-y-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#EFF4EF] pb-3">
           <div>
-            <h3 className="font-extrabold text-base text-stone-900 font-heading">
+            <h3 className="font-extrabold text-base text-[#172B24] font-heading">
               Field Waypoint Map & Flight Path
             </h3>
-            <p className="text-xs text-stone-500">
+            <p className="text-xs text-[#718078]">
               Visual agricultural flight path across {selectedField} ({selectedCrop})
             </p>
           </div>
 
-          <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold w-fit">
+          <span className="px-3 py-1 rounded-full bg-[#ECFDF5] text-[#064E3B] border border-[#A7F3D0] text-xs font-bold w-fit">
             Status: {activePlan?.status || 'Ready for Dispatch'}
           </span>
         </div>
 
         {/* Realistic Agricultural Map SVG */}
-        <div className="relative w-full h-64 sm:h-80 bg-[#f4f7f2] rounded-2xl border border-stone-300 overflow-hidden flex items-center justify-center p-4">
+        <div className="relative w-full h-64 sm:h-80 bg-[#f4f7f2] rounded-2xl border border-[#CBD8D0] overflow-hidden flex items-center justify-center p-4">
           {/* Subtle agricultural grid */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#14532d10_1px,transparent_1px),linear-gradient(to_bottom,#14532d10_1px,transparent_1px)] bg-[size:28px_28px]"></div>
 
@@ -308,7 +308,7 @@ export const DroneSprayPage: React.FC = () => {
           </svg>
 
           {/* Telemetry pill */}
-          <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-xs px-3.5 py-2 rounded-xl border border-stone-200 text-xs shadow-xs space-y-0.5 text-stone-700">
+          <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-xs px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs shadow-xs space-y-0.5 text-[#3E5248]">
             <div><strong>Altitude:</strong> {altitudeMeters} meters above canopy</div>
             <div><strong>Spray Rate:</strong> 1.4 L/minute</div>
           </div>
@@ -317,10 +317,10 @@ export const DroneSprayPage: React.FC = () => {
         {/* Action Controls & Launch */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
           <div className="space-y-1">
-            <div className="text-xs text-stone-500">
+            <div className="text-xs text-[#718078]">
               Formulation: <strong>{sprayType} (Bio-protection)</strong>
             </div>
-            <div className="text-xs text-emerald-800 font-semibold">
+            <div className="text-xs text-[#064E3B] font-semibold">
               ✓ Weather verified: 0% rain forecast during flight window
             </div>
           </div>
@@ -328,14 +328,14 @@ export const DroneSprayPage: React.FC = () => {
           <div className="flex items-center gap-3">
             <button
               onClick={handleCreateNewPlan}
-              className="px-4 py-2.5 rounded-xl border border-stone-300 hover:bg-stone-50 text-stone-800 text-xs font-bold transition-all"
+              className="px-4 py-2.5 rounded-xl border border-[#CBD8D0] hover:bg-[#F7FAF7] text-[#243A32] text-xs font-bold transition-all"
             >
               Recalculate Route
             </button>
 
             <button
               onClick={() => activePlan && executeDroneMission(activePlan.id)}
-              className="px-6 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold shadow-md transition-all flex items-center gap-2"
+              className="px-6 py-2.5 rounded-xl bg-[#064E3B] hover:bg-[#064E3B] text-white text-xs font-bold shadow-md transition-all flex items-center gap-2"
             >
               <Play className="w-4 h-4 fill-white" />
               <span>Simulate Flight</span>

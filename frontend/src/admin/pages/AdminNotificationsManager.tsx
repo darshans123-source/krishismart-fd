@@ -22,11 +22,11 @@ interface NotificationItem {
 
 const TYPE_BADGES: Record<string, { label: string; color: string }> = {
   weather_alert: { label: 'Weather Alert', color: 'bg-amber-100 text-amber-800' },
-  crop_alert: { label: 'Crop Advisory', color: 'bg-emerald-100 text-emerald-800' },
+  crop_alert: { label: 'Crop Advisory', color: 'bg-[#D1FAE5] text-[#064E3B]' },
   market_alert: { label: 'Mandi Price Surge', color: 'bg-teal-100 text-teal-800' },
   scheme: { label: 'Government Scheme', color: 'bg-blue-100 text-blue-800' },
   promotion: { label: 'Agri Store Promo', color: 'bg-purple-100 text-purple-800' },
-  system: { label: 'System Notice', color: 'bg-stone-100 text-stone-800' }
+  system: { label: 'System Notice', color: 'bg-[#EFF4EF] text-[#243A32]' }
 };
 
 export const AdminNotificationsManager: React.FC = () => {
@@ -125,30 +125,30 @@ export const AdminNotificationsManager: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-stone-200/80 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-[#E5EDE7]/80 shadow-xs">
         <div>
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold mb-2">
-            <Bell className="w-3.5 h-3.5 text-emerald-600" />
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#064E3B] text-xs font-semibold mb-2">
+            <Bell className="w-3.5 h-3.5 text-[#059669]" />
             Push Broadcast Center
           </div>
-          <h1 className="text-2xl font-black text-stone-900 tracking-tight font-heading">
+          <h1 className="text-2xl font-black text-[#172B24] tracking-tight font-heading">
             Notifications & Broadcast Alerts
           </h1>
-          <p className="text-xs text-stone-500 mt-1">
+          <p className="text-xs text-[#718078] mt-1">
             Dispatch high-priority weather warnings, pest outbreak alerts, and APMC market rallies to farmer devices.
           </p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={fetchNotifications}
-            className="p-2.5 rounded-xl border border-stone-200 text-stone-600 hover:bg-stone-50 transition"
+            className="p-2.5 rounded-xl border border-[#E5EDE7] text-[#5A6E64] hover:bg-[#F7FAF7] transition"
             title="Refresh"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
           </button>
           <button
             onClick={handleOpenCreate}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white text-xs font-bold shadow-sm transition cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             Dispatch New Alert
@@ -157,15 +157,15 @@ export const AdminNotificationsManager: React.FC = () => {
       </div>
 
       {/* Filter bar */}
-      <div className="bg-white p-4 rounded-2xl border border-stone-200/80 shadow-xs flex flex-col md:flex-row items-center gap-3">
+      <div className="bg-white p-4 rounded-2xl border border-[#E5EDE7]/80 shadow-xs flex flex-col md:flex-row items-center gap-3">
         <div className="relative flex-1 w-full">
-          <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#8A9A90] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search active alerts by title, content, or targeted recipients..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+            className="w-full pl-9 pr-4 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
           />
         </div>
 
@@ -173,7 +173,7 @@ export const AdminNotificationsManager: React.FC = () => {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 bg-stone-50 focus:ring-2 focus:ring-emerald-600/30"
+            className="px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs font-medium text-[#3E5248] bg-[#F7FAF7] focus:ring-2 focus:ring-[#059669]/30"
           >
             <option value="all">All Alert Types</option>
             {Object.entries(TYPE_BADGES).map(([k, v]) => (
@@ -186,23 +186,23 @@ export const AdminNotificationsManager: React.FC = () => {
       {/* Notifications List */}
       {loading ? (
         <div className="py-20 text-center">
-          <RefreshCw className="w-8 h-8 text-emerald-600 animate-spin mx-auto mb-3" />
-          <p className="text-xs text-stone-500">Retrieving notification dispatch logs...</p>
+          <RefreshCw className="w-8 h-8 text-[#059669] animate-spin mx-auto mb-3" />
+          <p className="text-xs text-[#718078]">Retrieving notification dispatch logs...</p>
         </div>
       ) : filteredNotifications.length === 0 ? (
-        <div className="bg-white rounded-3xl border border-dashed border-stone-300 p-12 text-center">
-          <Bell className="w-10 h-10 text-stone-300 mx-auto mb-3" />
-          <h3 className="text-sm font-bold text-stone-800">No active notifications</h3>
-          <p className="text-xs text-stone-500 mt-1">Broadcast an emergency weather warning or crop pest bulletin.</p>
+        <div className="bg-white rounded-2xl border border-dashed border-[#CBD8D0] p-12 text-center">
+          <Bell className="w-10 h-10 text-[#CBD8D0] mx-auto mb-3" />
+          <h3 className="text-sm font-bold text-[#243A32]">No active notifications</h3>
+          <p className="text-xs text-[#718078] mt-1">Broadcast an emergency weather warning or crop pest bulletin.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filteredNotifications.map(n => {
-            const badge = TYPE_BADGES[n.type] || { label: n.type, color: 'bg-stone-100 text-stone-700' };
+            const badge = TYPE_BADGES[n.type] || { label: n.type, color: 'bg-[#EFF4EF] text-[#3E5248]' };
             return (
               <div
                 key={n.id}
-                className="bg-white rounded-3xl border border-stone-200 p-5 shadow-xs hover:shadow-md transition flex flex-col justify-between"
+                className="bg-white rounded-2xl border border-[#E5EDE7] p-5 shadow-xs hover:shadow-md transition flex flex-col justify-between"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between gap-2">
@@ -214,42 +214,42 @@ export const AdminNotificationsManager: React.FC = () => {
                         ? 'bg-rose-100 text-rose-800'
                         : n.priority === 'medium'
                         ? 'bg-amber-100 text-amber-800'
-                        : 'bg-stone-100 text-stone-600'
+                        : 'bg-[#EFF4EF] text-[#5A6E64]'
                     }`}>
                       {n.priority} Priority
                     </span>
                   </div>
 
-                  <h3 className="text-base font-bold text-stone-900 leading-snug">
+                  <h3 className="text-base font-bold text-[#172B24] leading-snug">
                     {n.title}
                   </h3>
 
-                  <p className="text-xs text-stone-600 leading-relaxed">
+                  <p className="text-xs text-[#5A6E64] leading-relaxed">
                     {n.message}
                   </p>
 
-                  <div className="flex flex-wrap items-center gap-4 text-[11px] text-stone-500 pt-2 border-t border-stone-100">
+                  <div className="flex flex-wrap items-center gap-4 text-[11px] text-[#718078] pt-2 border-t border-[#EFF4EF]">
                     <div className="flex items-center gap-1.5">
-                      <Users className="w-3.5 h-3.5 text-stone-400" />
-                      <span>Target: <strong className="text-stone-800">{n.targetUsers}</strong></span>
+                      <Users className="w-3.5 h-3.5 text-[#8A9A90]" />
+                      <span>Target: <strong className="text-[#243A32]">{n.targetUsers}</strong></span>
                     </div>
 
                     {n.endDate && (
                       <div className="flex items-center gap-1.5">
-                        <Calendar className="w-3.5 h-3.5 text-stone-400" />
-                        <span>Valid until: <strong className="text-stone-800">{n.endDate}</strong></span>
+                        <Calendar className="w-3.5 h-3.5 text-[#8A9A90]" />
+                        <span>Valid until: <strong className="text-[#243A32]">{n.endDate}</strong></span>
                       </div>
                     )}
                   </div>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-stone-100 flex items-center justify-between">
-                  <span className="text-[10px] font-mono text-stone-400">
+                <div className="pt-4 mt-4 border-t border-[#EFF4EF] flex items-center justify-between">
+                  <span className="text-[10px] font-mono text-[#8A9A90]">
                     ID: {n.id}
                   </span>
                   <button
                     onClick={() => setDeleteTarget(n)}
-                    className="p-1.5 rounded-lg text-stone-400 hover:text-rose-600 hover:bg-rose-50 transition"
+                    className="p-1.5 rounded-lg text-[#8A9A90] hover:text-rose-600 hover:bg-rose-50 transition"
                     title="Delete Alert"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -269,24 +269,24 @@ export const AdminNotificationsManager: React.FC = () => {
       >
         <form onSubmit={handleSave} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-stone-700 mb-1">Alert Headline / Title *</label>
+            <label className="block text-xs font-semibold text-[#3E5248] mb-1">Alert Headline / Title *</label>
             <input
               type="text"
               required
               value={formData.title || ''}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
               placeholder="e.g. Thunderstorm Alert: Heavy Rainfall in Mandya"
-              className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">Broadcast Category</label>
+              <label className="block text-xs font-semibold text-[#3E5248] mb-1">Broadcast Category</label>
               <select
                 value={formData.type}
                 onChange={(e) => setFormData({ ...formData, type: e.target.value as any })}
-                className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30"
+                className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30"
               >
                 {Object.entries(TYPE_BADGES).map(([k, v]) => (
                   <option key={k} value={k}>{v.label}</option>
@@ -295,11 +295,11 @@ export const AdminNotificationsManager: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">Priority Level</label>
+              <label className="block text-xs font-semibold text-[#3E5248] mb-1">Priority Level</label>
               <select
                 value={formData.priority}
                 onChange={(e) => setFormData({ ...formData, priority: e.target.value as any })}
-                className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30"
+                className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30"
               >
                 <option value="urgent">Urgent (Red Toast & Sound)</option>
                 <option value="high">High Priority</option>
@@ -310,62 +310,62 @@ export const AdminNotificationsManager: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-stone-700 mb-1">Target Audience</label>
+            <label className="block text-xs font-semibold text-[#3E5248] mb-1">Target Audience</label>
             <input
               type="text"
               value={formData.targetUsers || ''}
               onChange={(e) => setFormData({ ...formData, targetUsers: e.target.value })}
               placeholder="All Registered Farmers or Tomato Growers"
-              className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-stone-700 mb-1">Notification Message / Advisory *</label>
+            <label className="block text-xs font-semibold text-[#3E5248] mb-1">Notification Message / Advisory *</label>
             <textarea
               required
               rows={4}
               value={formData.message || ''}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               placeholder="Detailed instructions for farmers, protective measures, emergency helplines..."
-              className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">Start Date</label>
+              <label className="block text-xs font-semibold text-[#3E5248] mb-1">Start Date</label>
               <input
                 type="date"
                 value={formData.startDate || ''}
                 onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">Expiry Date</label>
+              <label className="block text-xs font-semibold text-[#3E5248] mb-1">Expiry Date</label>
               <input
                 type="date"
                 value={formData.endDate || ''}
                 onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-600/30 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#059669]/30 focus:outline-none"
               />
             </div>
           </div>
 
-          <div className="flex items-center justify-end gap-3 pt-3 border-t border-stone-100">
+          <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#EFF4EF]">
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}
-              className="px-4 py-2 rounded-xl border border-stone-200 text-xs font-semibold text-stone-600 hover:bg-stone-50"
+              className="px-4 py-2 rounded-xl border border-[#E5EDE7] text-xs font-semibold text-[#5A6E64] hover:bg-[#F7FAF7]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-[#059669] hover:bg-[#064E3B] text-white text-xs font-bold shadow-sm transition disabled:opacity-50"
             >
               {saving ? 'Broadcasting...' : 'Send Alert Now'}
             </button>

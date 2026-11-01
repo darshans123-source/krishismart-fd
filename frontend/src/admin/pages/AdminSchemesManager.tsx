@@ -106,22 +106,22 @@ export const AdminSchemesManager: React.FC = () => {
   return (
     <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-200">
       {/* Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white rounded-3xl border border-stone-200 p-5 sm:p-6 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white rounded-2xl border border-[#E5EDE7] p-5 sm:p-6 shadow-2xs">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-extrabold text-stone-900 font-heading">Government Schemes & Subsidies</h2>
+            <h2 className="text-xl font-extrabold text-[#172B24] font-heading">Government Schemes & Subsidies</h2>
             <span className="px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-800 border border-purple-200 text-xs font-bold">
               {schemes.length} Schemes
             </span>
           </div>
-          <p className="text-xs text-stone-500 mt-1">
+          <p className="text-xs text-[#718078] mt-1">
             Publish central & state financial welfare programs, subsidies, and eligibility guidelines.
           </p>
         </div>
 
         <button
           onClick={handleOpenCreate}
-          className="px-4 py-2.5 rounded-2xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold flex items-center gap-2 transition-all shadow-xs cursor-pointer"
+          className="px-4 py-2.5 rounded-2xl bg-[#064E3B] hover:bg-[#064E3B] text-white text-xs font-bold flex items-center gap-2 transition-all shadow-xs cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           <span>Add New Scheme</span>
@@ -131,23 +131,23 @@ export const AdminSchemesManager: React.FC = () => {
       {/* Search & Filters */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#8A9A90] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search schemes, departments..."
-            className="w-full pl-9 pr-4 py-2.5 rounded-2xl bg-white border border-stone-200 text-xs focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+            className="w-full pl-9 pr-4 py-2.5 rounded-2xl bg-white border border-[#E5EDE7] text-xs focus:ring-2 focus:ring-[#10B981]/20 focus:border-[#10B981]"
           />
         </div>
 
-        <div className="flex items-center gap-1.5 p-1 bg-stone-100 rounded-2xl border border-stone-200 self-stretch sm:self-auto justify-center">
+        <div className="flex items-center gap-1.5 p-1 bg-[#EFF4EF] rounded-2xl border border-[#E5EDE7] self-stretch sm:self-auto justify-center">
           {['all', 'Open', 'Expiring Soon', 'Year-round'].map((st) => (
             <button
               key={st}
               onClick={() => setStatusFilter(st)}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                statusFilter === st ? 'bg-white text-stone-900 shadow-2xs font-bold' : 'text-stone-500 hover:text-stone-900'
+                statusFilter === st ? 'bg-white text-[#172B24] shadow-2xs font-bold' : 'text-[#718078] hover:text-[#172B24]'
               }`}
             >
               {st === 'all' ? 'All' : st}
@@ -157,10 +157,10 @@ export const AdminSchemesManager: React.FC = () => {
       </div>
 
       {/* Schemes Table */}
-      <div className="bg-white rounded-3xl border border-stone-200 shadow-2xs overflow-hidden">
+      <div className="bg-white rounded-2xl border border-[#E5EDE7] shadow-2xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-stone-50/70 border-b border-stone-200 text-stone-500 font-bold uppercase tracking-wider">
+            <thead className="bg-[#F7FAF7]/70 border-b border-[#E5EDE7] text-[#718078] font-bold uppercase tracking-wider">
               <tr>
                 <th className="py-3.5 px-4 sm:px-6">Scheme Name</th>
                 <th className="py-3.5 px-4">Department</th>
@@ -170,24 +170,24 @@ export const AdminSchemesManager: React.FC = () => {
                 <th className="py-3.5 px-4 sm:px-6 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-stone-100">
+            <tbody className="divide-y divide-[#EFF4EF]">
               {filteredSchemes.map((s) => (
                 <tr key={s.id} className="hover:bg-purple-50/20 transition-colors">
                   <td className="py-4 px-4 sm:px-6">
-                    <div className="font-extrabold text-stone-900 text-sm font-heading">{s.name}</div>
+                    <div className="font-extrabold text-[#172B24] text-sm font-heading">{s.name}</div>
                     <div className="text-[11px] text-purple-700 font-semibold">{s.shortName}</div>
                   </td>
 
-                  <td className="py-4 px-4 text-stone-600 max-w-xs">
+                  <td className="py-4 px-4 text-[#5A6E64] max-w-xs">
                     <div className="truncate">{s.department}</div>
                   </td>
 
-                  <td className="py-4 px-4 font-bold text-stone-800 max-w-xs">
+                  <td className="py-4 px-4 font-bold text-[#243A32] max-w-xs">
                     <div className="truncate">{s.financialBenefit}</div>
                   </td>
 
                   <td className="py-4 px-4">
-                    <span className="px-2 py-0.5 rounded-md bg-stone-100 border border-stone-200 font-medium text-stone-700">
+                    <span className="px-2 py-0.5 rounded-md bg-[#EFF4EF] border border-[#E5EDE7] font-medium text-[#3E5248]">
                       {s.category}
                     </span>
                   </td>
@@ -196,7 +196,7 @@ export const AdminSchemesManager: React.FC = () => {
                     <span
                       className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${
                         s.status === 'Open'
-                          ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                          ? 'bg-[#ECFDF5] text-[#064E3B] border-[#6EE7B7]'
                           : s.status === 'Expiring Soon'
                           ? 'bg-rose-50 text-rose-800 border-rose-300'
                           : 'bg-blue-50 text-blue-800 border-blue-300'
@@ -204,7 +204,7 @@ export const AdminSchemesManager: React.FC = () => {
                     >
                       {s.status}
                     </span>
-                    <div className="text-[10px] text-stone-400 mt-0.5">{s.deadline}</div>
+                    <div className="text-[10px] text-[#8A9A90] mt-0.5">{s.deadline}</div>
                   </td>
 
                   <td className="py-4 px-4 sm:px-6 text-right">
@@ -214,7 +214,7 @@ export const AdminSchemesManager: React.FC = () => {
                           href={s.officialUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="p-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 transition-colors"
+                          className="p-2 rounded-xl bg-[#EFF4EF] hover:bg-[#E5EDE7] text-[#3E5248] transition-colors"
                           title="Official Portal"
                         >
                           <ExternalLink className="w-4 h-4" />
@@ -229,7 +229,7 @@ export const AdminSchemesManager: React.FC = () => {
                       </button>
                       <button
                         onClick={() => setDeleteConfirmId(s.id)}
-                        className="p-2 rounded-xl hover:bg-rose-50 text-stone-400 hover:text-rose-600 transition-colors cursor-pointer"
+                        className="p-2 rounded-xl hover:bg-rose-50 text-[#8A9A90] hover:text-rose-600 transition-colors cursor-pointer"
                         title="Delete Scheme"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -254,35 +254,35 @@ export const AdminSchemesManager: React.FC = () => {
         >
           <form onSubmit={handleSave} className="space-y-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-stone-700">Scheme Full Official Name</label>
+              <label className="text-xs font-bold text-[#3E5248]">Scheme Full Official Name</label>
               <input
                 type="text"
                 value={editingScheme.name}
                 onChange={(e) => setEditingScheme({ ...editingScheme, name: e.target.value })}
                 placeholder="e.g. Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)"
                 required
-                className="w-full px-3.5 py-2 rounded-xl border border-stone-200 text-xs font-bold"
+                className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs font-bold"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-stone-700">Short Display Title</label>
+                <label className="text-xs font-bold text-[#3E5248]">Short Display Title</label>
                 <input
                   type="text"
                   value={editingScheme.shortName || ''}
                   onChange={(e) => setEditingScheme({ ...editingScheme, shortName: e.target.value })}
                   placeholder="PM-KISAN DBT"
-                  className="w-full px-3.5 py-2 rounded-xl border border-stone-200 text-xs"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-stone-700">Category</label>
+                <label className="text-xs font-bold text-[#3E5248]">Category</label>
                 <select
                   value={editingScheme.category}
                   onChange={(e) => setEditingScheme({ ...editingScheme, category: e.target.value })}
-                  className="w-full px-3.5 py-2 rounded-xl border border-stone-200 text-xs bg-white"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs bg-white"
                 >
                   <option value="Direct Income">Direct Income (DBT)</option>
                   <option value="Equipment & Solar">Equipment & Solar (PM-KUSUM / PMKSY)</option>
@@ -294,33 +294,33 @@ export const AdminSchemesManager: React.FC = () => {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-stone-700">Government Ministry / Department</label>
+              <label className="text-xs font-bold text-[#3E5248]">Government Ministry / Department</label>
               <input
                 type="text"
                 value={editingScheme.department}
                 onChange={(e) => setEditingScheme({ ...editingScheme, department: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl border border-stone-200 text-xs"
+                className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-stone-700">Financial Benefit Amount / Terms</label>
+              <label className="text-xs font-bold text-[#3E5248]">Financial Benefit Amount / Terms</label>
               <input
                 type="text"
                 value={editingScheme.financialBenefit}
                 onChange={(e) => setEditingScheme({ ...editingScheme, financialBenefit: e.target.value })}
                 placeholder="e.g. ₹6,000 / year in 3 direct bank transfers"
-                className="w-full px-3.5 py-2 rounded-xl border border-stone-200 text-xs font-bold text-emerald-800"
+                className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs font-bold text-[#064E3B]"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-stone-700">Status</label>
+                <label className="text-xs font-bold text-[#3E5248]">Status</label>
                 <select
                   value={editingScheme.status}
                   onChange={(e) => setEditingScheme({ ...editingScheme, status: e.target.value })}
-                  className="w-full px-3.5 py-2 rounded-xl border border-stone-200 text-xs bg-white"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs bg-white"
                 >
                   <option value="Open">Open</option>
                   <option value="Expiring Soon">Expiring Soon</option>
@@ -331,39 +331,39 @@ export const AdminSchemesManager: React.FC = () => {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-stone-700">Deadline Notice</label>
+                <label className="text-xs font-bold text-[#3E5248]">Deadline Notice</label>
                 <input
                   type="text"
                   value={editingScheme.deadline}
                   onChange={(e) => setEditingScheme({ ...editingScheme, deadline: e.target.value })}
                   placeholder="e.g. Sep 30, 2026 or Ongoing"
-                  className="w-full px-3.5 py-2 rounded-xl border border-stone-200 text-xs"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs"
                 />
               </div>
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-stone-700">Official Portal Link</label>
+              <label className="text-xs font-bold text-[#3E5248]">Official Portal Link</label>
               <input
                 type="text"
                 value={editingScheme.officialUrl || ''}
                 onChange={(e) => setEditingScheme({ ...editingScheme, officialUrl: e.target.value })}
                 placeholder="https://pmkisan.gov.in"
-                className="w-full px-3.5 py-2 rounded-xl border border-stone-200 text-xs font-mono"
+                className="w-full px-3.5 py-2 rounded-xl border border-[#E5EDE7] text-xs font-mono"
               />
             </div>
 
-            <div className="pt-4 flex justify-end gap-2 border-t border-stone-200">
+            <div className="pt-4 flex justify-end gap-2 border-t border-[#E5EDE7]">
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 rounded-xl border border-stone-300 text-stone-700 text-xs font-semibold hover:bg-stone-100"
+                className="px-4 py-2 rounded-xl border border-[#CBD8D0] text-[#3E5248] text-xs font-semibold hover:bg-[#EFF4EF]"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold shadow-xs cursor-pointer"
+                className="px-5 py-2 rounded-xl bg-[#064E3B] hover:bg-[#064E3B] text-white text-xs font-bold shadow-xs cursor-pointer"
               >
                 Save Scheme
               </button>

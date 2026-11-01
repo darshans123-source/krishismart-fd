@@ -173,11 +173,11 @@ export const FloatingAIChat: React.FC = () => {
       <div className="fixed bottom-16 lg:bottom-6 left-4 sm:left-6 z-40">
         <button
           onClick={() => setIsAIChatOpen(!isAIChatOpen)}
-          className="relative group flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-emerald-700 via-emerald-600 to-green-600 text-white shadow-xl shadow-emerald-700/30 hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-emerald-400/40"
+          className="relative group flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-[#064E3B] via-[#059669] to-green-600 text-white shadow-xl shadow-[#064E3B]/30 hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-[#34D399]/40"
         >
           <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-400"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6EE7B7] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#34D399]"></span>
           </span>
 
           <BrainCircuit className="w-5 h-5 animate-pulse" />
@@ -189,23 +189,23 @@ export const FloatingAIChat: React.FC = () => {
 
       {/* Floating Chat Modal */}
       {isAIChatOpen && (
-        <div className="fixed bottom-20 left-3 sm:left-6 z-50 w-[94vw] sm:w-[420px] h-[580px] max-h-[82vh] bg-white rounded-3xl shadow-2xl border border-slate-200/90 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-6 duration-200">
+        <div className="fixed bottom-20 left-3 sm:left-6 z-50 w-[94vw] sm:w-[420px] h-[580px] max-h-[82vh] bg-white rounded-2xl shadow-2xl border border-[#E5EDE7]/90 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-6 duration-200">
           {/* Header */}
-          <div className="p-4 bg-gradient-to-r from-emerald-800 to-emerald-700 text-white flex items-center justify-between border-b border-emerald-600/50">
+          <div className="p-4 bg-gradient-to-r from-[#064E3B] to-[#064E3B] text-white flex items-center justify-between border-b border-[#059669]/50">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
-                <Bot className="w-5 h-5 text-emerald-300" />
+                <Bot className="w-5 h-5 text-[#6EE7B7]" />
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
                   <h3 className="font-bold text-sm leading-tight font-heading">
                     KrishiSmart AI Assistant
                   </h3>
-                  <span className="px-1.5 py-0.2 bg-emerald-500/40 text-emerald-200 text-[9px] font-extrabold rounded-sm uppercase tracking-wider">
+                  <span className="px-1.5 py-0.2 bg-[#10B981]/40 text-[#A7F3D0] text-[9px] font-extrabold rounded-sm uppercase tracking-wider">
                     24/7 Live
                   </span>
                 </div>
-                <p className="text-[11px] text-emerald-200/80">
+                <p className="text-[11px] text-[#A7F3D0]/80">
                   Multilingual Agronomist & Market Intelligence
                 </p>
               </div>
@@ -220,35 +220,35 @@ export const FloatingAIChat: React.FC = () => {
           </div>
 
           {/* Chat Messages */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-3.5 bg-slate-50/50 text-xs">
+          <div className="flex-1 p-4 overflow-y-auto space-y-3.5 bg-[#F7FAF7]/50 text-xs">
             {messages.map((msg) => (
               <div
                 key={msg.id}
                 className={`flex gap-2.5 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {msg.sender === 'assistant' && (
-                  <div className="w-7 h-7 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 mt-0.5 border border-emerald-200">
+                  <div className="w-7 h-7 rounded-xl bg-[#D1FAE5] text-[#064E3B] flex items-center justify-center shrink-0 mt-0.5 border border-[#A7F3D0]">
                     <Bot className="w-4 h-4" />
                   </div>
                 )}
                 <div
                   className={`max-w-[82%] p-3.5 rounded-2xl leading-relaxed ${
                     msg.sender === 'user'
-                      ? 'bg-emerald-600 text-white rounded-br-xs shadow-sm font-medium'
-                      : 'bg-white border border-slate-200/90 text-slate-800 rounded-bl-xs shadow-xs whitespace-pre-line'
+                      ? 'bg-[#059669] text-white rounded-br-xs shadow-sm font-medium'
+                      : 'bg-white border border-[#E5EDE7]/90 text-[#243A32] rounded-bl-xs shadow-xs whitespace-pre-line'
                   }`}
                 >
                   {msg.text}
                   <div
                     className={`text-[9px] mt-1 text-right ${
-                      msg.sender === 'user' ? 'text-emerald-100/70' : 'text-slate-400'
+                      msg.sender === 'user' ? 'text-[#D1FAE5]/70' : 'text-[#8A9A90]'
                     }`}
                   >
                     {msg.timestamp}
                   </div>
                 </div>
                 {msg.sender === 'user' && (
-                  <div className="w-7 h-7 rounded-xl bg-slate-800 text-white flex items-center justify-center shrink-0 mt-0.5">
+                  <div className="w-7 h-7 rounded-xl bg-[#243A32] text-white flex items-center justify-center shrink-0 mt-0.5">
                     <UserIcon className="w-3.5 h-3.5" />
                   </div>
                 )}
@@ -256,23 +256,23 @@ export const FloatingAIChat: React.FC = () => {
             ))}
 
             {isTyping && (
-              <div className="flex items-center gap-2 text-slate-500 bg-white p-3 rounded-2xl border border-slate-200 max-w-[140px] shadow-xs">
-                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-bounce"></div>
-                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-bounce [animation-delay:0.2s]"></div>
-                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-bounce [animation-delay:0.4s]"></div>
-                <span className="text-[10px] font-semibold text-slate-400">Analyzing...</span>
+              <div className="flex items-center gap-2 text-[#718078] bg-white p-3 rounded-2xl border border-[#E5EDE7] max-w-[140px] shadow-xs">
+                <div className="w-2 h-2 rounded-full bg-[#10B981] animate-bounce"></div>
+                <div className="w-2 h-2 rounded-full bg-[#10B981] animate-bounce [animation-delay:0.2s]"></div>
+                <div className="w-2 h-2 rounded-full bg-[#10B981] animate-bounce [animation-delay:0.4s]"></div>
+                <span className="text-[10px] font-semibold text-[#8A9A90]">Analyzing...</span>
               </div>
             )}
             <div ref={chatBottomRef} />
           </div>
 
           {/* Quick Prompts Carousel */}
-          <div className="px-3 py-2 bg-slate-100/70 border-t border-slate-200/80 overflow-x-auto flex gap-1.5 no-scrollbar">
+          <div className="px-3 py-2 bg-[#EFF4EF]/70 border-t border-[#E5EDE7]/80 overflow-x-auto flex gap-1.5 no-scrollbar">
             {currentSuggestions.slice(0, 3).map((prompt, i) => (
               <button
                 key={i}
                 onClick={() => handleSend(prompt)}
-                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-white hover:bg-emerald-50 text-[10px] font-medium text-slate-700 hover:text-emerald-800 border border-slate-200 transition-colors shadow-2xs shrink-0"
+                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-white hover:bg-[#ECFDF5] text-[10px] font-medium text-[#3E5248] hover:text-[#064E3B] border border-[#E5EDE7] transition-colors shadow-2xs shrink-0"
               >
                 {prompt}
               </button>
@@ -280,13 +280,13 @@ export const FloatingAIChat: React.FC = () => {
           </div>
 
           {/* Input Footer */}
-          <div className="p-3 bg-white border-t border-slate-200 flex items-center gap-2">
+          <div className="p-3 bg-white border-t border-[#E5EDE7] flex items-center gap-2">
             <button
               onClick={handleVoiceToggle}
               className={`p-2.5 rounded-xl transition-all ${
                 isListening
                   ? 'bg-rose-500 text-white animate-pulse'
-                  : 'bg-slate-100 text-slate-600 hover:bg-emerald-100 hover:text-emerald-800'
+                  : 'bg-[#EFF4EF] text-[#5A6E64] hover:bg-[#D1FAE5] hover:text-[#064E3B]'
               }`}
               title="Voice Input (English, Kannada, Hindi)"
             >
@@ -305,13 +305,13 @@ export const FloatingAIChat: React.FC = () => {
                   ? "कृषि प्रश्न पूछें..."
                   : "Ask about crops, pests, prices, schemes..."
               }
-              className="flex-1 bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all placeholder:text-slate-400"
+              className="flex-1 bg-[#EFF4EF] border border-[#E5EDE7] rounded-xl px-3.5 py-2.5 text-xs text-[#243A32] focus:outline-hidden focus:ring-2 focus:ring-[#10B981] focus:bg-white transition-all placeholder:text-[#8A9A90]"
             />
 
             <button
               onClick={() => handleSend()}
               disabled={!input.trim()}
-              className="p-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-40 text-white shadow-md shadow-emerald-600/20 transition-all shrink-0"
+              className="p-2.5 rounded-xl bg-[#059669] hover:bg-[#064E3B] disabled:opacity-40 text-white shadow-md shadow-[#059669]/20 transition-all shrink-0"
             >
               <Send className="w-4 h-4" />
             </button>

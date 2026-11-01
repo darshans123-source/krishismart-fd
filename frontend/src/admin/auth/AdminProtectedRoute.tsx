@@ -12,10 +12,10 @@ export const AdminProtectedRoute: React.FC<AdminProtectedRouteProps> = ({ childr
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#fbfcf9] text-stone-800">
-        <div className="p-4 rounded-3xl bg-emerald-50 border border-emerald-200 shadow-sm flex flex-col items-center gap-3">
-          <Sprout className="w-8 h-8 text-emerald-600 animate-bounce" />
-          <div className="text-xs font-bold text-emerald-800 tracking-wide">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#F7FAF7] text-[#243A32]">
+        <div className="p-4 rounded-2xl bg-[#ECFDF5] border border-[#A7F3D0] shadow-sm flex flex-col items-center gap-3">
+          <Sprout className="w-8 h-8 text-[#059669] animate-bounce" />
+          <div className="text-xs font-bold text-[#064E3B] tracking-wide">
             Verifying Admin Session...
           </div>
         </div>

@@ -127,7 +127,7 @@ export const INITIAL_CROPS: Crop[] = [
     projectedYieldKg: 95000,
     expectedRevenue: 332500,
     nextTask: 'Potash booster next week',
-    imageUrl: 'https://images.unsplash.com/photo-1598112972019-91e30f406976?w=600&auto=format&fit=crop&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=600&auto=format&fit=crop&q=80',
     timeline: [
       { id: 'seed', name: 'Two-bud Sett Planting', status: 'completed', progress: 100, estimatedDate: 'Feb 15', notes: 'Treated with Bavistin & Carbendazim.', tasks: ['Furrowing', 'Sett treatment'] },
       { id: 'germination', name: 'Sprouting & Formative', status: 'completed', progress: 100, estimatedDate: 'Mar 25', notes: '92% germination rate recorded.', tasks: ['Gap filling', 'First earthing-up'] },
