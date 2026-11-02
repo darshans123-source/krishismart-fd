@@ -1,0 +1,72 @@
+// Centralized crop image mapping, keyed by unique crop slug.
+// Sources: Wikimedia Commons thumbnails found via Wikipedia/Commons pages (see PR body).
+// Crops with no verified photograph here return undefined -> the page shows a
+// per-crop placeholder tile (initial + category colour), never a generic field photo.
+export const CROP_IMAGE_BY_SLUG: Record<string, string> = {
+  "paddy": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Paddy_field_in_Sammanthurai%2C_Ampara%2C_Sri_Lanka.JPG/250px-Paddy_field_in_Sammanthurai%2C_Ampara%2C_Sri_Lanka.JPG",
+  "wheat": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Vehn%C3%A4pelto_6.jpg/250px-Vehn%C3%A4pelto_6.jpg",
+  "maize": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/ZeaMays.jpg/250px-ZeaMays.jpg",
+  "jowar": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Sorghum_bicolor03.jpg/250px-Sorghum_bicolor03.jpg",
+  "ragi": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Finger_millet_3_11-21-02.jpg/250px-Finger_millet_3_11-21-02.jpg",
+  "barley": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Barley_%28Hordeum_vulgare%29_-_United_States_National_Arboretum_-_24_May_2009.jpg/250px-Barley_%28Hordeum_vulgare%29_-_United_States_National_Arboretum_-_24_May_2009.jpg",
+  "foxtail-millet": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Foxtail_millet_%28Setaria_italica%29.jpg/220px-Foxtail_millet_%28Setaria_italica%29.jpg",
+  "bengal-gram": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Chickpeas_Plant.jpg/250px-Chickpeas_Plant.jpg",
+  "chickpea": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Chickpea_pods.jpg/250px-Chickpea_pods.jpg",
+  "cowpea": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Black-eyed_pea_pods_on_plant_in_Hong_Kong.jpg/250px-Black-eyed_pea_pods_on_plant_in_Hong_Kong.jpg",
+  "field-peas": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/Blauwschokker_Kapucijner_rijserwt_bloem_Pisum_sativum.jpg/250px-Blauwschokker_Kapucijner_rijserwt_bloem_Pisum_sativum.jpg",
+  "soybean": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Soybean.USDA.jpg/250px-Soybean.USDA.jpg",
+  "sunflower": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Asteraceae_Helianthus_annuus._1.jpg/500px-Asteraceae_Helianthus_annuus._1.jpg",
+  "castor": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Ricinus_March_2010-1.jpg/250px-Ricinus_March_2010-1.jpg",
+  "safflower": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/Safflower.jpg/250px-Safflower.jpg",
+  "linseed": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Flax_flowers.jpg/500px-Flax_flowers.jpg",
+  "cotton": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/Cotton_boll_opening_following_defoliation_during_the_2010_crop_year._%2824821524380%29.jpg/330px-Cotton_boll_opening_following_defoliation_during_the_2010_crop_year._%2824821524380%29.jpg",
+  "sugarcane": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Cut_sugarcane.jpg/330px-Cut_sugarcane.jpg",
+  "tobacco": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Patch_of_Tobacco_%28Nicotiana_tabacum_%29_in_a_field_in_Intercourse%2C_Pennsylvania..jpg/250px-Patch_of_Tobacco_%28Nicotiana_tabacum_%29_in_a_field_in_Intercourse%2C_Pennsylvania..jpg",
+  "jute": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/Jute_Field_Bangladesh_%287749587518%29.jpg/250px-Jute_Field_Bangladesh_%287749587518%29.jpg",
+  "tomato": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Tomates_cerises_Luc_Viatour.jpg/250px-Tomates_cerises_Luc_Viatour.jpg",
+  "potato": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Patates.jpg/250px-Patates.jpg",
+  "onion": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/White_onions_for_sale_in_supermarket.JPG/250px-White_onions_for_sale_in_supermarket.JPG",
+  "brinjal": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Solanum_melongena_26_08_2012_%281%29.JPG/250px-Solanum_melongena_26_08_2012_%281%29.JPG",
+  "chilli": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/32/Thai_peppers.jpg/250px-Thai_peppers.jpg",
+  "capsicum": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Green-Yellow-Red-Pepper-2009.jpg/250px-Green-Yellow-Red-Pepper-2009.jpg",
+  "cabbage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Cabbage.jpg/250px-Cabbage.jpg",
+  "cauliflower": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Chou-fleur_02.jpg/250px-Chou-fleur_02.jpg",
+  "carrot": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/Vegetable-Carrot-Bundle-wStalks.jpg/250px-Vegetable-Carrot-Bundle-wStalks.jpg",
+  "okra": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Hong_Kong_Okra_Aug_25_2012.JPG/250px-Hong_Kong_Okra_Aug_25_2012.JPG",
+  "cucumber": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/ARS_cucumber.jpg/250px-ARS_cucumber.jpg",
+  "pumpkin": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/FrenchMarketPumpkinsB.jpg/500px-FrenchMarketPumpkinsB.jpg",
+  "bottle-gourd": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/Courge_encore_verte.jpg/250px-Courge_encore_verte.jpg",
+  "bitter-gourd": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/Bitter_gourd_%28Momordica_charantia%29.jpg/330px-Bitter_gourd_%28Momordica_charantia%29.jpg",
+  "beans": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Heaps_of_beans.jpg/330px-Heaps_of_beans.jpg",
+  "peas": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Peas_in_pods_-_Studio.jpg/250px-Peas_in_pods_-_Studio.jpg",
+  "spinach": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Spinach_leaves.jpg/250px-Spinach_leaves.jpg",
+  "mango": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Mangos_-_single_and_halved.jpg/500px-Mangos_-_single_and_halved.jpg",
+  "banana": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Bananavarieties.jpg/250px-Bananavarieties.jpg",
+  "papaya": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Papaya.jpg/250px-Papaya.jpg",
+  "guava": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/Guava_pink_fruit.jpg/250px-Guava_pink_fruit.jpg",
+  "pomegranate": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Pomegranate_fruit_-_whole_and_piece_with_arils.jpg/250px-Pomegranate_fruit_-_whole_and_piece_with_arils.jpg",
+  "sweet-lime": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/%28Citrus_limetta%29_Mosambi_at_a_market_in_Seethammadhara.jpg/250px-%28Citrus_limetta%29_Mosambi_at_a_market_in_Seethammadhara.jpg",
+  "watermelon": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Watermelon_cross_BNC.jpg/250px-Watermelon_cross_BNC.jpg",
+  "apple": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/120px-Red_Apple.jpg",
+  "sapota": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Sapodilla_Malay_with_seeds.jpg/250px-Sapodilla_Malay_with_seeds.jpg",
+  "jackfruit": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Jackfruit_hanging.JPG/120px-Jackfruit_hanging.JPG",
+  "garlic": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Opened_garlic_bulb_with_garlic_clove.jpg/250px-Opened_garlic_bulb_with_garlic_clove.jpg",
+  "coriander": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/A_scene_of_Coriander_leaves.JPG/250px-A_scene_of_Coriander_leaves.JPG",
+  "cardamom": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Elettaria_cardamomum_Capsules_and_seeds.jpg/500px-Elettaria_cardamomum_Capsules_and_seeds.jpg",
+  "coffee": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Starr_070308-5472_Coffea_arabica.jpg/250px-Starr_070308-5472_Coffea_arabica.jpg",
+  "tea": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Csinensis.jpg/250px-Csinensis.jpg",
+  "rubber": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Tapped_rubber_tree.jpg/250px-Tapped_rubber_tree.jpg",
+  "cashew": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Cashew_apples.jpg/250px-Cashew_apples.jpg",
+  "marigold": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Tagetes_erecta_chendumalli_chedi.jpg/250px-Tagetes_erecta_chendumalli_chedi.jpg",
+  "jasmine": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Jasmine0001.JPG/250px-Jasmine0001.JPG",
+  "rose": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Small_Red_Rose.JPG/250px-Small_Red_Rose.JPG",
+  "chrysanthemum": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Chrysanthemumclose.jpg/250px-Chrysanthemumclose.jpg",
+};
+
+export function cropSlug(name: string): string {
+  return name.toLowerCase().replace(/\s+/g, '-');
+}
+
+export function cropImageUrl(name: string): string | undefined {
+  return CROP_IMAGE_BY_SLUG[cropSlug(name)];
+}
