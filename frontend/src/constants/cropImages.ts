@@ -52,6 +52,7 @@ export const CROP_IMAGE_BY_SLUG: Record<string, string> = {
   "sapota": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Sapodilla_Malay_with_seeds.jpg/250px-Sapodilla_Malay_with_seeds.jpg",
   "jackfruit": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Jackfruit_hanging.JPG/120px-Jackfruit_hanging.JPG",
   "garlic": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Opened_garlic_bulb_with_garlic_clove.jpg/250px-Opened_garlic_bulb_with_garlic_clove.jpg",
+  "cumin": "/assets/crops/cumin.svg",
   "coriander": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/A_scene_of_Coriander_leaves.JPG/250px-A_scene_of_Coriander_leaves.JPG",
   "cardamom": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Elettaria_cardamomum_Capsules_and_seeds.jpg/500px-Elettaria_cardamomum_Capsules_and_seeds.jpg",
   "coffee": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Starr_070308-5472_Coffea_arabica.jpg/250px-Starr_070308-5472_Coffea_arabica.jpg",
