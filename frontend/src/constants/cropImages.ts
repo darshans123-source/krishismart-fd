@@ -70,6 +70,9 @@ export const CROP_IMAGE_BY_SLUG: Record<string, string> = {
   "black-pepper": "/assets/crops/black-pepper.svg",
   "clove": "/assets/crops/clove.svg",
   "coconut": "/assets/crops/coconut.svg",
+  "gerbera": "/assets/crops/gerbera.svg",
+  "ginger": "/assets/crops/ginger.svg",
+  "grapes": "/assets/crops/grapes.svg",
 };
 
 export function cropSlug(name: string): string {
