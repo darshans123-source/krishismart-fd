@@ -62,7 +62,7 @@ export const SmartFarmIoTPage: React.FC = () => {
               <span>In-Field Wireless Farm Telemetry</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-extrabold font-heading text-white tracking-tight">
-              IoT Smart Farming
+              {t('iotTitle')}
             </h1>
             <p className="text-xs sm:text-base text-[#E5EDE7] mt-1 max-w-2xl leading-relaxed">
               Real-time monitoring of soil, weather, water tanks, and irrigation pumps across your fields.

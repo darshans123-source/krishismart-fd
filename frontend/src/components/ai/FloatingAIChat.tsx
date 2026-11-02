@@ -263,13 +263,7 @@ export const FloatingAIChat: React.FC = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-              placeholder={
-                language === 'kn'
-                  ? "ಕೃಷಿ ಪ್ರಶ್ನೆ ಕೇಳಿ..."
-                  : language === 'hi'
-                  ? "कृषि प्रश्न पूछें..."
-                  : "Ask about crops, pests, prices, schemes..."
-              }
+              placeholder={t('askQuestionPlaceholder')}
               className="flex-1 bg-[#EFF4EF] border border-[#E5EDE7] rounded-xl px-3.5 py-2.5 text-xs text-[#243A32] focus:outline-hidden focus:ring-2 focus:ring-[#10B981] focus:bg-white/75 backdrop-blur-xl transition-all placeholder:text-[#8A9A90]"
             />
 

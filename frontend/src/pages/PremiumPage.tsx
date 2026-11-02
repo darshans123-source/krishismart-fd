@@ -84,7 +84,7 @@ export const PremiumPage: React.FC = () => {
           <span>KrishiSmart Pro Memberships</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-[#172B24] font-heading">
-          Unlock the Full Power of Intelligent Farming
+          {t('premiumHero')}
         </h1>
         <p className="text-xs sm:text-sm text-[#718078]">
           Equip your agricultural operations with predictive market intelligence, automated drip controls, and AI agronomy.

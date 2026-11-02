@@ -64,7 +64,7 @@ export const DroneSprayPage: React.FC = () => {
               <span>Agricultural Aviation & Precision Spraying</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-extrabold font-heading text-white tracking-tight">
-              Smart Drone Planning
+              {t('droneTitle')}
             </h1>
             <p className="text-xs sm:text-base text-[#E5EDE7] mt-1 max-w-2xl leading-relaxed">
               Plan efficient field coverage with drone-based farm monitoring and spraying.

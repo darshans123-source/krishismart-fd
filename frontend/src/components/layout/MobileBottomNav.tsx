@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import {
   Home,
   Sprout,
@@ -17,14 +18,15 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
   currentTab,
   setCurrentTab
 }) => {
+  const { t } = useLanguage();
   if (currentTab === 'landing') return null;
 
   const navItems = [
-    { id: 'dashboard', label: 'Home', icon: Home },
-    { id: 'myFarms', label: 'Farm', icon: Sprout },
-    { id: 'aiHub', label: 'AI', icon: BrainCircuit },
-    { id: 'market', label: 'Market', icon: TrendingUp },
-    { id: 'profile', label: 'Profile', icon: User }
+    { id: 'dashboard', labelKey: 'navDashboard', icon: Home },
+    { id: 'myFarms', labelKey: 'navMyFarm', icon: Sprout },
+    { id: 'aiHub', labelKey: 'navAiAssistant', icon: BrainCircuit },
+    { id: 'market', labelKey: 'navMandiPrices', icon: TrendingUp },
+    { id: 'profile', labelKey: 'profileTitle', icon: User }
   ];
 
   return (
@@ -43,7 +45,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
             }`}
           >
             <Icon className={`w-5 h-5 ${isActive ? 'text-[#064E3B]' : 'text-[#718078]'}`} />
-            <span className="text-[11px] mt-1 font-semibold tracking-tight">{item.label}</span>
+            <span className="text-[11px] mt-1 font-semibold tracking-tight">{t(item.labelKey)}</span>
           </button>
         );
       })}

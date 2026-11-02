@@ -31,6 +31,7 @@ import {
   LogOut
 } from 'lucide-react';
 import { useFarmData } from '../../context/FarmDataContext';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface SidebarProps {
   currentTab: string;
@@ -45,7 +46,7 @@ interface SidebarProps {
 
 type NavItem = {
   id: string;
-  label: string;
+  labelKey: string;
   icon: React.ComponentType<{ className?: string }>;
   tab?: string;
   action?: 'notifications' | 'admin';
@@ -73,47 +74,47 @@ type NavItem = {
 */
 const NAV_GROUPS: { group: string; items: NavItem[] }[] = [
   {
-    group: 'MAIN',
+    group: 'navMain',
     items: [
-      { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, tab: 'dashboard' },
-      { id: 'myFarms', label: 'My Farm', icon: Sprout, tab: 'myFarms' },
-      { id: 'crops', label: 'Crop Management', icon: Wheat, tab: 'crops' },
-      { id: 'cropHealth', label: 'Crop Health', icon: HeartPulse, tab: 'aiHub' },
+      { id: 'dashboard', labelKey: 'navDashboard', icon: LayoutDashboard, tab: 'dashboard' },
+      { id: 'myFarms', labelKey: 'navMyFarm', icon: Sprout, tab: 'myFarms' },
+      { id: 'crops', labelKey: 'navCropManagement', icon: Wheat, tab: 'crops' },
+      { id: 'cropHealth', labelKey: 'navCropHealth', icon: HeartPulse, tab: 'aiHub' },
     ]
   },
   {
-    group: 'SMART FARMING',
+    group: 'navSmartFarming',
     items: [
-      { id: 'aiCropDoctor', label: 'AI Crop Doctor', icon: ScanSearch, tab: 'aiHub' },
-      { id: 'weather', label: 'Weather', icon: CloudSun, tab: 'weather' },
-      { id: 'soilHealth', label: 'Soil Health', icon: FlaskConical, tab: 'aiHub' },
-      { id: 'irrigation', label: 'Irrigation', icon: Droplets, tab: 'pump' },
-      { id: 'pestDetection', label: 'Pest Detection', icon: Bug, tab: 'aiHub' },
-      { id: 'drone', label: 'Drone Monitoring', icon: Plane, tab: 'drone' },
-      { id: 'iot', label: 'IoT Devices', icon: Cpu, tab: 'iot' },
+      { id: 'aiCropDoctor', labelKey: 'navAiCropDoctor', icon: ScanSearch, tab: 'aiHub' },
+      { id: 'weather', labelKey: 'navWeather', icon: CloudSun, tab: 'weather' },
+      { id: 'soilHealth', labelKey: 'navSoilHealth', icon: FlaskConical, tab: 'aiHub' },
+      { id: 'irrigation', labelKey: 'navIrrigation', icon: Droplets, tab: 'pump' },
+      { id: 'pestDetection', labelKey: 'navPestDetection', icon: Bug, tab: 'aiHub' },
+      { id: 'drone', labelKey: 'navDroneMonitoring', icon: Plane, tab: 'drone' },
+      { id: 'iot', labelKey: 'navIotDevices', icon: Cpu, tab: 'iot' },
     ]
   },
   {
-    group: 'MARKET & FINANCE',
+    group: 'navMarketFinance',
     items: [
-      { id: 'mandiPrices', label: 'Mandi Prices', icon: Store, tab: 'market' },
-      { id: 'marketInsights', label: 'Market Insights', icon: TrendingUp, tab: 'krishiBhavishya' },
-      { id: 'govtSchemes', label: 'Government Schemes', icon: Landmark, tab: 'govtSchemes' },
-      { id: 'farmLoans', label: 'Farm Loans', icon: Banknote, tab: 'finance' },
-      { id: 'insurance', label: 'Insurance', icon: Umbrella, tab: 'finance' },
-      { id: 'marketplace', label: 'Marketplace', icon: ShoppingBag, tab: 'store' },
-      { id: 'premium', label: 'Premium', icon: Crown, tab: 'premium' },
+      { id: 'mandiPrices', labelKey: 'navMandiPrices', icon: Store, tab: 'market' },
+      { id: 'marketInsights', labelKey: 'navMarketInsights', icon: TrendingUp, tab: 'krishiBhavishya' },
+      { id: 'govtSchemes', labelKey: 'navGovtSchemes', icon: Landmark, tab: 'govtSchemes' },
+      { id: 'farmLoans', labelKey: 'navFarmLoans', icon: Banknote, tab: 'finance' },
+      { id: 'insurance', labelKey: 'navInsurance', icon: Umbrella, tab: 'finance' },
+      { id: 'marketplace', labelKey: 'navMarketplace', icon: ShoppingBag, tab: 'store' },
+      { id: 'premium', labelKey: 'navPremium', icon: Crown, tab: 'premium' },
     ]
   },
   {
-    group: 'TOOLS',
+    group: 'navTools',
     items: [
-      { id: 'aiAssistant', label: 'AI Farming Assistant', icon: BrainCircuit, tab: 'aiHub' },
-      { id: 'reports', label: 'Reports & Analytics', icon: BarChart3, tab: 'krishiBhavishya' },
-      { id: 'notifications', label: 'Notifications', icon: Bell, action: 'notifications' },
-      { id: 'help', label: 'Help & Support', icon: LifeBuoy, tab: 'profile' },
-      { id: 'rewards', label: 'Rewards & Journey', icon: Flame, tab: 'journey' },
-      { id: 'admin', label: 'Admin Dashboard', icon: ShieldCheck, action: 'admin' },
+      { id: 'aiAssistant', labelKey: 'navAiAssistant', icon: BrainCircuit, tab: 'aiHub' },
+      { id: 'reports', labelKey: 'navReportsAnalytics', icon: BarChart3, tab: 'krishiBhavishya' },
+      { id: 'notifications', labelKey: 'navNotifications', icon: Bell, action: 'notifications' },
+      { id: 'help', labelKey: 'navHelpSupport', icon: LifeBuoy, tab: 'profile' },
+      { id: 'rewards', labelKey: 'navRewardsJourney', icon: Flame, tab: 'journey' },
+      { id: 'admin', labelKey: 'navAdminDashboard', icon: ShieldCheck, action: 'admin' },
     ]
   }
 ];
@@ -148,6 +149,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onOpenNotifications
 }) => {
   const { user, crops, tasks, isProUnlocked, logout } = useFarmData();
+  const { t } = useLanguage();
 
   const pendingTasksCount = tasks.filter((task) => !task.completed).length;
   const [selectedId, setSelectedId] = useState<string>(
@@ -218,7 +220,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <div className="font-extrabold text-base text-[#172B24] font-heading tracking-tight">
               KRISHISMART <span className="text-[#065F46]">AI</span>
             </div>
-            <p className="text-xs text-[#718078]">Smart Agriculture for Farmers</p>
+            <p className="text-xs text-[#718078]">{t('smartAgriculture')}</p>
           </div>
         </div>
       )}
@@ -250,7 +252,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   aria-expanded={isOpen}
                   className="w-full flex items-center justify-between px-3 py-1 text-[11px] font-bold tracking-[0.12em] uppercase text-[#718078] hover:text-[#065F46] transition-colors"
                 >
-                  <span>{sec.group}</span>
+                  <span>{t(sec.group)}</span>
                   <ChevronDown
                     className={`w-3.5 h-3.5 transition-transform duration-200 ${isOpen ? '' : '-rotate-90'}`}
                   />
@@ -267,8 +269,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         key={item.id}
                         type="button"
                         onClick={() => handleSelect(item)}
-                        title={item.label}
-                        aria-label={item.label}
+                        title={t(item.labelKey)}
+                        aria-label={t(item.labelKey)}
                         aria-current={isActive ? 'page' : undefined}
                         className={`w-full flex items-center ${isCollapsed ? 'justify-center px-0' : 'justify-between px-2.5'} py-2.5 rounded-xl text-sm font-semibold transition-all duration-150 group ${
                           isActive
@@ -286,7 +288,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                           >
                             <Icon className="w-[18px] h-[18px]" />
                           </span>
-                          <span className={`truncate ${isCollapsed ? 'hidden' : ''}`}>{item.label}</span>
+                          <span className={`truncate ${isCollapsed ? 'hidden' : ''}`}>{t(item.labelKey)}</span>
                         </span>
                         {badge !== undefined && !isCollapsed && (
                           <span
@@ -311,9 +313,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {isCollapsed ? (
         <div className="mt-6 pt-4 border-t border-[#E5EDE7] flex flex-col items-center gap-2">
           <button
-            onClick={() => handleSelect({ id: 'help', label: 'Profile', icon: Settings, tab: 'profile' })}
+            onClick={() => handleSelect({ id: 'help', labelKey: 'profileTitle', icon: Settings, tab: 'profile' })}
             title={displayName}
-            aria-label={`${displayName}, Farm Manager, open profile`}
+            aria-label={`${displayName}, ${t('farmManager')}, open profile`}
             className="w-11 h-11 rounded-full bg-[#ECFDF5] text-[#065F46] font-bold flex items-center justify-center overflow-hidden hover:ring-2 hover:ring-[#059669] transition-all"
           >
             {user?.avatarUrl ? (
@@ -324,8 +326,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </button>
           <button
             onClick={handleLogout}
-            title="Logout"
-            aria-label="Logout"
+            title={t('logout')}
+            aria-label={t('logout')}
             className="w-9 h-9 rounded-xl text-[#718078] hover:bg-[#ECFDF5] hover:text-[#065F46] flex items-center justify-center transition-all"
           >
             <LogOut className="w-4 h-4" />
@@ -335,7 +337,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="mt-6 pt-4 border-t border-[#E5EDE7] space-y-3">
           <button
             type="button"
-            onClick={() => handleSelect({ id: 'help', label: 'Profile', icon: Settings, tab: 'profile' })}
+            onClick={() => handleSelect({ id: 'help', labelKey: 'profileTitle', icon: Settings, tab: 'profile' })}
             title="Open profile"
             className="w-full flex items-center gap-3 p-2.5 rounded-2xl bg-[#F3F6F4] hover:bg-[#ECFDF5] transition-colors text-left"
           >
@@ -348,7 +350,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </span>
             <span className="min-w-0 flex-1">
               <span className="block truncate text-sm font-bold text-[#172B24]">{displayName}</span>
-              <span className="block text-xs text-[#718078]">Farm Manager</span>
+              <span className="block text-xs text-[#718078]">{t('farmManager')}</span>
               <span className="block text-[11px] text-[#718078] mt-0.5">
                 {user?.streakDays || 1} day streak · {user?.xp || 0} XP · {pendingTasksCount} tasks pending
               </span>
@@ -357,11 +359,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <div className="flex gap-2">
             <button
               type="button"
-              onClick={() => handleSelect({ id: 'help', label: 'Profile', icon: Settings, tab: 'profile' })}
+              onClick={() => handleSelect({ id: 'help', labelKey: 'profileTitle', icon: Settings, tab: 'profile' })}
               className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold text-[#3E5248] bg-[#F3F6F4] hover:bg-[#ECFDF5] hover:text-[#065F46] transition-colors"
             >
               <Settings className="w-4 h-4" />
-              Settings
+              {t('settings')}
             </button>
             <button
               type="button"
@@ -369,7 +371,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold text-[#3E5248] bg-[#F3F6F4] hover:bg-[#ECFDF5] hover:text-[#065F46] transition-colors"
             >
               <LogOut className="w-4 h-4" />
-              Logout
+              {t('logout')}
             </button>
           </div>
           {isProUnlocked && (
