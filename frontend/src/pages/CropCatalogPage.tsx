@@ -2,7 +2,8 @@ import React, { useMemo, useState } from 'react';
 import { Search, Plus, Eye, X } from 'lucide-react';
 import { useFarmData } from '../context/FarmDataContext';
 import { useLanguage } from '../context/LanguageContext';
-import { CROP_CATALOG, CROP_CATEGORIES, CROP_STATES, CROP_SOILS, FALLBACK_CROP_IMAGE, CatalogCrop } from '../constants/cropCatalog';
+import { CROP_CATALOG, CROP_CATEGORIES, CROP_STATES, CROP_SOILS, CatalogCrop } from '../constants/cropCatalog';
+import { cropImageUrl } from '../constants/cropImages';
 
 interface CropCatalogPageProps {
   onViewMyFarm?: () => void;
@@ -18,6 +19,25 @@ const CATEGORY_BADGE: Record<string, string> = {
   'Spices & Plantation': 'bg-[#FEE2E2] text-[#991B1B]',
   'Flowers': 'bg-[#F5D0FE] text-[#86198F]'
 };
+
+function CropCardImage({ crop, alt, className }: { crop: CatalogCrop; alt: string; className: string }) {
+  const [failed, setFailed] = useState(false);
+  const url = cropImageUrl(crop.name);
+  if (!url || failed) {
+    return (
+      <div className={`${className} flex flex-col items-center justify-center gap-1 bg-[#ECFDF5] text-[#065F46]`} role="img" aria-label={alt}>
+        <span className="text-3xl font-extrabold font-heading">{alt.charAt(0)}</span>
+        <span className="text-[10px] font-bold px-2 text-center leading-tight">{alt}</span>
+        <span className="text-[10px] text-[#718078]">Photo coming soon</span>
+      </div>
+    );
+  }
+  return (
+    <div className={`${className} overflow-hidden`}>
+      <img src={url} alt={alt} loading="lazy" onError={() => setFailed(true)} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+    </div>
+  );
+}
 
 export const CropCatalogPage: React.FC<CropCatalogPageProps> = ({ onViewMyFarm }) => {
   const { farms, addCrop } = useFarmData();
@@ -167,14 +187,8 @@ export const CropCatalogPage: React.FC<CropCatalogPageProps> = ({ onViewMyFarm }
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
           {filtered.map((crop) => (
-            <article key={crop.id} className="bg-white rounded-2xl border border-[#E5EDE7] shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all overflow-hidden flex flex-col">
-              <img
-                src={crop.image}
-                alt={crop.name}
-                loading="lazy"
-                onError={(e) => { const img = e.currentTarget; if (img.src !== FALLBACK_CROP_IMAGE) img.src = FALLBACK_CROP_IMAGE; }}
-                className="w-full h-32 object-cover"
-              />
+            <article key={crop.id} className="group bg-white rounded-2xl border border-[#E5EDE7] shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all overflow-hidden flex flex-col">
+              <CropCardImage crop={crop} alt={displayName(crop)} className="w-full h-36" />
               <div className="p-3.5 flex-1 flex flex-col gap-1.5">
                 <span className={`self-start text-[10px] font-bold px-2 py-0.5 rounded-full ${CATEGORY_BADGE[crop.category] || 'bg-[#ECFDF5] text-[#065F46]'}`}>{crop.category}</span>
                 <h3 className="font-bold text-sm text-[#172B24] leading-tight">{displayName(crop)}</h3>
@@ -201,7 +215,7 @@ export const CropCatalogPage: React.FC<CropCatalogPageProps> = ({ onViewMyFarm }
       {selected && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/60 backdrop-blur-xs" onClick={() => setSelected(null)}>
           <div className="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            <img src={selected.image} alt={selected.name} onError={(e) => { const img = e.currentTarget; if (img.src !== FALLBACK_CROP_IMAGE) img.src = FALLBACK_CROP_IMAGE; }} className="w-full h-48 object-cover" />
+            <CropCardImage crop={selected} alt={displayName(selected)} className="w-full h-48" />
             <div className="p-6 space-y-3 text-sm">
               <div className="flex items-start justify-between gap-3">
                 <div>
