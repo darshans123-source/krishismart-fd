@@ -153,6 +153,7 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
               collapsed={isSidebarCollapsed}
               onToggleCollapse={toggleSidebarCollapsed}
               onNavigateAdmin={onNavigateAdmin}
+              onOpenNotifications={() => setIsNotificationsOpen(true)}
             />
           </div>
         )}
@@ -177,6 +178,7 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
               isMobile={true}
               onCloseMobile={() => setIsMobileSidebarOpen(false)}
               onNavigateAdmin={onNavigateAdmin}
+              onOpenNotifications={() => setIsNotificationsOpen(true)}
             />
           </div>
           <div className="flex-1" onClick={() => setIsMobileSidebarOpen(false)} />
