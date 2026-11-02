@@ -7,6 +7,7 @@ import {
   WeatherData,
   MandiItem,
   GovernmentScheme,
+  SchemeApplication,
   FinancialSummary,
   FinancialTransaction,
   IoTDevice,
@@ -131,6 +132,8 @@ interface FarmDataContextType {
 
   schemes: GovernmentScheme[];
   applyForScheme: (schemeId: string) => void;
+  schemeApplications: SchemeApplication[];
+  saveSchemeApplication: (app: SchemeApplication) => void;
 
   financialSummary: FinancialSummary;
   transactions: FinancialTransaction[];
@@ -484,6 +487,10 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return saved ? JSON.parse(saved) : INITIAL_SCHEMES;
   });
 
+  const [schemeApplications, setSchemeApplications] = useState<SchemeApplication[]>(() => {
+    try { return JSON.parse(localStorage.getItem('krishi_scheme_applications') || '[]'); } catch { return []; }
+  });
+
   const [financialSummary, setFinancialSummary] = useState<FinancialSummary>(() => {
     const saved = localStorage.getItem('krishi_fin_summary');
     return saved ? JSON.parse(saved) : INITIAL_FINANCIAL_SUMMARY;
@@ -569,6 +576,10 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   useEffect(() => {
     localStorage.setItem('krishi_schemes', JSON.stringify(schemes));
   }, [schemes]);
+
+  useEffect(() => {
+    localStorage.setItem('krishi_scheme_applications', JSON.stringify(schemeApplications));
+  }, [schemeApplications]);
 
   useEffect(() => {
     localStorage.setItem('krishi_fin_summary', JSON.stringify(financialSummary));
@@ -876,18 +887,31 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   };
 
-  // Schemes
+  // Schemes — the old one-click path claimed a portal submission it never
+  // made, so it no longer shows a success toast. Real applications go
+  // through saveSchemeApplication (draft/submit in KrishiSmart, with an
+  // official-portal link for the government step) on the Schemes page.
   const applyForScheme = async (schemeId: string) => {
     setSchemes((prev) =>
       prev.map((s) => (s.id === schemeId ? { ...s, applicationStatus: 'Applied' } : s))
     );
-    addXP(75, 'Applied for Government Agro Scheme');
-    showToast('Application submitted successfully to portal!', 'success');
     try {
       await api.schemes.apply(schemeId);
     } catch (e) {
       console.warn('Backend sync for scheme application deferred:', e);
     }
+  };
+
+  const saveSchemeApplication = (app: SchemeApplication) => {
+    setSchemeApplications((prev) => {
+      const idx = prev.findIndex((a) => a.id === app.id);
+      if (idx >= 0) { const next = [...prev]; next[idx] = app; return next; }
+      return [app, ...prev];
+    });
+    setSchemes((prev) =>
+      prev.map((s) => (s.id === app.schemeId ? { ...s, appliedStatus: app.status === 'Submitted' ? 'In Progress' : s.appliedStatus } : s))
+    );
+    if (app.status === 'Submitted') addXP(75, 'Submitted scheme application in KrishiSmart');
   };
 
   // Financials
@@ -1145,6 +1169,8 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         setIsAIChatOpen,
         schemes,
         applyForScheme,
+        schemeApplications,
+        saveSchemeApplication,
         financialSummary,
         transactions,
         addTransaction,

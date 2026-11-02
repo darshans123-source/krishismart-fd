@@ -11,7 +11,10 @@ import { LandingPage } from './pages/LandingPage';
 import { Dashboard } from './pages/Dashboard';
 import { MyFarmsPage } from './pages/MyFarmsPage';
 import { CropCatalogPage } from './pages/CropCatalogPage';
-import { AIHubPage } from './pages/AIHubPage';
+import { CropHealthPage } from './pages/CropHealthPage';
+import { AICropDoctorPage } from './pages/AICropDoctorPage';
+import { SoilHealthPage } from './pages/SoilHealthPage';
+import { PestDetectionPage } from './pages/PestDetectionPage';
 import { KrishiNidhiPage } from './pages/KrishiNidhiPage';
 import { KrishiBhavishyaPage } from './pages/KrishiBhavishyaPage';
 import { GovernmentSchemesPage } from './pages/GovernmentSchemesPage';
@@ -98,8 +101,19 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
         return <MyFarmsPage onBrowseCrops={() => setCurrentTab('crops')} />;
       case 'crops':
         return <CropCatalogPage onViewMyFarm={() => setCurrentTab('myFarms')} />;
+      case 'cropHealth':
+        return <CropHealthPage />;
+      case 'aiDoctor':
+        return <AICropDoctorPage />;
+      case 'soilHealth':
+        return <SoilHealthPage />;
+      case 'pestDetection':
+        return <PestDetectionPage />;
       case 'aiHub':
-        return <AIHubPage />;
+        // Legacy tab (old dashboard/sidebar links): Crop Health is the
+        // closest distinct page, so old links land there, not on a
+        // shared hub page.
+        return <CropHealthPage />;
       case 'finance':
         return <KrishiNidhiPage />;
       case 'krishiBhavishya':

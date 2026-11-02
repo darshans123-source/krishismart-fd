@@ -59,7 +59,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     if (query.includes('crop') || query.includes('farm') || query.includes('field')) {
       setCurrentTab('myFarms');
     } else if (query.includes('ai') || query.includes('doctor') || query.includes('disease') || query.includes('soil')) {
-      setCurrentTab('aiHub');
+      setCurrentTab('aiDoctor');
     } else if (query.includes('price') || query.includes('bhavishya') || query.includes('future') || query.includes('predict')) {
       setCurrentTab('krishiBhavishya');
     } else if (query.includes('scheme') || query.includes('kisan') || query.includes('subsidy')) {

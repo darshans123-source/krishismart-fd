@@ -186,7 +186,7 @@ export const AIFarmHealthModal: React.FC<AIFarmHealthModalProps> = ({
           <button
             onClick={() => {
               onClose();
-              onNavigate('aiHub');
+              onNavigate('cropHealth');
             }}
             className="text-xs font-bold text-[#064E3B] hover:text-[#064E3B] flex items-center gap-1"
           >

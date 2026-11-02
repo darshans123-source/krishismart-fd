@@ -47,7 +47,8 @@ export const INITIAL_FARMS: Farm[] = [
     totalArea: 4.5,
     soilType: 'Red Loamy & Clayey',
     waterSource: 'Canal',
-    fieldsCount: 3
+    fieldsCount: 3,
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Paddy_field_in_Sammanthurai%2C_Ampara%2C_Sri_Lanka.JPG/250px-Paddy_field_in_Sammanthurai%2C_Ampara%2C_Sri_Lanka.JPG'
   },
   {
     id: 'farm-2',
@@ -56,7 +57,8 @@ export const INITIAL_FARMS: Farm[] = [
     totalArea: 2.0,
     soilType: 'Black Sandy Loam',
     waterSource: 'Borewell',
-    fieldsCount: 2
+    fieldsCount: 2,
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Sorghum_bicolor03.jpg/250px-Sorghum_bicolor03.jpg'
   }
 ];
 

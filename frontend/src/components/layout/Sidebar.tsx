@@ -59,9 +59,9 @@ type NavItem = {
   panel are untouched. Every existing route is preserved; items that have
   no dedicated page of their own point at the closest existing page, so
   no sidebar entry is a dead link:
-    Crop Health / Soil Health / Pest Detection -> aiHub (AI Hub holds the
-      Crop Doctor scan, soil tools and pest advice)
-    AI Farming Assistant -> aiHub
+    Crop Health, AI Crop Doctor, Soil Health and Pest Detection each have
+      their own page and route (cropHealth, aiDoctor, soilHealth,
+      pestDetection). AI Farming Assistant -> aiDoctor.
     Farm Loans / Insurance -> finance (KrishiNidhi finance page)
     Reports & Analytics -> krishiBhavishya
     Help & Support -> profile
@@ -79,17 +79,17 @@ const NAV_GROUPS: { group: string; items: NavItem[] }[] = [
       { id: 'dashboard', labelKey: 'navDashboard', icon: LayoutDashboard, tab: 'dashboard' },
       { id: 'myFarms', labelKey: 'navMyFarm', icon: Sprout, tab: 'myFarms' },
       { id: 'crops', labelKey: 'navCropManagement', icon: Wheat, tab: 'crops' },
-      { id: 'cropHealth', labelKey: 'navCropHealth', icon: HeartPulse, tab: 'aiHub' },
+      { id: 'cropHealth', labelKey: 'navCropHealth', icon: HeartPulse, tab: 'cropHealth' },
     ]
   },
   {
     group: 'navSmartFarming',
     items: [
-      { id: 'aiCropDoctor', labelKey: 'navAiCropDoctor', icon: ScanSearch, tab: 'aiHub' },
+      { id: 'aiCropDoctor', labelKey: 'navAiCropDoctor', icon: ScanSearch, tab: 'aiDoctor' },
       { id: 'weather', labelKey: 'navWeather', icon: CloudSun, tab: 'weather' },
-      { id: 'soilHealth', labelKey: 'navSoilHealth', icon: FlaskConical, tab: 'aiHub' },
+      { id: 'soilHealth', labelKey: 'navSoilHealth', icon: FlaskConical, tab: 'soilHealth' },
       { id: 'irrigation', labelKey: 'navIrrigation', icon: Droplets, tab: 'pump' },
-      { id: 'pestDetection', labelKey: 'navPestDetection', icon: Bug, tab: 'aiHub' },
+      { id: 'pestDetection', labelKey: 'navPestDetection', icon: Bug, tab: 'pestDetection' },
       { id: 'drone', labelKey: 'navDroneMonitoring', icon: Plane, tab: 'drone' },
       { id: 'iot', labelKey: 'navIotDevices', icon: Cpu, tab: 'iot' },
     ]
@@ -109,7 +109,7 @@ const NAV_GROUPS: { group: string; items: NavItem[] }[] = [
   {
     group: 'navTools',
     items: [
-      { id: 'aiAssistant', labelKey: 'navAiAssistant', icon: BrainCircuit, tab: 'aiHub' },
+      { id: 'aiAssistant', labelKey: 'navAiAssistant', icon: BrainCircuit, tab: 'aiDoctor' },
       { id: 'reports', labelKey: 'navReportsAnalytics', icon: BarChart3, tab: 'krishiBhavishya' },
       { id: 'notifications', labelKey: 'navNotifications', icon: Bell, action: 'notifications' },
       { id: 'help', labelKey: 'navHelpSupport', icon: LifeBuoy, tab: 'profile' },
@@ -123,7 +123,11 @@ const PRIMARY_ITEM_FOR_TAB: Record<string, string> = {
   dashboard: 'dashboard',
   myFarms: 'myFarms',
   crops: 'crops',
-  aiHub: 'aiCropDoctor',
+  cropHealth: 'cropHealth',
+  aiDoctor: 'aiCropDoctor',
+  soilHealth: 'soilHealth',
+  pestDetection: 'pestDetection',
+  aiHub: 'cropHealth',
   weather: 'weather',
   pump: 'irrigation',
   drone: 'drone',
