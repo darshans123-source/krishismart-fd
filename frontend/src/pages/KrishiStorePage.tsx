@@ -82,7 +82,7 @@ export const KrishiStorePage: React.FC = () => {
               <span>Certified Agri-Inputs & Farm Tech</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-extrabold font-heading text-white tracking-tight">
-              Krishi Store
+              {t('storeTitle')}
             </h1>
             <p className="text-xs sm:text-base text-[#E5EDE7] mt-0.5 max-w-2xl leading-relaxed">
               Certified seeds, nano fertilizers, bio-protection, drip kits, and IoT sensors with farm-gate delivery.

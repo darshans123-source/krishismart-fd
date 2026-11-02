@@ -52,7 +52,7 @@ export const SmartPumpPage: React.FC = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#022C22]/90 via-[#172B24]/40 to-transparent flex flex-col justify-end p-6 sm:p-8 text-white">
             <h1 className="text-2xl sm:text-4xl font-extrabold font-heading text-white tracking-tight flex items-center gap-2">
-              <span>💧</span> Smart Irrigation
+              <span>💧</span> {t('smartPump')}
             </h1>
             <p className="text-xs sm:text-base text-[#E5EDE7] mt-1 max-w-2xl leading-relaxed">
               Control and monitor your farm water system.

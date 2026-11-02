@@ -55,7 +55,7 @@ export const KrishiBhavishyaPage: React.FC = () => {
   return (
     <div className="w-full min-w-0 space-y-8 pb-16 animate-in fade-in">
       {/* ================================================== */}
-      {/* 1. HEADER: "When should I sell my crop?" */}
+      {/* 1. HEADER: "{t('sellCropQuestion')}" */}
       {/* ================================================== */}
       <div className="rounded-2xl bg-gradient-to-r from-[#064E3B] to-[#064E3B] text-white p-6 sm:p-8 shadow-sm border border-[#064E3B] space-y-2">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#064E3B]/80 text-[#A7F3D0] text-xs font-bold w-fit">

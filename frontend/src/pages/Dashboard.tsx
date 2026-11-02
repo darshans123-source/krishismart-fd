@@ -83,7 +83,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
     setShowAddTaskModal(false);
   };
 
-  // Text-to-speech for Farm Advice Briefing
+  // Text-to-speech for {t('farmAdvice')} Briefing
   const handleToggleSpeakBriefing = () => {
     if (!('speechSynthesis' in window)) return;
 
@@ -152,7 +152,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
       .join(' ');
   const hourNow = new Date().getHours();
-  const timeGreeting = hourNow < 12 ? 'Good morning' : hourNow < 17 ? 'Good afternoon' : 'Good evening';
+  const timeGreeting = hourNow < 12 ? t('goodMorning') : hourNow < 17 ? t('goodAfternoon') : t('goodEvening');
   // Usability fix (issue 8): sentence case, never ALL-CAPS. If a CMS
   // heading was entered in all caps, normalise it to sentence case too.
   const toSentenceCase = (s: string) => {
@@ -166,7 +166,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
   const heroHeading = heroConfig?.mainHeading
     ? toSentenceCase(heroConfig.mainHeading.replace(/\{name\}/gi, formatDisplayName(user?.name)))
     : `${timeGreeting}, ${formatDisplayName(user?.name).split(' ')[0]}!`;
-  const heroSubtitle = heroConfig?.subtitle || 'Your farm intelligence at a glance. Monitor your crops, understand your soil and make smarter farming decisions.';
+  const heroSubtitle = heroConfig?.subtitle || t('farmIntelligence');
 
   const activeQuickActions = (cmsDashboard?.quickActions && Array.isArray(cmsDashboard.quickActions) && cmsDashboard.quickActions.length > 0)
     ? cmsDashboard.quickActions.filter((qa: any) => qa.visible !== false).sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
@@ -188,7 +188,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#34D399] opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#34D399]"></span>
                 </span>
-                <span>Live · Smart Farming Platform</span>
+                <span>{t('livePlatform')}</span>
               </div>
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-heading text-white tracking-tight leading-tight break-words">
                 {heroHeading}
@@ -213,7 +213,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             >
               <div className="text-xs text-[#A7F3D0] flex items-center gap-1.5 font-medium">
                 <MapPin className="w-3.5 h-3.5 text-[#6EE7B7] shrink-0" />
-                <span className="tracking-wide">Current location</span>
+                <span className="tracking-wide">{t('currentLocation')}</span>
               </div>
               <div className="text-sm font-bold text-white mt-1 truncate group-hover:text-[#A7F3D0]">
                 {locationState.address.district || 'Raichur'}, {locationState.address.state || 'Karnataka'}
@@ -243,7 +243,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             >
               <div className="text-xs text-[#A7F3D0] flex items-center gap-1.5 font-medium">
                 <Wheat className="w-3.5 h-3.5 text-[#6EE7B7] shrink-0" />
-                <span className="tracking-wide">Crop health</span>
+                <span className="tracking-wide">{t('cropHealthLabel')}</span>
               </div>
               <div className="text-sm font-bold text-white mt-1 group-hover:text-[#A7F3D0]">
                 {aiFarmHealth.cropHealth}% Healthy
@@ -273,7 +273,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             >
               <div className="text-xs text-[#A7F3D0] flex items-center gap-1.5 font-medium">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#D6AD55] shrink-0" />
-                <span className="tracking-wide">Farm health score</span>
+                <span className="tracking-wide">{t('farmHealthScore')}</span>
               </div>
               <div className="text-sm font-bold text-white mt-1 group-hover:text-[#A7F3D0]">
                 {aiFarmHealth.overall}/100
@@ -290,9 +290,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       <div className="w-full min-w-0 space-y-2.5">
         <div className="flex flex-col items-start gap-0.5">
           <h2 className="text-sm font-bold text-[#172B24] font-heading">
-            Quick actions
+            {t('quickActions')}
           </h2>
-          <span className="text-xs text-[#718078] font-medium">One-tap farm shortcuts</span>
+          <span className="text-xs text-[#718078] font-medium">{t('quickActionsDesc')}</span>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
@@ -327,7 +327,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <h2 className="text-base font-bold text-[#172B24] font-heading">
-              My crops
+              {t('myCrops')}
             </h2>
             <span className="px-2.5 py-0.5 bg-[#ECFDF5] text-[#064E3B] text-xs font-bold rounded-full border border-[#A7F3D0]">
               {crops.length} fields monitored
@@ -424,15 +424,15 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           percentages are invented here. */}
       <div className="w-full min-w-0 space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-bold text-[#172B24] font-heading">Farm analytics</h2>
-          <span className="text-xs text-[#718078]">From your recorded farm data</span>
+          <h2 className="text-base font-bold text-[#172B24] font-heading">{t('farmAnalytics')}</h2>
+          <span className="text-xs text-[#718078]">{t('fromRecordedData')}</span>
         </div>
         {/* Usability fix (issue 12): cards are grouped, not one flat row of 8.
             Production = land, crops, health, moisture, yield.
             Financials = income, profit, expected revenue. */}
         {(['Production', 'Financials'] as const).map((groupName) => (
           <div key={groupName} className="space-y-2">
-            <h3 className="text-xs font-bold text-[#064E3B] tracking-wide">{groupName}</h3>
+            <h3 className="text-xs font-bold text-[#064E3B] tracking-wide">{groupName === 'Production' ? t('production') : t('financials')}</h3>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
             { icon: Wheat, group: 'Production', label: 'Total land', value: `${crops.reduce((sum, c) => sum + (c.area || 0), 0).toFixed(1)} acres`, sub: `${crops.length} fields`, onClick: () => onNavigate('myFarms') },
@@ -450,7 +450,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                     <span className="w-9 h-9 rounded-xl bg-[#ECFDF5] text-[#064E3B] flex items-center justify-center mb-3">
                       <Icon className="w-4 h-4" />
                     </span>
-                    <span className="block text-xs font-semibold tracking-wide text-[#718078]">{stat.label}</span>
+                    <span className="block text-xs font-semibold tracking-wide text-[#718078]">{({'Total land': t('totalLand'), 'Active crops': t('activeCrops'), 'Farm health': t('farmHealth'), 'Soil moisture': t('soilMoisture'), 'Total income': t('totalIncome'), 'Net profit': t('netProfit'), 'Estimated yield': t('estimatedYield'), 'Expected revenue': t('expectedRevenue')} as Record<string, string>)[stat.label] || stat.label}</span>
                     <span className="block text-base font-bold text-[#172B24] font-heading mt-0.5 truncate">{stat.value}</span>
                     <span className="block text-xs text-[#718078] mt-0.5 truncate">{stat.sub}</span>
                   </button>
@@ -464,9 +464,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       {/* 4. FARM ADVICE & RECOMMENDATIONS (Natural Language) */}
       {/* ================================================== */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left Column (Farm Advice & Today's recommendations) */}
+        {/* Left Column ({t('farmAdvice')} & {t('todaysRecommendation')}s) */}
         <div className="lg:col-span-8 space-y-6">
-          {/* Farm Advice Card */}
+          {/* {t('farmAdvice')} Card */}
           <div className="p-5 sm:p-6 premium-card space-y-4">
             <div className="border-b border-[#EFF4EF] pb-3 space-y-2">
               <div className="flex items-center gap-2.5">
@@ -475,14 +475,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                 </div>
                 <div>
                   <h2 className="text-sm font-extrabold text-[#172B24] tracking-wide font-heading">
-                    Farm Advice
+                    {t('farmAdvice')}
                   </h2>
                   <span className="text-xs text-[#718078]">
                     Daily summary for {locationState.address.district || 'Raichur'} • Updated just now
                   </span>
                 </div>
               </div>
-              {/* Usability fix (issue 13): Listen Advice sits directly under
+              {/* Usability fix (issue 13): {t('listenAdvice')} sits directly under
                   the heading/text it acts on, left-aligned, not far right. */}
               <button
                 onClick={handleToggleSpeakBriefing}
@@ -491,7 +491,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                 aria-label="Read farm advice aloud"
               >
                 {isSpeakingBriefing ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
-                <span>{isSpeakingBriefing ? 'Stop' : 'Listen Advice'}</span>
+                <span>{isSpeakingBriefing ? t('stop') : t('listenAdvice')}</span>
               </button>
             </div>
 
@@ -502,7 +502,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
               <div className="p-3 rounded-2xl bg-blue-50 border border-blue-100 text-[#243A32] space-y-1">
                 <div className="text-xs font-bold tracking-wide text-[#064E3B]">
-                  Today's recommendation
+                  {t('todaysRecommendation')}
                 </div>
                 <div className="text-xs font-bold">Irrigation Advice</div>
                 <p className="text-xs text-[#243A32] leading-snug">
@@ -514,7 +514,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
               <div className="p-3 rounded-2xl bg-amber-50 border border-amber-100 text-[#243A32] space-y-1">
                 <div className="text-xs font-bold tracking-wide text-[#064E3B]">
-                  Possible risk
+                  {t('possibleRisk')}
                 </div>
                 <div className="text-xs font-bold">Crop Disease Alert</div>
                 <p className="text-xs text-[#243A32] leading-snug">
@@ -524,7 +524,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
               <div className="p-3 rounded-2xl bg-[#ECFDF5] border border-[#D1FAE5] text-[#064E3B] space-y-1">
                 <div className="text-xs font-bold tracking-wide text-[#064E3B]">
-                  AI suggestion
+                  {t('aiSuggestion')}
                 </div>
                 <div className="text-xs font-bold">Optimal Spray Window</div>
                 <p className="text-xs text-[#243A32] leading-snug">
@@ -539,7 +539,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             <div className="flex items-center justify-between border-b border-[#EFF4EF] pb-3">
               <div>
                 <h2 className="text-sm font-extrabold text-[#172B24] uppercase tracking-wider font-heading">
-                  Today's Farm Tasks
+                  {t('todaysFarmTasks')}
                 </h2>
                 <p className="text-xs text-[#718078]">
                   {pendingTasks.length} pending tasks for today

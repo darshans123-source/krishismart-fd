@@ -400,9 +400,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     type="button"
                     onClick={() => setOnboardStep(1)}
                     className="flex-1 py-3 rounded-xl border border-[#CBD8D0] hover:bg-[#F7FAF7] text-[#3E5248] font-bold text-sm"
-                  >
-                    Back
-                  </button>
+                  >{t('back')}</button>
                   <button
                     type="button"
                     onClick={() => setOnboardStep(3)}
@@ -474,9 +472,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     type="button"
                     onClick={() => setOnboardStep(2)}
                     className="flex-1 py-3 rounded-xl border border-[#CBD8D0] hover:bg-[#F7FAF7] text-[#3E5248] font-bold text-sm"
-                  >
-                    Back
-                  </button>
+                  >{t('back')}</button>
                   <button
                     type="submit"
                     className="flex-1 py-3 rounded-xl btn-clay-primary text-white font-bold text-sm shadow-md flex items-center justify-center gap-2"
