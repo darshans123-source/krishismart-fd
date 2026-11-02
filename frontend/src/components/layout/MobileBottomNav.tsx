@@ -24,7 +24,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
   const navItems = [
     { id: 'dashboard', labelKey: 'navDashboard', icon: Home },
     { id: 'myFarms', labelKey: 'navMyFarm', icon: Sprout },
-    { id: 'aiHub', labelKey: 'navAiAssistant', icon: BrainCircuit },
+    { id: 'aiDoctor', labelKey: 'navAiAssistant', icon: BrainCircuit },
     { id: 'market', labelKey: 'navMandiPrices', icon: TrendingUp },
     { id: 'profile', labelKey: 'profileTitle', icon: User }
   ];

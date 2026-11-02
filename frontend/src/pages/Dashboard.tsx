@@ -118,7 +118,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
   // Quick action buttons matching specification with dynamic CMS fallback
   const defaultQuickActions = [
-    { id: 'aiHub', label: 'Crop Scan', icon: '🌱', route: 'aiHub', bg: 'bg-[#ECFDF5] hover:bg-[#D1FAE5] text-[#064E3B] border-[#A7F3D0]' },
+    { id: 'cropHealth', label: 'Crop Scan', icon: '🌱', route: 'cropHealth', bg: 'bg-[#ECFDF5] hover:bg-[#D1FAE5] text-[#064E3B] border-[#A7F3D0]' },
     { id: 'weather', label: 'Weather', icon: '🌦️', route: 'weather', bg: 'bg-amber-50 hover:bg-amber-100 text-[#243A32] border-amber-200' },
     { id: 'market', label: 'Market', icon: '📈', route: 'market', bg: 'bg-blue-50 hover:bg-blue-100 text-[#243A32] border-blue-200' },
     { id: 'finance', label: 'Finance', icon: '💰', route: 'finance', bg: 'bg-teal-50 hover:bg-teal-100 text-teal-900 border-teal-200' },

@@ -3,6 +3,7 @@ import { Plus, MapPin, Droplets, TrendingUp, Pencil } from 'lucide-react';
 import { useFarmData } from '../context/FarmDataContext';
 import { useLanguage } from '../context/LanguageContext';
 import { Farm } from '../types';
+import { prepareImageFile } from '../utils/imageUpload';
 
 /*
   MY FARM — Farm Overview only.
@@ -16,12 +17,20 @@ interface MyFarmsPageProps {
   onBrowseCrops?: () => void;
 }
 
-const FARM_IMAGES = [
-  'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&auto=format&fit=crop&q=80',
-  'https://images.unsplash.com/photo-1500937386664?w=600&auto=format&fit=crop&q=80',
-  'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&auto=format&fit=crop&q=80'
-];
-const FALLBACK_FARM_IMAGE = FARM_IMAGES[0];
+/*
+  Each parcel has its OWN photo — never one shared sunset image.
+  Cauvery River Oasis: green paddy field (canal-irrigated rice).
+  Siddaganga Highlands: sorghum/jowar field (a different landscape).
+  Older saved farms without an imageUrl fall back by parcel id, and
+  user-added parcels without a photo get a per-parcel initial tile,
+  not a generic field photo. Uploaded photos are stored on the farm
+  record (localStorage via FarmDataContext) and shown on revisit.
+*/
+const CAUVERY_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Paddy_field_in_Sammanthurai%2C_Ampara%2C_Sri_Lanka.JPG/250px-Paddy_field_in_Sammanthurai%2C_Ampara%2C_Sri_Lanka.JPG';
+const SIDDAGANGA_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Sorghum_bicolor03.jpg/250px-Sorghum_bicolor03.jpg';
+const HERO_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Vehn%C3%A4pelto_6.jpg/250px-Vehn%C3%A4pelto_6.jpg';
+const farmImage = (farm: Farm): string | null =>
+  farm.imageUrl || (farm.id === 'farm-1' ? CAUVERY_IMAGE : farm.id === 'farm-2' ? SIDDAGANGA_IMAGE : null);
 
 export const MyFarmsPage: React.FC<MyFarmsPageProps> = ({ onBrowseCrops }) => {
   const { farms, addFarm, updateFarm, crops, advanceCropStage, deleteCrop } = useFarmData();
@@ -35,6 +44,8 @@ export const MyFarmsPage: React.FC<MyFarmsPageProps> = ({ onBrowseCrops }) => {
   const [farmTotalArea, setFarmTotalArea] = useState(3);
   const [farmSoilType, setFarmSoilType] = useState('Red Sandy Loam');
   const [farmWaterSource, setFarmWaterSource] = useState<Farm['waterSource']>('Borewell');
+  const [farmImageUrl, setFarmImageUrl] = useState('');
+  const [farmImageError, setFarmImageError] = useState('');
 
   const totalLand = farms.reduce((s, f) => s + f.totalArea, 0);
   const totalProductionKg = crops.reduce((s, c) => s + c.projectedYieldKg, 0);
@@ -63,15 +74,18 @@ export const MyFarmsPage: React.FC<MyFarmsPageProps> = ({ onBrowseCrops }) => {
     setFarmTotalArea(farm.totalArea);
     setFarmSoilType(farm.soilType);
     setFarmWaterSource(farm.waterSource);
+    setFarmImageUrl(farmImage(farm) || '');
+    setFarmImageError('');
   };
-  const closeFarmModal = () => { setShowAddFarmModal(false); setEditingFarm(null); };
+  const closeFarmModal = () => { setShowAddFarmModal(false); setEditingFarm(null); setFarmImageUrl(''); setFarmImageError(''); };
   const handleFarmSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!farmName.trim()) return;
+    const imageUrl = farmImageUrl || undefined;
     if (editingFarm) {
-      updateFarm(editingFarm.id, { name: farmName, location: farmLocation || 'Mandya, Karnataka', totalArea: farmTotalArea, soilType: farmSoilType, waterSource: farmWaterSource });
+      updateFarm(editingFarm.id, { name: farmName, location: farmLocation || 'Mandya, Karnataka', totalArea: farmTotalArea, soilType: farmSoilType, waterSource: farmWaterSource, imageUrl });
     } else {
-      addFarm({ name: farmName, location: farmLocation || 'Mandya, Karnataka', totalArea: farmTotalArea, soilType: farmSoilType, waterSource: farmWaterSource, fieldsCount: 2 });
+      addFarm({ name: farmName, location: farmLocation || 'Mandya, Karnataka', totalArea: farmTotalArea, soilType: farmSoilType, waterSource: farmWaterSource, fieldsCount: 2, imageUrl });
     }
     closeFarmModal();
   };
@@ -94,14 +108,14 @@ export const MyFarmsPage: React.FC<MyFarmsPageProps> = ({ onBrowseCrops }) => {
     <div className="w-full min-w-0 space-y-8 pb-12 animate-in fade-in">
       {/* Hero — aerial farm illustration */}
       <div className="rounded-3xl overflow-hidden relative shadow-lg shadow-[#065F46]/20">
-        <img src={FARM_IMAGES[0]} alt="Aerial view of green farm fields" className="w-full h-56 sm:h-64 object-cover" />
+        <img src={HERO_IMAGE} alt="Green farm fields" className="w-full h-56 sm:h-64 object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#022C22]/85 via-[#065F46]/60 to-transparent flex flex-col justify-center p-6 sm:p-8 text-white">
           <h1 className="text-2xl sm:text-4xl font-extrabold font-heading">My Farm</h1>
           <p className="text-sm text-[#D1FAE5] mt-2 max-w-xl">
             Your farm overview — parcels, planted crops, performance and seasonal summaries, all in one place.
           </p>
           <div className="flex flex-wrap gap-2 mt-4">
-            <button onClick={() => { setEditingFarm(null); setFarmName(''); setFarmLocation(''); setFarmTotalArea(3); setFarmSoilType('Red Sandy Loam'); setFarmWaterSource('Borewell'); setShowAddFarmModal(true); }} className="px-4 py-2.5 rounded-xl bg-[#FACC15] text-[#172B24] text-xs font-bold hover:bg-[#EAB308] transition-colors flex items-center gap-1.5">
+            <button onClick={() => { setEditingFarm(null); setFarmName(''); setFarmLocation(''); setFarmTotalArea(3); setFarmSoilType('Red Sandy Loam'); setFarmWaterSource('Borewell'); setFarmImageUrl(''); setFarmImageError(''); setShowAddFarmModal(true); }} className="px-4 py-2.5 rounded-xl bg-[#FACC15] text-[#172B24] text-xs font-bold hover:bg-[#EAB308] transition-colors flex items-center gap-1.5">
               <Plus className="w-4 h-4" /> Add Farm
             </button>
             {onBrowseCrops && (
@@ -127,12 +141,16 @@ export const MyFarmsPage: React.FC<MyFarmsPageProps> = ({ onBrowseCrops }) => {
       <section className="space-y-3">
         <h2 className="text-lg font-extrabold text-[#172B24] font-heading">Farm parcels</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-          {farms.map((farm, idx) => {
+          {farms.map((farm) => {
             const farmCrops = crops.filter((c) => c.farmId === farm.id);
             const revenue = farmCrops.reduce((s, c) => s + c.expectedRevenue, 0);
+            const img = farmImage(farm);
             return (
               <article key={farm.id} className={`bg-white rounded-2xl border shadow-sm overflow-hidden hover:shadow-lg transition-all ${selectedFarm?.id === farm.id ? 'border-[#059669] ring-2 ring-[#059669]/30' : 'border-[#E5EDE7]'}`}>
-                <img src={FARM_IMAGES[idx % FARM_IMAGES.length]} alt={farm.name} loading="lazy" onError={(e) => { const img = e.currentTarget; if (img.src !== FALLBACK_FARM_IMAGE) img.src = FALLBACK_FARM_IMAGE; }} className="w-full h-36 object-cover" />
+                <div className="relative w-full h-36 bg-[#ECFDF5] flex items-center justify-center overflow-hidden">
+                  <span className="text-3xl font-black text-[#065F46]">{farm.name.charAt(0).toUpperCase()}</span>
+                  {img && <img src={img} alt={farm.name} loading="lazy" onError={(e) => { e.currentTarget.style.display = 'none'; }} className="absolute inset-0 w-full h-full object-cover" />}
+                </div>
                 <div className="p-4 space-y-2">
                   <div className="flex items-start justify-between gap-2">
                     <h3 className="font-bold text-[#172B24]">{farm.name}</h3>
@@ -245,6 +263,13 @@ export const MyFarmsPage: React.FC<MyFarmsPageProps> = ({ onBrowseCrops }) => {
               <div>
                 <label className="block font-bold text-[#3E5248] mb-1">Soil Type</label>
                 <input value={farmSoilType} onChange={(e) => setFarmSoilType(e.target.value)} placeholder="e.g. Red Loamy / Black Cotton" className="w-full p-2.5 rounded-xl border border-[#CBD8D0] text-xs" />
+              </div>
+              <div>
+                <label className="block font-bold text-[#3E5248] mb-1">Farm photograph (optional)</label>
+                <input type="file" accept="image/jpeg,image/png,image/webp" onChange={async (e) => { const f = e.target.files?.[0]; if (!f) return; try { const prepared = await prepareImageFile(f); setFarmImageUrl(prepared.previewUrl); setFarmImageError(''); } catch (err: any) { setFarmImageError(err?.message || 'Could not process this image.'); } }} className="w-full text-xs" />
+                {farmImageUrl && <img src={farmImageUrl} alt="Farm photo preview" className="w-full h-28 object-cover rounded-xl mt-2" />}
+                {farmImageError && <p className="text-rose-600 font-bold mt-1">{farmImageError}</p>}
+                <p className="text-[11px] text-[#718078] mt-1">Your photo is saved with this parcel and shown when you revisit My Farm. If you leave this blank, a parcel initial tile is shown — never a shared generic image.</p>
               </div>
               <button type="submit" className="w-full py-3 rounded-xl bg-[#059669] hover:bg-[#065F46] text-white font-bold text-sm transition-colors">
                 {editingFarm ? 'Save Farm Changes' : 'Register Farm Parcel'}

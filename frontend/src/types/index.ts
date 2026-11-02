@@ -29,6 +29,25 @@ export interface Farm {
   soilType: string;
   waterSource: 'Borewell' | 'Canal' | 'Drip/Sprinkler' | 'Rainfed';
   fieldsCount: number;
+  /** Farm photo URL or a data URL uploaded by the farmer. Never a shared generic sunset image. */
+  imageUrl?: string;
+}
+
+export interface SchemeApplication {
+  id: string;
+  schemeId: string;
+  schemeName: string;
+  reference: string;
+  status: 'Draft' | 'Submitted' | 'Under Review' | 'Approved' | 'Rejected';
+  farmerName: string;
+  phone: string;
+  village: string;
+  district: string;
+  landAcres: number;
+  documents: string[];
+  submittedAt: string;
+  /** Saved in KrishiSmart only. A government submission is NOT claimed unless the official portal confirms it. */
+  governmentSubmitted: false;
 }
 
 export interface CropTimelineStage {

@@ -39,12 +39,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
   const corePillars = [
     {
-      id: 'aiHub',
-      title: 'AI Crop Doctor & Soil Labs',
-      description: 'Upload crop photos to detect 120+ diseases with 95%+ accuracy. Get organic & chemical prescriptions instantly.',
+      id: 'aiDoctor',
+      title: 'AI Crop Doctor',
+      description: 'Ask farming questions in text or with a photo, and get AI answers in English, Kannada or Hindi. Photo disease and pest analysis live on their own pages.',
       icon: BrainCircuit,
       color: 'from-[#10B981] to-teal-600',
-      badge: '95%+ Accuracy'
+      badge: 'Chat + Photo'
     },
     {
       id: 'krishiBhavishya',
