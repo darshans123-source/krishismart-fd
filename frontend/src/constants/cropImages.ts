@@ -9,7 +9,7 @@ export const CROP_IMAGE_BY_SLUG: Record<string, string> = {
   "jowar": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Sorghum_bicolor03.jpg/250px-Sorghum_bicolor03.jpg",
   "ragi": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Finger_millet_3_11-21-02.jpg/250px-Finger_millet_3_11-21-02.jpg",
   "barley": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Barley_%28Hordeum_vulgare%29_-_United_States_National_Arboretum_-_24_May_2009.jpg/250px-Barley_%28Hordeum_vulgare%29_-_United_States_National_Arboretum_-_24_May_2009.jpg",
-  "foxtail-millet": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Foxtail_millet_%28Setaria_italica%29.jpg/220px-Foxtail_millet_%28Setaria_italica%29.jpg",
+  "foxtail-millet": "/assets/crops/foxtail-millet.svg",
   "bengal-gram": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Chickpeas_Plant.jpg/250px-Chickpeas_Plant.jpg",
   "chickpea": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Chickpea_pods.jpg/250px-Chickpea_pods.jpg",
   "cowpea": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Black-eyed_pea_pods_on_plant_in_Hong_Kong.jpg/250px-Black-eyed_pea_pods_on_plant_in_Hong_Kong.jpg",
@@ -63,6 +63,13 @@ export const CROP_IMAGE_BY_SLUG: Record<string, string> = {
   "jasmine": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Jasmine0001.JPG/250px-Jasmine0001.JPG",
   "rose": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Small_Red_Rose.JPG/250px-Small_Red_Rose.JPG",
   "chrysanthemum": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Chrysanthemumclose.jpg/250px-Chrysanthemumclose.jpg",
+  "arecanut": "/assets/crops/arecanut.svg",
+  "bajra": "/assets/crops/bajra.svg",
+  "barnyard-millet": "/assets/crops/barnyard-millet.svg",
+  "black-gram": "/assets/crops/black-gram.svg",
+  "black-pepper": "/assets/crops/black-pepper.svg",
+  "clove": "/assets/crops/clove.svg",
+  "coconut": "/assets/crops/coconut.svg",
 };
 
 export function cropSlug(name: string): string {
