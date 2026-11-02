@@ -10,6 +10,7 @@ import { FloatingAIChat } from './components/ai/FloatingAIChat';
 import { LandingPage } from './pages/LandingPage';
 import { Dashboard } from './pages/Dashboard';
 import { MyFarmsPage } from './pages/MyFarmsPage';
+import { CropCatalogPage } from './pages/CropCatalogPage';
 import { AIHubPage } from './pages/AIHubPage';
 import { KrishiNidhiPage } from './pages/KrishiNidhiPage';
 import { KrishiBhavishyaPage } from './pages/KrishiBhavishyaPage';
@@ -94,8 +95,9 @@ const MainAppContent: React.FC<MainAppContentProps> = ({ onNavigateAdmin }) => {
       case 'dashboard':
         return <Dashboard onNavigate={(tab) => setCurrentTab(tab)} />;
       case 'myFarms':
+        return <MyFarmsPage onBrowseCrops={() => setCurrentTab('crops')} />;
       case 'crops':
-        return <MyFarmsPage />;
+        return <CropCatalogPage onViewMyFarm={() => setCurrentTab('myFarms')} />;
       case 'aiHub':
         return <AIHubPage />;
       case 'finance':
