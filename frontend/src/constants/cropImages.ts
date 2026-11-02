@@ -45,6 +45,7 @@ export const CROP_IMAGE_BY_SLUG: Record<string, string> = {
   "papaya": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Papaya.jpg/250px-Papaya.jpg",
   "guava": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/Guava_pink_fruit.jpg/250px-Guava_pink_fruit.jpg",
   "pomegranate": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Pomegranate_fruit_-_whole_and_piece_with_arils.jpg/250px-Pomegranate_fruit_-_whole_and_piece_with_arils.jpg",
+  "orange": "https://images.unsplash.com/photo-1597714026720-8f74c62310ba?w=400&auto=format&fit=crop&q=80",
   "sweet-lime": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/%28Citrus_limetta%29_Mosambi_at_a_market_in_Seethammadhara.jpg/250px-%28Citrus_limetta%29_Mosambi_at_a_market_in_Seethammadhara.jpg",
   "watermelon": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Watermelon_cross_BNC.jpg/250px-Watermelon_cross_BNC.jpg",
   "apple": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/120px-Red_Apple.jpg",
