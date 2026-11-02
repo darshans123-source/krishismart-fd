@@ -86,6 +86,7 @@ interface FarmDataContextType {
 
   farms: Farm[];
   addFarm: (farm: Omit<Farm, 'id'>) => void;
+  updateFarm: (farmId: string, patch: Partial<Farm>) => void;
 
   crops: Crop[];
   addCrop: (crop: Omit<Crop, 'id' | 'timeline'>) => void;
@@ -784,6 +785,11 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   };
 
+  const updateFarm = (farmId: string, patch: Partial<Farm>) => {
+    setFarms((prev) => prev.map((f) => (f.id === farmId ? { ...f, ...patch } : f)));
+    showToast('Farm details updated successfully!', 'success');
+  };
+
   const addCrop = async (cropData: Omit<Crop, 'id' | 'timeline'>) => {
     const newCrop: Crop = {
       ...cropData,
@@ -1110,6 +1116,7 @@ export const FarmDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         completeOnboarding,
         farms,
         addFarm,
+        updateFarm,
         crops,
         addCrop,
         advanceCropStage,
