@@ -177,7 +177,7 @@ export interface GovernmentScheme {
   status: 'Open' | 'Expiring Soon' | 'Year-round';
   officialUrl: string;
   appliedStatus?: 'Not Applied' | 'In Progress' | 'Approved' | 'Disbursed';
-  category: 'Direct Income' | 'Credit & Loan' | 'Insurance' | 'Equipment & Solar' | 'Organic & Seeds';
+  category: 'Direct Income' | 'Credit & Loan' | 'Insurance' | 'Equipment & Solar' | 'Organic & Seeds' | 'Irrigation';
 }
 
 export interface FinancialSummary {

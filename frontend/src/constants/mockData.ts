@@ -598,6 +598,25 @@ export const INITIAL_SCHEMES: GovernmentScheme[] = [
     officialUrl: 'https://pgsindia-ncof.gov.in',
     appliedStatus: 'Not Applied',
     category: 'Organic & Seeds'
+  },
+  {
+    id: 'scheme-ganga-kalyana',
+    name: 'Ganga Kalyana Scheme (Karnataka)',
+    shortName: 'Ganga Kalyana',
+    department: 'Government of Karnataka — implemented through state development corporations (Seva Sindhu)',
+    financialBenefit: 'Reported support up to ₹4.75 lakh for borewell drilling, pump set and electrification (reported, not confirmed on Seva Sindhu at entry time; amount varies by district and corporation)',
+    eligibility: [
+      'Small and marginal farmers needing an irrigation facility for agricultural land',
+      'Exact category, land and prior-benefit conditions depend on the implementing corporation — check the official Seva Sindhu notification before applying',
+      'Apply through Seva Sindhu under the relevant development corporation'
+    ],
+    documentsRequired: ['Check the official Seva Sindhu notification for the document list for your corporation (it varies by corporation, so no fixed list is shown here)'],
+    deadline: 'Reported deadline: 30 November 2026 (reported, not confirmed on Seva Sindhu at entry time)',
+    applicationMode: 'Online',
+    status: 'Open',
+    officialUrl: 'https://sevasindhu.karnataka.gov.in/',
+    appliedStatus: 'Not Applied',
+    category: 'Irrigation'
   }
 ];
 

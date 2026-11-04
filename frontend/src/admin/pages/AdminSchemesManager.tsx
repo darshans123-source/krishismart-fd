@@ -289,6 +289,7 @@ export const AdminSchemesManager: React.FC = () => {
                   <option value="Credit & Loan">Credit & Loan (KCC 4%)</option>
                   <option value="Insurance">Crop Insurance (PMFBY)</option>
                   <option value="Organic & Seeds">Organic & Seed Subsidies</option>
+                  <option value="Irrigation">Irrigation</option>
                 </select>
               </div>
             </div>

@@ -30,7 +30,7 @@ export const GovernmentSchemesPage: React.FC = () => {
   const [confirmation, setConfirmation] = useState<SchemeApplication | null>(null);
   const [showApplications, setShowApplications] = useState(false);
 
-  const categories = ['All', 'Direct Income', 'Credit & Loan', 'Insurance', 'Equipment & Solar', 'Organic & Seeds'];
+  const categories = ['All', 'Direct Income', 'Credit & Loan', 'Insurance', 'Equipment & Solar', 'Organic & Seeds', 'Irrigation'];
   const filteredSchemes = schemes.filter((s) => {
     const matchesCat = selectedCategory === 'All' || s.category === selectedCategory;
     const matchesSearch = s.name.toLowerCase().includes(searchQuery.toLowerCase()) || s.shortName.toLowerCase().includes(searchQuery.toLowerCase()) || s.department.toLowerCase().includes(searchQuery.toLowerCase());
